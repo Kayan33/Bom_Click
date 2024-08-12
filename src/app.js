@@ -3,7 +3,7 @@ import Rotas from "./router"
 function App() {
   return(
     <div>
-<Rotas/>
+          <Rotas/>
     </div>
   )
 }

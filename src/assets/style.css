@@ -1,0 +1,23 @@
+:root{
+
+    font-size: 16px;
+    font-family: var(--fontePrincipal);
+
+    --azul: #054AAE;
+    --verde: #2F7339;
+    --amarelo: #FFC200;
+    --vermelho: #D90D1E;
+
+    --fontePrincipal:  font-family: "Poppins", sans-serif;
+    --fonteTitulo: 1.25rem;
+    --fonteSegundaria: 1rem;
+    --fontePequena: 0.625rem;
+
+    --espacamentoMaior: 2rem;
+    --espacamentoMenor: 1rem;
+
+    --borda: 2rem solid; 
+    --bordaRaio: 0.5rem;
+
+    --tamanhoIcone: 1.5rem
+}

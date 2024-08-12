@@ -1,0 +1,38 @@
+
+.flex-container{
+    background-color: var(--azul);
+    padding: 0.5rem 1rem 0.5rem 1rem ;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo{
+    width: var(--tamanhoIcone);
+}
+
+.estastisticas h1{
+    font-size: var(--fonteTitulo);
+    color: var(--azul);
+    font-weight: 800;
+
+}
+
+.link {
+    display: flex;
+    align-items: center; 
+}
+
+.link-content {
+    display: flex;
+    align-items: center;
+    background-color: var(--azul);
+    padding: 1rem;
+    border-radius: 2rem;
+}
+
+
+
+.link-text {
+    color: var(--amarelo); /* Cor do texto */
+    font-weight: 800;
+}
