@@ -12,7 +12,7 @@
 .estastisticas h1 {
     font-size: var(--fonteTitulo);
     color: var(--azul);
-    font-weight: 800;
+    font-weight: bolder;
     text-align: center;
     width: 30ch;
     word-break: break-word;
@@ -35,5 +35,5 @@
 
 .link-text {
     color: var(--amarelo);
-    font-weight: 800;
+    font-weight: bolder;
 }
