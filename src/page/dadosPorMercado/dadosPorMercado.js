@@ -1,5 +1,5 @@
 import './dadosPorMercado.css'
-import '../../components/cabecalho.css'
+import '../../assets/cabecalho.css'
 import iconeVoltar from '../../imagens/icon-voltar.svg'
 
 function DadosPorMercado() {

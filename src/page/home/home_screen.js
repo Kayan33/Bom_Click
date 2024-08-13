@@ -6,34 +6,34 @@ import { Link } from 'react-router-dom';
 
 function HomeScreen() {
   return (
-    <div className="cabecalho">
-      <header className='cabecalho-lista'>
-        <li >
-          <img src={logo} alt="Logo" className='lista-logo' />
+    <header >
+      <ul className='cabacalho_lista'>
+        <li>
+          <img src={logo} alt="Logo" className='cabacalho_lista_item' />
         </li>
 
         <li>
           <img src={carrinho} alt="Carrinho de compras" />
         </li>
-      </header>
+      </ul>
 
-      <section className='cabecalho-estastisticas'>
+      <section className='container-estastisticas'>
         <div className='estastisticas'>
           <h1>
             Tudo o que você precisa para economizar em um só lugar!
           </h1>
         </div>
         <div className='estastisticas'>
-          <Link to='/perfil'>
-            <div className="estastisticas-link">
+
+          <Link className="link">
+            <div className="link-content">
               <img src={perfil} alt="Perfil" className="perfil-img" />
               <span className="link-text">Veja suas economias e estatísticas!</span>
             </div>
           </Link>
         </div>
       </section>
-    </div>
-
+    </header>
   )
 }
 

@@ -1,0 +1,13 @@
+.cabecalho{
+
+    background-color: var(--azul);
+    display: flex;
+    padding: var(--espacamentoMenor)
+}
+
+.cabecalho_titulo{
+
+    color: var(--amarelo);
+    font-weight: var(--fonteSemiBold);
+    margin: auto;
+}
