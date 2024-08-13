@@ -1,28 +1,29 @@
-
-.flex-container{
+.cabecalho-lista {
     background-color: var(--azul);
-    padding: 0.5rem 1rem 0.5rem 1rem ;
+    padding: 0.5rem 1rem 0.5rem 1rem;
     display: flex;
     justify-content: space-between;
 }
 
-.logo{
+.lista-logo {
     width: var(--tamanhoIcone);
 }
 
-.estastisticas h1{
+.estastisticas h1 {
     font-size: var(--fonteTitulo);
     color: var(--azul);
     font-weight: 800;
-
+    text-align: center;
+    width: 30ch;
+    word-break: break-word;
 }
 
-.link {
+.estastisticas{
     display: flex;
-    align-items: center; 
+    justify-content: center;
 }
 
-.link-content {
+.estastisticas-link {
     display: flex;
     align-items: center;
     background-color: var(--azul);
@@ -33,6 +34,6 @@
 
 
 .link-text {
-    color: var(--amarelo); /* Cor do texto */
+    color: var(--amarelo);
     font-weight: 800;
 }
