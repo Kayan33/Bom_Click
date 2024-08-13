@@ -3,7 +3,9 @@ import logo from '../../imagens/bomClick.svg'
 import carrinho from '../../imagens/carrinho.svg'
 import perfil from '../../imagens/perfil.svg'
 import { Link } from 'react-router-dom'
-import carne from '../../imagens/carne.png'
+import confiancaLogo from '../../imagens/confiancaLogo.png'
+
+import {produtos} from '../../data/produtos.js';
 
 function HomeScreen() {
   return (
@@ -34,12 +36,26 @@ function HomeScreen() {
         </div>
       </section>
 
-      <section>
+      <section className='cabecalho_promocoes'>
         <h1>Promoções do dia!</h1>
-        <div>
-          <div>
-            <img src={carne} alt="Carne" />
-          </div>
+        <div className="promocoes-carrosel">
+        <div className='promocoes-01'>
+          {produtos.map(produto => (
+            <div className='promocoes'>
+              <div className='promocoes_img'>
+                <img src={produto.imagem} alt={produto.nome} />
+              </div>
+              <div className='promocoes_produtos'>
+                <h3>{produto.nome}</h3>
+                <span>R${produto.preco.toFixed(2)}</span>
+                <div>
+                  <img src={confiancaLogo} alt={produto.mercado} />
+                  <button>Adicionar <br /> a compra</button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
         </div>
       </section>
     </div>

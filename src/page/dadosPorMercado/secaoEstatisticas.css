@@ -4,19 +4,21 @@
     color: var(--amarelo);
     gap: var(--espacamentoMenor);
     margin: var(--espacamentoMaior) var(--espacamentoMenor);
+    text-align: center;
 
 }
 
 .secao_estatisticas_item{
 
+    border-radius: var(--bordaRaio);
     background-color: var(--azul);
     display: flex;
     flex-direction: column;
-    padding: 16px;
+    gap: var(--espacamentoMenor);
+    padding: var(--espacamentoMenor);
 }
 
 .secao_estatisticas_item_titulo{
 
     font-size: 0.625rem;
-
 }

@@ -1,7 +1,9 @@
 .cabecalho{
 
+    align-items: center;
     background-color: var(--azul);
     display: flex;
+    justify-content: center;
     padding: var(--espacamentoMenor)
 }
 

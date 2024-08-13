@@ -37,3 +37,116 @@
     color: var(--amarelo);
     font-weight: bolder;
 }
+
+
+
+
+.cabecalho_promocoes{
+    background-color: var(--amarelo);
+    padding: 1rem;
+    
+}
+
+.cabecalho_promocoes h1 {
+    margin-bottom: 0.5rem;
+}
+
+.promocoes-carrosel{
+    overflow-x: auto;
+    padding: 1rem 0;
+    scroll-behavior: smooth;
+}
+
+.promocoes-01{
+    display: flex;
+    gap: 2rem;
+}
+.promocoes {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f9f9f9;
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    width: 20rem;
+
+    
+}
+
+.promocoes:hover {
+    transform: scale(1.03);
+}
+
+.promocoes_img img {
+    width: var(--tamanhoFotoGrande);
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.promocoes_img img:hover {
+    transform: scale(1.1);
+}
+
+.promocoes_produtos {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px;
+    border-radius: var(--bordaRaio);
+}
+
+.promocoes_produtos h3 {
+    font-size: var(--fonteSegundaria);
+    font-weight: bolder;
+    color: var(--verde);
+    
+    margin-bottom: 0.5rem;
+    
+    
+}
+
+.promocoes_produtos span {
+    font-size: 1.5rem;
+    font-size: var(--fonteSegundaria);
+    color: var(--azul);
+    font-weight: bold;
+}
+
+.promocoes_produtos div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+}
+
+.promocoes_produtos img {
+    width: var(--tamanhoFotoPequena);
+    height: auto;
+    object-fit: contain;
+}
+
+.promocoes_produtos button {
+    padding: 0.5rem 1rem;
+    background-color: var(--azul);
+    color: var(--amarelo);
+    font-weight: bolder;
+    border: none;
+    border-radius: var(--bordaRaio);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.promocoes-carrosel::-webkit-scrollbar {
+    height: 8px;
+}
+
+.promocoes-carrosel::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+}
+
+.promocoes-carrosel::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}

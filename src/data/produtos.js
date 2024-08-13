@@ -29,4 +29,23 @@ export const produtos = [
         mercado: "Mercado do Bairro",
         imagem: batata 
     },
+    {
+        id: 4,
+        nome: "Limão Taiti",
+        descricao: "Limão Taiti fresco, pacote de 1kg.",
+        preco: 5.90,
+        pesoKg: 1,
+        mercado: "Feira Livre ABC",
+        imagem: limao 
+    },
+
+    {
+        id: 5,
+        nome: "Batata Inglesa",
+        descricao: "Batata inglesa fresca, pacote de 2kg.",
+        preco: 8.99,
+        pesoKg: 2,
+        mercado: "Mercado do Bairro",
+        imagem: batata 
+    },
 ];

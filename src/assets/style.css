@@ -22,5 +22,8 @@
     --borda: 2rem solid; 
     --bordaRaio: 0.5rem;
 
-    --tamanhoIcone: 1.5rem
+    --tamanhoIcone: 1.5rem;
+    --tamanhoFotoGrande: 7.938rem;
+    --tamanhoFotoPequena: 4.375rem;
+
 }
