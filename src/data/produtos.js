@@ -1,3 +1,6 @@
+import carne from '../imagens/carne.png'
+import limao from '../imagens/limao.png'
+import batata from '../imagens/batata.png'
 export const produtos = [
     {
         id: 1,
@@ -6,7 +9,7 @@ export const produtos = [
         preco: 129.90,
         pesoKg: 1,
         mercado: "Supermercado XYZ",
-        // imagem: fileMignonImagem 
+        imagem: carne 
     },
     {
         id: 2,
@@ -15,7 +18,7 @@ export const produtos = [
         preco: 5.90,
         pesoKg: 1,
         mercado: "Feira Livre ABC",
-        // imagem: limaoImagem 
+        imagem: limao 
     },
     {
         id: 3,
@@ -24,6 +27,6 @@ export const produtos = [
         preco: 8.99,
         pesoKg: 2,
         mercado: "Mercado do Bairro",
-        // imagem: batataImagem 
+        imagem: batata 
     },
 ];

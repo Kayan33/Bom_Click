@@ -1,0 +1,22 @@
+.secao_estatisticas{
+
+    display: flex;
+    color: var(--amarelo);
+    gap: var(--espacamentoMenor);
+    margin: var(--espacamentoMaior) var(--espacamentoMenor);
+
+}
+
+.secao_estatisticas_item{
+
+    background-color: var(--azul);
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+}
+
+.secao_estatisticas_item_titulo{
+
+    font-size: 0.625rem;
+
+}
