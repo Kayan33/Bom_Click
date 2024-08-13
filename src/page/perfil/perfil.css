@@ -4,6 +4,11 @@
     align-items: center;
     gap: var(--espacamentoMenor);
     img {
+        margin: var(--espacamentoMenor);
         width: var(--tamanhoFotoPequena);
+    }
+    p {
+        color: var(--azul);
+        font-size: var(--fontePequena);
     }
 };

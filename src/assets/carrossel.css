@@ -24,18 +24,25 @@
 .secao_compras_lista_item{
 
     display: flex;
-    flex-direction: column;
+
 }
 
 .secao_compras_lista_item_produto{
 
     display: flex;
     flex-direction: column;
+    gap: var(--espacamentoMenor);
 }
 
 .secao_compras_lista_item_produto_imagem{
 
     width: var(--tamanhoFotoGrande);
+}
+
+.secao_compras_lista_item_produto_valores{
+
+    display: flex;
+    justify-content: space-between;
 }
 
 .secao_compras_lista_item_produto_titulo{

@@ -54,13 +54,29 @@ function DadosPorMercado() {
 
                             <div className='secao_compras_lista_item_produto_valores'>
 
-                                <h4 className='secao_compras_lista_item_produto_produto--preço'>R$40,00</h4>
+                                <h4 className='secao_compras_lista_item_produto_titulo--preço'>R$40,00</h4>
 
-                                <h4 className='secao_compras_lista_item_produto_produto--desconto'>R$40,00</h4>
+                                <h4 className='secao_compras_lista_item_produto_titulo--desconto'>R$40,00</h4>
 
                             </div>
 
                         </div>
+
+                        <div className='secao_compras_lista_item_produto'>
+
+<img src={fotoCarne} alt="Fraldinha" className='secao_compras_lista_item_produto_imagem'/>
+
+<h3 className='secao_compras_lista_item_produto_titulo'>Fraldinha Bovina Resfriada KG</h3>
+
+<div className='secao_compras_lista_item_produto_valores'>
+
+    <h4 className='secao_compras_lista_item_produto_titulo--preço'>R$40,00</h4>
+
+    <h4 className='secao_compras_lista_item_produto_titulo--desconto'>R$40,00</h4>
+
+</div>
+
+</div>
 
                     </li>
 
