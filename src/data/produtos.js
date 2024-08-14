@@ -62,7 +62,7 @@ export const produtos = [
         setores: "Hortifrut"
     },
     {
-        id: 1,
+        id: 6,
         nome: "Carne Bovina - Filé Mignon",
         descricao: "Filé Mignon bovino, peça de 1kg.",
         preco: 129.90,
@@ -73,7 +73,7 @@ export const produtos = [
         setores: "Açougue"
     },
     {
-        id: 2,
+        id: 7,
         nome: "Limão Taiti",
         descricao: "Limão Taiti fresco, pacote de 1kg.",
         preco: 5.90,
@@ -84,7 +84,7 @@ export const produtos = [
         setores: "Hortifrut"
     },
     {
-        id: 3,
+        id: 8,
         nome: "Batata Inglesa",
         descricao: "Batata inglesa fresca, pacote de 2kg.",
         preco: 8.99,
@@ -95,7 +95,7 @@ export const produtos = [
         setores: "Hortifrut"
     },
     {
-        id: 4,
+        id: 9,
         nome: "Limão Taiti",
         descricao: "Limão Taiti fresco, pacote de 1kg.",
         preco: 5.90,
@@ -107,7 +107,7 @@ export const produtos = [
     },
 
     {
-        id: 5,
+        id: 10,
         nome: "Batata Inglesa",
         descricao: "Batata inglesa fresca, pacote de 2kg.",
         preco: 8.99,
