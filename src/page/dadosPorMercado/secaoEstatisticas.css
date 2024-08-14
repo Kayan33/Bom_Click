@@ -2,8 +2,9 @@
 
     display: flex;
     color: var(--amarelo);
-    gap: var(--espacamentoMenor);
-    margin: var(--espacamentoMaior) var(--espacamentoMenor);
+    gap: var(--espacamentoPequeno);
+    justify-content: center;
+    margin: var(--espacamentoMaior) 0;
     text-align: center;
 
 }
@@ -14,6 +15,7 @@
     background-color: var(--azul);
     display: flex;
     flex-direction: column;
+    font-weight: var(--fonteExtraBold);
     gap: var(--espacamentoMenor);
     padding: var(--espacamentoMenor);
 }
@@ -21,4 +23,9 @@
 .secao_estatisticas_item_titulo{
 
     font-size: 0.625rem;
+}
+
+.secao_estatisticas_item_valor{
+
+    font-size: 1rem;
 }

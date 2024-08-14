@@ -15,9 +15,11 @@
     --fonteRegular: 400;
     --fonteSemiBold: 600;
     --fonteBold: 700;
+    --fonteExtraBold: 800;
 
     --espacamentoMaior: 2rem;
     --espacamentoMenor: 1rem;
+    --espacamentoPequeno: 0.5rem;
 
     --borda: 2rem solid; 
     --bordaRaio: 0.5rem;

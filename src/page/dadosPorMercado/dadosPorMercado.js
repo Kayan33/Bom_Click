@@ -26,12 +26,12 @@ function DadosPorMercado() {
 
                 <div className='secao_estatisticas_item'>
                     <span className='secao_estatisticas_item_titulo'>Valores gastos</span>
-                    <span className='secao_estatisticas_item_valor'>2</span>
+                    <span className='secao_estatisticas_item_valor'>R$40,50</span>
                 </div>
 
                 <div className='secao_estatisticas_item'>
                     <span className='secao_estatisticas_item_titulo'>Valores Economizados</span>
-                    <span className='secao_estatisticas_item_valor'>2</span>
+                    <span className='secao_estatisticas_item_valor'>R$50</span>
                 </div>
 
             </section>
