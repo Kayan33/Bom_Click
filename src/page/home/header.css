@@ -156,12 +156,27 @@
     margin: 0rem 0.5rem;
 }
 .mercados_flex{
+    margin-top: 3rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-wrap: wrap;
 }
 
 .mercados_flex img {
     width: var(--tamanhoFotoGrande);
+    transition: transform 0.3s ease;
+    border: var(--amarelo) solid 5px;
+    border-radius: var(--bordaRaio);
     
+}
+
+.mercados_flex img:hover {
+    transform: scale(1.1);
+}
+
+@media (max-width: 600px){
+    .mercados_flex img {
+        width: var(--tamanhoFotoPequena);
+        
+    }
 }
