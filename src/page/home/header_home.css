@@ -55,6 +55,21 @@
     padding: 1rem 0;
     scroll-behavior: smooth;
 }
+@media (min-width: 800px){
+.promocoes-carrosel::-webkit-scrollbar {
+    height: 8px;
+}
+
+.promocoes-carrosel::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+}
+
+.promocoes-carrosel::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+}
+    
 
 .promocoes-01{
     display: flex;
@@ -136,24 +151,12 @@
     transition: background-color 0.3s ease;
 }
 
-.promocoes-carrosel::-webkit-scrollbar {
-    height: 8px;
-}
-
-.promocoes-carrosel::-webkit-scrollbar-thumb {
-    background-color: #ccc;
-    border-radius: 10px;
-}
-
-.promocoes-carrosel::-webkit-scrollbar-track {
-    background-color: #f1f1f1;
-}
 
 .cabecalho_mercados{
     margin: 0rem 0.5rem;
 }
 .mercados_flex{
-    margin-top: 3rem;
+    margin: 3rem 0rem;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;

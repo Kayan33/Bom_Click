@@ -69,6 +69,12 @@ function HomeScreen() {
           <img src={tausteLogo}></img>
         </div>
       </section>
+
+      <section>
+        <div className='promocoes-carrosel'>
+
+        </div>
+      </section>
     </div>
 
   )
