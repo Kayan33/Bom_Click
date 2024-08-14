@@ -1,7 +1,7 @@
-import './secaoEstatisticas.css'
-import '../../assets/cabecalho.css'
-import '../../assets/carrossel.css'
-import iconeVoltar from '../../imagens/icon-voltar.svg'
+import './secaoEstatisticas.css';
+import '../../assets/cabecalho.css';
+import '../../assets/carrossel.css';
+import iconeVoltar from '../../imagens/icon-voltar.svg';
 import fotoCarne from '../../imagens/carne.png';
 
 function DadosPorMercado() {
@@ -9,8 +9,8 @@ function DadosPorMercado() {
         <>
 
             <header className='cabecalho'>
-                <a href="/" className="cabecalho__link" aria-label="Voltar para o perfil">
-                    <img src={iconeVoltar} alt="Voltar para o perfil" className="cabecalho__link" />
+                <a href="/" className="cabecalho_link" aria-label="Voltar para o perfil">
+                    <img src={iconeVoltar} alt="Voltar para o perfil" className="cabecalho_link" />
                 </a>
 
                 <h1 className='cabecalho_titulo'>Confiança</h1>
