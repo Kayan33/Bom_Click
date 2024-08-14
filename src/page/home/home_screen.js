@@ -8,7 +8,7 @@ import confiancaLogo from '../../imagens/confiancaLogo.png'
 import panelaoLogo from '../../imagens/panelaoLogo.png'
 import tausteLogo from '../../imagens/tausteLogo.png'
 
-import {produtos} from '../../data/produtos.js';
+import { produtos } from '../../data/produtos.js';
 
 function HomeScreen() {
   return (
@@ -42,23 +42,23 @@ function HomeScreen() {
       <section className='cabecalho_promocoes'>
         <h1>Promoções do dia!</h1>
         <div className="promocoes-carrosel">
-        <div className='promocoes-01'>
-          {produtos.map(produto => (
-            <div className='promocoes'>
-              <div className='promocoes_img'>
-                <img src={produto.imagem} alt={produto.nome} />
-              </div>
-              <div className='promocoes_produtos'>
-                <h3>{produto.nome}</h3>
-                <span>R${produto.preco.toFixed(2)}</span>
-                <div>
-                  <img src={produto.mercado} alt={produto.mercado}  className='imagem-mercado'/>
-                  <button>Adicionar <br /> a compra</button>
+          <div className='promocoes-01'>
+            {produtos.map(produto => (
+              <div className='promocoes'>
+                <div className='promocoes_img'>
+                  <img src={produto.imagem} alt={produto.nome} />
+                </div>
+                <div className='promocoes_produtos'>
+                  <h3>{produto.nome}</h3>
+                  <span>R${produto.preco.toFixed(2)}</span>
+                  <div>
+                    <img src={produto.mercado} alt={produto.mercado} className='imagem-mercado' />
+                    <button>Adicionar <br /> a compra</button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -70,9 +70,14 @@ function HomeScreen() {
         </div>
       </section>
 
-      <section>
+      <section className='cabecalho_setores'>
         <div className='promocoes-carrosel'>
-
+          <div className='promocoes-01  setores-mercado'>
+            <button className="button">Frios</button>
+            <button className="button">Açougue</button>
+            <button className="button">Hortifrut</button>
+            <button className="button">Higiene</button>
+          </div>
         </div>
       </section>
     </div>
