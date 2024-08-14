@@ -30,21 +30,48 @@
     overflow-x: auto;
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
+    
 }
+
+@media (min-width: 800px){
+    .secao_compras_produtos_lista::-webkit-scrollbar {
+        height: 8px;
+    }
+    
+    .secao_compras_produtos_lista::-webkit-scrollbar-thumb {
+        background-color: #ccc;
+        border-radius: 10px;
+    }
+    
+    .secao_compras_produtos_lista::-webkit-scrollbar-track {
+        background-color: #f1f1f1;
+    }
+    }
 
 .secao_compras_produtos_lista_item{
 
     display: flex;
     flex-direction: row;
     scroll-snap-align: center;
+   
 
 }
 
 .secao_compras_lista_item_produto{
-
     display: flex;
     flex-direction: column;
     gap: var(--espacamentoMenor);
+    justify-content: space-around;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacamentoMenor);
+    width: 200px;
+    
+}
+
+.secao_compras_lista_item_produto:hover{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
 }
 
 .secao_compras_lista_item_produto_imagem{
@@ -55,7 +82,9 @@
 .secao_compras_lista_item_produto_valores{
 
     display: flex;
+    align-items: center;
     justify-content: space-between;
+    justify-content: center;
     gap:var(--espacamentoMenor);
 }
 
@@ -74,4 +103,24 @@
 .secao_compras_lista_item_produto_titulo--desconto{
 
     color: var(--amarelo);
+}
+
+.secao_compras_lista_item_produto_comparar--preco{
+    color: #ffffff;
+    background-color: var(--azul);
+    border-radius: var(--bordaRaio);
+    font-family: var(--fontePrincipal);
+    font-weight: var(--fonteSemiBold);
+    font-size:  var(--fontePequena);
+    padding: 0.5rem 0.2rem;
+}
+
+.secao_compras_lista_item_produto_adicionar--carrinho{
+    color: #ffffff;
+    background-color: var(--verde);
+    border-radius: var(--bordaRaio);
+    padding: 0.5rem 0.2rem;
+    font-family: var(--fontePrincipal);
+    font-weight: var(--fonteSemiBold);
+    font-size: var(--fontePequena);
 }
