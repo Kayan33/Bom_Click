@@ -7,7 +7,7 @@ import fotoCarne from '../../imagens/carne.png';
 function DadosPorMercado() {
     return (
         <>
-            <header className='cabecalhoTeste'>
+            <header className='cabecalho teste'>
                 <a href="/" className="cabecalho_link" aria-label="Voltar para o perfil">
                     <img src={iconeVoltar} alt="Voltar para o perfil" className="cabecalho_link" />
                 </a>
