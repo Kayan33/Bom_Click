@@ -17,8 +17,10 @@ export default function Perfil() {
             </header>   
             <main>
                 <section className='secao_perfil'>
-                    <img src={perfil} alt="icone de perfil" /> {/*Colocar tag Link*/}
-                    <p>Editar Informações</p> {/*Colocar tag Link*/}
+                    <a href="/dadosPorMercado">
+                        <img src={perfil} alt="icone de perfil" /> {/*Colocar tag Link*/}
+                        <p>Editar Informações</p> {/*Colocar tag Link*/}
+                    </a>
                     <h2>Olá Danrley!</h2>
                 </section>
                 <section className='secao_estatisticas'>

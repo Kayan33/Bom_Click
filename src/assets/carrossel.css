@@ -1,3 +1,12 @@
+.cabecalhoTeste{
+
+    align-items: center;
+    background-color: var(--azul);
+    display: flex;
+    justify-content: center;
+    padding: var(--espacamentoMenor);
+}
+
 .secao_compras{
 
     margin: 0 var(--espacamentoMenor) var(--espacamentoMaior);
