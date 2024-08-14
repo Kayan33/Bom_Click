@@ -40,49 +40,184 @@ function DadosPorMercado() {
 
                 <h2 className='secao_compras_titulo'>Compras Realizadas</h2>
 
-                <ul className='secao_compras_lista'>
 
-                    <li className='secao_compras_lista_item'>
+                <section className='secao_compras_produtos'>
 
-                        <time datetime="2024-05-17" className='secao_compras_titulo secao_compras_titulo--verde'>17/05/2024</time>
+                <time datetime="2024-05-17" className='secao_compras_produtos_lista_titulo secao_compras_produtos_lista_titulo--verde'>17/05/2024</time>
 
-                        <div className='secao_compras_lista_item_produto'>
+                <ul className='secao_compras_produtos_lista'>
 
-                            <img src={fotoCarne} alt="Fraldinha" className='secao_compras_lista_item_produto_imagem'/>
+                    <li className='secao_compras_produtos_lista_item'>
 
-                            <h3 className='secao_compras_lista_item_produto_titulo'>Fraldinha Bovina Resfriada KG</h3>
+                            <article className='secao_compras_lista_item_produto'>
 
-                            <div className='secao_compras_lista_item_produto_valores'>
+                                <img src={fotoCarne} alt="Fraldinha" className='secao_compras_lista_item_produto_imagem' />
 
-                                <h4 className='secao_compras_lista_item_produto_titulo--preço'>R$40,00</h4>
+                                <h3 className='secao_compras_lista_item_produto_titulo'>Fraldinha Bovina Resfriada KG</h3>
 
-                                <h4 className='secao_compras_lista_item_produto_titulo--desconto'>R$40,00</h4>
+                                <div className='secao_compras_lista_item_produto_valores'>
 
-                            </div>
+                                    <h4 className='secao_compras_lista_item_produto_titulo--preço'>R$40,00</h4>
 
-                        </div>
+                                    <h4 className='secao_compras_lista_item_produto_titulo--desconto'>R$40,00</h4>
 
-                        <div className='secao_compras_lista_item_produto'>
+                                </div>
 
-<img src={fotoCarne} alt="Fraldinha" className='secao_compras_lista_item_produto_imagem'/>
-
-<h3 className='secao_compras_lista_item_produto_titulo'>Fraldinha Bovina Resfriada KG</h3>
-
-<div className='secao_compras_lista_item_produto_valores'>
-
-    <h4 className='secao_compras_lista_item_produto_titulo--preço'>R$40,00</h4>
-
-    <h4 className='secao_compras_lista_item_produto_titulo--desconto'>R$40,00</h4>
-
-</div>
-
-</div>
+                            </article>
 
                     </li>
 
-                    
+                    <li className='secao_compras_produtos_lista_item'>
 
+                            <article className='secao_compras_lista_item_produto'>
+
+                                <img src={fotoCarne} alt="Fraldinha" className='secao_compras_lista_item_produto_imagem' />
+
+                                <h3 className='secao_compras_lista_item_produto_titulo'>Fraldinha Bovina Resfriada KG</h3>
+
+                                <div className='secao_compras_lista_item_produto_valores'>
+
+                                    <h4 className='secao_compras_lista_item_produto_titulo--preço'>R$40,00</h4>
+
+                                    <h4 className='secao_compras_lista_item_produto_titulo--desconto'>R$40,00</h4>
+
+                                </div>
+
+                            </article>
+
+                    </li>
+                            
                 </ul>
+
+                <time datetime="2024-05-17" className='secao_compras_produtos_lista_titulo secao_compras_produtos_lista_titulo--verde'>17/05/2024</time>
+
+                <ul className='secao_compras_produtos_lista'>
+
+                    <li className='secao_compras_produtos_lista_item'>
+
+                            <article className='secao_compras_lista_item_produto'>
+
+                                <img src={fotoCarne} alt="Fraldinha" className='secao_compras_lista_item_produto_imagem' />
+
+                                <h3 className='secao_compras_lista_item_produto_titulo'>Fraldinha Bovina Resfriada KG</h3>
+
+                                <div className='secao_compras_lista_item_produto_valores'>
+
+                                    <h4 className='secao_compras_lista_item_produto_titulo--preço'>R$40,00</h4>
+
+                                    <h4 className='secao_compras_lista_item_produto_titulo--desconto'>R$40,00</h4>
+
+                                </div>
+
+                            </article>
+
+                    </li>
+
+                    <li className='secao_compras_produtos_lista_item'>
+
+                            <article className='secao_compras_lista_item_produto'>
+
+                                <img src={fotoCarne} alt="Fraldinha" className='secao_compras_lista_item_produto_imagem' />
+
+                                <h3 className='secao_compras_lista_item_produto_titulo'>Fraldinha Bovina Resfriada KG</h3>
+
+                                <div className='secao_compras_lista_item_produto_valores'>
+
+                                    <h4 className='secao_compras_lista_item_produto_titulo--preço'>R$40,00</h4>
+
+                                    <h4 className='secao_compras_lista_item_produto_titulo--desconto'>R$40,00</h4>
+
+                                </div>
+
+                            </article>
+
+                    </li>
+
+                    <li className='secao_compras_produtos_lista_item'>
+
+                            <article className='secao_compras_lista_item_produto'>
+
+                                <img src={fotoCarne} alt="Fraldinha" className='secao_compras_lista_item_produto_imagem' />
+
+                                <h3 className='secao_compras_lista_item_produto_titulo'>Fraldinha Bovina Resfriada KG</h3>
+
+                                <div className='secao_compras_lista_item_produto_valores'>
+
+                                    <h4 className='secao_compras_lista_item_produto_titulo--preço'>R$40,00</h4>
+
+                                    <h4 className='secao_compras_lista_item_produto_titulo--desconto'>R$40,00</h4>
+
+                                </div>
+
+                            </article>
+
+                    </li>
+                    
+                    <li className='secao_compras_produtos_lista_item'>
+
+<article className='secao_compras_lista_item_produto'>
+
+    <img src={fotoCarne} alt="Fraldinha" className='secao_compras_lista_item_produto_imagem' />
+
+    <h3 className='secao_compras_lista_item_produto_titulo'>Fraldinha Bovina Resfriada KG</h3>
+
+    <div className='secao_compras_lista_item_produto_valores'>
+
+        <h4 className='secao_compras_lista_item_produto_titulo--preço'>R$40,00</h4>
+
+        <h4 className='secao_compras_lista_item_produto_titulo--desconto'>R$40,00</h4>
+
+    </div>
+
+</article>
+
+</li>
+
+<li className='secao_compras_produtos_lista_item'>
+
+<article className='secao_compras_lista_item_produto'>
+
+    <img src={fotoCarne} alt="Fraldinha" className='secao_compras_lista_item_produto_imagem' />
+
+    <h3 className='secao_compras_lista_item_produto_titulo'>Fraldinha Bovina Resfriada KG</h3>
+
+    <div className='secao_compras_lista_item_produto_valores'>
+
+        <h4 className='secao_compras_lista_item_produto_titulo--preço'>R$40,00</h4>
+
+        <h4 className='secao_compras_lista_item_produto_titulo--desconto'>R$40,00</h4>
+
+    </div>
+
+</article>
+
+</li>
+
+<li className='secao_compras_produtos_lista_item'>
+
+<article className='secao_compras_lista_item_produto'>
+
+    <img src={fotoCarne} alt="Fraldinha" className='secao_compras_lista_item_produto_imagem' />
+
+    <h3 className='secao_compras_lista_item_produto_titulo'>Fraldinha Bovina Resfriada KG</h3>
+
+    <div className='secao_compras_lista_item_produto_valores'>
+
+        <h4 className='secao_compras_lista_item_produto_titulo--preço'>R$40,00</h4>
+
+        <h4 className='secao_compras_lista_item_produto_titulo--desconto'>R$40,00</h4>
+
+    </div>
+
+</article>
+
+</li>
+
+                            
+                </ul>
+
+                </section>
+
             </section>
 
 
