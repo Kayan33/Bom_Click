@@ -4,7 +4,7 @@
     background-color: var(--azul);
     display: flex;
     justify-content: center;
-    padding: var(--espacamentoMenor)
+    padding: var(--espacamentoMenor);
 }
 
 .cabecalho_titulo{
