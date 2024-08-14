@@ -1,6 +1,6 @@
 .secao_compras{
 
-    margin: 0 var(--espacamentoMenor);
+    margin: 0 var(--espacamentoMenor) var(--espacamentoMaior);
 }
 
 .secao_compras_titulo{
