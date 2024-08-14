@@ -7,6 +7,13 @@
     padding: var(--espacamentoMenor);
 }
 
+.cabecalho_titulo{
+
+    color: var(--amarelo);
+    font-weight: var(--fonteSemiBold);
+    margin: auto;
+}
+
 .secao_compras{
 
     margin: 0 var(--espacamentoMenor) var(--espacamentoMaior);
