@@ -1,6 +1,9 @@
 import carne from '../imagens/carne.png'
 import limao from '../imagens/limao.png'
 import batata from '../imagens/batata.png'
+import confiancaLogo from '../imagens/confiancaLogo.png'
+import panelaoLogo from '../imagens/panelaoLogo.png'
+import tausteLogo from '../imagens/tausteLogo.png'
 export const produtos = [
     {
         id: 1,
@@ -9,7 +12,8 @@ export const produtos = [
         preco: 129.90,
         pesoKg: 1,
         mercado: "Supermercado XYZ",
-        imagem: carne 
+        imagem: carne ,
+        mercado: confiancaLogo
     },
     {
         id: 2,
@@ -18,7 +22,8 @@ export const produtos = [
         preco: 5.90,
         pesoKg: 1,
         mercado: "Feira Livre ABC",
-        imagem: limao 
+        imagem: limao ,
+        mercado:panelaoLogo
     },
     {
         id: 3,
@@ -27,7 +32,8 @@ export const produtos = [
         preco: 8.99,
         pesoKg: 2,
         mercado: "Mercado do Bairro",
-        imagem: batata 
+        imagem: batata,
+        mercado:panelaoLogo
     },
     {
         id: 4,
@@ -36,7 +42,8 @@ export const produtos = [
         preco: 5.90,
         pesoKg: 1,
         mercado: "Feira Livre ABC",
-        imagem: limao 
+        imagem: limao,
+        mercado:tausteLogo
     },
 
     {
@@ -46,6 +53,7 @@ export const produtos = [
         preco: 8.99,
         pesoKg: 2,
         mercado: "Mercado do Bairro",
-        imagem: batata 
+        imagem: batata,
+        mercado:tausteLogo
     },
 ];

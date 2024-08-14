@@ -3,7 +3,10 @@ import logo from '../../imagens/bomClick.svg'
 import carrinho from '../../imagens/carrinho.svg'
 import perfil from '../../imagens/perfil.svg'
 import { Link } from 'react-router-dom'
+
 import confiancaLogo from '../../imagens/confiancaLogo.png'
+import panelaoLogo from '../../imagens/panelaoLogo.png'
+import tausteLogo from '../../imagens/tausteLogo.png'
 
 import {produtos} from '../../data/produtos.js';
 
@@ -49,13 +52,21 @@ function HomeScreen() {
                 <h3>{produto.nome}</h3>
                 <span>R${produto.preco.toFixed(2)}</span>
                 <div>
-                  <img src={confiancaLogo} alt={produto.mercado} />
+                  <img src={produto.mercado} alt={produto.mercado}  className='imagem-mercado'/>
                   <button>Adicionar <br /> a compra</button>
                 </div>
               </div>
             </div>
           ))}
         </div>
+        </div>
+      </section>
+
+      <section className='cabecalho_mercados'>
+        <div className='mercados_flex'>
+          <img src={confiancaLogo}></img>
+          <img src={panelaoLogo}></img>
+          <img src={tausteLogo}></img>
         </div>
       </section>
     </div>
