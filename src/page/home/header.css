@@ -40,7 +40,7 @@
 
 
 
-
+/* PROMOÇOES */
 .cabecalho_promocoes{
     background-color: var(--amarelo);
     padding: 1rem;
@@ -49,6 +49,8 @@
 
 .cabecalho_promocoes h1 {
     margin-bottom: 0.5rem;
+    color: var(--azul);
+    font-weight: bolder;
 }
 
 .promocoes-carrosel{
@@ -123,8 +125,7 @@
 
 .promocoes_produtos img {
     width: var(--tamanhoFotoPequena);
-    height: auto;
-    object-fit: contain;
+    margin-right: 0.6rem;
 }
 
 .promocoes_produtos button {
@@ -149,4 +150,18 @@
 
 .promocoes-carrosel::-webkit-scrollbar-track {
     background-color: #f1f1f1;
+}
+
+.cabecalho_mercados{
+    margin: 0rem 0.5rem;
+}
+.mercados_flex{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.mercados_flex img {
+    width: var(--tamanhoFotoGrande);
+    
 }
