@@ -6,13 +6,13 @@ import fotoCarne from '../../imagens/carne.png';
 
 function DadosPorMercado() {
     return (
-        <div className='teste'>
-            <header className='cabecalho'>
+        <>
+            <header className='cabecalho_titulo'>
                 <a href="/" className="cabecalho_link" aria-label="Voltar para o perfil">
                     <img src={iconeVoltar} alt="Voltar para o perfil" className="cabecalho_link" />
                 </a>
 
-                <h1 className='cabecalho_titulo'>Confiança</h1>
+                <h1 className='cabecalho'>Confiança</h1>
 
             </header>
 
@@ -218,7 +218,7 @@ function DadosPorMercado() {
             </section>
 
 
-</div>
+            </>
     )
 }
 
