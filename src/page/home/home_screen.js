@@ -1,4 +1,4 @@
-import './header.css'
+import './header_home.css'
 import logo from '../../imagens/bomClick.svg'
 import carrinho from '../../imagens/carrinho.svg'
 import perfil from '../../imagens/perfil.svg'
