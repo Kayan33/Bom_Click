@@ -9,7 +9,7 @@ function DadosPorMercado() {
         <>
 
             <header className='cabecalho'>
-                <a href="#" className="cabecalho__link" aria-label="Voltar para o perfil">
+                <a href="/" className="cabecalho__link" aria-label="Voltar para o perfil">
                     <img src={iconeVoltar} alt="Voltar para o perfil" className="cabecalho__link" />
                 </a>
 
