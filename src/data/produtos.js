@@ -11,9 +11,9 @@ export const produtos = [
         descricao: "Filé Mignon bovino, peça de 1kg.",
         preco: 129.90,
         pesoKg: 1,
-        mercado: "Supermercado XYZ",
+        mercado: "Panelão",
         imagem: carne ,
-        mercado: confiancaLogo,
+        mercadoImagem: confiancaLogo,
         setores: "Açougue"
     },
     {
@@ -22,9 +22,9 @@ export const produtos = [
         descricao: "Limão Taiti fresco, pacote de 1kg.",
         preco: 5.90,
         pesoKg: 1,
-        mercado: "Feira Livre ABC",
+        mercado: "Panelão",
         imagem: limao ,
-        mercado:panelaoLogo,
+        mercadoImagem:panelaoLogo,
         setores: "Hortifrut"
     },
     {
@@ -33,9 +33,9 @@ export const produtos = [
         descricao: "Batata inglesa fresca, pacote de 2kg.",
         preco: 8.99,
         pesoKg: 2,
-        mercado: "Mercado do Bairro",
+        mercado: "Confiança",
         imagem: batata,
-        mercado:panelaoLogo,
+        mercadoImagem:panelaoLogo,
         setores: "Hortifrut"
     },
     {
@@ -44,9 +44,9 @@ export const produtos = [
         descricao: "Limão Taiti fresco, pacote de 1kg.",
         preco: 5.90,
         pesoKg: 1,
-        mercado: "Feira Livre ABC",
+        mercado: "Tauste",
         imagem: limao,
-        mercado:tausteLogo,
+        mercadoImagem:tausteLogo,
         setores: "Hortifrut"
     },
 
@@ -56,9 +56,9 @@ export const produtos = [
         descricao: "Batata inglesa fresca, pacote de 2kg.",
         preco: 8.99,
         pesoKg: 2,
-        mercado: "Mercado do Bairro",
+        mercado: "Tauste",
         imagem: batata,
-        mercado:tausteLogo,
+        mercadoImagem:tausteLogo,
         setores: "Hortifrut"
     },
     {
@@ -67,9 +67,9 @@ export const produtos = [
         descricao: "Filé Mignon bovino, peça de 1kg.",
         preco: 129.90,
         pesoKg: 1,
-        mercado: "Supermercado XYZ",
+        mercado: "Confiança",
         imagem: carne ,
-        mercado: confiancaLogo,
+        mercadoImagem: confiancaLogo,
         setores: "Açougue"
     },
     {
@@ -78,9 +78,9 @@ export const produtos = [
         descricao: "Limão Taiti fresco, pacote de 1kg.",
         preco: 5.90,
         pesoKg: 1,
-        mercado: "Feira Livre ABC",
+        mercado: "Confiança",
         imagem: limao ,
-        mercado:panelaoLogo,
+        mercadoImagem:panelaoLogo,
         setores: "Hortifrut"
     },
     {
@@ -89,9 +89,9 @@ export const produtos = [
         descricao: "Batata inglesa fresca, pacote de 2kg.",
         preco: 8.99,
         pesoKg: 2,
-        mercado: "Mercado do Bairro",
+        mercado: "Panelão",
         imagem: batata,
-        mercado:panelaoLogo,
+        mercadoImagem:panelaoLogo,
         setores: "Hortifrut"
     },
     {
@@ -100,9 +100,9 @@ export const produtos = [
         descricao: "Limão Taiti fresco, pacote de 1kg.",
         preco: 5.90,
         pesoKg: 1,
-        mercado: "Feira Livre ABC",
+        mercado: "Tauste",
         imagem: limao,
-        mercado:tausteLogo,
+        mercadoImagem:tausteLogo,
         setores: "Hortifrut"
     },
 
@@ -112,10 +112,21 @@ export const produtos = [
         descricao: "Batata inglesa fresca, pacote de 2kg.",
         preco: 8.99,
         pesoKg: 2,
-        mercado: "Mercado do Bairro",
+        mercado: "Tauste",
         imagem: batata,
-        mercado:tausteLogo,
+        mercadoImagem:tausteLogo,
         setores: "Hortifrut"
+    },
+    {
+        id: 11,
+        nome: "Carne Bovina - Filé Mignon",
+        descricao: "Filé Mignon bovino, peça de 1kg.",
+        preco: 129.90,
+        pesoKg: 1,
+        mercado: "Tauste",
+        imagem: carne ,
+        mercadoImagem: confiancaLogo,
+        setores: "Açougue"
     },
     
 ];

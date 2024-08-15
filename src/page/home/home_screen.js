@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom'
 import confiancaLogo from '../../imagens/confiancaLogo.png'
 import panelaoLogo from '../../imagens/panelaoLogo.png'
 import tausteLogo from '../../imagens/tausteLogo.png'
-import fotoCarne from '../../imagens/carne.png'
 
 import { produtos } from '../../data/produtos.js';
 import { useState } from 'react'
@@ -17,12 +16,17 @@ import { useState } from 'react'
 function HomeScreen() {
   const [setorSelecionado, setSetorSelecionado] = useState('Todos');
 
+
   const handleSetorClick = (setor) => {
     setSetorSelecionado(setor);
   };
 
+  
 
-  const produtosFiltrados = setorSelecionado === 'Todos' ? produtos : produtos.filter(produto => produto.setores === setorSelecionado);
+
+
+  const produtosFiltrados = setorSelecionado === 'Todos' ? produtos : produtos.filter(produto => produto.mercado  === setorSelecionado || produto.setores === setorSelecionado);
+
 
   return (
     <div>
@@ -65,7 +69,7 @@ function HomeScreen() {
                   <h3>{produto.nome}</h3>
                   <span>R${produto.preco.toFixed(2)}</span>
                   <div>
-                    <img src={produto.mercado} alt={produto.mercado} className='imagem-mercado' />
+                    <img src={produto.mercadoImagem} alt={produto.mercado} className='imagem-mercado' />
                     <button>Adicionar <br /> a compra</button>
                   </div>
                 </div>
@@ -77,9 +81,9 @@ function HomeScreen() {
 
       <section className='cabecalho_mercados'>
         <div className='mercados_flex'>
-          <img src={confiancaLogo}></img>
-          <img src={panelaoLogo}></img>
-          <img src={tausteLogo}></img>
+          <img src={confiancaLogo} onClick={()=> handleSetorClick('Confiança')}></img>
+          <img src={panelaoLogo} onClick={()=> handleSetorClick('Panelão')}></img>
+          <img src={tausteLogo} onClick={()=> handleSetorClick('Tauste')}></img>
         </div>
       </section>
 
