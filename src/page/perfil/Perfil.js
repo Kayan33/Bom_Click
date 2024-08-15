@@ -7,20 +7,21 @@ import panelaoLogo from '../../imagens/panelaoLogo.png'
 import carne from '../../imagens/carne.png'
 import limao from '../../imagens/limao.png'
 import '../../assets/cabecalho.css'
+import { Link } from 'react-router-dom'
 
 export default function Perfil() {
     return (
         <div>
             <header className='cabecalho'>
-                <img src={iconeVoltar} alt="Voltar para Página Inicial" />
+                <Link to='/'><img src={iconeVoltar} alt="Voltar para Página Inicial" /></Link>
                 <h1 className='cabecalho_titulo'>Perfil</h1>
             </header>   
             <main>
                 <section className='secao_perfil'>
-                    <a href="/dadosPorMercado">
-                        <img src={perfil} alt="icone de perfil" /> {/*Colocar tag Link*/}
-                        <p>Editar Informações</p> {/*Colocar tag Link*/}
-                    </a>
+                    <Link to="/dadosPorMercado">
+                        <img src={perfil} alt="icone de perfil" /> 
+                        <p>Editar Informações</p> 
+                    </Link>
                     <h2>Olá Danrley!</h2>
                 </section>
                 <section className='secao_estatisticas'>
@@ -66,7 +67,7 @@ export default function Perfil() {
                         <li>
                             <div>
                                 <img src={tausteLogo} alt="Logo Supermecado Tauste" />
-                                <p>Veja suas compras</p>  {/*Colocar tag Link*/}
+                                <Link to='/resumocompra'>Veja suas compras</Link> 
                             </div>
                         </li>
                         <li>
