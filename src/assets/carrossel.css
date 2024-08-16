@@ -58,15 +58,12 @@
 }
 
 .secao_compras_lista_item_produto{
-    display: flex;
-    flex-direction: column;
-    gap: var(--espacamentoMenor);
-    justify-content: space-around;
     align-items: center;
     display: flex;
     flex-direction: column;
-    gap: var(--espacamentoMenor);
-    width: 200px;
+    gap: var(--espacamentoMaior);
+    justify-content: space-around;
+    /* width: 200px; */
     
 }
 
@@ -76,33 +73,28 @@
 
 .secao_compras_lista_item_produto_imagem{
 
-    width: var(--tamanhoFotoGrande);
+    width: 100%;
 }
 
 .secao_compras_lista_item_produto_valores{
 
-    display: flex;
     align-items: center;
-    justify-content: space-between;
-    justify-content: center;
+    display: flex;
     gap:var(--espacamentoMenor);
+    justify-content: space-between;
+    width: 100%;
 }
 
 .secao_compras_lista_item_produto_titulo{
 
     color:  var(--verde);
-    font-size:  var(--fontePequena);
+    font-size:  var(--fonteSegundaria);
     font-weight: var(--fonteBold);
 }
 
 .secao_compras_lista_item_produto_titulo--preço{
 
     color: var(--azul);
-}
-
-.secao_compras_lista_item_produto_titulo--desconto{
-
-    color: var(--amarelo);
 }
 
 .secao_compras_lista_item_produto_comparar--preco{
