@@ -3,9 +3,11 @@
     flex-direction: column;
     align-items: center;
     gap: var(--espacamentoMenor);
+   
     img {
         margin: var(--espacamentoMenor);
         width: var(--tamanhoFotoPequena);
+        color: var(--azul);
     }
     p {
         color: var(--azul);
