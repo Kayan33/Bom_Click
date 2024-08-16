@@ -165,7 +165,6 @@
 .mercados_flex img {
     width: var(--tamanhoFotoGrande);
     transition: transform 0.3s ease;
-    border: var(--amarelo) solid 5px;
     border-radius: var(--bordaRaio);
     
 }

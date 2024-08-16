@@ -1,37 +1,45 @@
-import './header_home.css'
-import logo from '../../imagens/bomClick.svg'
-import carrinho from '../../imagens/carrinho.svg'
-import perfil from '../../imagens/perfil.svg'
-import { Link } from 'react-router-dom'
+import './header_home.css';
+import logo from '../../imagens/bomClick.svg';
+import carrinho from '../../imagens/carrinho.svg';
+import perfil from '../../imagens/perfil.svg';
+import { Link } from 'react-router-dom';
 
-import confiancaLogo from '../../imagens/confiancaLogo.png'
-import panelaoLogo from '../../imagens/panelaoLogo.png'
-import tausteLogo from '../../imagens/tausteLogo.png'
+import confiancaLogo from '../../imagens/confiancaLogo.png';
+import panelaoLogo from '../../imagens/panelaoLogo.png';
+import tausteLogo from '../../imagens/tausteLogo.png';
 
 import { produtos } from '../../data/produtos.js';
-import { useState } from 'react'
-
-
+import { useState, useEffect } from 'react';
 
 function HomeScreen() {
   const [setorSelecionado, setSetorSelecionado] = useState('Todos');
+  const [mercadoSelecionado, setMercadoSelecionado] = useState('Todos');
 
+  function filtrarProdutos() {
+    return produtos.filter(produto => {
+      const mercadoMatch = mercadoSelecionado === 'Todos' || produto.mercado === mercadoSelecionado;
+      const setorMatch = setorSelecionado === 'Todos' || produto.setores === setorSelecionado;
+
+      return mercadoMatch && setorMatch;
+    });
+
+  };
+
+  const produtosFiltrados = filtrarProdutos();
 
   const handleSetorClick = (setor) => {
     setSetorSelecionado(setor);
   };
 
-  
+  const handleMercadoClick = (mercado) => {
+    setMercadoSelecionado(mercado);
+  };
 
-
-
-  const produtosFiltrados = setorSelecionado === 'Todos' ? produtos : produtos.filter(produto => produto.mercado  === setorSelecionado || produto.setores === setorSelecionado);
-
-
+  console.log(produtosFiltrados)
   return (
     <div>
       <header className='cabecalho-lista'>
-        <li >
+        <li>
           <img src={logo} alt="Logo" className='lista-logo' />
         </li>
 
@@ -61,7 +69,7 @@ function HomeScreen() {
         <div className="promocoes-carrosel">
           <div className='promocoes-01'>
             {produtos.map(produto => (
-              <div className='promocoes'>
+              <div className='promocoes' key={produto.id}>
                 <div className='promocoes_img'>
                   <img src={produto.imagem} alt={produto.nome} />
                 </div>
@@ -81,9 +89,15 @@ function HomeScreen() {
 
       <section className='cabecalho_mercados'>
         <div className='mercados_flex'>
-          <img src={confiancaLogo} onClick={()=> handleSetorClick('Confiança')}></img>
-          <img src={panelaoLogo} onClick={()=> handleSetorClick('Panelão')}></img>
-          <img src={tausteLogo} onClick={()=> handleSetorClick('Tauste')}></img>
+          <button className='button'>
+            <img src={confiancaLogo} onClick={() => handleMercadoClick('Confiança')} alt="Confiança Logo"></img>
+          </button>
+          <button className='button'>
+            <img src={panelaoLogo} onClick={() => handleMercadoClick('Panelão')} alt="Panelão Logo"></img>
+          </button>
+          <button className='button'>
+            <img src={tausteLogo} onClick={() => handleMercadoClick('Tauste')} alt="Tauste Logo"></img>
+          </button>
         </div>
       </section>
 
@@ -98,45 +112,50 @@ function HomeScreen() {
         </div>
       </section>
 
+      <section className="promocoes-carrosel">
+        <ul className='secao_compras_produtos_lista'>
+          {produtosFiltrados.map(produto => (
+            <li key={produto.id} className='secao_compras_produtos_lista_item'>
+              <article className='secao_compras_lista_item_produto'>
+                <img
+                  src={produto.imagem}
+                  alt={produto.nome}
+                  className='secao_compras_lista_item_produto_imagem'
+                />
+                <h3 className='secao_compras_lista_item_produto_titulo'>
+                  {produto.nome}
+                </h3>
 
-      <div className="promocoes-carrosel">
-  <ul className='secao_compras_produtos_lista'>
-    {produtosFiltrados.map(produto => (
-      <li key={produto.id} className='secao_compras_produtos_lista_item'>
-        <article className='secao_compras_lista_item_produto'>
-          <img 
-            src={produto.imagem} 
-            alt={produto.nome} 
-            className='secao_compras_lista_item_produto_imagem' 
-          />
-          <h3 className='secao_compras_lista_item_produto_titulo'>
-            {produto.nome}
-          </h3>
-          
-          <div className='secao_compras_lista_item_produto_valores'>
-            <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preco'>
-              R${produto.preco.toFixed(2)}
-            </h4>
-            <button className='secao_compras_lista_item_produto_comparar--preco'>
-              Comparar Preço
-            </button>
+                <div className='secao_compras_lista_item_produto_valores'>
+                  <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preco'>
+                    R${produto.preco.toFixed(2)}
+                  </h4>
+                  <button className='secao_compras_lista_item_produto_comparar--preco'>
+                    Comparar Preço
+                  </button>
+                </div>
+
+                <div className='secao_compras_lista_item_produto_valores'>
+                  <button className='secao_compras_lista_item_produto_adicionar--carrinho'>
+                    Adicionar a Compra
+                  </button>
+                </div>
+              </article>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section>
+        <h1>Comparativo</h1>
+        <div>
+          <div>
+
           </div>
-
-          <div className='secao_compras_lista_item_produto_valores'>
-            <button className='secao_compras_lista_item_produto_adicionar--carrinho'>
-              Adicionar a Compra
-            </button>
-          </div>
-        </article>
-      </li>
-    ))}
-  </ul>
-</div>
-
-
+        </div>
+      </section>
     </div>
-
-  )
+  );
 }
 
-export default HomeScreen
+export default HomeScreen;
