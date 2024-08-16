@@ -7,8 +7,8 @@
     img {
         margin: var(--espacamentoMenor);
         width: var(--tamanhoFotoPequena);
-        color: var(--azul);
     }
+    
     p {
         color: var(--azul);
         font-size: var(--fontePequena);

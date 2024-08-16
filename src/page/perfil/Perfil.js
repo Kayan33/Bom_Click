@@ -19,7 +19,7 @@ export default function Perfil() {
             <main>
                 <section className='secao_perfil'>
                     <Link to="/dadosPorMercado">
-                        <img src={perfil} alt="icone de perfil" /> 
+                        <img src={perfil} alt="icone de perfil" id='icon-page-perfil'/> 
                         <p>Editar Informações</p> 
                     </Link>
                     <h2>Olá Danrley!</h2>
