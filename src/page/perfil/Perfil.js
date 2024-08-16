@@ -73,13 +73,13 @@ export default function Perfil() {
                         <li>
                             <div>
                                 <img src={confiancaLogo} alt="Logo Supermecado Confiança" />
-                                <p>Veja suas compras</p>  {/*Colocar tag Link*/}
+                                <Link to='/resumocompra'>Veja suas compras</Link>   
                             </div>
                         </li>
                         <li>
                             <div>
                                 <img src={panelaoLogo} alt="Logo Supermecado Panelão" />
-                                <p>Veja suas compras</p>  {/*Colocar tag Link*/}
+                                <Link to='/resumocompra'>Veja suas compras</Link> 
                             </div>
                         </li>
                     </ul>
@@ -89,44 +89,44 @@ export default function Perfil() {
                     <img src={confiancaLogo} alt="Logo Supermecado Confiança" />
                     <div className='scrool_ultimas_compras'>
                         <ul>
-                            <li> {/*Colocar tag Link*/}
+                            <li>
                                 <div className='scroll_produto'>
-                                    <img src={carne} alt=" Imagem de Carne Vermelha" />
-                                    <p>Fraldinha Bovina Resfriada KG</p>
-                                    <div className='scroll_economia'>
-                                        <p>R$ 40,00</p>
-                                        <p>R$ 5,00</p>
-                                    </div>
+                                        <img src={carne} alt=" Imagem de Carne Vermelha" />
+                                        <p>Fraldinha Bovina Resfriada KG</p>
+                                        <div className='scroll_economia'>
+                                            <p>R$ 40,00</p>
+                                            <p>R$ 5,00</p>
+                                        </div>
                                 </div>
                             </li>
-                            <li> {/*Colocar tag Link*/}
+                            <li> 
                                 <div className='scroll_produto'>
-                                    <img src={limao} alt="Imagem de limão Taiti" />
-                                    <p>Limão Taiti KG</p>
-                                    <div className='scroll_economia'>
-                                        <p>R$ 40,00</p>
-                                        <p>R$ 0,00</p>
-                                    </div>
+                                        <img src={limao} alt="Imagem de limão Taiti" />
+                                        <p>Limão Taiti KG</p>
+                                        <div className='scroll_economia'>
+                                            <p>R$ 40,00</p>
+                                            <p>R$ 0,00</p>
+                                        </div>
                                 </div>
                             </li>
-                            <li> {/*Colocar tag Link*/}
+                            <li>
                                 <div className='scroll_produto'>
-                                    <img src={carne} alt="Imagem de Carne Vermelha" />
-                                    <p>Alho KG</p>
-                                    <div className='scroll_economia'>
-                                        <p>R$ 0,50</p>
-                                        <p>R$ 0,00</p>
-                                    </div>
+                                        <img src={carne} alt="Imagem de Carne Vermelha" />
+                                        <p>Alho KG</p>
+                                        <div className='scroll_economia'>
+                                            <p>R$ 0,50</p>
+                                            <p>R$ 0,00</p>
+                                        </div>
                                 </div>
                             </li>
-                            <li>  {/*Colocar tag Link*/}
+                            <li> 
                                 <div className='scroll_produto'>
-                                    <img src={limao} alt="Imagem de Limão Taiti" />
-                                    <p>Batata KG</p>
-                                    <div className='scroll_economia'>
-                                        <p>R$ 40,00</p>
-                                        <p>R$ 5,00</p>
-                                    </div>
+                                        <img src={limao} alt="Imagem de Limão Taiti" />
+                                        <p>Batata KG</p>
+                                        <div className='scroll_economia'>
+                                            <p>R$ 40,00</p>
+                                            <p>R$ 5,00</p>
+                                        </div>
                                 </div>
                             </li>
                         </ul>
