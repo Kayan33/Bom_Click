@@ -12,8 +12,8 @@ import { produtos } from '../../data/produtos.js';
 import { useState, useEffect } from 'react';
 
 function HomeScreen() {
-  const [setorSelecionado, setSetorSelecionado] = useState('Todos');
-  const [mercadoSelecionado, setMercadoSelecionado] = useState('Todos');
+  const [setorSelecionado, setSetorSelecionado] = useState('Açougue');
+  const [mercadoSelecionado, setMercadoSelecionado] = useState('Confiança');
 
   function filtrarProdutos() {
     return produtos.filter(produto => {
@@ -22,7 +22,6 @@ function HomeScreen() {
 
       return mercadoMatch && setorMatch;
     });
-
   };
 
   const produtosFiltrados = filtrarProdutos();
@@ -35,14 +34,12 @@ function HomeScreen() {
     setMercadoSelecionado(mercado);
   };
 
-  console.log(produtosFiltrados)
   return (
     <div>
       <header className='cabecalho-lista'>
         <li>
           <img src={logo} alt="Logo" className='lista-logo' />
         </li>
-
         <li>
           <img src={carrinho} alt="Carrinho de compras" />
         </li>
@@ -89,14 +86,23 @@ function HomeScreen() {
 
       <section className='cabecalho_mercados'>
         <div className='mercados_flex'>
-          <button className='button'>
-            <img src={confiancaLogo} onClick={() => handleMercadoClick('Confiança')} alt="Confiança Logo"></img>
+          <button
+            className={`button ${mercadoSelecionado === 'Confiança' ? 'selected' : ''}`}
+            onClick={() => handleMercadoClick('Confiança')}
+          >
+            <img src={confiancaLogo} alt="Confiança Logo"></img>
           </button>
-          <button className='button'>
-            <img src={panelaoLogo} onClick={() => handleMercadoClick('Panelão')} alt="Panelão Logo"></img>
+          <button
+            className={`button ${mercadoSelecionado === 'Panelão' ? 'selected' : ''}`}
+            onClick={() => handleMercadoClick('Panelão')}
+          >
+            <img src={panelaoLogo} alt="Panelão Logo"></img>
           </button>
-          <button className='button'>
-            <img src={tausteLogo} onClick={() => handleMercadoClick('Tauste')} alt="Tauste Logo"></img>
+          <button
+            className={`button ${mercadoSelecionado === 'Tauste' ? 'selected' : ''}`}
+            onClick={() => handleMercadoClick('Tauste')}
+          >
+            <img src={tausteLogo} alt="Tauste Logo"></img>
           </button>
         </div>
       </section>
@@ -104,10 +110,30 @@ function HomeScreen() {
       <section className='cabecalho_setores'>
         <div className='promocoes-carrosel'>
           <div className='promocoes-01 setores-mercado'>
-            <button className="button" onClick={() => handleSetorClick('Frios')}>Frios</button>
-            <button className="button" onClick={() => handleSetorClick('Açougue')}>Açougue</button>
-            <button className="button" onClick={() => handleSetorClick('Hortifrut')}>Hortifrut</button>
-            <button className="button" onClick={() => handleSetorClick('Higiene')}>Higiene</button>
+            <button
+              className={`button ${setorSelecionado === 'Frios' ? 'selected' : ''}`}
+              onClick={() => handleSetorClick('Frios')}
+            >
+              Frios
+            </button>
+            <button
+              className={`button ${setorSelecionado === 'Açougue' ? 'selected' : ''}`}
+              onClick={() => handleSetorClick('Açougue')}
+            >
+              Açougue
+            </button>
+            <button
+              className={`button ${setorSelecionado === 'Hortifrut' ? 'selected' : ''}`}
+              onClick={() => handleSetorClick('Hortifrut')}
+            >
+              Hortifrut
+            </button>
+            <button
+              className={`button ${setorSelecionado === 'Higiene' ? 'selected' : ''}`}
+              onClick={() => handleSetorClick('Higiene')}
+            >
+              Higiene
+            </button>
           </div>
         </div>
       </section>
