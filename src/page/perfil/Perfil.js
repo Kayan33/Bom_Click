@@ -1,6 +1,6 @@
 import iconeVoltar from '../../imagens/icon-voltar.svg'
 import './perfil.css'
-import perfil from '../../imagens/perfil.svg'
+import perfil from '../../imagens/perfil-pagePerfil.svg'
 import tausteLogo from '../../imagens/tausteLogo.png'
 import confiancaLogo from '../../imagens/confiancaLogo.png'
 import panelaoLogo from '../../imagens/panelaoLogo.png'
