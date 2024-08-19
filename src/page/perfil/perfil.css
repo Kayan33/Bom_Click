@@ -1,8 +1,14 @@
-.secao_perfil {
+main {
+    .secao_perfil {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: var(--espacamentoMenor);
+
+    h2 {
+        color: var(--verde);
+        font-weight: var(--fonteBold);
+    }
    
     img {
         margin: var(--espacamentoMenor);
@@ -14,3 +20,62 @@
         font-size: var(--fontePequena);
     }
 };
+
+.perfil_secao_estatisticas {
+    margin-top: var(--espacamentoMaior);   
+    display: flex;
+    flex-direction: column;
+
+    .perfil_scroll_valores {
+        display: flex;
+
+        ul {
+            display: flex;
+            justify-content: flex-start;
+            gap: var(--espacamentoMaior);
+            width: 100vw;
+            overflow-y: scroll;
+            li {
+                display: flex;
+                font-size: 16px;
+                background-color: var(--azul);
+                color: var(--amarelo);
+                width: 208px;
+                height: 50px;
+                border-radius: var(--bordaRaio);
+                marg
+                .scroll_item {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 300px;
+            }
+            }
+
+          
+        }
+    }
+}
+
+.secao_info_mercados {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+
+    ul {
+        display: flex;
+        align-items: center;
+        li {
+            display: flex;
+            flex-direction: column;
+
+           
+            img {
+                width: var(--tamanhoFotoPequena);
+            }
+        }
+    }
+}
+
+}
