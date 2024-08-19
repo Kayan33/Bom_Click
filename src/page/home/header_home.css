@@ -1,14 +1,22 @@
 .cabecalho-lista {
     background-color: var(--azul);
-    padding: 0.5rem 1rem 0.5rem 1rem;
     display: flex;
     justify-content: space-between;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
 .lista-logo {
-    width: var(--tamanhoIcone);
+    width: var(--tamanhoIcone)
 }
-
+.cabecalho-lista img {
+    padding: 1rem;
+}
+.cabecalho-estastisticas {
+    margin: 6rem 0rem 3rem 0rem;
+}
 .estastisticas h1 {
     font-size: var(--fonteTitulo);
     color: var(--azul);
@@ -16,6 +24,7 @@
     text-align: center;
     width: 30ch;
     word-break: break-word;
+    margin-bottom: 2rem;
 }
 
 .estastisticas{
