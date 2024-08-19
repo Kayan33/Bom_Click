@@ -1,14 +1,22 @@
 .cabecalho-lista {
     background-color: var(--azul);
-    padding: 0.5rem 1rem 0.5rem 1rem;
     display: flex;
     justify-content: space-between;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
 .lista-logo {
-    width: var(--tamanhoIcone);
+    width: var(--tamanhoIcone)
 }
-
+.cabecalho-lista img {
+    padding: 1rem;
+}
+.cabecalho-estastisticas {
+    margin: 6rem 0rem 3rem 0rem;
+}
 .estastisticas h1 {
     font-size: var(--fonteTitulo);
     color: var(--azul);
@@ -16,6 +24,7 @@
     text-align: center;
     width: 30ch;
     word-break: break-word;
+    margin-bottom: 2rem;
 }
 
 .estastisticas{
@@ -190,12 +199,13 @@
 .button {
     background-color: transparent;
     border: none;
-
     color: var(--verde);
     font: inherit;
     cursor: pointer;
     padding: 0;
     outline: none;
+    font-weight: bolder;
+    font-size: var(--fonteTitulo);
 }
 
 .button:focus {
@@ -204,8 +214,12 @@
     border-radius: var(--bordaRaio);
 }
 
-.button, .button:focus {
-    font-weight: bolder;
-    font-size: var(--fonteTitulo);
+.button.selected {
+    border: 5px solid var(--amarelo);
+    border-radius: var(--bordaRaio);
+}
+
+.button, .button:focus, .button.selected {
     padding: 0.5rem;
 }
+

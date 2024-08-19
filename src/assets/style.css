@@ -29,3 +29,11 @@
     --tamanhoFotoPequena: 4.375rem;
 
 }
+
+@media (min-width: 768px){
+
+    :root{
+        
+        font-size: 24px;
+    }
+}
