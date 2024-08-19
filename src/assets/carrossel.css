@@ -63,7 +63,7 @@
     flex-direction: column;
     gap: var(--espacamentoMaior);
     justify-content: space-around;
-    /* width: 200px; */
+    width: 12.5rem;
     
 }
 
@@ -116,3 +116,12 @@
     font-weight: var(--fonteSemiBold);
     font-size: var(--fontePequena);
 }
+
+@media (min-width: 768px){
+
+    .secao_compras_produtos_lista{
+        
+        gap: var(--espacamentoMaior);
+    }
+}
+
