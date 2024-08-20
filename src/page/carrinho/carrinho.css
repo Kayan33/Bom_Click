@@ -16,7 +16,7 @@
 .secao_carrinho_compra{
   display: flex;
   margin: 2rem 0rem;
-  gap: 6rem;
+  gap: 10vw;
 }
 
 .secao_total_economizou h4{
