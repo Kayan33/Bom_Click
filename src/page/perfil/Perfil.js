@@ -65,33 +65,22 @@ export default function Perfil() {
                     <h3>Informações por mercados</h3>
                     <ul>
                         <li>
-                            <div className='info_compras'>
-                                <div className='info_img'>
-                                    <img src={tausteLogo} alt="Logo Supermecado Tauste" />
-                                </div>
-                                <div className='info_link'>
-                                    <Link to='/resumocompra'>Veja suas compras</Link> 
-                                </div>
+                            <div>
+                                <img src={tausteLogo} alt="Logo Supermecado Tauste" />
+                                <Link to='/resumocompra'>Veja suas compras</Link> 
                             </div>
                         </li>
                         <li>
-                            <div className='info_compras'>
-                                <div className='info_img'>
-                                    <img src={confiancaLogo} alt="Logo Supermecado Confiança" />
-                                </div>
-                                <div className='info_link'>
-                                    <Link to='/resumocompra'>Veja suas compras</Link>
-                                </div>   
+                            <div>
+                                <img src={confiancaLogo} alt="Logo Supermecado Confiança" />
+                                <Link to='/resumocompra'>Veja suas compras</Link>   
                             </div>
                         </li>
                         <li>
                             <div className='info_compras'>
                                 <div className='info_img'>
                                 <img src={panelaoLogo} alt="Logo Supermecado Panelão" />
-                                </div>
-                                <div className='info_link'>
-                                    <Link to='/resumocompra'>Veja suas compras</Link> 
-                                </div>
+                                <Link to='/resumocompra'>Veja suas compras</Link> 
                             </div>
                         </li>
                     </ul>

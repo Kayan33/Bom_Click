@@ -14,6 +14,7 @@ import { useState, useEffect } from 'react';
 function HomeScreen() {
   const [setorSelecionado, setSetorSelecionado] = useState('Açougue');
   const [mercadoSelecionado, setMercadoSelecionado] = useState('Confiança');
+  const [cartCount, setCartCount] = useState(0);
 
   function filtrarProdutos() {
     return produtos.filter(produto => {
@@ -34,6 +35,21 @@ function HomeScreen() {
     setMercadoSelecionado(mercado);
   };
 
+  const handleAddToCart = (produto) => {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.push(produto);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    localStorage.setItem('cartCount', cart.length);
+    setCartCount(cart.length); 
+  };
+
+  useEffect(() => {
+    const count = localStorage.getItem('cartCount');
+    setCartCount(count ? parseInt(count, 10) : 0);
+  }, []);
+
+  
+
   return (
     <div>
       <header className='cabecalho-lista'>
@@ -41,7 +57,14 @@ function HomeScreen() {
           <img src={logo} alt="Logo" className='lista-logo' />
         </li>
         <li>
-          <img src={carrinho} alt="Carrinho de compras" />
+          <Link to='/carrinho'>
+            <div className='carrinho-container'>
+              <img src={carrinho} alt="Carrinho de compras" />
+              {cartCount > 0 && (
+                <span className='cart-count'>{cartCount}</span>
+              )}
+            </div>
+          </Link>
         </li>
       </header>
 
@@ -75,7 +98,7 @@ function HomeScreen() {
                   <span>R${produto.preco.toFixed(2)}</span>
                   <div>
                     <img src={produto.mercadoImagem} alt={produto.mercado} className='imagem-mercado' />
-                    <button>Adicionar <br /> a compra</button>
+                    <button onClick={() => handleAddToCart(produto)}>Adicionar <br /> a compra</button>
                   </div>
                 </div>
               </div>
@@ -162,8 +185,8 @@ function HomeScreen() {
                 </div>
 
                 <div className='secao_compras_lista_item_produto_valores'>
-                  <button className='secao_compras_lista_item_produto_adicionar--carrinho'>
-                    Adicionar a Compra
+                  <button className='secao_compras_lista_item_produto_adicionar--carrinho' onClick={() => handleAddToCart(produto)}>
+                    ADICINAR A COMPRA
                   </button>
                 </div>
               </article>
