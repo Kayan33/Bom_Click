@@ -6,10 +6,15 @@
     top: 0;
     width: 100%;
     z-index: 1000;
+    align-items: center;
 }
 
 .lista-logo {
-    width: var(--tamanhoIcone)
+    width: var(--tamanhoIconeGrande);
+}
+
+.carrinho-container img {
+width: var(--tamanhoIcone);
 }
 .cabecalho-lista img {
     padding: 1rem;
@@ -77,27 +82,7 @@
     color: var(--azul);
     font-weight: bolder;
 }
-
-.promocoes-carrosel{
-    overflow-x: auto;
-    padding: 1rem 0;
-    scroll-behavior: smooth;
-}
-@media (min-width: 800px){
-.promocoes-carrosel::-webkit-scrollbar {
-    height: 8px;
-}
-
-.promocoes-carrosel::-webkit-scrollbar-thumb {
-    background-color: #ccc;
-    border-radius: 10px;
-}
-
-.promocoes-carrosel::-webkit-scrollbar-track {
-    background-color: #f1f1f1;
-}
-}
-    
+  
 
 .promocoes-01{
     display: flex;
@@ -111,12 +96,16 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
     width: 20rem;
-
-    
+    padding: 0px 0.5rem;
 }
 
 .promocoes:hover {
     transform: scale(1.03);
+}
+
+.promocoes_img{
+    display: flex;
+    align-items: center;
 }
 
 .promocoes_img img {
