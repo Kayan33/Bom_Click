@@ -33,28 +33,12 @@
     
 }
 
-@media (min-width: 800px){
-    .secao_compras_produtos_lista::-webkit-scrollbar {
-        height: 8px;
-    }
-    
-    .secao_compras_produtos_lista::-webkit-scrollbar-thumb {
-        background-color: #ccc;
-        border-radius: 10px;
-    }
-    
-    .secao_compras_produtos_lista::-webkit-scrollbar-track {
-        background-color: #f1f1f1;
-    }
-    }
-
 .secao_compras_produtos_lista_item{
 
     display: flex;
     flex-direction: row;
     scroll-snap-align: center;
    
-
 }
 
 .secao_compras_lista_item_produto{

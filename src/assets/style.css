@@ -2,7 +2,7 @@
 
     font-size: 16px;
     font-family: var(--fontePrincipal);
-
+    
     --azul: #054AAE;
     --verde: #2F7339;
     --amarelo: #FFC200;
@@ -28,6 +28,25 @@
     --tamanhoFotoGrande: 7.938rem;
     --tamanhoFotoPequena: 4.375rem;
 
+}
+
+.barraRolagem {
+
+    scrollbar-color: var(--azul) #FFF;
+    scrollbar-width: thin;
+}
+
+.barraRolagem::-webkit-scrollbar {
+    width: 3px;
+}
+
+.barraRolagem::-webkit-scrollbar-track {
+    background-color: #ffffff; /* Cor de fundo da faixa da barra de rolagem */
+}
+
+.barraRolagem::-webkit-scrollbar-thumb {
+    background-color: #054AAE;
+    border-radius: 10px; /* Bordas arredondadas para a parte deslizante */
 }
 
 @media (min-width: 768px){
