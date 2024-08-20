@@ -27,18 +27,15 @@ width: var(--tamanhoIcone);
   
   .cart-count {
     position: absolute;
-    top: 8px;
-    right:13px;
+    top: 10px;
+    right:12px;
     background-color: var(--vermelho);
     color: white;
     border-radius: 50%;
-    height: 1rem;
-    width: 1rem;
-    font-size: 12px;
+    padding: 0.2rem;
+    font-size: 10px;
     font-weight: var(--fonteBold);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    text-align: center;
   }
   
 .cabecalho-estastisticas {
