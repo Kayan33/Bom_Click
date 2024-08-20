@@ -3,18 +3,23 @@
     display: block;
 }
 
-.cabecalho{
-
-    align-items: center;
+.cabecalho {
     background-color: var(--azul);
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr auto; /* Define duas colunas */
+    grid-template-rows: auto; /* Linha única */
     padding: var(--espacamentoMenor);
+    align-items: center; /* Alinha os itens verticalmente no centro da linha */
 }
 
-.cabecalho_titulo{
+.cabecalho_link {
+    grid-column: 1; /* Coluna 1 */
+    grid-row: 1; /* Linha 1 */
+}
 
+.cabecalho_titulo {
     color: var(--amarelo);
     font-weight: var(--fonteSemiBold);
-    margin: auto;
+    grid-column: 2; /* Coluna 2 */
+    grid-row: 1; /* Linha 1 */
 }
