@@ -35,10 +35,14 @@
 
     scrollbar-color: var(--azul) #FFF;
     scrollbar-width: thin;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
 }
 
 .barraRolagem::-webkit-scrollbar {
     width: 3px;
+    
 }
 
 .barraRolagem::-webkit-scrollbar-track {

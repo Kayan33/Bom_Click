@@ -27,9 +27,6 @@
 
     display: flex;
     gap: var(--espacamentoMenor);
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
     
 }
 
