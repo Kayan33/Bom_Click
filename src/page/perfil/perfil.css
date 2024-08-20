@@ -18,6 +18,7 @@ main {
     p {
         color: var(--azul);
         font-size: var(--fontePequena);
+        font-weight: var(--fonteExtraBold)
     }
 };
 
@@ -26,15 +27,23 @@ main {
     display: flex;
     flex-direction: column;
 
+    h3 {
+        color: var(--amarelo);
+        font-weight: var(--fonteBold);
+    }
+
     .perfil_scroll_valores {
         display: flex;
+        margin-top: var(--espacamentoMaior);
+        margin-bottom: var(--espacamentoMaior);
 
         ul {
             display: flex;
             justify-content: flex-start;
-            gap: var(--espacamentoMaior);
+            gap: var(--espacamentoMenor);
             width: 100vw;
-            overflow-y: scroll;
+            overflow-y: hidden;
+            overflow-x: auto;
             li {
                 display: flex;
                 font-size: 16px;
@@ -43,13 +52,17 @@ main {
                 width: 208px;
                 height: 50px;
                 border-radius: var(--bordaRaio);
-                marg
                 .scroll_item {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                width: 300px;
+                width: 200px;
+                gap: var(--espacamentoPequeno);
+
+                p {
+                    font-weight: var(--fonteBold);
+                }
             }
             }
 
@@ -63,16 +76,64 @@ main {
     display: flex;
     flex-direction: column;
 
+    h3 {
+        color: var(--amarelo);
+        font-weight: var(--fonteBold);
+    }
+
     ul {
+        width: 100vw;
         display: flex;
         align-items: center;
+        margin-top: var(--espacamentoMaior);
+        margin-bottom: var(--espacamentoMaior);
         li {
+            width: 100vw;
             display: flex;
             flex-direction: column;
-
+            align-items: center;
+            justify-content: center;
            
+            .info_compras {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
             img {
-                width: var(--tamanhoFotoPequena);
+                height: 40px; 
+            }
+
+            a {
+                font-size: var(--fontePequena);
+                color: var(--azul);
+                font-weight: var(--fonteBold);
+            }
+        }
+    }
+}
+
+
+.secao_ultimas_compras {
+    h3 {
+        color: var(--amarelo);
+        font-weight: var(--fonteBold);
+    }
+
+    .scrool_ultimas_compras {
+        ul {
+            display: flex;
+            justify-content: flex-start;
+            gap: var(--espacamentoMenor);
+            width: 100vw;
+            overflow-y: hidden;
+            overflow-x: auto;
+            li {
+                .scroll_produto {
+                    img {
+                        width: var(--tamanhoFotoGrande)
+                    }
+                }
             }
         }
     }
