@@ -12,8 +12,9 @@ import { produtos } from '../../data/produtos.js';
 import { useState, useEffect } from 'react';
 
 function HomeScreen() {
-  const [setorSelecionado, setSetorSelecionado] = useState('Todos');
-  const [mercadoSelecionado, setMercadoSelecionado] = useState('Todos');
+  const [setorSelecionado, setSetorSelecionado] = useState('Açougue');
+  const [mercadoSelecionado, setMercadoSelecionado] = useState('Confiança');
+  const [cartCount, setCartCount] = useState(0);
 
   function filtrarProdutos() {
     return produtos.filter(produto => {
@@ -22,7 +23,6 @@ function HomeScreen() {
 
       return mercadoMatch && setorMatch;
     });
-
   };
 
   const produtosFiltrados = filtrarProdutos();
@@ -35,16 +35,36 @@ function HomeScreen() {
     setMercadoSelecionado(mercado);
   };
 
-  console.log(produtosFiltrados)
+  const handleAddToCart = (produto) => {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.push(produto);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    localStorage.setItem('cartCount', cart.length);
+    setCartCount(cart.length); 
+  };
+
+  useEffect(() => {
+    const count = localStorage.getItem('cartCount');
+    setCartCount(count ? parseInt(count, 10) : 0);
+  }, []);
+
+  
+
   return (
     <div>
       <header className='cabecalho-lista'>
         <li>
           <img src={logo} alt="Logo" className='lista-logo' />
         </li>
-
         <li>
-          <img src={carrinho} alt="Carrinho de compras" />
+          <Link to='/carrinho'>
+            <div className='carrinho-container'>
+              <img src={carrinho} alt="Carrinho de compras" />
+              {cartCount > 0 && (
+                <span className='cart-count'>{cartCount}</span>
+              )}
+            </div>
+          </Link>
         </li>
       </header>
 
@@ -78,7 +98,7 @@ function HomeScreen() {
                   <span>R${produto.preco.toFixed(2)}</span>
                   <div>
                     <img src={produto.mercadoImagem} alt={produto.mercado} className='imagem-mercado' />
-                    <button>Adicionar <br /> a compra</button>
+                    <button onClick={() => handleAddToCart(produto)}>Adicionar <br /> a compra</button>
                   </div>
                 </div>
               </div>
@@ -89,14 +109,23 @@ function HomeScreen() {
 
       <section className='cabecalho_mercados'>
         <div className='mercados_flex'>
-          <button className='button'>
-            <img src={confiancaLogo} onClick={() => handleMercadoClick('Confiança')} alt="Confiança Logo"></img>
+          <button
+            className={`button ${mercadoSelecionado === 'Confiança' ? 'selected' : ''}`}
+            onClick={() => handleMercadoClick('Confiança')}
+          >
+            <img src={confiancaLogo} alt="Confiança Logo"></img>
           </button>
-          <button className='button'>
-            <img src={panelaoLogo} onClick={() => handleMercadoClick('Panelão')} alt="Panelão Logo"></img>
+          <button
+            className={`button ${mercadoSelecionado === 'Panelão' ? 'selected' : ''}`}
+            onClick={() => handleMercadoClick('Panelão')}
+          >
+            <img src={panelaoLogo} alt="Panelão Logo"></img>
           </button>
-          <button className='button'>
-            <img src={tausteLogo} onClick={() => handleMercadoClick('Tauste')} alt="Tauste Logo"></img>
+          <button
+            className={`button ${mercadoSelecionado === 'Tauste' ? 'selected' : ''}`}
+            onClick={() => handleMercadoClick('Tauste')}
+          >
+            <img src={tausteLogo} alt="Tauste Logo"></img>
           </button>
         </div>
       </section>
@@ -104,10 +133,30 @@ function HomeScreen() {
       <section className='cabecalho_setores'>
         <div className='promocoes-carrosel'>
           <div className='promocoes-01 setores-mercado'>
-            <button className="button" onClick={() => handleSetorClick('Frios')}>Frios</button>
-            <button className="button" onClick={() => handleSetorClick('Açougue')}>Açougue</button>
-            <button className="button" onClick={() => handleSetorClick('Hortifrut')}>Hortifrut</button>
-            <button className="button" onClick={() => handleSetorClick('Higiene')}>Higiene</button>
+            <button
+              className={`button ${setorSelecionado === 'Frios' ? 'selected' : ''}`}
+              onClick={() => handleSetorClick('Frios')}
+            >
+              Frios
+            </button>
+            <button
+              className={`button ${setorSelecionado === 'Açougue' ? 'selected' : ''}`}
+              onClick={() => handleSetorClick('Açougue')}
+            >
+              Açougue
+            </button>
+            <button
+              className={`button ${setorSelecionado === 'Hortifrut' ? 'selected' : ''}`}
+              onClick={() => handleSetorClick('Hortifrut')}
+            >
+              Hortifrut
+            </button>
+            <button
+              className={`button ${setorSelecionado === 'Higiene' ? 'selected' : ''}`}
+              onClick={() => handleSetorClick('Higiene')}
+            >
+              Higiene
+            </button>
           </div>
         </div>
       </section>
@@ -136,8 +185,8 @@ function HomeScreen() {
                 </div>
 
                 <div className='secao_compras_lista_item_produto_valores'>
-                  <button className='secao_compras_lista_item_produto_adicionar--carrinho'>
-                    Adicionar a Compra
+                  <button className='secao_compras_lista_item_produto_adicionar--carrinho' onClick={() => handleAddToCart(produto)}>
+                    ADICINAR A COMPRA
                   </button>
                 </div>
               </article>

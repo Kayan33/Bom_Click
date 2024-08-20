@@ -1,5 +1,5 @@
 import iconeVoltar from '../../imagens/icon-voltar.svg'
-import './perfil.css'
+import '../perfil/perfil.css'
 import perfil from '../../imagens/perfil-pagePerfil.svg'
 import tausteLogo from '../../imagens/tausteLogo.png'
 import confiancaLogo from '../../imagens/confiancaLogo.png'
@@ -24,9 +24,9 @@ export default function Perfil() {
                     </Link>
                     <h2>Olá Danrley!</h2>
                 </section>
-                <section className='secao_estatisticas'>
+                <section className='perfil_secao_estatisticas'>
                     <h3>Suas estatísticas!</h3>
-                    <div className='scroll_valores'>
+                    <div className='perfil_scroll_valores'>
                         <ul>
                             <li>
                                 <div className='scroll_item'>
