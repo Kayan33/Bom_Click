@@ -8,8 +8,9 @@ function DadosPorMercado() {
     return (
         <>
             <header className='cabecalho teste'>
+
                 <a href="/" className="cabecalho_link" aria-label="Voltar para o perfil">
-                    <img src={iconeVoltar} alt="Voltar para o perfil" className="cabecalho_link" />
+                    <img src={iconeVoltar} alt="Voltar para o perfil" />
                 </a>
 
                 <h1 className='cabecalho_titulo'>Confiança</h1>
