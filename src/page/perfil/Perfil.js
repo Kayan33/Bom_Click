@@ -67,20 +67,21 @@ export default function Perfil() {
                         <li>
                             <div>
                                 <img src={tausteLogo} alt="Logo Supermecado Tauste" />
-                                <Link to='/resumocompra'>Veja suas compras</Link> 
+                                <Link to='/dadosPorMercado'>Veja suas compras</Link> 
                             </div>
                         </li>
                         <li>
                             <div>
                                 <img src={confiancaLogo} alt="Logo Supermecado Confiança" />
-                                <Link to='/resumocompra'>Veja suas compras</Link>   
+                                <Link to='/dadosPorMercado'>Veja suas compras</Link>   
                             </div>
                         </li>
                         <li>
                             <div className='info_compras'>
                                 <div className='info_img'>
                                 <img src={panelaoLogo} alt="Logo Supermecado Panelão" />
-                                <Link to='/resumocompra'>Veja suas compras</Link> 
+                                <Link to='/dadosPorMercado'>Veja suas compras</Link> 
+                                </div>
                             </div>
                         </li>
                     </ul>
