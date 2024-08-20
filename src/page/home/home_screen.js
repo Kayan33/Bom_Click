@@ -86,7 +86,7 @@ function HomeScreen() {
 
       <section className='cabecalho_promocoes'>
         <h1>Promoções do dia!</h1>
-        <div className="promocoes-carrosel">
+        <div className="barraRolagem">
           <div className='promocoes-01'>
             {produtos.map(produto => (
               <div className='promocoes' key={produto.id}>
@@ -131,7 +131,7 @@ function HomeScreen() {
       </section>
 
       <section className='cabecalho_setores'>
-        <div className='promocoes-carrosel'>
+        <div className='barraRolagem'>
           <div className='promocoes-01 setores-mercado'>
             <button
               className={`button ${setorSelecionado === 'Frios' ? 'selected' : ''}`}
@@ -161,7 +161,7 @@ function HomeScreen() {
         </div>
       </section>
 
-      <section className="promocoes-carrosel">
+      <section className="secao_compras">
         <ul className='secao_compras_produtos_lista'>
           {produtosFiltrados.map(produto => (
             <li key={produto.id} className='secao_compras_produtos_lista_item'>

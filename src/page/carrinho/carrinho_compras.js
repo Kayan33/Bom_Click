@@ -30,7 +30,7 @@ function CarrinhoCompras() {
         <h2>Resumo das compras por mercado</h2>
         <div className='secao_carrinho_produtos'>
           <img src={confiancaLogo} alt="Confiança Logo" />
-          <ul className='secao_compras_produtos_lista'>
+          <ul className='secao_compras_produtos_lista barraRolagem'>
             {cartItems.map((item, index) => (
               <li key={index} className='secao_compras_produtos_lista_item'>
                 <article className='secao_compras_lista_item_produto'>
