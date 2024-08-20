@@ -26,15 +26,23 @@ main {
     display: flex;
     flex-direction: column;
 
+    h3 {
+        color: var(--amarelo);
+        font-weight: var(--fonteBold);
+    }
+
     .perfil_scroll_valores {
         display: flex;
+        margin-top: var(--espacamentoMenor);
+        margin-bottom: var(--espacamentoMenor);
 
         ul {
             display: flex;
             justify-content: flex-start;
-            gap: var(--espacamentoMaior);
+            gap: var(--espacamentoMenor);
             width: 100vw;
-            overflow-y: scroll;
+            overflow-y: hidden;
+            overflow-x: auto;
             li {
                 display: flex;
                 font-size: 16px;
@@ -43,13 +51,17 @@ main {
                 width: 208px;
                 height: 50px;
                 border-radius: var(--bordaRaio);
-                marg
                 .scroll_item {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                width: 300px;
+                width: 200px;
+                gap: var(--espacamentoPequeno);
+
+                p {
+                    font-weight: var(--fonteBold);
+                }
             }
             }
 
@@ -63,16 +75,44 @@ main {
     display: flex;
     flex-direction: column;
 
+    h3 {
+        color: var(--amarelo);
+        font-weight: var(--fonteBold);
+    }
+
     ul {
+        width: 100vw;
         display: flex;
         align-items: center;
         li {
+            width: 100vw;
             display: flex;
             flex-direction: column;
-
+            align-items: center;
+            justify-content: center;
            
+            .info_compras {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .info_img {
+                    
+                    
+                }
+
+                .info_link {
+                  
+
+                }
+            }
+
             img {
-                width: var(--tamanhoFotoPequena);
+                height: var(--tamanhoIconeGrande); 
+            }
+
+            a {
+                font-size: var(--fontePequena);
             }
         }
     }
