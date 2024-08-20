@@ -163,7 +163,7 @@ function HomeScreen() {
 
                 <div className='secao_compras_lista_item_produto_valores'>
                   <button className='secao_compras_lista_item_produto_adicionar--carrinho'>
-                    Adicionar a Compra
+                    ADICINAR A COMPRA
                   </button>
                 </div>
               </article>

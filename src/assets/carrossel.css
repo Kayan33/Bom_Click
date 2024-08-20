@@ -108,10 +108,11 @@
 }
 
 .secao_compras_lista_item_produto_adicionar--carrinho{
+    width: 100%;
     color: #ffffff;
     background-color: var(--verde);
     border-radius: var(--bordaRaio);
-    padding: 0.5rem 0.2rem;
+    padding: 0.6rem 2.5rem;
     font-family: var(--fontePrincipal);
     font-weight: var(--fonteSemiBold);
     font-size: var(--fontePequena);

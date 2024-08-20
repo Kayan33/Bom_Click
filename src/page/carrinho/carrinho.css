@@ -1,0 +1,30 @@
+.resumo {
+  padding: var(--espacamentoMenor);
+
+}
+
+.resumo h2{
+  color: var(--azul);
+  font-weight: var(--fonteBold);
+  margin: 2rem 0rem;
+}
+
+.secao_carrinho_produtos img {
+  width: var(--tamanhoFotoGrande);
+}
+
+.secao_carrinho_compra{
+  display: flex;
+  margin: 2rem 0rem;
+  gap: 6rem;
+}
+
+.secao_total_economizou h4{
+  color: var(--azul);
+  font-weight: var(--fonteSemiBold);
+}
+
+.secao_total_economizou h3{
+  color: var(--verde);
+  font-weight: var(--fonteSemiBold);
+}
