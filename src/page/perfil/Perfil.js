@@ -16,7 +16,7 @@ export default function Perfil() {
     return (
         <div>
             <header className='cabecalho'>
-                <Link to='/'>
+                <Link to='/' className='cabecalho_link'>
                     <img src={iconeVoltar} alt="Voltar para Página Inicial" />
                 </Link>
                 <h1 className='cabecalho_titulo'>Perfil</h1>
@@ -32,7 +32,7 @@ export default function Perfil() {
                 <section className='perfil_secao_estatisticas'>
                     <h3>Suas estatísticas!</h3>
                     <div className='perfil_scroll_valores'>
-                        <ul>
+                        <ul className='barraRolagem barraRolagem--amarelo'>
                             <li>
                                 <div className='scroll_item'>
                                     <p>Valores economizados</p>
