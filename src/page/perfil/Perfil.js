@@ -78,37 +78,23 @@ export default function Perfil() {
                 </section>
                 <section className='secao_info_mercados'>
                     <h3>Informações por mercados</h3>
-                    <ul>
+                    <ul className='barraRolagem'>
                         <li>
                             <div className='info_compras'>
-                                <div>
-                                    <img src={tausteLogo} alt="Logo Supermecado Tauste" />
-                                </div>
-                                <div className='info_link'>
+                            <img src={tausteLogo} alt="Logo Supermecado Tauste" />
                                     <Link to='/dadosPorMercado'>Veja suas compras</Link> 
-                                </div>
                             </div>
                         </li>
                         <li>
                             <div className='info_compras'>
-                                <div>
-                                    <img src={confiancaLogo} alt="Logo Supermecado Confiança" />
-                                </div>
-
-                                <div className='info_link'>
-                                    <Link to='/dadosPorMercado'>Veja suas compras</Link>  
-                                </div> 
+                            <img src={confiancaLogo} alt="Logo Supermecado Confiança" />
+                                    <Link to='/dadosPorMercado'>Veja suas compras</Link>   
                             </div>
                         </li>
                         <li>
                             <div className='info_compras'>
-                                <div className='info_img'>
-                                    <img src={panelaoLogo} alt="Logo Supermecado Panelão" />
-                                </div>
-
-                                <div className='info_link'>
-                                    <Link to='/dadosPorMercado'>Veja suas compras</Link>
-                                </div> 
+                            <img src={panelaoLogo} alt="Logo Supermecado Panelão" />
+                                    <Link to='/dadosPorMercado'>Veja suas compras</Link> 
                             </div>
                         </li>
                     </ul>

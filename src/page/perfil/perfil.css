@@ -28,19 +28,14 @@ main {
     }
 };
 
-    .perfil_secao_estatisticas > .perfil_scroll_valores, h3,
-    .secao_info_mercados > h3, 
-    .secao_ultimas_compras > h3, img,  p {
-        margin-left: var(--espacamentoPequeno);
-    }
-
 .perfil_secao_estatisticas {
     margin:var(--espacamentoMaior) var(--espacamentoMenor);   
     display: flex;
     flex-direction: column;
-    gap: var(--espacamentoMenor);
+    gap: var(--espacamentoMaior);
 
     h3 {
+        font-size: var(--fonteTitulo);
         color: var(--amarelo);
         font-weight: var(--fonteBold);
     }
@@ -86,21 +81,20 @@ main {
     }
 
 .secao_info_mercados {
-    width: 100vw;
     display: flex;
     flex-direction: column;
+    gap: var(--espacamentoMaior);
+    margin: 0 var(--espacamentoMenor) var(--espacamentoMaior);
 
     h3 {
+        font-size: var(--fonteTitulo);
         color: var(--amarelo);
         font-weight: var(--fonteBold);
     }
 
     ul {
-        width: 100vw;
         display: flex;
         align-items: center;
-        margin-top: var(--espacamentoMaior);
-        margin-bottom: var(--espacamentoMaior);
         li {
             width: 100vw;
             display: flex;
@@ -113,6 +107,7 @@ main {
                 flex-direction: column;
                 align-items: center;
                 gap: var(--espacamentoPequeno);
+                text-align: center;
             }
 
             img {
