@@ -51,7 +51,6 @@ main {
 
             li {
                 display: flex;
-                font-size: 16px;
                 background-color: var(--azul);
                 color: var(--amarelo);
                 border-radius: var(--bordaRaio);
@@ -72,6 +71,7 @@ main {
                         font-weight: var(--fonteBold);
                         margin: 0;
                         font-size: var(--fontePequena);
+                        width: max-content;
                     }
             }
             }
