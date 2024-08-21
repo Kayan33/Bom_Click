@@ -4,6 +4,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     gap: var(--espacamentoMenor);
 
     h2 {
@@ -12,10 +13,12 @@ main {
         font-size: var(--fonteTitulo);
         margin: var(--espacamentoMenor);
     }
+  
    
     img {
         margin: var(--espacamentoMenor);
         width: var(--tamanhoIconeGrande);
+
     }
     
     p {
