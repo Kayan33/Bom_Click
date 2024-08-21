@@ -1,4 +1,5 @@
 main {
+
     .secao_perfil {
     display: flex;
     flex-direction: column;
@@ -8,11 +9,13 @@ main {
     h2 {
         color: var(--verde);
         font-weight: var(--fonteBold);
+        font-size: var(--fonteTitulo);
+        margin: var(--espacamentoMenor);
     }
    
     img {
         margin: var(--espacamentoMenor);
-        width: var(--tamanhoFotoPequena);
+        width: var(--tamanhoIconeGrande);
     }
     
     p {
@@ -21,6 +24,12 @@ main {
         font-weight: var(--fonteExtraBold)
     }
 };
+
+    .perfil_secao_estatisticas > .perfil_scroll_valores, h3,
+    .secao_info_mercados > h3, 
+    .secao_ultimas_compras > h3, img,  p {
+        margin-left: var(--espacamentoPequeno);
+    }
 
 .perfil_secao_estatisticas {
     margin-top: var(--espacamentoMaior);   
@@ -44,6 +53,7 @@ main {
             width: 100vw;
             overflow-y: hidden;
             overflow-x: auto;
+
             li {
                 display: flex;
                 font-size: 16px;
@@ -53,16 +63,17 @@ main {
                 height: 50px;
                 border-radius: var(--bordaRaio);
                 .scroll_item {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                width: 200px;
-                gap: var(--espacamentoPequeno);
-
-                p {
-                    font-weight: var(--fonteBold);
-                }
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    width: 200px;
+                    gap: var(--espacamentoPequeno);
+                    p 
+                    {
+                        font-weight: var(--fonteBold);
+                        margin: 0;
+                    }
             }
             }
 
@@ -98,6 +109,7 @@ main {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                gap: var(--espacamentoPequeno);
             }
 
             img {
@@ -121,16 +133,63 @@ main {
     }
 
     .scrool_ultimas_compras {
+
         ul {
             display: flex;
             justify-content: flex-start;
-            gap: var(--espacamentoMenor);
-            width: 100vw;
+            align-items: baseline;
+            gap: var(--espacamentoMaior);
             overflow-y: hidden;
             overflow-x: auto;
+
+            .barraRolagem {
+                scrollbar-color: var(--azul) #FFF;
+                scrollbar-width: thin;
+                overflow-x: auto;
+                overflow-y: hidden;
+                scroll-snap-type: x mandatory;
+            }
+            
+            .barraRolagem::-webkit-scrollbar {
+                width: 3px;
+                
+            }
+            
+            .barraRolagem::-webkit-scrollbar-track {
+                background-color: #ffffff; /* Cor de fundo da faixa da barra de rolagem */
+            }
+            
+            .barraRolagem::-webkit-scrollbar-thumb {
+                background-color: #054AAE;
+                border-radius: 10px; /* Bordas arredondadas para a parte deslizante */
+            }
+
             li {
+                display: flex;
+
                 .scroll_produto {
+                    width: 150px;
+                    height: 250px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    color: var(--verde);
+                    font-weight: var(--fonteBold);
+                    
+                    .scroll_economia {
+                        width: 180px;
+                        display: flex;
+                        gap: var(--espacamentoMenor);
+                        color: var(--azul);
+
+                        :nth-child(2) {
+                            color: var(--amarelo);
+                        }
+                        
+                    }
+
                     img {
+                        height: 100px;
                         width: var(--tamanhoFotoGrande)
                     }
                 }
@@ -139,4 +198,44 @@ main {
     }
 }
 
+}
+
+@media only screen and (min-width: 768px) {
+    main {
+        & .secao_ultimas_compras {
+            & .scrool_ultimas_compras {
+                & ul {
+                    & li {
+                        & .scroll_produto {
+                            width: 250px;
+                            .scroll_economia {
+                                width: 300px;
+                                display: flex;
+                                gap: var(--espacamentoMaior);
+                                color: var(--azul);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    main {    
+        & .secao_info_mercados {
+            & ul {
+                & li {
+                    a {
+                        font-size: var(--fonteSegundaria);
+                    }
+                    img {
+                        height: 90px;
+                        width: var(--tamanhoFotoGrande);
+                    }
+                }
+            }
+        }
+    }
 }

@@ -6,14 +6,19 @@ import confiancaLogo from '../../imagens/confiancaLogo.png'
 import panelaoLogo from '../../imagens/panelaoLogo.png'
 import carne from '../../imagens/carne.png'
 import limao from '../../imagens/limao.png'
+import batata from '../../imagens/batata.png'
+import alho from '../../imagens/alho.png'
 import '../../assets/cabecalho.css'
 import { Link } from 'react-router-dom'
+
 
 export default function Perfil() {
     return (
         <div>
             <header className='cabecalho'>
-                <Link to='/'><img src={iconeVoltar} alt="Voltar para Página Inicial" /></Link>
+                <Link to='/'>
+                    <img src={iconeVoltar} alt="Voltar para Página Inicial" />
+                </Link>
                 <h1 className='cabecalho_titulo'>Perfil</h1>
             </header>   
             <main>
@@ -28,6 +33,18 @@ export default function Perfil() {
                     <h3>Suas estatísticas!</h3>
                     <div className='perfil_scroll_valores'>
                         <ul>
+                            <li>
+                                <div className='scroll_item'>
+                                    <p>Valores economizados</p>
+                                    <p>R$ 40,50</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div className='scroll_item'>
+                                    <p>Valores economizados</p>
+                                    <p>R$ 40,50</p>
+                                </div>
+                            </li>
                             <li>
                                 <div className='scroll_item'>
                                     <p>Valores economizados</p>
@@ -102,7 +119,7 @@ export default function Perfil() {
                     <h3>Última compra</h3>
                     <img src={confiancaLogo} alt="Logo Supermecado Confiança" />
                     <div className='scrool_ultimas_compras'>
-                        <ul>
+                        <ul className='barraRolagem'>
                             <li>
                                 <div className='scroll_produto'>
                                         <img src={carne} alt=" Imagem de Carne Vermelha" />
@@ -125,7 +142,7 @@ export default function Perfil() {
                             </li>
                             <li>
                                 <div className='scroll_produto'>
-                                        <img src={carne} alt="Imagem de Carne Vermelha" />
+                                        <img src={alho} alt="Imagem de alho" />
                                         <p>Alho KG</p>
                                         <div className='scroll_economia'>
                                             <p>R$ 0,50</p>
@@ -135,7 +152,7 @@ export default function Perfil() {
                             </li>
                             <li> 
                                 <div className='scroll_produto'>
-                                        <img src={limao} alt="Imagem de Limão Taiti" />
+                                        <img src={batata} alt="Imagem de batata" />
                                         <p>Batata KG</p>
                                         <div className='scroll_economia'>
                                             <p>R$ 40,00</p>
