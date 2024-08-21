@@ -6,6 +6,7 @@ import EditarInformacoes from "../page/editarInformacoes/editarInformacoes";
 import ResumoCompra from "../page/resumoCompra/resumo_compra";
 import CarrinhoCompras from "../page/carrinho/carrinho_compras";
 import Login from "../page/login";
+import CompraFinalizada from "../page/compraFinalizada/compraFinalizada";
 
 function Rotas() {
   return (
@@ -18,6 +19,7 @@ function Rotas() {
         <Route path="/editarInformacoes" element={<EditarInformacoes/>}></Route>
         <Route path="/carrinho" element={<CarrinhoCompras/>}></Route>
         <Route path="/login" element={<Login/>}></Route>
+        <Route path="/finalizado" element={<CompraFinalizada/>}></Route>
       </Routes>
     </BrowserRouter>
   );
