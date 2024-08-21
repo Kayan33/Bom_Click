@@ -6,7 +6,7 @@
 .cabecalho {
     background-color: var(--azul);
     display: grid;
-    grid-template-columns: 1fr auto; /* Define duas colunas */
+    grid-template-columns: 43% auto; /* Define duas colunas */
     grid-template-rows: auto; /* Linha única */
     padding: var(--espacamentoMenor);
     align-items: center; /* Alinha os itens verticalmente no centro da linha */
@@ -15,6 +15,7 @@
 .cabecalho_link {
     grid-column: 1; /* Coluna 1 */
     grid-row: 1; /* Linha 1 */
+    justify-self: flex-start;
 }
 
 .cabecalho_titulo {
@@ -22,4 +23,5 @@
     font-weight: var(--fonteSemiBold);
     grid-column: 2; /* Coluna 2 */
     grid-row: 1; /* Linha 1 */
+    justify-self: flex-start;
 }
