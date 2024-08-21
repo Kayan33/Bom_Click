@@ -46,7 +46,7 @@
 .cabecalho_compra_finalizada img {
     height: var(--tamanhoFotoGrande);
     opacity: 0; 
-    animation: fadeInRotate 2s 0.5s forwards; 
+    animation: fadeInRotate 3s 0.5s forwards; 
 }
 
 
