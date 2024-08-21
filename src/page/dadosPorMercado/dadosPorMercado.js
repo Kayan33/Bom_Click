@@ -42,7 +42,7 @@ function DadosPorMercado() {
 
                 <section className='secao_compras_produtos'>
 
-                    <time datetime="2024-05-17" className='secao_compras_titulo secao_compras_titulo--verde'>17/05/2024</time>
+                    <time datetime="2024-05-17" className='secao_compras_titulo secao_compras_titulo--verde secao_compras_titulo--comMargem'>17/05/2024</time>
 
                     <ul className='secao_compras_produtos_lista barraRolagem'>
 
