@@ -51,8 +51,7 @@ main {
             justify-content: flex-start;
             gap: var(--espacamentoMenor);
             width: 100vw;
-            overflow-y: hidden;
-            overflow-x: auto;
+           
 
             li {
                 display: flex;
@@ -113,7 +112,7 @@ main {
             }
 
             img {
-                height: 40px; 
+                height: var(--tamanhoIconeGrande); 
             }
 
             a {
@@ -168,8 +167,8 @@ main {
                 display: flex;
 
                 .scroll_produto {
-                    width: 150px;
-                    height: 250px;
+                    width: 9.375rem;
+                    height: 15.625rem;
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
@@ -177,7 +176,7 @@ main {
                     font-weight: var(--fonteBold);
                     
                     .scroll_economia {
-                        width: 180px;
+                        width: 11.25rem;
                         display: flex;
                         gap: var(--espacamentoMenor);
                         color: var(--azul);
@@ -189,7 +188,7 @@ main {
                     }
 
                     img {
-                        height: 100px;
+                        height: 6.25rem;
                         width: var(--tamanhoFotoGrande)
                     }
                 }
@@ -198,44 +197,4 @@ main {
     }
 }
 
-}
-
-@media only screen and (min-width: 768px) {
-    main {
-        & .secao_ultimas_compras {
-            & .scrool_ultimas_compras {
-                & ul {
-                    & li {
-                        & .scroll_produto {
-                            width: 250px;
-                            .scroll_economia {
-                                width: 300px;
-                                display: flex;
-                                gap: var(--espacamentoMaior);
-                                color: var(--azul);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-@media only screen and (min-width: 1024px) {
-    main {    
-        & .secao_info_mercados {
-            & ul {
-                & li {
-                    a {
-                        font-size: var(--fonteSegundaria);
-                    }
-                    img {
-                        height: 90px;
-                        width: var(--tamanhoFotoGrande);
-                    }
-                }
-            }
-        }
-    }
 }
