@@ -8,7 +8,6 @@
     color: var(--amarelo);
     font-size: var(--fonteTitulo);
     font-weight: var(--fonteBold);
-    margin: 0 0 var(--espacamentoMaior) 0;
 }
 
 .secao_compras_titulo--verde{
@@ -16,11 +15,16 @@
     color: var(--verde);
 }
 
+.secao_compras_titulo--comMargem{
+
+    margin: var(--espacamentoMaior) 0 0 0;
+}
+
 .secao_compras_produtos{
 
     display: flex;
     flex-direction: column;
-    gap: var(--espacamentoMenor);
+    gap: var(--espacamentoMaior);
 }
 
 .secao_compras_produtos_lista{
