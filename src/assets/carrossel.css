@@ -16,6 +16,11 @@
     color: var(--verde);
 }
 
+.secao_compras_titulo--semMargem{
+
+    margin: 0;
+}
+
 .secao_compras_produtos{
 
     display: flex;
