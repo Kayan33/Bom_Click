@@ -6,7 +6,7 @@
 .cabecalho {
     background-color: var(--azul);
     display: grid;
-    grid-template-columns: 43% 14% 43%; /* Três colunas, onde a central é flexível */
+    grid-template-columns: 1fr auto 1fr; /* Colunas flexíveis */
     grid-template-rows: auto; /* Linha única */
     padding: var(--espacamentoMenor);
     align-items: center; /* Alinha os itens verticalmente no centro da linha */
