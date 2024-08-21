@@ -73,6 +73,7 @@
 
 .secao_compras_lista_item_produto_titulo{
 
+    align-self: flex-start;
     color:  var(--verde);
     font-size:  var(--fonteSegundaria);
     font-weight: var(--fonteBold);
