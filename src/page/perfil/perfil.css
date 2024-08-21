@@ -35,25 +35,23 @@ main {
     }
 
 .perfil_secao_estatisticas {
-    margin-top: var(--espacamentoMaior);   
+    margin:var(--espacamentoMaior) var(--espacamentoMenor);   
     display: flex;
     flex-direction: column;
+    gap: var(--espacamentoMenor);
 
     h3 {
         color: var(--amarelo);
         font-weight: var(--fonteBold);
     }
 
-    .perfil_scroll_valores {
-        display: flex;
-        margin-top: var(--espacamentoMaior);
-        margin-bottom: var(--espacamentoMaior);
-
+    
         ul {
             display: flex;
             justify-content: flex-start;
             gap: var(--espacamentoMenor);
-            width: 100vw;
+
+        }
            
 
             li {
@@ -61,20 +59,24 @@ main {
                 font-size: 16px;
                 background-color: var(--azul);
                 color: var(--amarelo);
-                width: 208px;
-                height: 50px;
                 border-radius: var(--bordaRaio);
+                padding: var(--espacamentoPequeno) var(--espacamentoMenor);
+                text-align: center;
                 .scroll_item {
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
                     align-items: center;
-                    width: 200px;
                     gap: var(--espacamentoPequeno);
+
+                    :nth-child(2) {
+                        font-size: var(--fonteSegundaria);
+                    }
                     p 
                     {
                         font-weight: var(--fonteBold);
                         margin: 0;
+                        font-size: var(--fontePequena);
                     }
             }
             }
@@ -82,7 +84,6 @@ main {
           
         }
     }
-}
 
 .secao_info_mercados {
     width: 100vw;
@@ -170,8 +171,6 @@ main {
                 display: flex;
 
                 .scroll_produto {
-                    width: 9.375rem;
-                    height: 15.625rem;
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
@@ -200,4 +199,3 @@ main {
     }
 }
 
-}
