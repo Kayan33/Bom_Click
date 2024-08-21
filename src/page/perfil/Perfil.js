@@ -164,7 +164,6 @@ export default function Perfil() {
                     </div>
                 </section>
             </main>
-               
         </div>
     )
 }
