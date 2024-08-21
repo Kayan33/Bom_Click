@@ -40,6 +40,11 @@
     scroll-snap-type: x mandatory;
 }
 
+.barraRolagem--amarelo{
+
+    scrollbar-color: var(--amarelo) #FFF;
+}
+
 .barraRolagem::-webkit-scrollbar {
     width: 3px;
     
