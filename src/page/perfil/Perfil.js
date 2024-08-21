@@ -118,7 +118,7 @@ export default function Perfil() {
 
                 <section className='secao_compras_produtos'>
 
-                    <h3 className='secao_compras_titulo secao_compras_titulo--semMargem'> Compras Realizadas</h3>
+                    <h3 className='secao_compras_titulo'> Compras Realizadas</h3>
 
                     <ul className='secao_compras_produtos_lista barraRolagem'>
 
