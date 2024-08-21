@@ -27,15 +27,18 @@ width: var(--tamanhoIcone);
   
   .cart-count {
     position: absolute;
-    top: 10px;
-    right:12px;
+    top: 8px;
+    right:14px;
     background-color: var(--vermelho);
     color: white;
     border-radius: 50%;
-    padding: 0.2rem;
-    font-size: 10px;
+    height: 1rem;
+    width: 1rem;
+    font-size:0.6rem;
     font-weight: var(--fonteBold);
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
 .cabecalho-estastisticas {
@@ -87,6 +90,7 @@ width: var(--tamanhoIcone);
 .promocoes-01{
     display: flex;
     gap: 2rem;
+    margin-bottom: 1rem;
 }
 .promocoes {
     display: flex;

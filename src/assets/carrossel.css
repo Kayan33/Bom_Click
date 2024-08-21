@@ -83,6 +83,11 @@
     color: var(--azul);
 }
 
+.secao_compras_lista_item_produto_titulo--amarelo{
+
+    color: var(--amarelo);
+}
+
 .secao_compras_lista_item_produto_comparar--preco{
     color: #ffffff;
     background-color: var(--azul);

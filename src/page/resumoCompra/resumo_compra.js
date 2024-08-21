@@ -32,7 +32,7 @@ export default function ResumoCompra() {
                                         <p>Fraldinha Bovina Resfriada KG</p>
                                         <div className='scroll_economia'>
                                             <p>R$ 40,00</p>
-                                            <p>R$ 5,00</p>
+                                            <p>Melhor Preço!</p>
                                         </div>
                                 </div>
                             </li>

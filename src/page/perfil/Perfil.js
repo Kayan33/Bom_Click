@@ -104,7 +104,7 @@ export default function Perfil() {
 
                 <section className='secao_compras_produtos'>
 
-                    <h3 className='secao_compras_titulo'> Compras Realizadas</h3>
+                    <h3 className='secao_compras_titulo'> Últimas Compras</h3>
 
                     <ul className='secao_compras_produtos_lista barraRolagem'>
 
@@ -120,7 +120,7 @@ export default function Perfil() {
 
                                     <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preço'>R$40,00</h4>
 
-                                    <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--desconto'>R$40,00</h4>
+                                    <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--desconto secao_compras_lista_item_produto_titulo--amarelo'>R$40,00</h4>
 
                                 </div>
 
@@ -132,15 +132,53 @@ export default function Perfil() {
 
                             <article className='secao_compras_lista_item_produto'>
 
-                                <img src={fotoCarne} alt="Fraldinha" className='secao_compras_lista_item_produto_imagem' />
+                                <img src={limao} alt="Fraldinha" className='secao_compras_lista_item_produto_imagem' />
 
-                                <h3 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo'>Fraldinha Bovina Resfriada KG</h3>
+                                <h3 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo'>Limao Taiti KG</h3>
 
                                 <div className='secao_compras_lista_item_produto_valores'>
 
-                                    <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preço'>R$40,00</h4>
+                                    <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preço'>R$10,00</h4>
 
-                                    <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--desconto'>R$40,00</h4>
+                                    <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--desconto secao_compras_lista_item_produto_titulo--amarelo'>R$40,00</h4>
+
+                                </div>
+
+                            </article>
+
+                        </li>
+                        <li className='secao_compras_produtos_lista_item'>
+
+                            <article className='secao_compras_lista_item_produto'>
+
+                                <img src={alho} alt="Fraldinha" className='secao_compras_lista_item_produto_imagem' />
+
+                                <h3 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo'>Alho UN</h3>
+
+                                <div className='secao_compras_lista_item_produto_valores'>
+
+                                    <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preço'>R$00,50</h4>
+
+                                    <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--desconto secao_compras_lista_item_produto_titulo--amarelo'>R$40,00</h4>
+
+                                </div>
+
+                            </article>
+
+                        </li>
+                        <li className='secao_compras_produtos_lista_item'>
+
+                            <article className='secao_compras_lista_item_produto'>
+
+                                <img src={batata} alt="Fraldinha" className='secao_compras_lista_item_produto_imagem' />
+
+                                <h3 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo'>Batata UN</h3>
+
+                                <div className='secao_compras_lista_item_produto_valores'>
+
+                                    <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preço'>R$05,00</h4>
+
+                                    <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--desconto secao_compras_lista_item_produto_titulo--amarelo'>R$1,00</h4>
 
                                 </div>
 
