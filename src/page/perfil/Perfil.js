@@ -4,7 +4,7 @@ import perfil from '../../imagens/perfil-pagePerfil.svg'
 import tausteLogo from '../../imagens/tausteLogo.png'
 import confiancaLogo from '../../imagens/confiancaLogo.png'
 import panelaoLogo from '../../imagens/panelaoLogo.png'
-import carne from '../../imagens/carne.png'
+import fotoCarne from '../../imagens/carne.png'
 import limao from '../../imagens/limao.png'
 import batata from '../../imagens/batata.png'
 import alho from '../../imagens/alho.png'
@@ -31,8 +31,7 @@ export default function Perfil() {
                 </section>
                 <section className='perfil_secao_estatisticas'>
                     <h3>Suas estatísticas!</h3>
-                    <div className='perfil_scroll_valores'>
-                        <ul className='barraRolagem barraRolagem--amarelo'>
+                    <ul className='barraRolagem barraRolagem--amarelo'>
                             <li>
                                 <div className='scroll_item'>
                                     <p>Valores economizados</p>
@@ -76,7 +75,6 @@ export default function Perfil() {
                                 </div>
                             </li>
                         </ul>
-                    </div>
                 </section>
                 <section className='secao_info_mercados'>
                     <h3>Informações por mercados</h3>
@@ -115,54 +113,61 @@ export default function Perfil() {
                         </li>
                     </ul>
                 </section>
-                <section className='secao_ultimas_compras'>
-                    <h3>Última compra</h3>
-                    <img src={confiancaLogo} alt="Logo Supermecado Confiança" />
-                    <div className='scrool_ultimas_compras'>
-                        <ul className='barraRolagem'>
-                            <li>
-                                <div className='scroll_produto'>
-                                        <img src={carne} alt=" Imagem de Carne Vermelha" />
-                                        <p>Fraldinha Bovina Resfriada KG</p>
-                                        <div className='scroll_economia'>
-                                            <p>R$ 40,00</p>
-                                            <p>R$ 5,00</p>
-                                        </div>
+                <section className='secao_compras'>
+                
+
+                <section className='secao_compras_produtos'>
+
+                    <h3 className='secao_compras_titulo secao_compras_titulo--semMargem'> Compras Realizadas</h3>
+
+                    <ul className='secao_compras_produtos_lista barraRolagem'>
+
+                        <li className='secao_compras_produtos_lista_item'>
+
+                            <article className='secao_compras_lista_item_produto'>
+
+                                <img src={fotoCarne} alt="Fraldinha" className='secao_compras_lista_item_produto_imagem' />
+
+                                <h3 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo'>Fraldinha Bovina Resfriada KG</h3>
+
+                                <div className='secao_compras_lista_item_produto_valores'>
+
+                                    <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preço'>R$40,00</h4>
+
+                                    <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--desconto'>R$40,00</h4>
+
                                 </div>
-                            </li>
-                            <li> 
-                                <div className='scroll_produto'>
-                                        <img src={limao} alt="Imagem de limão Taiti" />
-                                        <p>Limão Taiti KG</p>
-                                        <div className='scroll_economia'>
-                                            <p>R$ 40,00</p>
-                                            <p>R$ 0,00</p>
-                                        </div>
+
+                            </article>
+
+                        </li>
+
+                        <li className='secao_compras_produtos_lista_item'>
+
+                            <article className='secao_compras_lista_item_produto'>
+
+                                <img src={fotoCarne} alt="Fraldinha" className='secao_compras_lista_item_produto_imagem' />
+
+                                <h3 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo'>Fraldinha Bovina Resfriada KG</h3>
+
+                                <div className='secao_compras_lista_item_produto_valores'>
+
+                                    <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preço'>R$40,00</h4>
+
+                                    <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--desconto'>R$40,00</h4>
+
                                 </div>
-                            </li>
-                            <li>
-                                <div className='scroll_produto'>
-                                        <img src={alho} alt="Imagem de alho" />
-                                        <p>Alho KG</p>
-                                        <div className='scroll_economia'>
-                                            <p>R$ 0,50</p>
-                                            <p>R$ 0,00</p>
-                                        </div>
-                                </div>
-                            </li>
-                            <li> 
-                                <div className='scroll_produto'>
-                                        <img src={batata} alt="Imagem de batata" />
-                                        <p>Batata KG</p>
-                                        <div className='scroll_economia'>
-                                            <p>R$ 40,00</p>
-                                            <p>R$ 5,00</p>
-                                        </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+
+                            </article>
+
+                        </li>
+
+                    </ul>
+
+                  
                 </section>
+
+            </section>
             </main>
         </div>
     )
