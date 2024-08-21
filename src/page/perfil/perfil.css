@@ -1,4 +1,5 @@
 main {
+
     .secao_perfil {
     display: flex;
     flex-direction: column;
@@ -222,7 +223,7 @@ main {
 }
 
 @media only screen and (min-width: 1024px) {
-    main {
+    main {    
         & .secao_info_mercados {
             & ul {
                 & li {
