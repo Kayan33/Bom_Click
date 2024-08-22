@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import './resumocompra.css'
 import { Link } from 'react-router-dom'
 import iconeVoltar from '../../imagens/icon-voltar.svg'
@@ -13,6 +13,13 @@ import '../../assets/carrossel.css'
 
 
 export default function ResumoCompra() {
+
+  const [isChecked, setIsChecked] = useState(false)
+
+  const compVisivel = () => {
+    setIsChecked(!isChecked)
+  }
+
   return(
     <div>
     <header className='cabecalho'>
@@ -110,54 +117,35 @@ export default function ResumoCompra() {
         </section>
 
         <section className="secao_resumo_entrega">
-          <h3>Entrega</h3>
-          <div>
+          <h3>Entrega:</h3>
+          <div className="escolha_entrega">
             <p>Retirar na loja:</p>
             <p>R. Treze de Maio, 2-13 - Centro, Bauru</p>
-          </div>
-          <p>Entrega em casa</p>
-          <div className="entrega_endereco">
-              <div>
-                <p>CEP:</p>
-                <div className="editar_endereco">
-                  <p>17010-150</p>
-                  <Link to='/editarInformacoes'>
-                  <img src={editarEndereco} alt="link para editar endereço"/>
-                  </Link>
-                </div>
-              </div>
-              <div>
-                <p>Logradouro:</p>
-                <p>Rua Engenheiro Saint-Martin - até Quadra 11</p>
-              </div>
-              <div>
-                <p>Bairro:</p>
-                <p>Centro</p>
-              </div>
-              <div>
-                <p>Número:</p>
-                <div className="editar_endereco">
-                  <p>10-12</p>
-                  <Link to='/editarInformacoes'>
-                   <img src={editarEndereco} alt="link para editar endereço" />
-                   </Link>
-                </div>
-              </div>
+            <label for="checkbox">
+            <input
+              type="checkbox"
+              checked={isChecked} 
+              id="checkbox" 
+              onChange={compVisivel}/>
+              </label>
+
+            {/* Secão componente CEP */}
+            {isChecked && (<div>
+              <h2>Agora está visivel</h2>
+            </div>)}
           </div>
         </section>
 
         <section className="secao_forma_pagamento">
-          <div className="scroll_forma_pagamento">
-            <ul>
+          <h3>Forma de pagamento</h3>
+            <ul className="scroll_forma_pagamento">
               <li>Crédito</li>
               <li>Débito</li>
               <li>Vale alimentação</li>
               <li>Vale refeição</li>
             </ul>
             <div className="pagamento_escolhido">
-
             </div>
-          </div>
           <div className="finalizar_compra">
           <div className="compra_total">
             <p>Total: R$200</p>

@@ -4,7 +4,26 @@ main {
         h2 {
             color: var(--amarelo);
             font-weight: var(--fonteBold);
-        }
-            
+            margin: var(--espacamentoMaior) var(--espacamentoMenor);
         }
     }
+
+    .secao_resumo_entrega {
+        margin: var(--espacamentoMaior) var(--espacamentoMenor);
+
+        h3 {
+            color: var(--amarelo);
+            font-weight: var(--fonteBold);
+        }
+
+        .escolha_entrega {
+            margin: var(--espacamentoMenor) 0;
+            display: flex;
+        }
+
+    }
+
+    .secao_forma_pagamento {
+        margin: var(--espacamentoMaior) var(--espacamentoMenor);
+    }
+}
