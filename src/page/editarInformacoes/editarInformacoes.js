@@ -19,68 +19,98 @@ function EditarInformacoes() {
 
             </header>
 
-
-            <h2>Informações Pessoais</h2>
-
             <form action="">
 
-                <label for="user">Nome:</label>
-                <input type="text" id="user" />
+                <fieldset>
 
-                <label for="cpf">CPF:</label>
-                <input type="text" id="cpf" />
+                    <legend>Informações Pessoais</legend>
 
-                <label for="dataNascimento">Data de Nascimento:</label>
-                <input type="text" id="dataNascimento" />
+                    <label for="user">Nome:</label>
+                    <input type="text" id="user" value="Felipe Da Silva Jr" disabled />
+                    <input type="checkbox" name="" id="user" value="Alterar nome" />
+
+                    <label for="cpf">CPF:</label>
+                    <input type="text" id="cpf" disabled />
+                    <input type="checkbox" name="" id="cpf" value="Alterar cpf" />
+
+                    <label for="dataNascimento">Data de Nascimento:</label>
+                    <input type="text" id="dataNascimento" disabled />
+                    <input type="checkbox" name="" id="dataNascimento" value="Alterar data de nascimento" />
+
+                </fieldset>
 
             </form>
 
             <form action="">
 
-                <label for="senha">Senha:</label>
-                <input type="password" id="senha" />
+                <fieldset>
 
-                <button>Redefinir senha</button>
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="senha" />
+                    <input type="checkbox" name="" id="senha" value="Ver senha" />
 
-            </form>
+                    <button>Redefinir senha</button>
 
-            <h2>Endereço</h2>
-
-            <form action="">
-
-                <label for="user">Nome:</label>
-                <input type="text" id="user" />
-
-                <label for="cpf">CPF:</label>
-                <input type="text" id="cpf" />
-
-                <label for="dataNascimento">Data de Nascimento:</label>
-                <input type="text" id="dataNascimento" />
-
-                <label for="senha">Senha:</label>
-                <input type="password" id="senha" />
-
-                <button>Redefinir senha</button>
+                </fieldset>
 
             </form>
 
-            <h2>Endereço</h2>
-            
+
+
             <form action="">
 
-                <label for="user">Nome:</label>
-                <input type="text" id="user" />
+                <fieldset>
 
-                <label for="cpf">CPF:</label>
-                <input type="text" id="cpf" />
+                    <legend>Endereço</legend>
 
-                <label for="dataNascimento">Data de Nascimento:</label>
-                <input type="text" id="dataNascimento" />
+                    <label for="user">Nome:</label>
+                    <input type="text" id="user" />
 
-                <label for="senha">Senha:</label>
-                <input type="password" id="senha" />
+                    <label for="cpf">CPF:</label>
+                    <input type="text" id="cpf" />
 
-                <button>Redefinir senha</button>
+                    <label for="dataNascimento">Data de Nascimento:</label>
+                    <input type="text" id="dataNascimento" />
+
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="senha" />
+
+                    <button>Redefinir senha</button>
+
+                </fieldset>
+
+            </form>
+
+            <section>
+
+                
+
+            </section>
+
+
+
+
+            <form action="">
+
+                <fieldset>
+
+                    <legend>Formas de pagamento</legend>
+
+                    <label for="user">Nome:</label>
+                    <input type="text" id="user" />
+
+                    <label for="cpf">CPF:</label>
+                    <input type="text" id="cpf" />
+
+                    <label for="dataNascimento">Data de Nascimento:</label>
+                    <input type="text" id="dataNascimento" />
+
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="senha" />
+
+                    <button>Redefinir senha</button>
+
+                </fieldset>
 
             </form>
 
