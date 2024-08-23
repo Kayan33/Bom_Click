@@ -9,20 +9,21 @@ import panelaoLogo from '../../imagens/panelaoLogo.png';
 import tausteLogo from '../../imagens/tausteLogo.png';
 
 import { produtos } from '../../data/produtos.js';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 function HomeScreen() {
   const [setorSelecionado, setSetorSelecionado] = useState('Açougue');
   const [mercadoSelecionado, setMercadoSelecionado] = useState('Confiança');
   const [cartCount, setCartCount] = useState(0);
   const [produtosComparacao, setProdutosComparacao] = useState([]);
-
+  
+  // Referência para a seção de comparação de preços
+  const comparacaoRef = useRef(null);
 
   function filtrarProdutos() {
     return produtos.filter(produto => {
       const mercadoMatch = mercadoSelecionado === 'Todos' || produto.mercado === mercadoSelecionado;
       const setorMatch = setorSelecionado === 'Todos' || produto.setores === setorSelecionado;
-
       return mercadoMatch && setorMatch;
     });
   };
@@ -44,7 +45,12 @@ function HomeScreen() {
   const handleCompararPreco = (nomeProduto) => {
     const resultado = compararPreco(nomeProduto);
     setProdutosComparacao(resultado);
-    console.log(resultado)
+    console.log(resultado);
+    
+    // Rolagem para a seção de comparação de preços
+    if (comparacaoRef.current) {
+      comparacaoRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 
   const handleAddToCart = (produto) => {
@@ -59,8 +65,6 @@ function HomeScreen() {
     const count = localStorage.getItem('cartCount');
     setCartCount(count ? parseInt(count, 10) : 0);
   }, []);
-
-
 
   return (
     <div>
@@ -207,9 +211,7 @@ function HomeScreen() {
         </ul>
       </section>
 
-
-
-      <section className="secao_compras">
+      <section className="secao_compras" ref={comparacaoRef}>
         <h1>Comparativo de Preços</h1>
         <ul className='secao_compras_produtos_lista'>
           {produtosComparacao.map(produto => (
@@ -233,7 +235,6 @@ function HomeScreen() {
                   </div>
                 </div>
 
-
                 <div className='secao_compras_lista_item_produto_valores'>
                   <button className='secao_compras_lista_item_produto_adicionar--carrinho' onClick={() => handleAddToCart(produto)}>
                     ADICIONAR A COMPRA
@@ -244,9 +245,6 @@ function HomeScreen() {
           ))}
         </ul>
       </section>
-
-      
-
     </div>
   );
 }
