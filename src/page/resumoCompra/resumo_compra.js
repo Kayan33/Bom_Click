@@ -119,21 +119,24 @@ export default function ResumoCompra() {
         <section className="secao_resumo_entrega">
           <h3>Entrega:</h3>
           <div className="escolha_entrega">
-            <p>Retirar na loja:</p>
-            <p>R. Treze de Maio, 2-13 - Centro, Bauru</p>
-            <label for="checkbox">
-            <input
-              type="checkbox"
-              checked={isChecked} 
-              id="checkbox" 
-              onChange={compVisivel}/>
+            <div className="entrega_opcao">
+              <label 
+              for="lojaProxima">
+              Retirar na Loja:
               </label>
-
+              <input type="box" id="lojaProxima" value={"R. Treze de Maio, 2-13 - Centro, Bauru"}/>
+              <input
+                type="checkbox"
+                checked={isChecked}
+                id="lojaProxima"
+                onChange={compVisivel}/>
+            </div>
+             </div>
             {/* Secão componente CEP */}
-            {isChecked && (<div>
+            {!isChecked && (<div>
               <h2>Agora está visivel</h2>
             </div>)}
-          </div>
+          
         </section>
 
         <section className="secao_forma_pagamento">

@@ -16,9 +16,58 @@ main {
             font-weight: var(--fonteBold);
         }
 
+
         .escolha_entrega {
             margin: var(--espacamentoMenor) 0;
             display: flex;
+            align-items: center;
+
+            .entrega_opcao {
+                display: flex;
+                align-items: center;
+                gap: .5rem;
+            }
+
+
+            label {
+            font-size: var(--fonteRegular);
+            color: var(--azul);
+            font-weight: var(--fonteBold);
+            width: max-content;
+         }
+
+            input[type="box"] {
+                font-size: var(--fontePequena);
+                border: none;
+                color: var(--verde);
+                font-weight: var(--fonteExtraBold);
+                width: max-content;
+                text-overflow: ellipsis;
+            }
+
+            input[type="checkbox"] {
+                appearance: none;
+                -webkit-appearance:none;
+                -moz-appearance: none;
+               width: 20px;
+               height: 20px;
+               border-radius: 50%;
+               border: 3px solid var(--azul);
+               outline: none;
+               cursor: pointer;
+               transition: background-color 0.3s ease;
+            }
+            
+            input[type="checkbox"]:hover {
+                background-image: radial-gradient(circle at center, #fff, #fff, #fff, var(--azul), var(--azul) );
+            }
+
+            input[type="checkbox"]:checked {
+                background-color: var(--azul);
+                background-image: none;
+            }
+
+            
         }
 
     }
