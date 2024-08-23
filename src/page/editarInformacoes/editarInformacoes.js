@@ -1,4 +1,5 @@
 import '../../assets/cabecalho.css'
+import './editarInformacoes.css'
 import iconeVoltar from '../../imagens/icon-voltar.svg';
 
 function EditarInformacoes() {
@@ -19,42 +20,76 @@ function EditarInformacoes() {
 
             </header>
 
-            <form action="">
+            <section className='secao_informacoesPessoais'>
 
-                <fieldset>
+                <form action="" className='secao_informacoesPessoais_formulario'>
 
-                    <legend>Informações Pessoais</legend>
+                    <fieldset className='secao_informacoesPessoais_formulario_container'>
 
-                    <label for="user">Nome:</label>
-                    <input type="text" id="user" value="Felipe Da Silva Jr" disabled />
-                    <input type="checkbox" name="" id="user" value="Alterar nome" />
+                        <legend className='secao_informacoesPessoais_formulario_container_titulo'>Informações Pessoais</legend>
 
-                    <label for="cpf">CPF:</label>
-                    <input type="text" id="cpf" disabled />
-                    <input type="checkbox" name="" id="cpf" value="Alterar cpf" />
+                        <div className='secao_informacoesPessoais_formulario_container_campo'>
 
-                    <label for="dataNascimento">Data de Nascimento:</label>
-                    <input type="text" id="dataNascimento" disabled />
-                    <input type="checkbox" name="" id="dataNascimento" value="Alterar data de nascimento" />
+                            <label for="user" className='secao_informacoesPessoais_formulario_container_campo_titulo'>Nome:</label>
 
-                </fieldset>
+                            <input type="text" id="user" value="Felipe Da Silva Jr" className='secao_informacoesPessoais_formulario_container_campo_valor' disabled />
 
-            </form>
+                            <label for="alterarNome" className='iconeEditar'></label>
 
-            <form action="">
+                            <input type="checkbox" name="" id="alterarNome" value="Alterar nome"
+                                className='secao_informacoesPessoais_formulario_container_campo_checkbox' />
 
-                <fieldset>
+                        </div>
 
-                    <label for="senha">Senha:</label>
-                    <input type="password" id="senha" />
-                    <input type="checkbox" name="" id="senha" value="Ver senha" />
+                        <div className='secao_informacoesPessoais_formulario_container_campo'>
 
-                    <button>Redefinir senha</button>
+                            <label for="cpf" className='secao_informacoesPessoais_formulario_container_campo_titulo'>CPF:</label>
 
-                </fieldset>
+                            <input type="text" id="cpf" value="581.021.984.69" className='secao_informacoesPessoais_formulario_container_campo_valor' disabled />
 
-            </form>
+                            <label for="alterarCpf" className='iconeEditar'></label>
 
+                            <input type="checkbox" name="" id="alterarCpf" value="Alterar CPF"
+                                className='secao_informacoesPessoais_formulario_container_campo_checkbox' />
+
+                        </div>
+
+                        <div className='secao_informacoesPessoais_formulario_container_campo'>
+
+                            <label for="dataNascimento" className='secao_informacoesPessoais_formulario_container_campo_titulo'>Data de Nascimento:</label>
+
+                            <input type="text" id="dataNascimento" value="05/08/1999" className='secao_informacoesPessoais_formulario_container_campo_valor' disabled />
+
+                            <label for="alterarDataNascimento" className='iconeEditar'></label>
+
+                            <input type="checkbox" name="" id="alterarDataNascimento" value="Alterar data de nascimento"
+                                className='secao_informacoesPessoais_formulario_container_campo_checkbox' />
+
+                        </div>
+
+                    </fieldset>
+
+                </form>
+
+            </section>
+
+            <section  className='secao_senha'>
+
+                <form action="" className='secao_senha_f'>
+
+                    <fieldset>
+
+                        <label for="senha">Senha:</label>
+                        <input type="password" id="senha" />
+                        <input type="checkbox" name="" id="senha" value="Ver senha" />
+
+                        <button>Redefinir senha</button>
+
+                    </fieldset>
+
+                </form>
+
+            </section>
 
 
             <form action="">
@@ -83,12 +118,9 @@ function EditarInformacoes() {
 
             <section>
 
-                
+
 
             </section>
-
-
-
 
             <form action="">
 
@@ -96,23 +128,47 @@ function EditarInformacoes() {
 
                     <legend>Formas de pagamento</legend>
 
-                    <label for="user">Nome:</label>
-                    <input type="text" id="user" />
+                    <div>
+                        <div></div>
+                        <label for="user">Alimentação Alelo</label>
+                        <input type="text" id="user" value="0800 0800 0800 0800" />
+                        <button></button>
+                    </div>
 
-                    <label for="cpf">CPF:</label>
-                    <input type="text" id="cpf" />
+                    <div>
+                        <div></div>
+                        <label for="user">Alimentação Alelo</label>
+                        <input type="text" id="user" value="0800 0800 0800 0800" />
+                        <button></button>
+                    </div>
 
-                    <label for="dataNascimento">Data de Nascimento:</label>
-                    <input type="text" id="dataNascimento" />
-
-                    <label for="senha">Senha:</label>
-                    <input type="password" id="senha" />
-
-                    <button>Redefinir senha</button>
+                    <button>Adicionar Cartão</button>
 
                 </fieldset>
 
             </form>
+
+            <section>
+
+                <form action="">
+
+                    <fieldset>
+                        <button>Apagar conta</button>
+                    </fieldset>
+
+                </form>
+
+                <form action="">
+
+                    <fieldset>
+
+                        <button></button>
+
+                    </fieldset>
+
+                </form>
+
+            </section>
 
         </>
 
