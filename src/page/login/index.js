@@ -26,12 +26,23 @@ function Login() {
                     )}
                 </form>
                 <div className="button-login">
+                <div className='esqueci_senha'>
 
-                <button className="toggle-button" onClick={toggleForm}>
-                    {isLogin ? "Cadastre-se" : "Já tem uma conta? Faça login"}
-                </button>
-                    <button className="login-cadastro-button" type="submit">{isLogin ? "Login" : "cadastrar"}  </button>
+                    {isLogin && (
+                        <a className="special-button">
+                            Esqueci a senha
+                        </a>
+                    )}
+                </div>
+                <div className="login">
 
+                    <a className="toggle-button" onClick={toggleForm}>
+                        {isLogin ? "Cadastre-se" : "Já tem uma conta? Faça login"}
+                    </a>
+                    <button className="login-cadastro-button" type="submit">
+                        {isLogin ? "Login" : "Cadastrar"}
+                    </button>
+                </div>
                 </div>
             </div>
         </div>
