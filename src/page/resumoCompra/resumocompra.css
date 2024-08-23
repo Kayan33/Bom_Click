@@ -10,6 +10,7 @@ main {
 
     .secao_resumo_entrega {
         margin: var(--espacamentoMaior) var(--espacamentoMenor);
+        
 
         h3 {
             color: var(--amarelo);
@@ -21,11 +22,12 @@ main {
             margin: var(--espacamentoMenor) 0;
             display: flex;
             align-items: center;
+            justify-content: space-between;
 
             .entrega_opcao {
                 display: flex;
                 align-items: center;
-                gap: .5rem;
+                width: 100%;
             }
 
 
@@ -33,7 +35,7 @@ main {
             font-size: var(--fonteRegular);
             color: var(--azul);
             font-weight: var(--fonteBold);
-            width: max-content;
+            min-width: 8rem;
          }
 
             input[type="box"] {
@@ -41,7 +43,7 @@ main {
                 border: none;
                 color: var(--verde);
                 font-weight: var(--fonteExtraBold);
-                width: max-content;
+                width: 100%;
                 text-overflow: ellipsis;
             }
 
