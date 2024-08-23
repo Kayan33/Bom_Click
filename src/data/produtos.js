@@ -13,7 +13,7 @@ export const produtos = [
         pesoKg: 1,
         mercado: "Panelão",
         imagem: carne ,
-        mercadoImagem: confiancaLogo,
+        mercadoImagem: panelaoLogo,
         setores: "Açougue"
     },
     {
@@ -125,7 +125,7 @@ export const produtos = [
         pesoKg: 1,
         mercado: "Tauste",
         imagem: carne ,
-        mercadoImagem: confiancaLogo,
+        mercadoImagem: tausteLogo,
         setores: "Açougue"
     },
     

@@ -1,1 +1,60 @@
+.secao_informacoesPessoais{
+
+    margin: var(--espacamentoMaior)  var(--espacamentoMenor);
+}
+
+.secao_informacoesPessoais_formulario_container{
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacamentoMenor);
+}
+
+.secao_informacoesPessoais_formulario_container_titulo {
+
+    color: var(--amarelo);
+    font-size: var(--fonteTitulo);
+    font-weight: var(--fonteBold);
+    margin:  0 0 var(--espacamentoMaior) 0; 
+}
+
+.secao_informacoesPessoais_formulario_container_campo{
+
+    align-items: center;
+    display: grid;
+    grid-template-columns: max-content auto;
+    grid-template-rows: 1fr 1fr;
+   
+}
+
+.secao_informacoesPessoais_formulario_container_campo_titulo{
+
+    color: var(--azul);
+    font-size: var(--fontePequena);
+    grid-column: 1 / -1;
+}
+
+.secao_informacoesPessoais_formulario_container_campo_valor{
+
+    background-color: transparent;
+    border: none;
+    color: var(--azul);
+    font-size: var(--fonteSegundaria);
+    font-weight: var(--fonteBold);
+    text-overflow: ellipsis;
+    width: 8rem;
+}
+
+.iconeEditar{
+
+    background-image: url('../../imagens/iconeEditar.svg');
+    background-repeat: no-repeat;
+    height: 60%;
+}
+
+.secao_informacoesPessoais_formulario_container_campo_checkbox{
+
+    display: none;
+    width: max-content;
+}
 

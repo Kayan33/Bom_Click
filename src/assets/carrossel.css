@@ -110,6 +110,19 @@
     font-size: var(--fontePequena);
 }
 
+.secao_compras_lista_item_produto_imagem--mercado {
+    height:90%;
+    width: 100%;
+}
+
+.secao_compras_lista_item_produto_imagem--mercado img {
+    height: 100%;
+    width: var(--tamanhoFotoPequena);
+    object-fit: cover;
+    object-position: center; 
+}
+
+
 @media (min-width: 768px){
 
     .secao_compras_produtos_lista{
