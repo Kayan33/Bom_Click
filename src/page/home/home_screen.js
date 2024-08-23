@@ -9,18 +9,21 @@ import panelaoLogo from '../../imagens/panelaoLogo.png';
 import tausteLogo from '../../imagens/tausteLogo.png';
 
 import { produtos } from '../../data/produtos.js';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 function HomeScreen() {
   const [setorSelecionado, setSetorSelecionado] = useState('Açougue');
   const [mercadoSelecionado, setMercadoSelecionado] = useState('Confiança');
   const [cartCount, setCartCount] = useState(0);
+  const [produtosComparacao, setProdutosComparacao] = useState([]);
+  
+  // Referência para a seção de comparação de preços
+  const comparacaoRef = useRef(null);
 
   function filtrarProdutos() {
     return produtos.filter(produto => {
       const mercadoMatch = mercadoSelecionado === 'Todos' || produto.mercado === mercadoSelecionado;
       const setorMatch = setorSelecionado === 'Todos' || produto.setores === setorSelecionado;
-
       return mercadoMatch && setorMatch;
     });
   };
@@ -35,20 +38,33 @@ function HomeScreen() {
     setMercadoSelecionado(mercado);
   };
 
+  function compararPreco(nomeProduto) {
+    return produtos.filter(produto => produto.nome === nomeProduto);
+  }
+
+  const handleCompararPreco = (nomeProduto) => {
+    const resultado = compararPreco(nomeProduto);
+    setProdutosComparacao(resultado);
+    console.log(resultado);
+    
+    // Rolagem para a seção de comparação de preços
+    if (comparacaoRef.current) {
+      comparacaoRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
   const handleAddToCart = (produto) => {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     cart.push(produto);
     localStorage.setItem('cart', JSON.stringify(cart));
     localStorage.setItem('cartCount', cart.length);
-    setCartCount(cart.length); 
+    setCartCount(cart.length);
   };
 
   useEffect(() => {
     const count = localStorage.getItem('cartCount');
     setCartCount(count ? parseInt(count, 10) : 0);
   }, []);
-
-  
 
   return (
     <div>
@@ -179,14 +195,14 @@ function HomeScreen() {
                   <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preco'>
                     R${produto.preco.toFixed(2)}
                   </h4>
-                  <button className='secao_compras_lista_item_produto_comparar--preco'>
+                  <button className='secao_compras_lista_item_produto_comparar--preco' onClick={() => handleCompararPreco(produto.nome)}>
                     Comparar Preço
                   </button>
                 </div>
 
                 <div className='secao_compras_lista_item_produto_valores'>
                   <button className='secao_compras_lista_item_produto_adicionar--carrinho' onClick={() => handleAddToCart(produto)}>
-                    ADICINAR A COMPRA
+                    ADICIONAR A COMPRA
                   </button>
                 </div>
               </article>
@@ -195,13 +211,41 @@ function HomeScreen() {
         </ul>
       </section>
 
-      <section>
-        <h1>Comparativo</h1>
-        <div>
-          <div>
+      <section className="secao_compras" ref={comparacaoRef}>
+        <h1>Comparativo de Preços</h1>
+        <ul className='secao_compras_produtos_lista'>
+          {produtosComparacao.map(produto => (
+            <li key={produto.id} className='secao_compras_produtos_lista_item'>
+              <article className='secao_compras_lista_item_produto'>
+                <img
+                  src={produto.imagem}
+                  alt={produto.nome}
+                  className='secao_compras_lista_item_produto_imagem'
+                />
+                <h3 className='secao_compras_lista_item_produto_titulo'>
+                  {produto.nome}
+                </h3>
 
-          </div>
-        </div>
+                <div className='secao_compras_lista_item_produto_valores'>
+                  <div>
+                  <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preco'>
+                    R${produto.preco.toFixed(2)}
+                  </h4>
+                  </div>
+                  <div className='secao_compras_lista_item_produto_imagem--mercado'>
+                    <img src={produto.mercadoImagem} alt='Imagem do mercado' />
+                  </div>
+                </div>
+
+                <div className='secao_compras_lista_item_produto_valores'>
+                  <button className='secao_compras_lista_item_produto_adicionar--carrinho' onClick={() => handleAddToCart(produto)}>
+                    ADICIONAR A COMPRA
+                  </button>
+                </div>
+              </article>
+            </li>
+          ))}
+        </ul>
       </section>
     </div>
   );
