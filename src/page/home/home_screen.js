@@ -17,7 +17,7 @@ function HomeScreen() {
   const [cartCount, setCartCount] = useState(0);
   const [produtosComparacao, setProdutosComparacao] = useState([]);
   
-  // Referência para a seção de comparação de preços
+  
   const comparacaoRef = useRef(null);
 
   function filtrarProdutos() {
@@ -47,10 +47,13 @@ function HomeScreen() {
     setProdutosComparacao(resultado);
     console.log(resultado);
     
-    // Rolagem para a seção de comparação de preços
+    
     if (comparacaoRef.current) {
-      comparacaoRef.current.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => {
+        comparacaoRef.current.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
     }
+    
   }
 
   const handleAddToCart = (produto) => {
