@@ -1,7 +1,8 @@
 import '../../assets/cabecalho.css'
-import './editarInformacoes.css'
-import './editarSenha.css';
+import './secaoEditarInformacoes.css'
+import './secaoEditarSenha.css';
 import '../../components/SecaoCep/secaoCep.css'
+import './secaoCartoes.css';
 
 import iconeVoltar from '../../imagens/icon-voltar.svg';
 import SecaoCep from '../../components/SecaoCep/SecaoCep'
@@ -106,39 +107,49 @@ function EditarInformacoes() {
 
             <section className='secaoCep'>
 
-                <SecaoCep/>
+                <SecaoCep />
 
             </section>
 
+            <section className='secaoCartoes'>
 
+                <form action="" className='secaoCartoes_formulario'>
 
+                    <fieldset className='secaoCartoes_formulario_container'>
 
+                        <legend className='secaoCartoes_formulario_container_titulo'>Formas de pagamento</legend>
 
-            <form action="">
+                        <div className='secaoCartoes_formulario_container_cartao'>
 
-                <fieldset>
+                            <div className='secaoCartoes_formulario_container_cartao_icone'></div>
 
-                    <legend>Formas de pagamento</legend>
+                            <label for="user" className='secaoCartoes_formulario_container_cartao_titulo'>Alimentação Alelo</label>
 
-                    <div>
-                        <div></div>
-                        <label for="user">Alimentação Alelo</label>
-                        <input type="text" id="user" value="0800 0800 0800 0800" />
-                        <button></button>
-                    </div>
+                            <input type="text" id="user" value="0800 0800 0800 0800" className='secaoCartoes_formulario_container_cartao_numero' />
 
-                    <div>
-                        <div></div>
-                        <label for="user">Alimentação Alelo</label>
-                        <input type="text" id="user" value="0800 0800 0800 0800" />
-                        <button></button>
-                    </div>
+                            <button aria-label="Excluir cartão"></button>
+                            
+                        </div>
 
-                    <button>Adicionar Cartão</button>
+                        <div className='secaoCartoes_formulario_container_cartao'>
 
-                </fieldset>
+                            <div className='secaoCartoes_formulario_container_cartao_icone'></div>
 
-            </form>
+                            <label for="user" className='secaoCartoes_formulario_container_cartao_titulo'>Alimentação Alelo</label>
+
+                            <input type="text" id="user" value="0800 0800 0800 0800" className='secaoCartoes_formulario_container_cartao_numero' />
+
+                            <button aria-label="Excluir cartão"></button>
+                            
+                        </div>
+
+                        <button>Adicionar Cartão</button>
+
+                    </fieldset>
+
+                </form>
+
+            </section>
 
             <section>
 

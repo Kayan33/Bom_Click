@@ -1,0 +1,28 @@
+.secaoCartoes{
+
+    margin: 0 var(--espacamentoMenor);
+}
+
+.secaoCartoes_formulario_container{
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacamentoMenor);
+}
+
+.secaoCartoes_formulario_container_titulo{
+ 
+    color: var(--amarelo);
+    font-size: var(--fonteTitulo);
+    font-weight: var(--fonteBold);
+    margin:  0 0 var(--espacamentoMaior) 0; 
+}
+
+.secaoCartoes_formulario_container_cartao{
+
+    align-items: center;
+    display: grid;
+    grid-template-columns: max-content auto;
+    grid-template-rows: 1fr 1fr;
+
+}
