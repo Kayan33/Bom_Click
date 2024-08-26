@@ -8,7 +8,6 @@ import alho from '../../imagens/alho.png'
 import carne from '../../imagens/carne.png'
 import batata from '../../imagens/batata.png'
 import limao from '../../imagens/limao.png'
-import editarEndereco from '../../imagens/editar.svg'
 import '../../assets/carrossel.css'
 
 
@@ -23,7 +22,7 @@ export default function ResumoCompra() {
   return(
     <div>
     <header className='cabecalho'>
-        <img src={iconeVoltar} alt="Voltar para Página Inicial" />
+        <Link to='/'><img src={iconeVoltar} alt="Voltar para Página Inicial" /></Link>
         <h1 className='cabecalho_titulo'>Resumo da compra</h1>
       </header>
       <main>
@@ -141,8 +140,8 @@ export default function ResumoCompra() {
         </section>
 
         <section className="secao_forma_pagamento">
-          <h3>Forma de pagamento</h3>
-            <ul className="scroll_forma_pagamento">
+          <h3>Forma de pagamento:</h3>
+            <ul className="barraRolagem barraRolagem--amarelo">
               <li>Crédito</li>
               <li>Débito</li>
               <li>Vale alimentação</li>

@@ -76,5 +76,51 @@ main {
 
     .secao_forma_pagamento {
         margin: var(--espacamentoMaior) var(--espacamentoMenor);
+        
+        h3 {
+            font-size: var(--fonteTitulo);
+            font-weight: var(--fonteBold);
+            color: var(--amarelo);
+        }
+
+        ul {
+            display: flex;
+            align-items: center;
+            gap: var(--espacamentoMaior);
+            overflow-y: hidden;
+            overflow-x: auto;
+            margin: var(--espacamentoMenor) var(--espacamentoMenor);
+
+            li {
+                border: 2px solid var(--azul);
+                border-radius: var(--bordaRaio);
+                width: 126px;
+            }
+
+        .barraRolagem {
+                scrollbar-color: var(--azul) #FFF;
+                scrollbar-width: thin;
+                scroll-snap-type: x mandatory;
+            }
+            
+            .barraRolagem--amarelo{
+            
+                scrollbar-color: var(--amarelo) #FFF;
+            }
+            
+            .barraRolagem::-webkit-scrollbar {
+                width: 3px;
+                
+            }
+            
+            .barraRolagem::-webkit-scrollbar-track {
+                background-color: #ffffff; /* Cor de fundo da faixa da barra de rolagem */
+            }
+            
+            .barraRolagem::-webkit-scrollbar-thumb {
+                background-color: #054AAE;
+                border-radius: 10px; /* Bordas arredondadas para a parte deslizante */
+            }
+            }
+        }
     }
-}
