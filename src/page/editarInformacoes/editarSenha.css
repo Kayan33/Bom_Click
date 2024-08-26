@@ -1,0 +1,62 @@
+.secao_senha{
+
+ margin: 0 var(--espacamentoMenor);
+}
+
+.secao_senha_formulario_container{
+
+    display: flex;
+    flex-direction: column;
+}
+
+.secao_senha_formulario_container_campo {
+
+    display: grid;
+    grid-template-columns: max-content max-content auto;
+    align-items: center;
+    gap: 10px; /* Espaço entre os elementos */
+}
+
+.secao_senha_formulario_container_titulo{
+
+    color: var(--azul);
+    font-size: var(--fontePequena);
+
+}
+
+.secao_senha_formulario_container_campo_valor{
+
+    color: var(--azul);
+    text-overflow: ellipsis;
+    width: 8rem;
+}
+
+.iconeMostrarSenha{
+
+    background-image: url('../../imagens/iconeMostrar.svg');
+    background-repeat: no-repeat;
+    width: var(--tamanhoIcone);
+    height: 60%;
+}
+
+.secao_senha_formulario_container_campo_checkbox{
+
+    display: none;
+    width: max-content;
+}
+
+.secao_senha_formulario_container_campo_botao {
+
+    grid-column: 3; 
+    justify-self: flex-end;
+}
+
+.secao_senha_formulario_container_campo_botao{
+
+    background-color: transparent;
+    border: none;
+    color: var(--amarelo);
+    font-size: var(--fontePequena);
+    font-weight: var(--fonteMedium);
+
+}

@@ -1,5 +1,6 @@
 import '../../assets/cabecalho.css'
 import './editarInformacoes.css'
+import './editarSenha.css';
 import iconeVoltar from '../../imagens/icon-voltar.svg';
 
 function EditarInformacoes() {
@@ -73,18 +74,27 @@ function EditarInformacoes() {
 
             </section>
 
-            <section  className='secao_senha'>
+            <section className='secao_senha'>
 
-                <form action="" className='secao_senha_f'>
+                <form action="" className='secao_senha_formulario'>
 
-                    <fieldset>
+                    <fieldset className='secao_senha_formulario_container'>
 
-                        <label for="senha">Senha:</label>
-                        <input type="password" id="senha" />
-                        <input type="checkbox" name="" id="senha" value="Ver senha" />
+                        <label for="senha" className='secao_senha_formulario_container_titulo'>Senha:</label>
 
-                        <button>Redefinir senha</button>
+                        <div className='secao_senha_formulario_container_campo' >
 
+                            <input type="password" id="senha" value="1231233123" className='secao_senha_formulario_container_campo_valor' />
+
+                            <label for="mostrarSenha" className='iconeMostrarSenha'></label>
+
+                            <input type="checkbox" name="" id="mostrarSenha" value="Ver senha" className='secao_senha_formulario_container_campo_checkbox' />
+
+                            <button className='secao_senha_formulario_container_campo_botao'>Redefinir senha</button>
+
+
+                        </div>
+                        
                     </fieldset>
 
                 </form>
