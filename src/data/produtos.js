@@ -2,6 +2,9 @@ import carne from '../imagens/carne.png'
 import limao from '../imagens/limao.png'
 import batata from '../imagens/batata.png'
 import confiancaLogo from '../imagens/confiancaLogo.png'
+import alho from '../imagens/alho.png'
+import acai from '../imagens/acai.png'
+import almondegas from '../imagens/almondegas.png'
 import panelaoLogo from '../imagens/panelaoLogo.png'
 import tausteLogo from '../imagens/tausteLogo.png'
 export const produtos = [
@@ -128,5 +131,112 @@ export const produtos = [
         mercadoImagem: tausteLogo,
         setores: "Açougue"
     },
+
+    {
+        id: 12,
+        nome: "Alho Fresco 200g",
+        descricao: "Alho Fresco 200g",
+        preco: 7.98,
+        pesoKg: 200,
+        mercado: "Tauste",
+        imagem: alho ,
+        mercadoImagem: tausteLogo,
+        setores: "Hortifrut"
+    },
+
+    {
+        id: 13,
+        nome: "Alho Fresco 200g",
+        descricao: "Alho Fresco 200g",
+        preco: 8.50,
+        pesoKg: 200,
+        mercado: "Confiança",
+        imagem: alho ,
+        mercadoImagem: confiancaLogo,
+        setores: "Hortifrut"
+    },
+
+    {
+        id: 13,
+        nome: "Alho Fresco 200g",
+        descricao: "Alho Fresco 200g",
+        preco: 6.30,
+        pesoKg: 200,
+        mercado: "panelão",
+        imagem: alho ,
+        mercadoImagem: panelaoLogo,
+        setores: "Hortifrut"
+    },
+
+    {
+        id: 14,
+        nome: "Açaí Frooty Bob Esponja Natural Pote 1500ml",
+        descricao: "Açaí Frooty Bob Esponja Natural Pote 1500ml",
+        preco: 40.87,
+        pesoKg: 1500,
+        mercado: "Confiança",
+        imagem: acai ,
+        mercadoImagem: confiancaLogo,
+        setores: "Frios"
+    },
+    {
+        id: 15,
+        nome: "Açaí Frooty Bob Esponja Natural Pote 1500ml",
+        descricao: "Açaí Frooty Bob Esponja Natural Pote 1500ml",
+        preco: 60,
+        pesoKg: 1500,
+        mercado: "Panelão",
+        imagem: acai ,
+        mercadoImagem: panelaoLogo,
+        setores: "Frios"
+    },
+    {
+        id: 16,
+        nome: "Açaí Frooty Bob Esponja Natural Pote 1500ml",
+        descricao: "Açaí Frooty Bob Esponja Natural Pote 1500ml",
+        preco: 39.87,
+        pesoKg: 1500,
+        mercado: "Tauste",
+        imagem: acai,
+        mercadoImagem: tausteLogo,
+        setores: "Frios"
+    },
+
+    {
+        id: 17,
+        nome: "Almôndega Bovina Sadia Caixa 500g",
+        descricao: "Almôndega Bovina Sadia Caixa 500g",
+        preco: 30.47,
+        pesoKg: 500,
+        mercado: "Tauste",
+        imagem: almondegas,
+        mercadoImagem: tausteLogo,
+        setores: "Frios"
+    },
+
+    {
+        id: 18,
+        nome: "Almôndega Bovina Sadia Caixa 500g",
+        descricao: "Almôndega Bovina Sadia Caixa 500g",
+        preco: 28.47,
+        pesoKg: 500,
+        mercado: "Confiança",
+        imagem: almondegas,
+        mercadoImagem: confiancaLogo,
+        setores: "Frios"
+    },
+
+    {
+        id: 18,
+        nome: "Almôndega Bovina Sadia Caixa 500g",
+        descricao: "Almôndega Bovina Sadia Caixa 500g",
+        preco: 25.47,
+        pesoKg: 500,
+        mercado: "Panelão",
+        imagem: almondegas,
+        mercadoImagem: panelaoLogo,
+        setores: "Frios"
+    },
+    
     
 ];

@@ -12,7 +12,7 @@ import { produtos } from '../../data/produtos.js';
 import { useState, useEffect, useRef } from 'react';
 
 function HomeScreen() {
-  const [setorSelecionado, setSetorSelecionado] = useState('Açougue');
+  const [setorSelecionado, setSetorSelecionado] = useState('Frios');
   const [mercadoSelecionado, setMercadoSelecionado] = useState('Confiança');
   const [cartCount, setCartCount] = useState(0);
   const [produtosComparacao, setProdutosComparacao] = useState([]);
