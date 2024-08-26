@@ -59,5 +59,13 @@
     width: max-content;
 }
 
+@media (min-width: 768px) {
+
+    .secao_informacoesPessoais_formulario_container_campo_valor {
+
+        width: 10rem;
+    }
+  }
+  
 
 

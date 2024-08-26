@@ -60,3 +60,12 @@
     font-weight: var(--fonteMedium);
 
 }
+
+@media (min-width: 768px) {
+
+    .secao_senha_formulario_container_campo_valor {
+
+        width: 10rem;
+    }
+  }
+  
