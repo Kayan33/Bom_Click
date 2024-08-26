@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import SecaoCep from '../../components/SecaoCep/SecaoCep'
 import './resumocompra.css'
 import { Link } from 'react-router-dom'
 import iconeVoltar from '../../imagens/icon-voltar.svg'
@@ -9,6 +10,7 @@ import carne from '../../imagens/carne.png'
 import batata from '../../imagens/batata.png'
 import limao from '../../imagens/limao.png'
 import '../../assets/carrossel.css'
+
 
 
 export default function ResumoCompra() {
@@ -118,27 +120,31 @@ export default function ResumoCompra() {
         <section className="secao_resumo_entrega">
           <h3>Entrega:</h3>
           <div className="escolha_entrega">
-          
             <div className="entrega_opcao">
               <label 
               for="lojaProxima">
               Retirar na loja:
               </label>
               <input type="box" id="lojaProxima" value={"R. Treze de Maio, 2-13 - Centro, Bauru"}/>
+              <label For="entregaCasa">
+                Entrega em casa:
+              </label>
             </div>
             <input
                 type="checkbox"
-                checked={isChecked}
+                checked={!isChecked}
                 id="lojaProxima"
                 onChange={compVisivel}/>
+            <input
+                type="checkbox"
+                checked={isChecked}
+                id="entregaCasa"
+                onChange={compVisivel}/>
              </div>
-
-            {/* Secão componente CEP */}
-            {!isChecked && (<div>
-              <h2>Agora está visivel</h2>
-            </div>)}
+            {!isChecked && ( <SecaoCep/>)}
           
         </section>
+        
 
         <section className="secao_forma_pagamento">
           <h3>Forma de pagamento:</h3>
@@ -149,6 +155,7 @@ export default function ResumoCompra() {
               <li>Vale refeição</li>
             </ul>
             <div className="pagamento_escolhido">
+            <h1>Componente de add cartão</h1>
             </div>
           <div className="finalizar_compra">
           <div className="compra_total">
