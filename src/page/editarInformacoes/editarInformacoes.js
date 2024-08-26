@@ -1,7 +1,10 @@
 import '../../assets/cabecalho.css'
 import './editarInformacoes.css'
 import './editarSenha.css';
+import '../../components/SecaoCep/secaoCep.css'
+
 import iconeVoltar from '../../imagens/icon-voltar.svg';
+import SecaoCep from '../../components/SecaoCep/SecaoCep'
 
 function EditarInformacoes() {
 
@@ -94,43 +97,16 @@ function EditarInformacoes() {
 
 
                         </div>
-                        
+
                     </fieldset>
 
                 </form>
 
             </section>
 
+ 
+            <SecaoCep/> 
 
-            <form action="">
-
-                <fieldset>
-
-                    <legend>Endereço</legend>
-
-                    <label for="user">Nome:</label>
-                    <input type="text" id="user" />
-
-                    <label for="cpf">CPF:</label>
-                    <input type="text" id="cpf" />
-
-                    <label for="dataNascimento">Data de Nascimento:</label>
-                    <input type="text" id="dataNascimento" />
-
-                    <label for="senha">Senha:</label>
-                    <input type="password" id="senha" />
-
-                    <button>Redefinir senha</button>
-
-                </fieldset>
-
-            </form>
-
-            <section>
-
-
-
-            </section>
 
             <form action="">
 
