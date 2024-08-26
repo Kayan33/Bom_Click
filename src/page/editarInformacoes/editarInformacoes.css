@@ -50,6 +50,7 @@
     background-image: url('../../imagens/iconeEditar.svg');
     background-repeat: no-repeat;
     height: 60%;
+    width: var(--tamanhoIcone);
 }
 
 .secao_informacoesPessoais_formulario_container_campo_checkbox{
@@ -57,4 +58,6 @@
     display: none;
     width: max-content;
 }
+
+
 

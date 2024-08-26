@@ -15,6 +15,7 @@
     --fonteSegundaria: 1rem;
     --fontePequena: 0.5rem;
     --fonteRegular: 400;
+    --fonteMedium: 500;
     --fonteSemiBold: 600;
     --fonteBold: 700;
     --fonteExtraBold: 800;
@@ -31,6 +32,11 @@
     --tamanhoFotoGrande: 7.938rem;
     --tamanhoFotoPequena: 4.375rem;
 
+}
+
+*{
+
+    font-family: var(--fontePrincipal);
 }
 
 .barraRolagem {
