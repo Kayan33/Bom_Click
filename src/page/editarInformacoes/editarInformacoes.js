@@ -104,8 +104,14 @@ function EditarInformacoes() {
 
             </section>
 
- 
-            <SecaoCep/> 
+            <section className='secaoCep'>
+
+                <SecaoCep/>
+
+            </section>
+
+
+
 
 
             <form action="">

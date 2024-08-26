@@ -4,8 +4,6 @@ function SecaoCep() {
 
         <>
 
-            <section className='secaoCep'>
-
                 <form action="" className='secaoCep_formulario'>
 
                     <fieldset className='secaoCep_formulario_container'>
@@ -41,7 +39,6 @@ function SecaoCep() {
                     </fieldset>
 
                 </form>
-            </section>
 
         </>
     )
