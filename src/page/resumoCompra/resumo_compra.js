@@ -8,7 +8,6 @@ import alho from '../../imagens/alho.png'
 import carne from '../../imagens/carne.png'
 import batata from '../../imagens/batata.png'
 import limao from '../../imagens/limao.png'
-import editarEndereco from '../../imagens/editar.svg'
 import '../../assets/carrossel.css'
 
 
@@ -23,7 +22,7 @@ export default function ResumoCompra() {
   return(
     <div>
     <header className='cabecalho'>
-        <img src={iconeVoltar} alt="Voltar para Página Inicial" />
+        <Link to='/'><img src={iconeVoltar} alt="Voltar para Página Inicial" /></Link>
         <h1 className='cabecalho_titulo'>Resumo da compra</h1>
       </header>
       <main>
@@ -119,26 +118,30 @@ export default function ResumoCompra() {
         <section className="secao_resumo_entrega">
           <h3>Entrega:</h3>
           <div className="escolha_entrega">
-            <p>Retirar na loja:</p>
-            <p>R. Treze de Maio, 2-13 - Centro, Bauru</p>
-            <label for="checkbox">
-            <input
-              type="checkbox"
-              checked={isChecked} 
-              id="checkbox" 
-              onChange={compVisivel}/>
+          
+            <div className="entrega_opcao">
+              <label 
+              for="lojaProxima">
+              Retirar na Loja:
               </label>
-
+              <input type="box" id="lojaProxima" value={"R. Treze de Maio, 2-13 - Centro, Bauru"}/>
+            </div>
+            <input
+                type="checkbox"
+                checked={isChecked}
+                id="lojaProxima"
+                onChange={compVisivel}/>
+             </div>
             {/* Secão componente CEP */}
-            {isChecked && (<div>
+            {!isChecked && (<div>
               <h2>Agora está visivel</h2>
             </div>)}
-          </div>
+          
         </section>
 
         <section className="secao_forma_pagamento">
-          <h3>Forma de pagamento</h3>
-            <ul className="scroll_forma_pagamento">
+          <h3>Forma de pagamento:</h3>
+            <ul className="barraRolagem barraRolagem--amarelo">
               <li>Crédito</li>
               <li>Débito</li>
               <li>Vale alimentação</li>

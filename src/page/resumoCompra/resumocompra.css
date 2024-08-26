@@ -10,20 +10,117 @@ main {
 
     .secao_resumo_entrega {
         margin: var(--espacamentoMaior) var(--espacamentoMenor);
+        
 
         h3 {
             color: var(--amarelo);
             font-weight: var(--fonteBold);
         }
 
+
         .escolha_entrega {
             margin: var(--espacamentoMenor) 0;
             display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .entrega_opcao {
+                display: flex;
+                align-items: center;
+                width: 100%;
+            }
+
+
+            label {
+            font-size: var(--fonteRegular);
+            color: var(--azul);
+            font-weight: var(--fonteBold);
+            min-width: 8rem;
+         }
+
+            input[type="box"] {
+                font-size: var(--fontePequena);
+                border: none;
+                color: var(--verde);
+                font-weight: var(--fonteExtraBold);
+                width: 100%;
+                text-overflow: ellipsis;
+            }
+
+            input[type="checkbox"] {
+                appearance: none;
+                -webkit-appearance:none;
+                -moz-appearance: none;
+               width: 20px;
+               height: 20px;
+               border-radius: 50%;
+               border: 3px solid var(--azul);
+               outline: none;
+               cursor: pointer;
+               transition: background-color 0.3s ease;
+            }
+            
+            input[type="checkbox"]:hover {
+                background-image: radial-gradient(circle at center, #fff, #fff, #fff, var(--azul), var(--azul) );
+            }
+
+            input[type="checkbox"]:checked {
+                background-color: var(--azul);
+                background-image: none;
+            }
+
+            
         }
 
     }
 
     .secao_forma_pagamento {
         margin: var(--espacamentoMaior) var(--espacamentoMenor);
+        
+        h3 {
+            font-size: var(--fonteTitulo);
+            font-weight: var(--fonteBold);
+            color: var(--amarelo);
+        }
+
+        ul {
+            display: flex;
+            align-items: center;
+            gap: var(--espacamentoMaior);
+            overflow-y: hidden;
+            overflow-x: auto;
+            margin: var(--espacamentoMenor) var(--espacamentoMenor);
+
+            li {
+                border: 2px solid var(--azul);
+                border-radius: var(--bordaRaio);
+                width: 126px;
+            }
+
+        .barraRolagem {
+                scrollbar-color: var(--azul) #FFF;
+                scrollbar-width: thin;
+                scroll-snap-type: x mandatory;
+            }
+            
+            .barraRolagem--amarelo{
+            
+                scrollbar-color: var(--amarelo) #FFF;
+            }
+            
+            .barraRolagem::-webkit-scrollbar {
+                width: 3px;
+                
+            }
+            
+            .barraRolagem::-webkit-scrollbar-track {
+                background-color: #ffffff; /* Cor de fundo da faixa da barra de rolagem */
+            }
+            
+            .barraRolagem::-webkit-scrollbar-thumb {
+                background-color: #054AAE;
+                border-radius: 10px; /* Bordas arredondadas para a parte deslizante */
+            }
+            }
+        }
     }
-}

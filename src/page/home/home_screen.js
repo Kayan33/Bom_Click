@@ -9,20 +9,21 @@ import panelaoLogo from '../../imagens/panelaoLogo.png';
 import tausteLogo from '../../imagens/tausteLogo.png';
 
 import { produtos } from '../../data/produtos.js';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 function HomeScreen() {
-  const [setorSelecionado, setSetorSelecionado] = useState('Açougue');
+  const [setorSelecionado, setSetorSelecionado] = useState('Frios');
   const [mercadoSelecionado, setMercadoSelecionado] = useState('Confiança');
   const [cartCount, setCartCount] = useState(0);
   const [produtosComparacao, setProdutosComparacao] = useState([]);
-
+  
+  
+  const comparacaoRef = useRef(null);
 
   function filtrarProdutos() {
     return produtos.filter(produto => {
       const mercadoMatch = mercadoSelecionado === 'Todos' || produto.mercado === mercadoSelecionado;
       const setorMatch = setorSelecionado === 'Todos' || produto.setores === setorSelecionado;
-
       return mercadoMatch && setorMatch;
     });
   };
@@ -44,7 +45,15 @@ function HomeScreen() {
   const handleCompararPreco = (nomeProduto) => {
     const resultado = compararPreco(nomeProduto);
     setProdutosComparacao(resultado);
-    console.log(resultado)
+    console.log(resultado);
+    
+    
+    if (comparacaoRef.current) {
+      setTimeout(() => {
+        comparacaoRef.current.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+    
   }
 
   const handleAddToCart = (produto) => {
@@ -59,8 +68,6 @@ function HomeScreen() {
     const count = localStorage.getItem('cartCount');
     setCartCount(count ? parseInt(count, 10) : 0);
   }, []);
-
-
 
   return (
     <div>
@@ -98,8 +105,8 @@ function HomeScreen() {
 
       <section className='cabecalho_promocoes'>
         <h1>Promoções do dia!</h1>
-        <div className="barraRolagem">
-          <div className='promocoes-01'>
+      
+          <div className='promocoes-01 barraRolagem'>
             {produtos.map(produto => (
               <div className='promocoes' key={produto.id}>
                 <div className='promocoes_img'>
@@ -116,7 +123,7 @@ function HomeScreen() {
               </div>
             ))}
           </div>
-        </div>
+        
       </section>
 
       <section className='cabecalho_mercados'>
@@ -174,7 +181,7 @@ function HomeScreen() {
       </section>
 
       <section className="secao_compras">
-        <ul className='secao_compras_produtos_lista'>
+        <ul className='secao_compras_produtos_lista barraRolagem'>
           {produtosFiltrados.map(produto => (
             <li key={produto.id} className='secao_compras_produtos_lista_item'>
               <article className='secao_compras_lista_item_produto'>
@@ -207,11 +214,9 @@ function HomeScreen() {
         </ul>
       </section>
 
-
-
-      <section className="secao_compras">
+      <section className="secao_compras" ref={comparacaoRef}>
         <h1>Comparativo de Preços</h1>
-        <ul className='secao_compras_produtos_lista'>
+        <ul className='secao_compras_produtos_lista barraRolagem'>
           {produtosComparacao.map(produto => (
             <li key={produto.id} className='secao_compras_produtos_lista_item'>
               <article className='secao_compras_lista_item_produto'>
@@ -225,14 +230,15 @@ function HomeScreen() {
                 </h3>
 
                 <div className='secao_compras_lista_item_produto_valores'>
+                  <div>
                   <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preco'>
                     R${produto.preco.toFixed(2)}
                   </h4>
+                  </div>
                   <div className='secao_compras_lista_item_produto_imagem--mercado'>
                     <img src={produto.mercadoImagem} alt='Imagem do mercado' />
                   </div>
                 </div>
-
 
                 <div className='secao_compras_lista_item_produto_valores'>
                   <button className='secao_compras_lista_item_produto_adicionar--carrinho' onClick={() => handleAddToCart(produto)}>
@@ -244,9 +250,6 @@ function HomeScreen() {
           ))}
         </ul>
       </section>
-
-      
-
     </div>
   );
 }

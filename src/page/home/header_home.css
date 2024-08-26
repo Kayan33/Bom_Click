@@ -90,7 +90,6 @@ width: var(--tamanhoIcone);
 .promocoes-01{
     display: flex;
     gap: 2rem;
-    margin-bottom: 1rem;
 }
 .promocoes {
     display: flex;

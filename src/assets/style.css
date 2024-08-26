@@ -15,6 +15,7 @@
     --fonteSegundaria: 1rem;
     --fontePequena: 0.5rem;
     --fonteRegular: 400;
+    --fonteMedium: 500;
     --fonteSemiBold: 600;
     --fonteBold: 700;
     --fonteExtraBold: 800;
@@ -33,6 +34,11 @@
 
 }
 
+*{
+
+    font-family: var(--fontePrincipal);
+}
+
 .barraRolagem {
 
     scrollbar-color: var(--azul) #FFF;
@@ -43,7 +49,6 @@
 }
 
 .barraRolagem--amarelo{
-
     scrollbar-color: var(--amarelo) #FFF;
 }
 
