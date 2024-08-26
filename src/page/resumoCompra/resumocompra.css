@@ -94,7 +94,8 @@ main {
             li {
                 border: 2px solid var(--azul);
                 border-radius: var(--bordaRaio);
-                width: 126px;
+                padding: var(--espacamentoMenor);
+                width: max-content;
             }
 
         .barraRolagem {

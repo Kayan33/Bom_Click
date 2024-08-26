@@ -122,7 +122,7 @@ export default function ResumoCompra() {
             <div className="entrega_opcao">
               <label 
               for="lojaProxima">
-              Retirar na Loja:
+              Retirar na loja:
               </label>
               <input type="box" id="lojaProxima" value={"R. Treze de Maio, 2-13 - Centro, Bauru"}/>
             </div>
@@ -132,6 +132,7 @@ export default function ResumoCompra() {
                 id="lojaProxima"
                 onChange={compVisivel}/>
              </div>
+
             {/* Secão componente CEP */}
             {!isChecked && (<div>
               <h2>Agora está visivel</h2>
