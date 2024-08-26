@@ -105,8 +105,8 @@ function HomeScreen() {
 
       <section className='cabecalho_promocoes'>
         <h1>Promoções do dia!</h1>
-        <div className="barraRolagem">
-          <div className='promocoes-01'>
+      
+          <div className='promocoes-01 barraRolagem'>
             {produtos.map(produto => (
               <div className='promocoes' key={produto.id}>
                 <div className='promocoes_img'>
@@ -123,7 +123,7 @@ function HomeScreen() {
               </div>
             ))}
           </div>
-        </div>
+        
       </section>
 
       <section className='cabecalho_mercados'>
@@ -181,7 +181,7 @@ function HomeScreen() {
       </section>
 
       <section className="secao_compras">
-        <ul className='secao_compras_produtos_lista'>
+        <ul className='secao_compras_produtos_lista barraRolagem'>
           {produtosFiltrados.map(produto => (
             <li key={produto.id} className='secao_compras_produtos_lista_item'>
               <article className='secao_compras_lista_item_produto'>
@@ -216,7 +216,7 @@ function HomeScreen() {
 
       <section className="secao_compras" ref={comparacaoRef}>
         <h1>Comparativo de Preços</h1>
-        <ul className='secao_compras_produtos_lista'>
+        <ul className='secao_compras_produtos_lista barraRolagem'>
           {produtosComparacao.map(produto => (
             <li key={produto.id} className='secao_compras_produtos_lista_item'>
               <article className='secao_compras_lista_item_produto'>
