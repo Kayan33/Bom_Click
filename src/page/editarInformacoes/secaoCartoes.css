@@ -76,3 +76,11 @@
     padding: var(--espacamentoPequeno);
     width: max-content;
 }
+
+.secaoCartoes_formulario_container_botao:hover{
+
+    color: var(--branco);
+    background-color: var(--verde);
+    font-weight: var(--fonteMedium);
+    transition: 0.3s;
+}
