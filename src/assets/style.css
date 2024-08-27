@@ -40,13 +40,12 @@
 }
 
 .barraRolagem {
-
     scrollbar-color: var(--azul) #FFF;
     scrollbar-width: thin;
     overflow-x: auto;
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
-    padding: 1rem;
+    padding-bottom: 1rem;
 }
 
 .barraRolagem--amarelo{
