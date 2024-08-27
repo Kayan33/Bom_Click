@@ -127,7 +127,7 @@ function EditarInformacoes() {
 
                             <input type="text" id="user" value="0800 0800 0800 0800" className='secaoCartoes_formulario_container_cartao_numero' />
 
-                            <button aria-label="Excluir cartão"></button>
+                            <button aria-label="Excluir cartão" className='secaoCartoes_formulario_container_cartao_botao'></button>
                             
                         </div>
 
@@ -139,11 +139,11 @@ function EditarInformacoes() {
 
                             <input type="text" id="user" value="0800 0800 0800 0800" className='secaoCartoes_formulario_container_cartao_numero' />
 
-                            <button aria-label="Excluir cartão"></button>
+                            <button aria-label="Excluir cartão" className='secaoCartoes_formulario_container_cartao_botao'></button>
                             
                         </div>
 
-                        <button>Adicionar Cartão</button>
+                        <button className='secaoCartoes_formulario_container_botao'>Adicionar Cartão</button>
 
                     </fieldset>
 
