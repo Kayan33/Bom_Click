@@ -9,8 +9,8 @@ import alho from '../../imagens/alho.png'
 import carne from '../../imagens/carne.png'
 import batata from '../../imagens/batata.png'
 import limao from '../../imagens/limao.png'
-import cartao from '../../imagens/cartao.png'
-import lixeira from '../../imagens/lixeira.png'
+import iconeCartao from '../../imagens/iconeCartao.svg'
+import iconeExcluir from '../../imagens/iconeExcluir.svg'
 import '../../assets/carrossel.css'
 
 
@@ -33,46 +33,46 @@ export default function ResumoCompra() {
     switch (opcaoSelecionada) {
       case 'credito':
         return <div className="img_cartao_escolhido">
-        <img src={cartao} alt="Crédito"/>
+        <img src={iconeCartao} alt="Crédito"/>
         <div className="cartao_escolhido">
           <p>Crédito Visa</p>
           <p>0800 **** **** 0800</p>
         </div>
         <div className="cartao_excluir">
-          <img src={lixeira} alt="Excluir" className="excluir"/>
+          <img src={iconeExcluir} alt="Excluir" className="excluir"/>
         </div>
         </div>;
       case 'debito':
         return <div className="img_cartao_escolhido">
-        <img src={cartao} alt="Débito"/>
+        <img src={iconeCartao} alt="Débito"/>
         <div className="cartao_escolhido">
           <p>Débito Visa</p>
           <p>0800 **** **** 0800</p>
         </div>
         <div className="cartao_excluir">
-          <img src={lixeira} alt="Excluir" className="excluir"/>
+          <img src={iconeExcluir} alt="Excluir" className="excluir"/>
         </div>
         </div>;
       case 'valeAlimentacao':
         return <div className="img_cartao_escolhido">
-        <img src={cartao} alt="Vale Alimentação"/>
+        <img src={iconeCartao} alt="Vale Alimentação"/>
         <div className="cartao_escolhido">
           <p>Alimentação Alelo</p>
           <p>0800 **** **** 0800</p>
         </div>
         <div className="cartao_excluir">
-          <img src={lixeira} alt="Excluir" className="excluir"/>
+          <img src={iconeExcluir} alt="Excluir" className="excluir"/>
         </div>
         </div>;
       case 'valeRefeicao':
         return <div className="img_cartao_escolhido">
-        <img src={cartao} alt="Vale Refeição"/>
+        <img src={iconeCartao} alt="Vale Refeição"/>
         <div className="cartao_escolhido">
           <p>Refeição Verocard</p>
           <p>0800 **** **** 0800</p>
         </div>
         <div className="cartao_excluir">
-          <img src={lixeira} alt="Excluir" className="excluir"/>
+          <img src={iconeExcluir} alt="Excluir" className="excluir"/>
         </div>
         </div>;
       default:
