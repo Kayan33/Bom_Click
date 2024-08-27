@@ -16,6 +16,29 @@ main {
         }
     }
 
+    .melhor_preco {
+        display: flex;
+        color: var(--verde);
+        font-weight: var(--fonteBold);
+        min-width: max-content;
+        align-items: center;
+    }
+
+    .nao_melhor_preco {
+        height: 1rem;
+        color: var(--amarelo);
+        min-width: 12.5rem;
+       
+
+        :nth-child(2) {
+             border: 2px solid var(--amarelo);
+             border-radius: var(--bordaRaio);
+             text-align: center;
+             padding: .1rem;
+        }
+
+    }
+
     .secao_resumo_entrega {
         margin: var(--espacamentoMaior) var(--espacamentoMenor);
         
@@ -186,7 +209,7 @@ main {
                 margin:  var(--espacamentoMenor) 0;
                 color: var(--azul);
                 display: flex;
-                gap: var(--espacamentoMaior);
+                gap: var(--espacamentoMenor);
                 
                 .cartao_escolhido {
                     display: flex;
@@ -210,8 +233,8 @@ main {
                 align-items: flex-end;
 
                 .excluir {
-                width: 0.725rem;
-                height: 0.725rem;
+                width: 60%;
+                height: 40%;
                }
 
                }

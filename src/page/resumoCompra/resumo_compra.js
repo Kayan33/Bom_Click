@@ -102,11 +102,11 @@ export default function ResumoCompra() {
 
         <h3 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo'>Fraldinha Bovina Resfriada KG</h3>
 
-        <div className='secao_compras_lista_item_produto_valores'>
+        <div className='secao_compras_lista_item_produto_valores melhor_preco'>
 
             <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preço'>R$40,00</h4>
 
-            <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--desconto secao_compras_lista_item_produto_titulo--amarelo'>R$40,00</h4>
+            <h4>Melhor Preço!</h4>
 
         </div>
 
@@ -122,11 +122,11 @@ export default function ResumoCompra() {
 
         <h3 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo'>Limao Taiti KG</h3>
 
-        <div className='secao_compras_lista_item_produto_valores'>
+        <div className='secao_compras_lista_item_produto_valores nao_melhor_preco'>
 
             <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preço'>R$10,00</h4>
 
-            <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--desconto secao_compras_lista_item_produto_titulo--amarelo'>R$40,00</h4>
+            <h4>Não é o melhor preço</h4>
 
         </div>
 
