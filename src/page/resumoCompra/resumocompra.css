@@ -2,9 +2,9 @@ main {
     .secao_conferir_produtos {
 
         h2 {
-            color: var(--amarelo);
-            font-weight: var(--fonteBold);
             margin: var(--espacamentoMenor) var(--espacamentoMenor);
+            font-weight: var(--fonteBold);
+            color: var(--amarelo);
         }
 
         .scroll_conferir_produtos {
@@ -21,8 +21,8 @@ main {
         
 
         h3 {
-            color: var(--amarelo);
             font-weight: var(--fonteBold);
+            color: var(--amarelo);
         }
 
 
@@ -45,8 +45,8 @@ main {
                 }
 
                  .checkbox {
-                    width: 20px; 
-                    height: 20px; 
+                    width: 1.25rem; 
+                    height: 1.25rem; 
                     border-radius: 50%; 
                     background-color: transparent;
                     border: 3px solid #007BFF;
@@ -64,8 +64,8 @@ main {
                 width: 100%; 
                 
             .checkbox_2 {
-                width: 20px;
-                height: 20px;
+                width: 1.25rem;
+                height: 1.25rem;
                 border-radius: 50%;
                 background-color: transparent;
                 border: 3px solid #007BFF;
@@ -79,17 +79,17 @@ main {
 
             label {
             font-size: var(--fonteRegular);
-            color: var(--azul);
             font-weight: var(--fonteBold);
+            color: var(--azul);
             min-width: 8rem;
          }
 
             input[type="box"] {
-                font-size: var(--fonteSegundaria);
-                border: none;
-                color: var(--verde);
+                font-size: .7rem;
                 font-weight: var(--fonteExtraBold);
+                color: var(--verde);
                 width: 100%;
+                border: none;
                 text-overflow: ellipsis;
             }
 
@@ -129,12 +129,12 @@ main {
         }
 
         ul {
+            margin: var(--espacamentoMenor) 0;
             display: flex;
             align-items: center;
             gap: var(--espacamentoMenor);
             overflow-y: hidden;
             overflow-x: auto;
-            margin: var(--espacamentoMenor) 0;
 
             li {
 
@@ -144,7 +144,7 @@ main {
                     font-weight: var(--fonteBold);
                     border: 3px solid var(--azul);
                     border-radius: var(--bordaRaio);
-                    padding: var(--espacamentoMenor);
+                    padding: var(--espacamentoPequeno);
                     min-width: max-content;
                 }
 
@@ -171,13 +171,13 @@ main {
             }
             
             .barraRolagem::-webkit-scrollbar-track {
-                background-color: #ffffff; /* Cor de fundo da faixa da barra de rolagem */
+                background-color: #ffffff;
             }
             
             .barraRolagem::-webkit-scrollbar-thumb {
                 background-color: #054AAE;
-                border-radius: 10px; /* Bordas arredondadas para a parte deslizante */
-            }
+                border-radius: 10px;
+           
             }
 
             .img_cartao_escolhido {
@@ -185,7 +185,7 @@ main {
                 margin:  var(--espacamentoMenor) 0;
                 color: var(--azul);
                 display: flex;
-                gap: var(--espacamentoMaior);
+                gap: var(--espacamentoMenor);
                 
                 .cartao_escolhido {
                     display: flex;
@@ -200,7 +200,7 @@ main {
                 }
 
                img {
-                width: 4,35rem;
+                width: 4.35rem;
                 height: 2.7rem;
                }
 
@@ -269,3 +269,4 @@ main {
 
         }
     }
+}
