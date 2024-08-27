@@ -1,11 +1,12 @@
-import '../../assets/cabecalho.css'
-import './secaoEditarInformacoes.css'
+import '../../assets/cabecalho.css';
+import './secaoEditarInformacoes.css';
 import './secaoEditarSenha.css';
-import '../../components/SecaoCep/secaoCep.css'
+import './secaoGerenciamentoConta.css';
+import '../../components/SecaoCep/secaoCep.css';
 import './secaoCartoes.css';
 
 import iconeVoltar from '../../imagens/icon-voltar.svg';
-import SecaoCep from '../../components/SecaoCep/SecaoCep'
+import SecaoCep from '../../components/SecaoCep/SecaoCep';
 
 function EditarInformacoes() {
 
@@ -151,21 +152,21 @@ function EditarInformacoes() {
 
             </section>
 
-            <section>
+            <section className='secaoGerenciamentoConta'>
 
-                <form action="">
+                <form action="" className='secaoGerenciamentoConta_formularioDeletarConta'>
 
-                    <fieldset>
-                        <button>Apagar conta</button>
+                    <fieldset className='secaoGerenciamentoConta_formularioDeletarConta_container'>
+                        <button className='secaoGerenciamentoConta_formularioDeletarConta_container_botao'>Apagar conta</button>
                     </fieldset>
 
                 </form>
 
-                <form action="">
+                <form action="" className='secaoGerenciamentoConta_formularioSairConta'>
 
-                    <fieldset>
+                    <fieldset className='secaoGerenciamentoConta_formularioSairConta_container'>
 
-                        <button></button>
+                        <button className='secaoGerenciamentoConta_formularioSairConta_container_botao'></button>
 
                     </fieldset>
 

@@ -1,0 +1,25 @@
+.secaoGerenciamentoConta{
+    align-items: flex-end;
+    display: flex;
+    margin: var(--espacamentoMaior) var(--espacamentoMenor);
+    justify-content: space-between;
+}
+
+.secaoGerenciamentoConta_formularioDeletarConta_container_botao{
+
+    background-color: transparent;
+    border: var(--borda) var(--vermelho);
+    border-radius: var(--bordaRaio);
+    color: var(--vermelho);
+    padding: var(--espacamentoPequeno);
+}
+
+.secaoGerenciamentoConta_formularioSairConta_container_botao{
+
+    background-color: transparent;
+    background-image: url('../../imagens/iconeLogout.svg');
+    background-repeat: no-repeat;
+    border: none;
+    height: var(--tamanhoIcone);
+    width: var(--tamanhoIcone);
+}
