@@ -85,7 +85,7 @@ main {
          }
 
             input[type="box"] {
-                font-size: var(--fontePequena);
+                font-size: var(--fonteSegundaria);
                 border: none;
                 color: var(--verde);
                 font-weight: var(--fonteExtraBold);
