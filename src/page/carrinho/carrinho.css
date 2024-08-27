@@ -10,7 +10,10 @@
 }
 
 .secao_carrinho_produtos img {
-  width: var(--tamanhoFotoGrande);
+  height: 100%;
+  width: var(--tamanhoFotoPequena);
+  object-fit: cover;
+  object-position: center;
 }
 
 .secao_carrinho_compra{

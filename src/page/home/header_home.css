@@ -67,6 +67,10 @@ width: var(--tamanhoIcone);
     border-radius: 2rem;
 }
 
+.estastisticas-link img{
+margin-right: 0.8rem;
+}
+
 .link-text {
     color: var(--amarelo);
     font-weight: bolder;
