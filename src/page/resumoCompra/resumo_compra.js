@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import SecaoCep from '../../components/SecaoCep/SecaoCep'
 import './resumocompra.css'
 import { Link } from 'react-router-dom'
 import iconeVoltar from '../../imagens/icon-voltar.svg'
@@ -8,16 +9,76 @@ import alho from '../../imagens/alho.png'
 import carne from '../../imagens/carne.png'
 import batata from '../../imagens/batata.png'
 import limao from '../../imagens/limao.png'
+import cartao from '../../imagens/cartao.png'
+import lixeira from '../../imagens/lixeira.png'
 import '../../assets/carrossel.css'
+
 
 
 export default function ResumoCompra() {
 
-  const [isChecked, setIsChecked] = useState(false)
+  const [isChecked, setIsChecked] = useState(true)
+
+  const [opcaoSelecionada, setOpcaoSelecionada] = useState('')
 
   const compVisivel = () => {
     setIsChecked(!isChecked)
   }
+
+  const handleClick = (opcao) => {
+    setOpcaoSelecionada(opcao)
+  }
+
+  const renderImage = () => {
+    switch (opcaoSelecionada) {
+      case 'credito':
+        return <div className="img_cartao_escolhido">
+        <img src={cartao} alt="Crédito"/>
+        <div className="cartao_escolhido">
+          <p>Crédito Visa</p>
+          <p>0800 **** **** 0800</p>
+        </div>
+        <div className="cartao_excluir">
+          <img src={lixeira} alt="Excluir" className="excluir"/>
+        </div>
+        </div>;
+      case 'debito':
+        return <div className="img_cartao_escolhido">
+        <img src={cartao} alt="Débito"/>
+        <div className="cartao_escolhido">
+          <p>Débito Visa</p>
+          <p>0800 **** **** 0800</p>
+        </div>
+        <div className="cartao_excluir">
+          <img src={lixeira} alt="Excluir" className="excluir"/>
+        </div>
+        </div>;
+      case 'valeAlimentacao':
+        return <div className="img_cartao_escolhido">
+        <img src={cartao} alt="Vale Alimentação"/>
+        <div className="cartao_escolhido">
+          <p>Alimentação Alelo</p>
+          <p>0800 **** **** 0800</p>
+        </div>
+        <div className="cartao_excluir">
+          <img src={lixeira} alt="Excluir" className="excluir"/>
+        </div>
+        </div>;
+      case 'valeRefeicao':
+        return <div className="img_cartao_escolhido">
+        <img src={cartao} alt="Vale Refeição"/>
+        <div className="cartao_escolhido">
+          <p>Refeição Verocard</p>
+          <p>0800 **** **** 0800</p>
+        </div>
+        <div className="cartao_excluir">
+          <img src={lixeira} alt="Excluir" className="excluir"/>
+        </div>
+        </div>;
+      default:
+        return null;
+    }
+  };
 
   return(
     <div>
@@ -118,38 +179,47 @@ export default function ResumoCompra() {
         <section className="secao_resumo_entrega">
           <h3>Entrega:</h3>
           <div className="escolha_entrega">
-          
-            <div className="entrega_opcao">
-              <label 
-              for="lojaProxima">
-              Retirar na loja:
-              </label>
-              <input type="box" id="lojaProxima" value={"R. Treze de Maio, 2-13 - Centro, Bauru"}/>
-            </div>
-            <input
+            <div className="entrega_opcao_1">
+              <div className="entrega_local">
+                <label
+                for="lojaProxima">
+                Retirar na loja:
+                </label>
+                <input type="box" id="lojaProxima" value={"R. Treze de Maio, 2-13 - Centro, Bauru"}/>
+              </div>
+              <input
                 type="checkbox"
                 checked={isChecked}
+                className="checkbox"
                 id="lojaProxima"
-                onChange={compVisivel}/>
+                onChange={compVisivel}
+                />
+              </div>
+             <div className="entrega_opcao_2">
+             <label For="entregaCasa">
+               Entrega em casa:
+               </label>
+               <input
+               type="checkbox"
+               checked={!isChecked}
+               className="checkbox_2"
+               id="entregaCasa"
+               onChange={compVisivel}/>
              </div>
-
-            {/* Secão componente CEP */}
-            {!isChecked && (<div>
-              <h2>Agora está visivel</h2>
-            </div>)}
-          
+            </div>
+             {!isChecked && ( <SecaoCep/>)}
         </section>
 
         <section className="secao_forma_pagamento">
           <h3>Forma de pagamento:</h3>
             <ul className="barraRolagem barraRolagem--amarelo">
-              <li>Crédito</li>
-              <li>Débito</li>
-              <li>Vale alimentação</li>
-              <li>Vale refeição</li>
+              <li><button onClick={() => handleClick('credito')}>Crédito</button></li>
+              <li><button onClick={() => handleClick('debito')}>Débito</button></li>
+              <li><button onClick={() => handleClick('valeAlimentacao')}>Vale alimentação</button></li>
+              <li><button onClick={() => handleClick('valeRefeicao')}>Vale refeição</button></li>
             </ul>
-            <div className="pagamento_escolhido">
-            </div>
+              {renderImage()}
+            
           <div className="finalizar_compra">
           <div className="compra_total">
             <p>Total: R$200</p>
@@ -160,7 +230,9 @@ export default function ResumoCompra() {
               <p>Previsão da entrega: 16:00</p>
           </div>
           </div>
-          <button>Finalizar compra</button>
+          <div className="finalizar_compra_botao">
+          <Link to="/finalizado"><button>Finalizar compra</button></Link>
+          </div>
         </section>
       </main>
     </div>
