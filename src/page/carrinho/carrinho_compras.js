@@ -2,11 +2,16 @@ import { useState, useEffect } from 'react';
 import iconeVoltar from '../../imagens/icon-voltar.svg';
 import '../../assets/cabecalho.css';
 import '../carrinho/carrinho.css';
-import fotoCarne from '../../imagens/carne.png';
 import confiancaLogo from '../../imagens/confiancaLogo.png';
-
+import { useNavigate } from 'react-router-dom';
 function CarrinhoCompras() {
   const [cartItems, setCartItems] = useState([]);
+
+  const navigate = useNavigate()
+
+  const handleCheckout = () => {
+    navigate('/resumocompra')
+  }
 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -54,7 +59,7 @@ function CarrinhoCompras() {
             <h3>Economizou: R$0</h3>
           </div>
           <div>
-            <button className='secao_compras_lista_item_produto_adicionar--carrinho'>FINALIZAR COMPRA</button>
+            <button className='secao_compras_lista_item_produto_adicionar--carrinho' onClick={handleCheckout}>FINALIZAR COMPRA</button>
           </div>
         </div>
       </section>
