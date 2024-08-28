@@ -59,17 +59,16 @@ main {
            
             .entrega_opcao_1 {
                 display: flex;
-                justify-content: space-between;
                 align-items: center;
 
                 .entrega_local {
                     display: flex;
-                    width: 90vw;
+                    width: 22rem;
                 }
 
                  .checkbox {
-                    width: 20px; 
-                    height: 20px; 
+                    min-width: 1.25rem; 
+                    min-height: 1.25rem; 
                     border-radius: 50%; 
                     background-color: transparent;
                     border: 3px solid #007BFF;
@@ -82,13 +81,13 @@ main {
 
             .entrega_opcao_2 {
                 display: flex;
-                justify-content: space-between;
                 align-items: center;
                 width: 100%; 
+                gap: var(--espacamentoMenor);
                 
             .checkbox_2 {
-                width: 20px;
-                height: 20px;
+                width: 1.25rem;
+                height: 1.25rem;
                 border-radius: 50%;
                 background-color: transparent;
                 border: 3px solid #007BFF;
