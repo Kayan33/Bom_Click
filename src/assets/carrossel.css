@@ -50,6 +50,8 @@
     justify-content: space-between;
     max-width: 12.5rem;
     padding: var(--espacamentoMenor) var(--espacamentoPequeno);
+    box-shadow: 0px 10px 42px -7px rgba(0,0,0,0.4);
+    border-radius: 1rem;
 }
 
 .secao_compras_lista_item_produto_imagem{
@@ -89,10 +91,10 @@
     color: #ffffff;
     background-color: var(--azul);
     border-radius: var(--bordaRaio);
-    font-family: var(--fontePrincipal);
     font-weight: var(--fonteSemiBold);
     font-size:  var(--fontePequena);
     padding: 0.5rem 0.2rem;
+    border: none;
 }
 
 .secao_compras_lista_item_produto_adicionar--carrinho{

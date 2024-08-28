@@ -195,12 +195,16 @@ function HomeScreen() {
                 </h3>
 
                 <div className='secao_compras_lista_item_produto_valores'>
+                  <div>
                   <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preco'>
                     R${produto.preco.toFixed(2)}
                   </h4>
+                  </div>
+                  <div>
                   <button className='secao_compras_lista_item_produto_comparar--preco' onClick={() => handleCompararPreco(produto.nome)}>
                     Comparar Preço
                   </button>
+                  </div>
                 </div>
 
                 <div className='secao_compras_lista_item_produto_valores'>
