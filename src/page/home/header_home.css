@@ -238,6 +238,19 @@ margin-right: 0.8rem;
     padding: 0.5rem;
 }
 
+.comparativo{
+    font-size: var(--fonteTitulo);
+    font-weight: var(--fonteBold);
+    color: var(--azul);
+}
+
+.comparativo span{
+    font-size: var(--fonteTitulo);
+    font-weight: var(--fonteBold);
+    color: var(--amarelo);
+    
+}
+
 
 
   

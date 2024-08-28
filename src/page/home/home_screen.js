@@ -215,7 +215,11 @@ function HomeScreen() {
       </section>
 
       <section className="secao_compras" ref={comparacaoRef}>
-        <h1>Comparativo de Preços</h1>
+      <h1 className='comparativo'>Comparativo: <span>{
+      produtosComparacao.length > 0 
+      ? produtosComparacao[0].nome.split(' ').slice(0, 2).join(' ') 
+      : ''
+        }</span></h1>
         <ul className='secao_compras_produtos_lista barraRolagem'>
           {produtosComparacao.map(produto => (
             <li key={produto.id} className='secao_compras_produtos_lista_item'>
