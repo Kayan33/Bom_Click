@@ -101,9 +101,9 @@
     border-radius: var(--bordaRaio);
     height: 2.5rem;
     width: 9rem;
-    font-family: var(--fontePrincipal);
     font-weight: var(--fonteSemiBold);
     font-size: var(--fontePequena);
+    border: none;
 }
 
 .secao_compras_lista_item_produto_imagem--mercado {
