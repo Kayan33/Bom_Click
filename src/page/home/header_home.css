@@ -253,7 +253,7 @@ margin-right: 0.8rem;
 
 
 
-@media (max-width: 1024px){
+@media (min-width: 1024px){
     .promocoes-01{
         display: flex;
         gap: 2rem;
