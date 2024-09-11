@@ -93,7 +93,7 @@ margin-right: 0.8rem;
 
 .promocoes-01{
     display: flex;
-    gap: 2rem;
+    gap: 10vw;
 }
 .promocoes {
     display: flex;
@@ -252,5 +252,12 @@ margin-right: 0.8rem;
 }
 
 
+
+@media (max-width: 1024px){
+    .promocoes-01{
+        display: flex;
+        gap: 2rem;
+    }
+}
 
   
