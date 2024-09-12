@@ -81,20 +81,26 @@ export default function Perfil() {
                     <ul className='barraRolagem'>
                         <li>
                             <div className='info_compras'>
+                             <Link to='/dadosPorMercado'>
                             <img src={tausteLogo} alt="Logo Supermecado Tauste" />
-                                    <Link to='/dadosPorMercado'>Veja suas compras</Link> 
+                            <p>Veja suas compras</p>
+                            </Link> 
                             </div>
                         </li>
                         <li>
                             <div className='info_compras'>
+                            <Link to='/dadosPorMercado'>
                             <img src={confiancaLogo} alt="Logo Supermecado Confiança" />
-                                    <Link to='/dadosPorMercado'>Veja suas compras</Link>   
+                            <p>Veja suas compras</p>
+                            </Link>   
                             </div>
                         </li>
                         <li>
                             <div className='info_compras'>
+                            <Link to='/dadosPorMercado'>
                             <img src={panelaoLogo} alt="Logo Supermecado Panelão" />
-                                    <Link to='/dadosPorMercado'>Veja suas compras</Link> 
+                            <p>Veja suas compras</p>
+                            </Link> 
                             </div>
                         </li>
                     </ul>

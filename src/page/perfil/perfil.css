@@ -94,13 +94,14 @@ main {
 
     ul {
         display: flex;
-        align-items: center;
         li {
             width: 100vw;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+
+           
            
             .info_compras {
                 display: flex;
@@ -108,19 +109,18 @@ main {
                 align-items: center;
                 gap: var(--espacamentoPequeno);
                 text-align: center;
-            }
-
-            img {
-                height: var(--tamanhoIconeGrande); 
-            }
-
-            a {
+                a {
                 font-size: var(--fontePequena);
                 color: var(--azul);
                 font-weight: var(--fonteBold);
+
+                img {
+                height: var(--tamanhoIconeGrande); 
             }
         }
     }
+}
+}
 }
 
 
