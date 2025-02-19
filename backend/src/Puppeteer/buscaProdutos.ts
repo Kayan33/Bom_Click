@@ -6,5 +6,5 @@ import puppeteer from "puppeteer";
     const page = await browser.newPage();
 
     
- }
+}
 
