@@ -41,11 +41,9 @@ model Usuario {
 model FormaPagamento {
   id Int @id @default(autoincrement())
   meioPagamento OpcaoPagamento
-  numeroCartao String @unique @db.VarChar(16)
+  numeroCartao String @db.VarChar(16)
   nome String
-  cvv String? @db.VarChar(4)
   dataVencimento String @db.VarChar(7)
-
 
   // Relação entre FormaPagamento e Usuario 
   usuarioId Int
@@ -134,66 +132,3 @@ model Mercado {
 //  no momento da transação.
 
 //  @@unique([tabela, tabela]) Pra evitar duplicações, o prisma gera erro devido a violação de unicidade.
-
-
-// Primeiro Protótipo da Tabela
-
-// model Usuario {
-//   id   Int @id @default(autoincrement())
-//   nome String
-//   cpf String @unique @db.VarChar(14)
-//   dataNascimento DateTime
-//   senha String 
-//   cep String @db.VarChar(8)
-//   logradouro String
-//   bairro String
-//   numero Int
-
-//   formasPagamento FormaPagamento[]
-//   compras Compras[]
-// }
-
-// model FormaPagamento {
-//   id Int @id @default(autoincrement())
-//   meioPagamento OpcaoPagamento
-//   numeroCartao String @db.VarChar(16)
-//   nome String
-//   cvv String? @db.VarChar(4)
-//   dataVencimento String @db.VarChar(7)
-
-//   usuarioId Int @unique
-//   usuario Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
-  
-//   compra  Compras? @relation(fields: [compraId], references: [id], onDelete: Cascade)
-//   compraId Int? @unique
-
-// }
-
-// model Compras {
-//   id Int @id @default(autoincrement())
-
-//   usuarioId Int
-//   usuario Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
-//   formasPagamento FormaPagamento[]
-//   produtos Produtos[]
-// }
-
-// model Produtos {
-//   id Int @id @default(autoincrement())
-//   imagem String
-//   valor Float
-//   quantidade Int
-//   valorEconomizado Float
-
-//   compra Compras[]
-//   mercadoId Int
-//   mercado Mercado @relation(fields: [mercadoId], references: [id])
-// }
-
-// model Mercado {
-//   id Int @id @default(autoincrement())
-//   nome String @db.VarChar(100)
-//   logo String @db.VarChar(100)
-
-//   produtos Produtos[]
-// }
