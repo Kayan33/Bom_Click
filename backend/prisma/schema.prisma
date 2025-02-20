@@ -13,8 +13,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum OpcaoPagamento {
+  DEBITO
+  CREDITO
+  VALE_ALIMENTACAO
+  VALE_REFEICAO
+}
+
 model Usuario {
-  id   Int                   @id @default(autoincrement())
+  id   Int @id @default(autoincrement())
   nome String
   cpf String @unique @db.VarChar(14)
   dataNascimento DateTime
@@ -22,6 +29,151 @@ model Usuario {
   cep String @db.VarChar(8)
   logradouro String
   bairro String
-  numero Int 
+  numero Int
+
+  formasPagamento FormaPagamento[]
+  compras Compras[]
 }
 
+model FormaPagamento {
+  id Int @id @default(autoincrement())
+  meioPagamento OpcaoPagamento
+  numeroCartao String @unique @db.VarChar(16)
+  nome String
+  cvv String? @db.VarChar(4)
+  dataVencimento String @db.VarChar(7)
+
+  usuarioId Int
+  usuario Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  pagamentos PagamentoCompra[] 
+}
+
+model Compras {
+  id Int @id @default(autoincrement())
+
+  usuarioId Int
+  usuario Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  itens ItensCompra[]
+  pagamentos PagamentoCompra[] 
+}
+
+model PagamentoCompra {
+  id              Int @id @default(autoincrement())
+  compraId        Int
+  formaPagamentoId Int
+
+  compra         Compras        @relation(fields: [compraId], references: [id], onDelete: Cascade)
+  formaPagamento FormaPagamento @relation(fields: [formaPagamentoId], references: [id], onDelete: Cascade)
+
+  @@unique([compraId, formaPagamentoId]) 
+}
+
+model ItensCompra {
+  id         Int @id @default(autoincrement())
+  compraId   Int
+  produtoId  Int
+  quantidade Int
+
+  compra     Compras  @relation(fields: [compraId], references: [id], onDelete: Cascade)
+  produto    Produto @relation(fields: [produtoId], references: [id], onDelete: Cascade)
+
+
+  @@unique([compraId, produtoId]) 
+}
+
+model Produto {
+  id Int @id @default(autoincrement())
+  imagem String
+  valor Float
+  quantidade Int
+  valorEconomizado Float
+
+  mercadoId Int
+  mercado Mercado @relation(fields: [mercadoId], references: [id])
+
+  itens ItensCompra[]
+}
+
+
+model Mercado {
+  id Int @id @default(autoincrement())
+  nome String
+  logo String
+
+  produto Produto[]
+}
+
+// tabela intermediária PagamentoCompra adicionada por causa da tabela compras e forma pagamento que no caso seria muitos pra muitos.
+// tabela intermediária ItensCompra Adicionada por causa da tabela Compra e Produtos que no caso seria muitos pra muitos.
+
+// enum limita as opções de pagamento, evitando erros de digitação ou dados inválidos.
+
+
+// cvv não pode ser armazenado, empresas de gateways ou outras que funcionam -
+// como intermediário de pagamento não permitem, ele deve ser coletado apenas
+// no momento da transação.
+
+//  @@unique([tabela, tabela]) Pra evitar duplicações, o prisma gera erro devido a violação de unicidade.
+
+
+// model Usuario {
+//   id   Int @id @default(autoincrement())
+//   nome String
+//   cpf String @unique @db.VarChar(14)
+//   dataNascimento DateTime
+//   senha String 
+//   cep String @db.VarChar(8)
+//   logradouro String
+//   bairro String
+//   numero Int
+
+//   formasPagamento FormaPagamento[]
+//   compras Compras[]
+// }
+
+// model FormaPagamento {
+//   id Int @id @default(autoincrement())
+//   meioPagamento OpcaoPagamento
+//   numeroCartao String @db.VarChar(16)
+//   nome String
+//   cvv String? @db.VarChar(4)
+//   dataVencimento String @db.VarChar(7)
+
+//   usuarioId Int @unique
+//   usuario Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  
+//   compra  Compras? @relation(fields: [compraId], references: [id], onDelete: Cascade)
+//   compraId Int? @unique
+
+// }
+
+// model Compras {
+//   id Int @id @default(autoincrement())
+
+//   usuarioId Int
+//   usuario Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+//   formasPagamento FormaPagamento[]
+//   produtos Produtos[]
+// }
+
+// model Produtos {
+//   id Int @id @default(autoincrement())
+//   imagem String
+//   valor Float
+//   quantidade Int
+//   valorEconomizado Float
+
+//   compra Compras[]
+//   mercadoId Int
+//   mercado Mercado @relation(fields: [mercadoId], references: [id])
+// }
+
+// model Mercado {
+//   id Int @id @default(autoincrement())
+//   nome String @db.VarChar(100)
+//   logo String @db.VarChar(100)
+
+//   produtos Produtos[]
+// }
