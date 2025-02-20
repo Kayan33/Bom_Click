@@ -13,8 +13,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum OpcaoPagamento {
+  DEBITO
+  CREDITO
+  VALE_ALIMENTACAO
+  VALE_REFEICAO
+}
+
 model Usuario {
-  id   Int                   @id @default(autoincrement())
+  id   Int @id @default(autoincrement())
   nome String
   cpf String @unique @db.VarChar(14)
   dataNascimento DateTime
@@ -22,6 +29,106 @@ model Usuario {
   cep String @db.VarChar(8)
   logradouro String
   bairro String
-  numero Int 
+  numero Int
+
+  // Relação entre Usuario e formasPagamento 
+  formasPagamento FormaPagamento[]
+
+  // Relação entre Usuario e Compras
+  compras Compras[]
 }
 
+model FormaPagamento {
+  id Int @id @default(autoincrement())
+  meioPagamento OpcaoPagamento
+  numeroCartao String @db.VarChar(16)
+  nome String
+  dataVencimento String @db.VarChar(7)
+
+  // Relação entre FormaPagamento e Usuario 
+  usuarioId Int
+  usuario Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  
+  // Relação entre FormaPagamento e pagamentos
+  pagamentos PagamentoCompra[] 
+}
+
+model Compras {
+  id Int @id @default(autoincrement())
+
+  // Relação entre Compras e Usuario 
+  usuarioId Int
+  usuario Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  // Relação Intermediária de muitos para muitos de Compras e Produtos
+  itens ItensCompra[]
+
+  // Relação entre Compras e PagamentosCompra
+  pagamentos PagamentoCompra[] 
+}
+
+model PagamentoCompra {
+  id              Int @id @default(autoincrement())
+
+  // Relação entre PagamentoCompra e Compra
+  compraId        Int
+  compra         Compras        @relation(fields: [compraId], references: [id], onDelete: Cascade)
+
+  // Relação entre PagamentoCompra e FormaPagamento  
+  formaPagamentoId Int
+  formaPagamento FormaPagamento @relation(fields: [formaPagamentoId], references: [id], onDelete: Cascade)
+
+  @@unique([compraId, formaPagamentoId]) 
+}
+
+model ItensCompra {
+  id         Int @id @default(autoincrement())
+  quantidade Int
+
+  // Relação entre ItensCompra e Compra
+  compraId   Int
+  compra     Compras  @relation(fields: [compraId], references: [id], onDelete: Cascade)
+  
+  // Relação entre ItensCompra e Produto
+  produtoId  Int
+  produto    Produto @relation(fields: [produtoId], references: [id], onDelete: Cascade)
+
+  @@unique([compraId, produtoId]) 
+}
+
+model Produto {
+  id Int @id @default(autoincrement())
+  imagem String
+  valor Float
+  quantidade Int
+  valorEconomizado Float
+  
+  // Relação entre Produto e Mercado
+  mercadoId Int
+  mercado Mercado @relation(fields: [mercadoId], references: [id])
+  
+  // Relação Intermediária de muitos para muitos de Produtos e Compras
+  itens ItensCompra[]
+}
+
+
+model Mercado {
+  id Int @id @default(autoincrement())
+  nome String
+  logo String
+  
+  // Relação entre Mercado e Produto
+  produto Produto[]
+}
+
+// tabela intermediária PagamentoCompra adicionada por causa da tabela compras e forma pagamento que no caso seria muitos pra muitos.
+// tabela intermediária ItensCompra Adicionada por causa da tabela Compra e Produtos que no caso seria muitos pra muitos.
+
+// enum limita as opções de pagamento, evitando erros de digitação ou dados inválidos.
+
+
+//  cvv não pode ser armazenado, empresas de gateways ou outras que funcionam -
+//  como intermediário de pagamento não permitem, ele deve ser coletado apenas
+//  no momento da transação.
+
+//  @@unique([tabela, tabela]) Pra evitar duplicações, o prisma gera erro devido a violação de unicidade.
