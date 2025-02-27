@@ -11,30 +11,50 @@ class Puppeteer {
         const navegador = await puppeteer.launch({ headless: false, devtools: true });
         const pagina = await navegador.newPage();
 
-        const produto = 'Frango a passarinho';
-        console.log(produto.split(" "));
-
+        let produto = 'Frango À Passarinho Seara Congelado Pacote 1000g';
+        let produtoArray = produto.split(" ");
+        
         await pagina.goto(`https://www.confianca.com.br/bauru/home`)
 
         await pagina.setViewport({ width: 1080, height: 1024 });
 
-        for(let contador = 0; contador < produto.length; contador++){
+        let produtoConcatenado = ""
 
-            produto[contador--] + produto[contador]
+        for(let contador = 0; contador < produtoArray.length; contador++){
+
+            produtoConcatenado += `${produtoArray[contador]} `
+
+            console.log(produtoConcatenado)
+
+            await pagina.locator('div.search-header > form > input').fill(produtoConcatenado);
+    
+            const informacoesProduto = await pagina.locator('.auto-suggest-item__info').waitHandle();
+    
+            const produtoSite = String(await informacoesProduto.evaluate(el => el.textContent)); 
+    
+            const similaridade = stringSimilarity.compareTwoStrings(produtoConcatenado, produtoSite);
+
+            console.log("Similaridade:", similaridade);
+
+            console.log(similaridade >= 0.60)
+            
+            if(similaridade >= 0.60){
+
+                await pagina.locator('.auto-suggest-item-container > a').click();
+            
+                const imagemContainer = await pagina.locator('.Img__Wrapper img').waitHandle();
+                const imagemProduto = await imagemContainer.evaluate((img => img.src));
+                console.log(imagemProduto)
+                
+                const valorContainer = await pagina.locator('.product-info__price false').waitHandle();
+                const valorProduto = await valorContainer.evaluate((el => el.textContent));
+                console.log(valorProduto)
+                break
+
+            }
         }
 
-        await pagina.locator('div.search-header > form > input').fill(produto);
-
-        const caixaSugestao = await pagina.locator('.auto-suggest-item-container').waitHandle();
-
-        const informacoesProduto = await pagina.locator('.auto-suggest-item__info').waitHandle();
-
-        const nomeProduto = String(await informacoesProduto.evaluate(el => el.textContent)); 
-
-        const similaridade = stringSimilarity.compareTwoStrings(produto, nomeProduto);
-        console.log("Similaridade:", similaridade);
-
-
+  
         // // Wait and click on first result.
         // await page.locator('.devsite-result-item-link').click();
 
