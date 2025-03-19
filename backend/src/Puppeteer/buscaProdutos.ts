@@ -5,72 +5,48 @@ import stringSimilarity from "string-similarity";
 class Puppeteer {
 
     async buscaProdutosConfiança(req: Request, res: Response) {
-
         console.time("Execução");
-        //const { produto } = req.body;
         const navegador = await puppeteer.launch({ headless: false, devtools: true });
         const pagina = await navegador.newPage();
 
-        let produto = 'Frango À Passarinho Seara Congelado Pacote 1000g';
-        let produtoArray = produto.split(" ");
-        
-        await pagina.goto(`https://www.confianca.com.br/bauru/home`)
-
-        await pagina.setViewport({ width: 1080, height: 1024 });
-
-        let produtoConcatenado = ""
-
-        for(let contador = 0; contador < produtoArray.length; contador++){
-
-            produtoConcatenado += `${produtoArray[contador]} `
-
-            console.log(produtoConcatenado)
-
-            await pagina.locator('div.search-header > form > input').fill(produtoConcatenado);
-    
-            const informacoesProduto = await pagina.locator('.auto-suggest-item__info').waitHandle();
-    
-            const produtoSite = String(await informacoesProduto.evaluate(el => el.textContent)); 
-    
-            const similaridade = stringSimilarity.compareTwoStrings(produtoConcatenado, produtoSite);
-
-            console.log("Similaridade:", similaridade);
-
-            console.log(similaridade >= 0.60)
-            
-            if(similaridade >= 0.60){
-
-                await pagina.locator('.auto-suggest-item-container > a').click();
-            
-                const imagemContainer = await pagina.locator('.Img__Wrapper img').waitHandle();
-                const imagemProduto = await imagemContainer.evaluate((img => img.src));
-                console.log(imagemProduto)
-                
-                const valorContainer = await pagina.locator('.product-info__price false').waitHandle();
-                const valorProduto = await valorContainer.evaluate((el => el.textContent));
-                console.log(valorProduto)
-                break
-
-            }
+        async function buscaDados() {
+            console.log("Acessou");
+            const informacoesProduto = await pagina.waitForSelector('div.auto-suggest-item__info');
+            const produtoSite = await informacoesProduto!.evaluate(el => el.textContent);
+            return String(produtoSite);
         }
 
-  
-        // // Wait and click on first result.
-        // await page.locator('.devsite-result-item-link').click();
+        let produto = 'Costelão Tauste Temperado Bandeja 1500g';
+        let produtoArray = produto.split(" ");
+        await pagina.goto(`https://www.confianca.com.br/bauru/home`);
+        await pagina.setViewport({ width: 1080, height: 1024 });
+        let produtoConcatenado = "";
 
-        // // Locate the full title with a unique string.
-        // const textSelector = await page
-        //     .locator('text/Customize and automate')
-        //     .waitHandle();
-        // const fullTitle = await textSelector?.evaluate(el => el.textContent);
+        for (let contador = 0; contador < produtoArray.length; contador++) {
+            produtoConcatenado += `${produtoArray[contador]} `;
+            console.log("TENTATIVA:", produtoConcatenado);
+            await pagina.locator('div.search-header > form > input').fill(produtoConcatenado);
 
-        // // Print the full title.
-        // console.log('The title of this blog post is "%s".', fullTitle);
+            //pausa de 2 segundos
+            await new Promise(resolve => setTimeout(resolve, 2000));
 
-        // await browser.close();
+            const produtoSite = await buscaDados();
+            console.log("ENCONTRADO_SITE:", produtoSite);
+            const similaridade = stringSimilarity.compareTwoStrings(produtoConcatenado, produtoSite);
+            console.log("Similaridade:", similaridade);
+            console.log(similaridade >= 0.60);
 
-        // console.timeEnd("Execução");
-
+            if (similaridade >= 0.60) {
+                const resultado = await pagina.waitForSelector('div.auto-suggest-item-container > a', { visible: true });
+                resultado!.click();
+                const imagemContainer = await pagina.locator('.Img__Wrapper img').waitHandle();
+                const imagemProduto = await imagemContainer.evaluate((img => img.src));
+                console.log(imagemProduto);
+                const valorContainer = await pagina.locator('.product-info__price false').waitHandle();
+                const valorProduto = await valorContainer.evaluate((el => el.textContent));
+                console.log(valorProduto);
+            }
+        }
     }
 
     async buscaProdutosTauste(req: Request, res: Response) {
@@ -111,4 +87,3 @@ class Puppeteer {
 }
 
 export default Puppeteer;
-
