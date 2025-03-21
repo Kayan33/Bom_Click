@@ -1,5 +1,7 @@
 .secao_compras{
 
+    display: grid;  
+    gap: 8px;
     margin: 0 var(--espacamentoMenor) var(--espacamentoMaior);
 }
 
@@ -30,8 +32,7 @@
 .secao_compras_produtos_lista{
 
     display: flex;
-    gap: var(--espacamentoMenor);
-    
+    gap: var(--espacamentoMenor);    
 }
 
 .secao_compras_produtos_lista_item{

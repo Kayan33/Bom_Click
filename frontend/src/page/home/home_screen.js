@@ -16,8 +16,8 @@ function HomeScreen() {
   const [mercadoSelecionado, setMercadoSelecionado] = useState('Confiança');
   const [cartCount, setCartCount] = useState(0);
   const [produtosComparacao, setProdutosComparacao] = useState([]);
-  
-  
+
+
   const comparacaoRef = useRef(null);
 
   function filtrarProdutos() {
@@ -46,14 +46,14 @@ function HomeScreen() {
     const resultado = compararPreco(nomeProduto);
     setProdutosComparacao(resultado);
     console.log(resultado);
-    
-    
+
+
     if (comparacaoRef.current) {
       setTimeout(() => {
         comparacaoRef.current.scrollIntoView({ behavior: 'smooth' });
       }, 100);
     }
-    
+
   }
 
   const handleAddToCart = (produto) => {
@@ -105,25 +105,25 @@ function HomeScreen() {
 
       <section className='cabecalho_promocoes'>
         <h1>Promoções do dia!</h1>
-      
-          <div className='promocoes-01 barraRolagem'>
-            {produtos.map(produto => (
-              <div className='promocoes' key={produto.id}>
-                <div className='promocoes_img'>
-                  <img src={produto.imagem} alt={produto.nome} />
-                </div>
-                <div className='promocoes_produtos'>
-                  <h3>{produto.nome}</h3>
-                  <span>R${produto.preco.toFixed(2)}</span>
-                  <div>
-                    <img src={produto.mercadoImagem} alt={produto.mercado} className='imagem-mercado' />
-                    <button onClick={() => handleAddToCart(produto)}>Adicionar <br /> a compra</button>
-                  </div>
+
+        <div className='promocoes-01 barraRolagem'>
+          {produtos.map(produto => (
+            <div className='promocoes' key={produto.id}>
+              <div className='promocoes_img'>
+                <img src={produto.imagem} alt={produto.nome} />
+              </div>
+              <div className='promocoes_produtos'>
+                <h3>{produto.nome}</h3>
+                <span>R${produto.preco.toFixed(2)}</span>
+                <div>
+                  <img src={produto.mercadoImagem} alt={produto.mercado} className='imagem-mercado' />
+                  <button onClick={() => handleAddToCart(produto)}>Adicionar <br /> a compra</button>
                 </div>
               </div>
-            ))}
-          </div>
-        
+            </div>
+          ))}
+        </div>
+
       </section>
 
       <section className='cabecalho_mercados'>
@@ -196,14 +196,14 @@ function HomeScreen() {
 
                 <div className='secao_compras_lista_item_produto_valores'>
                   <div>
-                  <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preco'>
-                    R${produto.preco.toFixed(2)}
-                  </h4>
+                    <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preco'>
+                      R${produto.preco.toFixed(2)}
+                    </h4>
                   </div>
                   <div>
-                  <button className='secao_compras_lista_item_produto_comparar--preco' onClick={() => handleCompararPreco(produto.nome)}>
-                    Comparar Preço
-                  </button>
+                    <button className='secao_compras_lista_item_produto_comparar--preco' onClick={() => handleCompararPreco(produto.nome)}>
+                      Comparar Preço
+                    </button>
                   </div>
                 </div>
 
@@ -219,14 +219,17 @@ function HomeScreen() {
       </section>
 
       <section className="secao_compras" ref={comparacaoRef}>
-      <h1 className='comparativo'>Comparativo: <span>{
-      produtosComparacao.length > 0 
-      ? produtosComparacao[0].nome.split(' ').slice(0, 2).join(' ') 
-      : ''
-        }</span></h1>
+        <h2 className='comparativo'>Comparativo: <span>{
+          produtosComparacao.length > 0
+            ? produtosComparacao[0].nome.split(' ').slice(0, 2).join(' ')
+            : ''
+        }</span></h2>
         <ul className='secao_compras_produtos_lista barraRolagem'>
           {produtosComparacao.map(produto => (
+
             <li key={produto.id} className='secao_compras_produtos_lista_item'>
+              {/* <h3>logo mercado</h3> */}
+
               <article className='secao_compras_lista_item_produto'>
                 <img
                   src={produto.imagem}
@@ -239,9 +242,9 @@ function HomeScreen() {
 
                 <div className='secao_compras_lista_item_produto_valores'>
                   <div>
-                  <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preco'>
-                    R${produto.preco.toFixed(2)}
-                  </h4>
+                    <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preco'>
+                      R${produto.preco.toFixed(2)}
+                    </h4>
                   </div>
                   <div className='secao_compras_lista_item_produto_imagem--mercado'>
                     <img src={produto.mercadoImagem} alt='Imagem do mercado' />

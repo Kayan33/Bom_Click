@@ -239,9 +239,12 @@ margin-right: 0.8rem;
 }
 
 .comparativo{
+
+    display: flex;
     font-size: var(--fonteTitulo);
     font-weight: var(--fonteBold);
     color: var(--azul);
+    margin: 0 0 var(--espacamentoMaior) 0;
 }
 
 .comparativo span{
