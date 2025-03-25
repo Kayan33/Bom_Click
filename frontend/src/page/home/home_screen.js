@@ -194,24 +194,17 @@ function HomeScreen() {
                   {produto.nome}
                 </h3>
 
-                <div className='secao_compras_lista_item_produto_valores'>
-                  <div>
-                    <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preco'>
-                      R${produto.preco.toFixed(2)}
-                    </h4>
-                  </div>
-                  <div>
-                    <button className='secao_compras_lista_item_produto_comparar--preco' onClick={() => handleCompararPreco(produto.nome)}>
-                      Comparar Preço
-                    </button>
-                  </div>
-                </div>
+                <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preco '>
+                  R${produto.preco.toFixed(2)}
+                </h4>
 
-                <div className='secao_compras_lista_item_produto_valores'>
-                  <button className='secao_compras_lista_item_produto_adicionar--carrinho' onClick={() => handleAddToCart(produto)}>
-                    ADICIONAR A COMPRA
-                  </button>
-                </div>
+                <button className="secao_compras_lista_item_produto_comparar" onClick={() => handleCompararPreco(produto.nome)}>
+                  Comparar Preço
+                </button>
+
+                <button className='secao_compras_lista_item_produto_adicionar--carrinho' onClick={() => handleAddToCart(produto)}>
+                  ADICIONAR A COMPRA
+                </button>
               </article>
             </li>
           ))}
@@ -228,7 +221,9 @@ function HomeScreen() {
           {produtosComparacao.map(produto => (
 
             <li key={produto.id} className='secao_compras_produtos_lista_item'>
-              {/* <h3>logo mercado</h3> */}
+              <h3>
+                <img src={produto.mercadoImagem} alt='Imagem do mercado' className='secao_compras_lista_item_produto_imagem--mercado' />
+              </h3>
 
               <article className='secao_compras_lista_item_produto'>
                 <img
@@ -240,22 +235,20 @@ function HomeScreen() {
                   {produto.nome}
                 </h3>
 
-                <div className='secao_compras_lista_item_produto_valores'>
-                  <div>
-                    <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preco'>
-                      R${produto.preco.toFixed(2)}
-                    </h4>
-                  </div>
-                  <div className='secao_compras_lista_item_produto_imagem--mercado'>
-                    <img src={produto.mercadoImagem} alt='Imagem do mercado' />
-                  </div>
-                </div>
+                <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preco '>
+                  R${produto.preco.toFixed(2)}
+                </h4>
 
-                <div className='secao_compras_lista_item_produto_valores'>
-                  <button className='secao_compras_lista_item_produto_adicionar--carrinho' onClick={() => handleAddToCart(produto)}>
-                    ADICIONAR A COMPRA
-                  </button>
-                </div>
+                <button className="secao_compras_lista_item_produto_comparar secao_compras_lista_item_produto_comparar--naoEncontrado" onClick={() => handleCompararPreco(produto.nome)}>
+                  Produto incorreto?
+                </button>
+
+                <button className='secao_compras_lista_item_produto_adicionar--carrinho' onClick={() => handleAddToCart(produto)}>
+                  ADICIONAR A COMPRA
+                </button>
+
+                {/* MESSI */}
+
               </article>
             </li>
           ))}

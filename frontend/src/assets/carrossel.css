@@ -1,116 +1,141 @@
-.secao_compras{
+.secao_compras {
 
-    display: grid;  
+    display: grid;
     gap: 8px;
     margin: 0 var(--espacamentoMenor) var(--espacamentoMaior);
 }
 
-.secao_compras_titulo{
+.secao_compras_titulo {
 
     color: var(--amarelo);
     font-size: var(--fonteTitulo);
     font-weight: var(--fonteBold);
 }
 
-.secao_compras_titulo--verde{
+.secao_compras_titulo--verde {
 
     color: var(--verde);
 }
 
-.secao_compras_titulo--comMargem{
+.secao_compras_titulo--comMargem {
 
     margin: var(--espacamentoMaior) 0 0 0;
 }
 
-.secao_compras_produtos{
+.secao_compras_produtos {
 
     display: flex;
     flex-direction: column;
     gap: var(--espacamentoMaior);
 }
 
-.secao_compras_produtos_lista{
+.secao_compras_produtos_lista {
 
     display: flex;
-    gap: var(--espacamentoMenor);    
+    gap: var(--espacamentoMenor);
 }
 
-.secao_compras_produtos_lista_item{
-
-    display: flex;
-    flex-direction: row;
+.secao_compras_produtos_lista_item {
+    display: grid;
+    gap: var(--espacamentoMenor);
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    justify-items: center;
     scroll-snap-align: center;
-   
 }
 
-.secao_compras_lista_item_produto{
-    align-items: center;
-    display: flex;
-    flex-direction: column;
+.secao_compras_lista_item_produto {
+
+    display: grid;
     gap: var(--espacamentoMaior);
-    justify-content: space-between;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
     max-width: 12.5rem;
     padding: var(--espacamentoMenor) var(--espacamentoPequeno);
-    box-shadow: 0px 10px 42px -7px rgba(0,0,0,0.4);
+    box-shadow: 0px 10px 42px -7px rgba(0, 0, 0, 0.4);
     border-radius: 1rem;
 }
 
-.secao_compras_lista_item_produto_imagem{
+.secao_compras_lista_item_produto_imagem {
 
-    width: var(--tamanhoFotoGrande);
+    grid-column: 1 / 3;
     height: var(--tamanhoFotoGrande);
+    margin: 0 auto;
+    width: var(--tamanhoFotoGrande);
 }
 
-.secao_compras_lista_item_produto_valores{
+.secao_compras_lista_item_produto_valores {
 
-    align-items: center;
-    display: flex;
-    gap:var(--espacamentoMenor);
+    gap: var(--espacamentoMenor);
+    grid-row-start: 4;
     justify-content: space-between;
     width: 100%;
 }
 
-.secao_compras_lista_item_produto_titulo{
+.secao_compras_lista_item_produto_titulo {
 
     align-self: flex-start;
-    color:  var(--verde);
-    font-size:  var(--fonteSegundaria);
+    color: var(--verde);
+    font-size: var(--fonteSegundaria);
     font-weight: var(--fonteBold);
+    grid-column: 1 / 3;
 }
 
-.secao_compras_lista_item_produto_titulo--preço{
+.secao_compras_lista_item_produto_titulo--preco {
+
+    align-self: center;
+    grid-column: 1 / 2;
+    grid-row-start: 3;
+    justify-self: start;
+}
+
+.secao_compras_lista_item_produto_titulo--azul {
 
     color: var(--azul);
 }
 
-.secao_compras_lista_item_produto_titulo--amarelo{
+.secao_compras_lista_item_produto_titulo--amarelo {
 
     color: var(--amarelo);
 }
 
-.secao_compras_lista_item_produto_comparar--preco{
+.secao_compras_lista_item_produto_comparar {
+    align-self: center;
     color: #ffffff;
     background-color: var(--azul);
     border-radius: var(--bordaRaio);
     font-weight: var(--fonteSemiBold);
-    font-size:  var(--fontePequena);
+    font-size: var(--fontePequena);
+    justify-self: end;
+    grid-row-start: 3;
+    grid-column: 2 / 3;
     padding: 0.5rem 0.2rem;
     border: none;
+    width: max-content;
 }
 
-.secao_compras_lista_item_produto_adicionar--carrinho{
+.secao_compras_lista_item_produto_comparar--naoEncontrado {
+
+    background-color: var(--vermelho);
+}
+
+.secao_compras_lista_item_produto_adicionar--carrinho {
+    
     color: #ffffff;
     background-color: var(--verde);
     border-radius: var(--bordaRaio);
-    height: 2.5rem;
-    width: 9rem;
     font-weight: var(--fonteSemiBold);
     font-size: var(--fontePequena);
+    grid-column: 1 / 3;
+    justify-self: center;
+    text-align: center;
+    height: 2.5rem;
+    width: 9rem;
     border: none;
 }
 
 .secao_compras_lista_item_produto_imagem--mercado {
-    height:90%;
+    height: var(--tamanhoIconeGrande);
     width: 100%;
 }
 
@@ -118,15 +143,14 @@
     height: 100%;
     width: var(--tamanhoFotoPequena);
     object-fit: cover;
-    object-position: center; 
+    object-position: center;
 }
 
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
 
-    .secao_compras_produtos_lista{
-        
+    .secao_compras_produtos_lista {
+
         gap: var(--espacamentoMaior);
     }
 }
-
