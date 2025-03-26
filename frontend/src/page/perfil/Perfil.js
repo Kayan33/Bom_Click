@@ -20,184 +20,184 @@ export default function Perfil() {
                     <img src={iconeVoltar} alt="Voltar para Página Inicial" />
                 </Link>
                 <h1 className='cabecalho_titulo'>Perfil</h1>
-            </header>   
+            </header>
             <main>
                 <section className='secao_perfil'>
                     <Link to="/editarInformacoes">
-                        <img src={perfil} alt="icone de perfil" id='icon-page-perfil'/> 
-                        <p>Editar Informações</p> 
+                        <img src={perfil} alt="icone de perfil" id='icon-page-perfil' />
+                        <p>Editar Informações</p>
                     </Link>
                     <h2>Olá Danrley!</h2>
                 </section>
                 <section className='perfil_secao_estatisticas'>
                     <h3>Suas estatísticas!</h3>
                     <ul className='barraRolagem barraRolagem--amarelo'>
-                            <li>
-                                <div className='scroll_item'>
-                                    <p>Valores economizados</p>
-                                    <p>R$ 40,50</p>
-                                </div>
-                            </li>
-                            <li>
-                                <div className='scroll_item'>
-                                    <p>Valores economizados</p>
-                                    <p>R$ 40,50</p>
-                                </div>
-                            </li>
-                            <li>
-                                <div className='scroll_item'>
-                                    <p>Valores economizados</p>
-                                    <p>R$ 40,50</p>
-                                </div>
-                            </li>
-                            <li>
-                                <div className='scroll_item'>
-                                    <p>Valores economizados</p>
-                                    <p>R$ 40,50</p>
-                                </div>
-                            </li>
-                            <li>
-                                <div className='scroll_item'>
-                                    <p>Valores economizados</p>
-                                    <p>R$ 40,50</p>
-                                </div>
-                            </li>
-                            <li>
-                                <div className='scroll_item'>
-                                    <p>Valores economizados</p>
-                                    <p>R$ 40,50</p>
-                                </div>
-                            </li>
-                            <li>
-                                <div className='scroll_item'>
-                                    <p>Valores economizados</p>
-                                    <p>R$ 40,50</p>
-                                </div>
-                            </li>
-                        </ul>
+                        <li>
+                            <div className='scroll_item'>
+                                <p>Valores economizados</p>
+                                <p>R$ 40,50</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div className='scroll_item'>
+                                <p>Valores economizados</p>
+                                <p>R$ 40,50</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div className='scroll_item'>
+                                <p>Valores economizados</p>
+                                <p>R$ 40,50</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div className='scroll_item'>
+                                <p>Valores economizados</p>
+                                <p>R$ 40,50</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div className='scroll_item'>
+                                <p>Valores economizados</p>
+                                <p>R$ 40,50</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div className='scroll_item'>
+                                <p>Valores economizados</p>
+                                <p>R$ 40,50</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div className='scroll_item'>
+                                <p>Valores economizados</p>
+                                <p>R$ 40,50</p>
+                            </div>
+                        </li>
+                    </ul>
                 </section>
                 <section className='secao_info_mercados'>
                     <h3>Informações por mercados</h3>
                     <ul className='barraRolagem'>
                         <li>
                             <div className='info_compras'>
-                             <Link to='/dadosPorMercado'>
-                            <img src={tausteLogo} alt="Logo Supermecado Tauste" />
-                            <p>Veja suas compras</p>
-                            </Link> 
+                                <Link to='/dadosPorMercado'>
+                                    <img src={tausteLogo} alt="Logo Supermecado Tauste" />
+                                    <p>Veja suas compras</p>
+                                </Link>
                             </div>
                         </li>
                         <li>
                             <div className='info_compras'>
-                            <Link to='/dadosPorMercado'>
-                            <img src={confiancaLogo} alt="Logo Supermecado Confiança" />
-                            <p>Veja suas compras</p>
-                            </Link>   
+                                <Link to='/dadosPorMercado'>
+                                    <img src={confiancaLogo} alt="Logo Supermecado Confiança" />
+                                    <p>Veja suas compras</p>
+                                </Link>
                             </div>
                         </li>
                         <li>
                             <div className='info_compras'>
-                            <Link to='/dadosPorMercado'>
-                            <img src={panelaoLogo} alt="Logo Supermecado Panelão" />
-                            <p>Veja suas compras</p>
-                            </Link> 
+                                <Link to='/dadosPorMercado'>
+                                    <img src={panelaoLogo} alt="Logo Supermecado Panelão" />
+                                    <p>Veja suas compras</p>
+                                </Link>
                             </div>
                         </li>
                     </ul>
                 </section>
                 <section className='secao_compras'>
-                
 
-                <section className='secao_compras_produtos'>
 
-                    <h3 className='secao_compras_titulo'> Últimas Compras</h3>
+                    <section className='secao_compras_produtos'>
 
-                    <ul className='secao_compras_produtos_lista barraRolagem'>
+                        <h3 className='secao_compras_titulo'> Últimas Compras</h3>
 
-                        <li className='secao_compras_produtos_lista_item'>
+                        <ul className='secao_compras_produtos_lista barraRolagem'>
 
-                            <article className='secao_compras_lista_item_produto'>
+                            <li className='secao_compras_produtos_lista_item'>
 
-                                <img src={fotoCarne} alt="Fraldinha" className='secao_compras_lista_item_produto_imagem' />
+                                <article className='secao_compras_lista_item_produto'>
 
-                                <h3 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo'>Fraldinha Bovina Resfriada KG</h3>
+                                    <img src={fotoCarne} alt="Fraldinha" className='secao_compras_lista_item_produto_imagem' />
 
-                                <div className='secao_compras_lista_item_produto_valores'>
+                                    <h3 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo'>Fraldinha Bovina Resfriada KG</h3>
 
-                                    <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preço'>R$40,00</h4>
+                                    <div className='secao_compras_lista_item_produto_valores'>
 
-                                    <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--desconto secao_compras_lista_item_produto_titulo--amarelo'>R$40,00</h4>
+                                        <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preço'>R$40,00</h4>
 
-                                </div>
+                                        <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--desconto secao_compras_lista_item_produto_titulo--amarelo'>R$40,00</h4>
 
-                            </article>
+                                    </div>
 
-                        </li>
+                                </article>
 
-                        <li className='secao_compras_produtos_lista_item'>
+                            </li>
 
-                            <article className='secao_compras_lista_item_produto'>
+                            <li className='secao_compras_produtos_lista_item'>
 
-                                <img src={limao} alt="Fraldinha" className='secao_compras_lista_item_produto_imagem' />
+                                <article className='secao_compras_lista_item_produto'>
 
-                                <h3 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo'>Limao Taiti KG</h3>
+                                    <img src={limao} alt="Fraldinha" className='secao_compras_lista_item_produto_imagem' />
 
-                                <div className='secao_compras_lista_item_produto_valores'>
+                                    <h3 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo'>Limao Taiti KG</h3>
 
-                                    <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preço'>R$10,00</h4>
+                                    <div className='secao_compras_lista_item_produto_valores'>
 
-                                    <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--desconto secao_compras_lista_item_produto_titulo--amarelo'>R$40,00</h4>
+                                        <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preço'>R$10,00</h4>
 
-                                </div>
+                                        <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--desconto secao_compras_lista_item_produto_titulo--amarelo'>R$40,00</h4>
 
-                            </article>
+                                    </div>
 
-                        </li>
-                        <li className='secao_compras_produtos_lista_item'>
+                                </article>
 
-                            <article className='secao_compras_lista_item_produto'>
+                            </li>
+                            <li className='secao_compras_produtos_lista_item'>
 
-                                <img src={alho} alt="Fraldinha" className='secao_compras_lista_item_produto_imagem' />
+                                <article className='secao_compras_lista_item_produto'>
 
-                                <h3 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo'>Alho UN</h3>
+                                    <img src={alho} alt="Fraldinha" className='secao_compras_lista_item_produto_imagem' />
 
-                                <div className='secao_compras_lista_item_produto_valores'>
+                                    <h3 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo'>Alho UN</h3>
 
-                                    <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preço'>R$0,50</h4>
+                                    <div className='secao_compras_lista_item_produto_valores'>
 
-                                    <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--desconto secao_compras_lista_item_produto_titulo--amarelo'>R$40,00</h4>
+                                        <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preço'>R$0,50</h4>
 
-                                </div>
+                                        <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--desconto secao_compras_lista_item_produto_titulo--amarelo'>R$40,00</h4>
 
-                            </article>
+                                    </div>
 
-                        </li>
-                        <li className='secao_compras_produtos_lista_item'>
+                                </article>
 
-                            <article className='secao_compras_lista_item_produto'>
+                            </li>
+                            <li className='secao_compras_produtos_lista_item'>
 
-                                <img src={batata} alt="Fraldinha" className='secao_compras_lista_item_produto_imagem' />
+                                <article className='secao_compras_lista_item_produto'>
 
-                                <h3 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo'>Batata UN</h3>
+                                    <img src={batata} alt="Fraldinha" className='secao_compras_lista_item_produto_imagem' />
 
-                                <div className='secao_compras_lista_item_produto_valores'>
+                                    <h3 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo'>Batata UN</h3>
 
-                                    <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preço'>R$5,00</h4>
+                                    <div className='secao_compras_lista_item_produto_valores'>
 
-                                    <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--desconto secao_compras_lista_item_produto_titulo--amarelo'>R$1,00</h4>
+                                        <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preço'>R$5,00</h4>
 
-                                </div>
+                                        <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--desconto secao_compras_lista_item_produto_titulo--amarelo'>R$1,00</h4>
 
-                            </article>
+                                    </div>
 
-                        </li>
+                                </article>
 
-                    </ul>
+                            </li>
 
-                  
+                        </ul>
+
+
+                    </section>
+
                 </section>
-
-            </section>
             </main>
         </div>
     )

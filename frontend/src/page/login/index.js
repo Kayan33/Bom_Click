@@ -12,31 +12,31 @@ function Login() {
         <div className="modal-container">
             <div className="modal-content">
                 <h2>{isLogin ? "Login" : "Cadastro"}</h2>
-                <form>
-                    {!isLogin &&(
-
-                    <div className="form-group">
-                        <input type="text" id="nome" name="nome" required placeholder="Nome:" />
-                    </div>
-                    )}
-                    <div className="form-group">
-                        <input type="text" id="cpf" name="cpf" required placeholder="CPF:" />
-                    </div>
-                    {!isLogin && (
-
+                <modal>
+                    <form>
+                        {!isLogin &&(
                         <div className="form-group">
-                            <input type="date" id="dataNascimento" name="dataNascimento" required />
+                            <input type="text" id="nome" name="nome" required placeholder="Nome:" />
                         </div>
-                    )}
-                    <div className="form-group">
-                        <input type="password" id="password" name="password" required placeholder="Senha:" />
-                    </div>
-                    {!isLogin && (
+                        )}
                         <div className="form-group">
-                            <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirmar Senha:" />
+                            <input type="text" id="cpf" name="cpf" required placeholder="CPF:" />
                         </div>
-                    )}
-                </form>
+                        {!isLogin && (
+                            <div className="form-group">
+                                <input type="date" id="dataNascimento" name="dataNascimento" required />
+                            </div>
+                        )}
+                        <div className="form-group">
+                            <input type="password" id="password" name="password" required placeholder="Senha:" />
+                        </div>
+                        {!isLogin && (
+                            <div className="form-group">
+                                <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirmar Senha:" />
+                            </div>
+                        )}
+                    </form>
+                </modal>
 
                 <div className="button-login">
                     <div className='esqueci_senha'>
