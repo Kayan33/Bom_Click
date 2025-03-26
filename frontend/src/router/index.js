@@ -5,9 +5,7 @@ import DadosPorMercado from "../page/dadosPorMercado/dadosPorMercado";
 import EditarInformacoes from "../page/editarInformacoes/editarInformacoes";
 import ResumoCompra from "../page/resumoCompra/resumo_compra";
 import CarrinhoCompras from "../page/carrinho/carrinho_compras";
-import Login from "../page/login";
 import CompraFinalizada from "../page/compraFinalizada/compraFinalizada";
-import Cadastro from "../page/cadastro/Cadastro";
 
 function Rotas() {
   return (
@@ -19,9 +17,7 @@ function Rotas() {
         <Route path="/dadosPorMercado" element={<DadosPorMercado/>}></Route>
         <Route path="/editarInformacoes" element={<EditarInformacoes/>}></Route>
         <Route path="/carrinho" element={<CarrinhoCompras/>}></Route>
-        <Route path="/login" element={<Login/>}></Route>
         <Route path="/finalizado" element={<CompraFinalizada/>}></Route>
-        <Route path="/cadastro" element={<Cadastro/>}></Route>
       </Routes>
     </BrowserRouter>
   );

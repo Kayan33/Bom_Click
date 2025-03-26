@@ -4,6 +4,7 @@ import '../../assets/cabecalho.css';
 import '../carrinho/carrinho.css';
 import confiancaLogo from '../../imagens/confiancaLogo.png';
 import { useNavigate } from 'react-router-dom';
+import Login from '../../components/login';
 function CarrinhoCompras() {
   const [cartItems, setCartItems] = useState([]);
 
@@ -24,6 +25,7 @@ function CarrinhoCompras() {
 
   return (
     <div>
+    <Login/>
       <header className='cabecalho teste'>
         <a href="/" className="cabecalho_link" aria-label="Voltar para o perfil">
           <img src={iconeVoltar} alt="Voltar para o perfil" className="cabecalho_link" />
