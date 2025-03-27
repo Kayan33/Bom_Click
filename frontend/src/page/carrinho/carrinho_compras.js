@@ -54,7 +54,6 @@ function CarrinhoCompras() {
             ))}
           </ul>
         </div>
-
         <div className='secao_carrinho_compra'>
           <div className='secao_total_economizou'>
             <h4>Total: R${calculateTotal()}</h4>
