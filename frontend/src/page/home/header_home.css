@@ -17,7 +17,7 @@
 width: var(--tamanhoIcone);
 }
 .cabecalho-lista img {
-    padding: 1rem;
+    padding: var(--espacamentoMenor);
 }
 
 .carrinho-container {
@@ -27,8 +27,8 @@ width: var(--tamanhoIcone);
   
   .cart-count {
     position: absolute;
-    top: 8px;
-    right:14px;
+    top: 0.5rem;
+    right:0.875rem;
     background-color: var(--vermelho);
     color: white;
     border-radius: 50%;
@@ -51,7 +51,7 @@ width: var(--tamanhoIcone);
     text-align: center;
     width: 30ch;
     word-break: break-word;
-    margin-bottom: 2rem;
+    margin-bottom: var(--espacamentoMaior);
 }
 
 .estastisticas{
@@ -63,8 +63,8 @@ width: var(--tamanhoIcone);
     display: flex;
     align-items: center;
     background-color: var(--azul);
-    padding: 1rem;
-    border-radius: 2rem;
+    padding:var(--espacamentoMenor);
+    border-radius: var(--bordaRaio);
 }
 
 .estastisticas-link img{
@@ -80,12 +80,12 @@ margin-right: 0.8rem;
 /* PROMOÇOES */
 .cabecalho_promocoes{
     background-color: var(--amarelo);
-    padding: 1rem;
+    padding:var(--espacamentoMenor);
     
 }
 
 .cabecalho_promocoes h1 {
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--espacamentoPequeno);
     color: var(--azul);
     font-weight: bolder;
 }
@@ -93,13 +93,13 @@ margin-right: 0.8rem;
 
 .promocoes-01{
     display: flex;
-    gap: 10vw;
+    gap: var(--espacamentoMaior);
 }
 .promocoes {
     display: flex;
     justify-content: space-between;
-    background-color: #f9f9f9;
-    border-radius: 1rem;
+    background-color: var(--branco);
+    border-radius: var(--bordaRaio);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
     width: 20rem;
@@ -131,7 +131,7 @@ margin-right: 0.8rem;
     flex-wrap: wrap;
     flex-direction: column;
     justify-content: space-between;
-    padding: 15px;
+    padding: var(--espacamentoMenor);
     border-radius: var(--bordaRaio);
 }
 
@@ -139,15 +139,11 @@ margin-right: 0.8rem;
     font-size: var(--fonteSegundaria);
     font-weight: bolder;
     color: var(--verde);
-    
-    margin-bottom: 0.5rem;
-    
-    
+    margin-bottom: var( --espacamentoPequeno); 
 }
 
 .promocoes_produtos span {
-    font-size: 1.5rem;
-    font-size: var(--fonteSegundaria);
+    font-size: var(--fontePrincipal);
     color: var(--azul);
     font-weight: bolder;
 }
@@ -156,16 +152,16 @@ margin-right: 0.8rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 0.5rem;
+    margin-top: var(--espacamentoPequeno);
 }
 
 .promocoes_produtos img {
     width: var(--tamanhoFotoPequena);
-    margin-right: 0.6rem;
+    margin-right: var(--espacamentoPequeno);
 }
 
 .promocoes_produtos button {
-    padding: 0.5rem 1rem;
+    padding: var(--espacamentoPequeno) var(--espacamentoMenor);
     background-color: var(--azul);
     color: var(--amarelo);
     font-weight: bolder;
@@ -180,7 +176,7 @@ margin-right: 0.8rem;
     margin: 0rem 1rem;
 }
 .mercados_flex{
-    margin: 3rem 0rem;
+    margin: var(--espacamentoMaior) 0rem;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
@@ -205,7 +201,7 @@ margin-right: 0.8rem;
 }
 
 .cabecalho_setores{
-    margin: 0rem 1rem;
+    margin: 0rem var(--espacamentoMenor);
 }
 .setores-mercado{
     justify-content: space-between;
@@ -235,7 +231,7 @@ margin-right: 0.8rem;
 }
 
 .button, .button:focus, .button.selected {
-    padding: 0.5rem;
+    padding: var(--espacamentoPequeno);
 }
 
 .comparativo{
@@ -259,7 +255,7 @@ margin-right: 0.8rem;
 @media (min-width: 1024px){
     .promocoes-01{
         display: flex;
-        gap: 2rem;
+        gap: var(--espacamentoMaior);
     }
 }
 
