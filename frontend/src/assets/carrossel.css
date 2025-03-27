@@ -1,9 +1,8 @@
-.secao_compras, .secao_resumo{
+.secao_compras{
 
     display: grid;
-    grid-template-columns: auto auto;
-    grid-template-rows: repeat(4, auto);
     gap: 8px;
+    margin: 0 var(--espacamentoMenor) var(--espacamentoMaior)
 }
 
 .secao_compras_titulo {
@@ -34,7 +33,7 @@
 
     display: flex;
     gap: var(--espacamentoMenor);
-    margin: 0 var(--espacamentoMenor);
+    margin: 0 0 0 var(--espacamentoMenor);
 }
 
 .secao_compras_produtos_lista_item {
@@ -160,8 +159,13 @@
 
 .secao_compras_lista_item_produto_carrinho--margem{
 
-    justify-self: start;
-    margin: var(--espacamentoMaior) 0;
+    align-self: center;
+    grid-row: span 2 / span 2;
+    grid-column-start: 2;
+    grid-row-start: 3;
+    justify-self: end;
+    margin: 0 var(--espacamentoPequeno) 0 0;
+    
 }
 
 
