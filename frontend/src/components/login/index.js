@@ -38,7 +38,7 @@ function Login() {
             <p>Cadastre-se</p>
           </a>
           <button className="dialogo-login-button" type="submit">
-            <p>Login</p>
+              <p>Login</p>
           </button>
         </div>
       </div>
