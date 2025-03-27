@@ -4,6 +4,7 @@ import '../../assets/cabecalho.css';
 import '../carrinho/carrinho.css';
 import confiancaLogo from '../../imagens/confiancaLogo.png';
 import { useNavigate } from 'react-router-dom';
+import Login from '../../components/login';
 function CarrinhoCompras() {
   const [cartItems, setCartItems] = useState([]);
 
@@ -24,6 +25,7 @@ function CarrinhoCompras() {
 
   return (
     <div>
+    <Login/>
       <header className='cabecalho teste'>
         <a href="/" className="cabecalho_link" aria-label="Voltar para o perfil">
           <img src={iconeVoltar} alt="Voltar para o perfil" className="cabecalho_link" />
@@ -55,6 +57,16 @@ function CarrinhoCompras() {
           <h4 className='secao_resumo_total'>Total: R${calculateTotal()}</h4>
           <h3 className='secao_resumo_economizou'>Economizou: R$0</h3>
           <button className='secao_compras_lista_item_produto_carrinho secao_compras_lista_item_produto_carrinho--margem' onClick={handleCheckout}>FINALIZAR COMPRA</button>
+        </div>
+        <div className='secao_carrinho_compra'>
+          <div className='secao_total_economizou'>
+            <h4>Total: R${calculateTotal()}</h4>
+            <h3>Economizou: R$0</h3>
+          </div>
+          <div>
+            <button className='secao_compras_lista_item_produto_adicionar--carrinho' onClick={handleCheckout}>FINALIZAR COMPRA</button>
+          </div>
+        </div>
       </section>
 
     </div>
