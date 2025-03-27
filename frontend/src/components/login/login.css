@@ -1,7 +1,7 @@
 .modal {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(5, auto);
   grid-column-gap: var(--espacamentoPequeno);
   grid-row-gap: var(--espacamentoPequeno);
   background-color: var(--azul);
@@ -16,10 +16,11 @@
   transform: translate(-50%, -50%);
   z-index: 1000;
   align-items: center;
+  max-width: 18.75rem;
 }
 
 .modal-login-voltar {
-  grid-area: 1 / 1 / 2 / 2;
+  grid-area: 1 / 1 / 1 / 1;
   display: flex;
   align-items: center;
 }
@@ -30,7 +31,7 @@
 }
 
 .modal-login-titulo {
-  grid-area: 1 / 2 / 2 / 3;
+  grid-area: 1 / 2 / 1 / 2;
   font-size: var(--fonteTitulo);
   color: var(--branco);
   display: flex;
@@ -44,7 +45,7 @@ dialog {
 }
 
 .inputs-container {
-  grid-area: 2 / 2 / 3 / 5; 
+  grid-area: 2 / 2 / 2 / 2; 
   display: grid;
   grid-template-columns: 1fr;
   grid-row-gap: var(--espacamentoPequeno);
@@ -52,55 +53,53 @@ dialog {
 }
 
 .dialogo-login-input-email {
+  grid-area: 2 / 2 / 2 / 2;
   padding: var(--espacamentoPequeno);
-  font-size: var(--fonteSegundaria);
+  font-size: var(--fontePequena);
   border-radius: var(--bordaRaio);
   border: var(--borda) #d1d5db;
   transition: border-color 0.3s ease;
-  margin-bottom: .5rem;
 }
 
 .dialogo-login-input-senha {
+  grid-area: 3 / 2 / 3 / 2;
   padding: var(--espacamentoPequeno);
-  font-size: var(--fonteSegundaria);
+  font-size: var(--fontePequena);
   border-radius: var(--bordaRaio);
   border: var(--borda) #d1d5db;
   transition: border-color 0.3s ease;
-  margin-top: var(--espacamentoPequeno);
 }
 
 .dialogo-button-esqueceu-senha {
-  grid-area: 4 / 2 / 5 / 3;
+  grid-area: 4 / 2 / 4 / 2;
   color: var(--amarelo);
   cursor: pointer;
   font-size: var(--fontePequena);
   text-decoration: none;
   display: inline-block;
-  width: 8rem;
 }
 
 .dialogo-login-link-cadastro {
-  grid-area: 5 / 2 / 6 / 3; 
+  grid-area: 5 / 2 / 5 / 2;
   color: var(--amarelo);
   cursor: pointer;
   font-size: var(--fontePequena);
   font-weight: var(--fonteSemiBold);
   text-decoration: none;
-  display: inline-block;
 }
 
 .dialogo-login-button {
   all: unset; 
-  grid-area: 5 / 4 / 6 / 5;
+  grid-area: 5 / 3 / 5 / 3;
   font-weight: var(--fonteSemiBold);
   justify-self: end;
-  padding: var(--espacamentoMenor);
+  padding: var(--espacamentoPequeno) var(--espacamentoMenor);
   border-radius: var(--bordaRaio);
   background-color: var(--amarelo);
   color: var(--verde);
 }
 
-/* .modal-overlay {
+.modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -109,4 +108,4 @@ dialog {
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(2px);
   z-index: 999;
-} */
+} 

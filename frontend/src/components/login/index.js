@@ -15,7 +15,6 @@ function Login() {
             <img src={iconeVoltar} alt="" />
           </a>
           <h2 className="modal-login-titulo">Login</h2>
-          <div className="inputs-container">
             <input
               type="text"
               required
@@ -30,15 +29,14 @@ function Login() {
               value={senha}
               className="dialogo-login-input-senha"
             />
-          </div>
           <a className="dialogo-button-esqueceu-senha">
-            <p>Esqueci a senha</p>
+            Esqueci a senha
           </a>
-          <a className="dialogo-login-link-cadastro">
-            <p>Cadastre-se</p>
+          <a className="dialogo-login-link-cadastro" href="/cadastro">
+            Cadastre-se
           </a>
           <button className="dialogo-login-button" type="submit">
-              <p>Login</p>
+              Login
           </button>
         </div>
       </div>
