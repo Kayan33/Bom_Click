@@ -1,32 +1,41 @@
-.resumo {
-  padding: var(--espacamentoMenor);
-
-}
-
-.resumo h2{
+.secao_resumo_titulo {
   color: var(--azul);
-  font-weight: var(--fonteBold);
-  margin: 2rem 0rem;
+  font-size: var(--fonteSegundaria);
+  font-weight: var(--fonteSemiBold);
+  grid-column: span 2 / span 2;
+  grid-row-start: 1;
+  margin: var(--espacamentoMaior) var(--espacamentoMenor) 0 var(--espacamentoMenor);
 }
 
-.secao_carrinho_produtos img {
-  width: var(--tamanhoFotoGrande);
-  height: auto;
-  object-fit: cover;
+.secao_resumo_produtos {
+
+  grid-column: span 2 / span 2;
+  grid-row-start: 2;
 }
 
-.secao_carrinho_compra{
+.secao_resumo_produtos_logoMercado {
+
+  height: var(--tamanhoFotoPequena);
+  margin: 0 var(--espacamentoMenor) var(--espacamentoMenor) var(--espacamentoMenor);
+}
+
+.secao_resumo_compra {
   display: flex;
   margin: 2rem 0rem;
   gap: 10vw;
 }
 
-.secao_total_economizou h4{
+.secao_resumo_total {
   color: var(--azul);
   font-weight: var(--fonteSemiBold);
+  grid-row-start: 3;
+  margin: 0 var(--espacamentoMenor)
 }
 
-.secao_total_economizou h3{
+.secao_resumo_economizou {
   color: var(--verde);
   font-weight: var(--fonteSemiBold);
+  grid-column-start: 1;
+  grid-row-start: 4;
+  margin: 0 var(--espacamentoMenor)
 }

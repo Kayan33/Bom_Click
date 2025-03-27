@@ -33,37 +33,32 @@ function CarrinhoCompras() {
         <h1 className='cabecalho_titulo'>Carrinho</h1>
       </header>
 
-      <section className='resumo'>
-        <h2>Resumo das compras por mercado</h2>
-        <div className='secao_carrinho_produtos'>
-          <img src={confiancaLogo} alt="Confiança Logo" />
+      <section className='secao_resumo'>
+        <h2 className='secao_resumo_titulo'>Resumo das compras por mercado</h2>
+        <section className='secao_resumo_produtos'>
+          <img src={confiancaLogo} alt="Confiança Logo" className='secao_resumo_produtos_logoMercado' />
           <ul className='secao_compras_produtos_lista barraRolagem'>
             {cartItems.map((item, index) => (
               <li key={index} className='secao_compras_produtos_lista_item'>
                 <article className='secao_compras_lista_item_produto'>
                   <img src={item.imagem} alt={item.nome} className='secao_compras_lista_item_produto_imagem' />
                   <h3 className='secao_compras_lista_item_produto_titulo'>{item.nome}</h3>
-                  <div className='secao_compras_lista_item_produto_valores'>
-                    <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preço'>
-                      R${item.preco.toFixed(2)}
-                    </h4>
-                    <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--desconto'>Não é o melhor preço</h4>
-                  </div>
+                  <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preco'>
+                    R${item.preco.toFixed(2)}
+                  </h4>
+                  <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--naoMelhorPreco'>Melhor preço</h4>
+
                 </article>
               </li>
             ))}
           </ul>
-        </div>
-        <div className='secao_carrinho_compra'>
-          <div className='secao_total_economizou'>
-            <h4>Total: R${calculateTotal()}</h4>
-            <h3>Economizou: R$0</h3>
-          </div>
-          <div>
-            <button className='secao_compras_lista_item_produto_adicionar--carrinho' onClick={handleCheckout}>FINALIZAR COMPRA</button>
-          </div>
-        </div>
+        </section>
+
+          <h4 className='secao_resumo_total'>Total: R${calculateTotal()}</h4>
+          <h3 className='secao_resumo_economizou'>Economizou: R$0</h3>
+          <button className='secao_compras_lista_item_produto_carrinho secao_compras_lista_item_produto_carrinho--margem' onClick={handleCheckout}>FINALIZAR COMPRA</button>
       </section>
+
     </div>
   );
 }

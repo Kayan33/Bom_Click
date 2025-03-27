@@ -202,7 +202,7 @@ function HomeScreen() {
                   Comparar Preço
                 </button>
 
-                <button className='secao_compras_lista_item_produto_adicionar--carrinho' onClick={() => handleAddToCart(produto)}>
+                <button className='secao_compras_lista_item_produto_carrinho' onClick={() => handleAddToCart(produto)}>
                   ADICIONAR A COMPRA
                 </button>
               </article>
@@ -243,7 +243,7 @@ function HomeScreen() {
                   Produto incorreto?
                 </button>
 
-                <button className='secao_compras_lista_item_produto_adicionar--carrinho' onClick={() => handleAddToCart(produto)}>
+                <button className='secao_compras_lista_item_produto_carrinho' onClick={() => handleAddToCart(produto)}>
                   ADICIONAR A COMPRA
                 </button>
 
