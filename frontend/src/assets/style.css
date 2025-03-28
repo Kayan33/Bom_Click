@@ -1,14 +1,14 @@
-:root{
+:root {
 
     font-size: 16px;
     font-family: var(--fontePrincipal);
-    
+
     --azul: #054AAE;
     --verde: #2F7339;
     --amarelo: #FFC200;
     --vermelho: #D90D1E;
-    --branco: #FFFFFFFF; 
-    
+    --branco: #FFFFFFFF;
+
     --fontePrincipal: "Poppins", sans-serif;
     --fonteTitulo: 1.25rem;
     --fonteSegundaria: 1rem;
@@ -23,19 +23,31 @@
     --espacamentoMenor: 1rem;
     --espacamentoPequeno: 0.5rem;
 
-    --borda: 2px solid; 
+    --borda: 2px solid;
     --bordaRaio: 0.5rem;
 
     --tamanhoIcone: 1.5rem;
     --tamanhoIconeGrande: 2.5rem;
+    --tamanhoIconePequeno: 1rem;
     --tamanhoFotoGrande: 7.938rem;
     --tamanhoFotoPequena: 4.375rem;
 
 }
 
-*{
+* {
 
     font-family: var(--fontePrincipal);
+
+    input, input::placeholder{
+        background-color: var(--branco);
+        border: var(--borda) #fff;
+        color: var(--verde);
+        
+    }
+
+    input:focus {
+        outline: 2px solid var(--amarelo);
+    } 
 }
 
 .barraRolagem {
@@ -47,28 +59,30 @@
     padding-bottom: 1rem;
 }
 
-.barraRolagem--amarelo{
+.barraRolagem--amarelo {
     scrollbar-color: var(--amarelo) #FFF;
 }
 
 .barraRolagem::-webkit-scrollbar {
     width: 3px;
-    
+
 }
 
 .barraRolagem::-webkit-scrollbar-track {
-    background-color: #ffffff; /* Cor de fundo da faixa da barra de rolagem */
+    background-color: #ffffff;
+    /* Cor de fundo da faixa da barra de rolagem */
 }
 
 .barraRolagem::-webkit-scrollbar-thumb {
     background-color: #054AAE;
-    border-radius: 10px; /* Bordas arredondadas para a parte deslizante */
+    border-radius: 10px;
+    /* Bordas arredondadas para a parte deslizante */
 }
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
 
-    :root{
-        
+    :root {
+
         font-size: 20px;
     }
 }

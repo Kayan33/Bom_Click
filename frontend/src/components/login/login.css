@@ -1,14 +1,16 @@
 .modal {
   display: grid;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: repeat(4, auto);
   grid-template-rows: repeat(5, auto);
-  grid-column-gap: var(--espacamentoPequeno);
-  grid-row-gap: var(--espacamentoPequeno);
+  grid-column-gap: var(--espacamentoMenor);
+  grid-row-gap: var(--espacamentoMenor);
   background-color: var(--azul);
-  padding: var(--espacamentoMaior);
+  padding: var(--espacamentoMenor);
+  /*Aqui!!!*/
   border-radius: var(--bordaRaio);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  height: 15rem;
+  height: 10rem;
+  /*Aqui!!!*/
   text-align: left;
   position: absolute;
   top: 50%;
@@ -16,23 +18,27 @@
   transform: translate(-50%, -50%);
   z-index: 1000;
   align-items: center;
-  max-width: 18.75rem;
+  max-width: 15rem;
+  /*Aqui!!!*/
 }
 
 .modal-login-voltar {
-  grid-area: 1 / 1 / 1 / 1;
+  grid-row: 1;
+  grid-column: 1;
   display: flex;
   align-items: center;
 }
 
 .modal-login-voltar img {
-  max-width: var(--tamanhoIcone);
+  max-width: var(--tamanhoIconePequeno);
   height: auto;
 }
 
 .modal-login-titulo {
-  grid-area: 1 / 2 / 1 / 2;
-  font-size: var(--fonteTitulo);
+  grid-row: 1;
+  grid-column: 2;
+  grid-column-start: 2;
+  font-size: var(--fonteSegundaria);
   color: var(--branco);
   display: flex;
   align-items: center;
@@ -44,34 +50,43 @@ dialog {
   background-color: transparent;
 }
 
-.inputs-container {
+/* .inputs-container {
   grid-area: 2 / 2 / 2 / 2; 
   display: grid;
   grid-template-columns: 1fr;
   grid-row-gap: var(--espacamentoPequeno);
   justify-content: center;
-}
+} */
 
 .dialogo-login-input-email {
-  grid-area: 2 / 2 / 2 / 2;
+  grid-row: 2;
+  grid-column: span 2 / span 3;
+  grid-column-start: 2;
   padding: var(--espacamentoPequeno);
   font-size: var(--fontePequena);
+  /*Aqui!!!*/
   border-radius: var(--bordaRaio);
-  border: var(--borda) #d1d5db;
   transition: border-color 0.3s ease;
 }
 
 .dialogo-login-input-senha {
-  grid-area: 3 / 2 / 3 / 2;
+  grid-row: 3;
+  grid-column: span 2 / span 3;
+  grid-column-start: 2;
   padding: var(--espacamentoPequeno);
   font-size: var(--fontePequena);
   border-radius: var(--bordaRaio);
-  border: var(--borda) #d1d5db;
   transition: border-color 0.3s ease;
 }
 
+.dialogo-login-input-email,
+.dialogo-login-input-senha {
+  width: 75%;
+}
+
 .dialogo-button-esqueceu-senha {
-  grid-area: 4 / 2 / 4 / 2;
+  grid-row: 4;
+  grid-column: 2;
   color: var(--amarelo);
   cursor: pointer;
   font-size: var(--fontePequena);
@@ -80,7 +95,8 @@ dialog {
 }
 
 .dialogo-login-link-cadastro {
-  grid-area: 5 / 2 / 5 / 2;
+  grid-row: 5;
+  grid-column: 2;
   color: var(--amarelo);
   cursor: pointer;
   font-size: var(--fontePequena);
@@ -89,14 +105,19 @@ dialog {
 }
 
 .dialogo-login-button {
-  all: unset; 
-  grid-area: 5 / 3 / 5 / 3;
+  all: unset;
+  grid-row: span 4 / span 5;
+  grid-row-start: 4;
+  grid-column-start: 3;
+  align-self: start;
+  font-size: var(--fontePequena);
   font-weight: var(--fonteSemiBold);
   justify-self: end;
   padding: var(--espacamentoPequeno) var(--espacamentoMenor);
   border-radius: var(--bordaRaio);
   background-color: var(--amarelo);
   color: var(--verde);
+
 }
 
 .modal-overlay {
@@ -108,4 +129,4 @@ dialog {
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(2px);
   z-index: 999;
-} 
+}

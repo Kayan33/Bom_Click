@@ -50,3 +50,15 @@ a{
 button{
     cursor: pointer;
 }
+
+input {
+	border: none;
+	outline: none;
+	background: transparent;
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}

@@ -19,14 +19,14 @@ function Login() {
               type="text"
               required
               placeholder="Email:"
-              value={email}
+              // value={email}
               className="dialogo-login-input-email"
             />
             <input
               type="password"
               required
               placeholder="Senha:"
-              value={senha}
+              // value={senha}
               className="dialogo-login-input-senha"
             />
           <a className="dialogo-button-esqueceu-senha">
