@@ -1,8 +1,8 @@
 import { hash } from "bcryptjs";
 import prismaClient from "../../prisma";
 
-class AlunoServices {
-  async Cadastrar_Aluno({
+class ServicesPost {
+  async CadastroUsuarios({
     nome,
     cpf,
     dataNascimento,
@@ -23,24 +23,31 @@ class AlunoServices {
     numero: number;
     email: string;
   }) {
-    const senhaCrypt = await hash(senha, 10);
-
-    await prismaClient.usuario.create({
-      data: {
-        nome,
-        cpf,
-        dataNascimento: dataNascimento,
-        senha: senhaCrypt,
-        logradouro,
-        numero,
-        bairro,
-        cep,
-        email,
-      },
-    });
-
-    return { mensagem: "Cadastro efetuado com sucesso!" };
+    try {
+      
+      const senhaCrypt = await hash(senha, 10);
+  
+      await prismaClient.usuario.create({
+        data: {
+          nome,
+          cpf,
+          dataNascimento: dataNascimento,
+          senha: senhaCrypt,
+          logradouro,
+          numero,
+          bairro,
+          cep,
+          email,
+        },
+      });
+  
+      return { mensagem: "Cadastro efetuado com sucesso!" };
+    } catch (error) {
+      console.log(error);
+      throw new Error("Erro interno ao cadastrar usuário.");
+      
+    }
   }
 }
 
-export default AlunoServices;
+export default ServicesPost;

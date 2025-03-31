@@ -1,0 +1,76 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "API Bom click",
+    "description": "API de consulta de Preços.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/CadastroUsuarios": {
+      "post": {
+        "summary": "Cadastra um novo usuário",
+        "description": "Recebe os dados do usuário e os armazena no banco de dados.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": { "type": "string" },
+                  "cpf": { "type": "string" },
+                  "dataNascimento": { "type": "string", "format": "date-time" },
+                  "senha": { "type": "string" },
+                  "cep": { "type": "string" },
+                  "logradouro": { "type": "string" },
+                  "bairro": { "type": "string" },
+                  "numero": { "type": "integer" },
+                  "email": { "type": "string", "format": "email" }
+                },
+                "required": [
+                  "nome",
+                  "cpf",
+                  "dataNascimento",
+                  "senha",
+                  "cep",
+                  "logradouro",
+                  "bairro",
+                  "numero",
+                  "email"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Usuário cadastrado com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "mensagem": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno no servidor.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
