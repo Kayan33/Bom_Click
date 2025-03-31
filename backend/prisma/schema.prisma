@@ -21,7 +21,7 @@ enum OpcaoPagamento {
 }
  
 model Usuario {
-  id   Int @id @default(autoincrement())
+  id   String @id @default(uuid())
   nome String
   cpf String @unique @db.VarChar(14)
   dataNascimento DateTime
@@ -30,7 +30,7 @@ model Usuario {
   logradouro String
   bairro String
   numero Int
-  email String
+  email String @unique
   // Relação entre Usuario e formasPagamento
   formasPagamento FormaPagamento[]
  
@@ -44,7 +44,7 @@ model Usuario {
 }
  
 model FormaPagamento {
-  id Int @id @default(autoincrement())
+  id   String @id @default(uuid())
   meioPagamento OpcaoPagamento
   numeroCartao String @unique @db.VarChar(16)
   nome String
@@ -53,7 +53,7 @@ model FormaPagamento {
  
  
   // Relação entre FormaPagamento e Usuario
-  usuarioId Int
+  usuarioId String
   usuario Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
  
   // Relação entre FormaPagamento e pagamentos
@@ -66,10 +66,10 @@ model FormaPagamento {
 }
  
 model Compras {
-  id Int @id @default(autoincrement())
+  id   String @id @default(uuid())
  
   // Relação entre Compras e Usuario
-  usuarioId Int
+  usuarioId String
   usuario Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
  
   // Relação Intermediária de muitos para muitos de Compras e Produtos
@@ -85,14 +85,14 @@ model Compras {
 }
  
 model PagamentoCompra {
-  id              Int @id @default(autoincrement())
+  iid   String @id @default(uuid())
  
   // Relação entre PagamentoCompra e Compra
-  compraId        Int
+  compraId        String
   compra         Compras        @relation(fields: [compraId], references: [id], onDelete: Cascade)
  
   // Relação entre PagamentoCompra e FormaPagamento  
-  formaPagamentoId Int
+  formaPagamentoId String
   formaPagamento FormaPagamento @relation(fields: [formaPagamentoId], references: [id], onDelete: Cascade)
  
   @@unique([compraId, formaPagamentoId])
@@ -104,15 +104,15 @@ model PagamentoCompra {
 }
  
 model ItensCompra {
-  id         Int @id @default(autoincrement())
+ id   String @id @default(uuid())
   quantidade Int
  
   // Relação entre ItensCompra e Compra
-  compraId   Int
+  compraId   String
   compra     Compras  @relation(fields: [compraId], references: [id], onDelete: Cascade)
  
   // Relação entre ItensCompra e Produto
-  produtoId  Int
+  produtoId  String
   produto    Produto @relation(fields: [produtoId], references: [id], onDelete: Cascade)
  
   @@unique([compraId, produtoId])
@@ -124,14 +124,14 @@ model ItensCompra {
 }
  
 model Produto {
-  id Int @id @default(autoincrement())
+  id   String @id @default(uuid())
   imagem String
   valor Float
   quantidade Int
   valorEconomizado Float
  
   // Relação entre Produto e Mercado
-  mercadoId Int
+  mercadoId String
   mercado Mercado @relation(fields: [mercadoId], references: [id])
  
   // Relação Intermediária de muitos para muitos de Produtos e Compras
@@ -145,7 +145,7 @@ model Produto {
  
  
 model Mercado {
-  id Int @id @default(autoincrement())
+  id   String @id @default(uuid())
   nome String
   logo String
  
