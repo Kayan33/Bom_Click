@@ -130,7 +130,7 @@ dialog {
   border-radius: var(--bordaRaio);
   background-color: var(--amarelo);
   color: var(--verde);
-
+  cursor: pointer;
 }
 
 .modal-overlay {

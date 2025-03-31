@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
 import "./login.css";
 import iconeVoltar from "../../imagens/icon-voltar.svg"
@@ -32,7 +31,7 @@ function Login() {
           <a className="dialogo-button-esqueceu-senha">
             Esqueci a senha
           </a>
-          <a className="dialogo-login-link-cadastro" href="/cadastro">
+          <a className="dialogo-login-link-cadastro" href="/">
             Cadastre-se
           </a>
           <button className="dialogo-login-button" type="submit">
