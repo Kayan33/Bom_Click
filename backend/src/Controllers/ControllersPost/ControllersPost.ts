@@ -32,7 +32,7 @@ class ControllerPost {
       return res.status(201).json(resposta);
     } catch (error) {
       console.error("Erro no cadastro de usuário:", error);
-      return res.status(500).json({ error: "Erro interno no servidor." });
+      return res.status(500).json({ error: "Erro ao cadastrar usuário." });
     }
   }
 }
