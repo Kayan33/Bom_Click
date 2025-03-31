@@ -16,7 +16,7 @@ class Puppeteer {
             return String(produtoSite);
         }
 
-        let produto = 'Costelão Tauste Temperado Bandeja 1500g';
+        let produto = 'Empanada Seara Levíssimo Recheado Frango/Mussarela 120g';
         let produtoArray = produto.split(" ");
         await pagina.goto(`https://www.confianca.com.br/bauru/home`);
         await pagina.setViewport({ width: 1080, height: 1024 });
@@ -37,7 +37,8 @@ class Puppeteer {
             console.log(similaridade >= 0.60);
 
             if (similaridade >= 0.60) {
-                const resultado = await pagina.waitForSelector('div.auto-suggest-item-container > a', { visible: true });
+                const resultado = await pagina.waitForSelector('div.auto-suggest-item-container > a');
+                await new Promise(resolve => setTimeout(resolve, 1000));
                 resultado!.click();
                 const imagemContainer = await pagina.locator('.Img__Wrapper img').waitHandle();
                 const imagemProduto = await imagemContainer.evaluate((img => img.src));
