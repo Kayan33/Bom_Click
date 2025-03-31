@@ -175,6 +175,85 @@
           }
         }
       }
+    },
+    "/AlteraDadosUsuario/{id}": {
+      "put": {
+        "summary": "Altera os dados de um usuário pelo ID",
+        "description": "Atualiza os dados de um usuário específico com base no ID fornecido.",
+        "operationId": "alteraDadosUsuario",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID do usuário a ser atualizado"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": { "type": "string", "example": "Carlos Souza" },
+                  "cpf": { "type": "string", "example": "123.456.789-00" },
+                  "dataNascimento": { "type": "string", "format": "date-time" },
+                  "cep": { "type": "string", "example": "01010-010" },
+                  "logradouro": { "type": "string", "example": "Rua das Flores" },
+                  "bairro": { "type": "string", "example": "Centro" },
+                  "numero": { "type": "integer", "example": 100 },
+                  "email": { "type": "string", "example": "carlos@email.com" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Usuário atualizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "mensagem": { "type": "string", "example": "Alterado com Sucesso" }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Usuário não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string", "example": "Usuário não encontrado." }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno ao alterar usuário",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string", "example": "Erro ao alterar usuário." }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
