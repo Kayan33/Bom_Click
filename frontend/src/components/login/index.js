@@ -10,35 +10,33 @@ function Login() {
 
     return (
         <div className="modal-content">
-        <div className="modal">
+        <div className="modal modal--login ">
           <a href="/" className="modal-login-voltar">
             <img src={iconeVoltar} alt="" />
           </a>
           <h2 className="modal-login-titulo">Login</h2>
-          <div className="inputs-container">
             <input
               type="text"
               required
               placeholder="Email:"
-              value={email}
+              // value={email}
               className="dialogo-login-input-email"
             />
             <input
               type="password"
               required
               placeholder="Senha:"
-              value={senha}
+              // value={senha}
               className="dialogo-login-input-senha"
             />
-          </div>
           <a className="dialogo-button-esqueceu-senha">
-            <p>Esqueci a senha</p>
+            Esqueci a senha
           </a>
-          <a className="dialogo-login-link-cadastro">
-            <p>Cadastre-se</p>
+          <a className="dialogo-login-link-cadastro" href="/cadastro">
+            Cadastre-se
           </a>
           <button className="dialogo-login-button" type="submit">
-              <p>Login</p>
+              Login
           </button>
         </div>
       </div>
