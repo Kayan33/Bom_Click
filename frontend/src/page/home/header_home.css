@@ -94,6 +94,7 @@ margin-right: 0.8rem;
 .promocoes-01{
     display: flex;
     gap: var(--espacamentoMaior);
+    justify-content: space-around;
 }
 .promocoes {
     display: flex;
@@ -231,7 +232,7 @@ margin-right: 0.8rem;
 }
 
 .button, .button:focus, .button.selected {
-    padding: var(--espacamentoPequeno);
+    padding: 0.2rem;
 }
 
 .comparativo{
@@ -256,6 +257,7 @@ margin-right: 0.8rem;
     .promocoes-01{
         display: flex;
         gap: var(--espacamentoMaior);
+        justify-content: space-around;
     }
 }
 

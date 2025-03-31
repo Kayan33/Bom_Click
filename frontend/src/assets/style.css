@@ -59,6 +59,11 @@
     padding-bottom: 1rem;
 }
 
+.barraRolagem--vertical {
+    overflow-y: auto;
+}
+
+
 .barraRolagem--amarelo {
     scrollbar-color: var(--amarelo) #FFF;
 }

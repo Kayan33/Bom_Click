@@ -15,7 +15,7 @@ export default function ModalSimilares({ setIsOpen }) {
         <h2 className="modal-login-titulo">Produtos similares</h2>
       </div>
 
-      <div className="modal-similares__inputs-container">
+      <div className="modal-similares__inputs-container barraRolagem--vertical">
         {produtos.map((prod) => (
           <li key={prod.id} className="modal-similares__item">
             <img

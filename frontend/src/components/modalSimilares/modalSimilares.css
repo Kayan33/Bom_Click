@@ -14,8 +14,6 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--espacamentoMaior);
-  overflow-y: auto;
-  max-height: 50vh;
   padding-right: var(--espacamentoPequeno);
 }
 
