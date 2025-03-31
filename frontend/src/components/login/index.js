@@ -10,7 +10,7 @@ function Login() {
 
     return (
         <div className="modal-content">
-        <div className="modal">
+        <div className="modal modal--login ">
           <a href="/" className="modal-login-voltar">
             <img src={iconeVoltar} alt="" />
           </a>

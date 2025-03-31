@@ -1,26 +1,39 @@
+
+
 .modal {
   display: grid;
-  grid-template-columns: repeat(4, auto);
-  grid-template-rows: repeat(5, auto);
-  grid-column-gap: var(--espacamentoMenor);
-  grid-row-gap: var(--espacamentoMenor);
   background-color: var(--azul);
   padding: var(--espacamentoMenor);
-  /*Aqui!!!*/
   border-radius: var(--bordaRaio);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  height: 10rem;
-  /*Aqui!!!*/
-  text-align: left;
+  width: 90vw; 
+  max-width: 25rem;
+  height: auto;
+  max-height: 80vh;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1000;
+}
+
+/* Modal Similares */
+.modal--similares {
+  grid-template-rows: auto 1fr;
+}
+
+/* modal login */
+.modal--login {
+  grid-template-columns: repeat(4, auto);
+  grid-template-rows: repeat(5, auto);
+  grid-column-gap: var(--espacamentoMenor);
+  grid-row-gap: var(--espacamentoMenor);
   align-items: center;
   max-width: 15rem;
-  /*Aqui!!!*/
+  height: 10rem;
+  text-align: left;
 }
+
 
 .modal-login-voltar {
   grid-row: 1;
