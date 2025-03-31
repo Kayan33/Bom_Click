@@ -30,7 +30,7 @@ model Usuario {
   logradouro String
   bairro String
   numero Int
- 
+  email String
   // Relação entre Usuario e formasPagamento
   formasPagamento FormaPagamento[]
  
