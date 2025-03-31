@@ -1,118 +1,159 @@
-.modal-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    transition: opacity 0.3s ease;
-    
-  
-  }
-  
-  .modal-content {
-    background-color:var(--azul);
-    padding: 2rem;
-    border-radius: 50px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    width: 100%;
-    max-width: 400px;
-    transform: translateY(-50px);
-    animation: slideDown 0.5s ease forwards;
-  }
-  
-  
-  
-  
-  @keyframes slideDown {
-    from {
-        transform: translateY(-50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-  }
-  
-  .modal-content h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    color: var(--branco) ;
-    text-align: left;
-  }
-  
-  .form-group {
-    margin-bottom: 1.5rem;
-    text-align: left;
-  }
-  
-  .form-group label {
-    display: block;
-    font-size: 0.875rem;
-    margin-bottom: 0.5rem;
-    color: #4b5563;
-  }
-  
-  .form-group input {
-    width: 90%;
-    padding: 0.6rem;
-    font-size: 1rem;
-    border-radius: 50px;
-    border: 1px solid #d1d5db;
-    transition: border-color 0.3s ease;
-  }
-  
-  .button-login {
-  
-    display: grid;
-  }
-  
-  .login-cadastro-button {
-    padding: 0.3rem 1.0rem;
-    margin-right: 0.6rem;
-    font-size: 0.8rem;
-    color:var(--verde);
-    font-weight: var(--fonteSemiBold);
-    background-color: var(--amarelo);
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  
-  
-  .toggle-button {
-    color: var(--amarelo);
-    cursor: pointer;
-    font-size: var(--fontePequena);
-  }
-  
-  
-  
-  .toggle-button {
-    background-color: transparent;
-    color: var(--amarelo);
-    text-decoration: underline;
-    cursor: pointer;
-  }
-  .esqueci_senha {
+
+
+.modal {
+  display: grid;
+  background-color: var(--azul);
+  padding: var(--espacamentoMenor);
+  border-radius: var(--bordaRaio);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  width: 90vw; 
+  max-width: 25rem;
+  height: auto;
+  max-height: 80vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+
+/* Modal Similares */
+.modal--similares {
+  grid-template-rows: auto 1fr;
+}
+
+/* modal cadastro */
+.modal--cadastro {
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(8, auto);
+  grid-column-gap: var(--espacamentoMenor);
+  grid-row-gap: var(--espacamentoMenor);
+  align-items: center;
+  max-width: 15rem;
+  height: 25rem;
+  justify-items: center;
+}
+
+
+
+.modal-cadastro-titulo {
+  grid-row: 1;
+  grid-column: span 1 / span 2;
+  grid-column-start: 1;
+  justify-self: center;
+  font-size: var(--fonteSegundaria);
+  color: var(--branco);
   display: flex;
-  }
-  
-  .esqueci_senha a{
-    color: var(--amarelo);
-    cursor: pointer;
-    font-size: var(--fontePequena);
-    margin-bottom:1rem ;
-    }
-  .login{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+  align-items: center;
+}
+
+dialog {
+  border: none;
+  padding: 0;
+  background-color: transparent;
+}
+
+
+.dialogo-cadastro-input-nome {
+  grid-row: 2;
+  grid-column: span 1 / span 2;
+  grid-column-start: 1;
+  padding: var(--espacamentoPequeno);
+  font-size: var(--fontePequena);
+  border-radius: var(--bordaRaio);
+  transition: border-color 0.3s ease;
+}
+
+.dialogo-cadastro-input-email {
+  grid-row: 3;
+  grid-column: span 1 / span 2;
+  grid-column-start: 1;
+  padding: var(--espacamentoPequeno);
+  font-size: var(--fontePequena);
+  border-radius: var(--bordaRaio);
+  transition: border-color 0.3s ease;
+}
+
+.dialogo-cadastro-input-cpf {
+  grid-row: 4;
+  grid-column: span 1 / span 2;
+  grid-column-start: 1;
+  padding: var(--espacamentoPequeno);
+  font-size: var(--fontePequena);
+  border-radius: var(--bordaRaio);
+  transition: border-color 0.3s ease;
+}
+
+.dialogo-cadastro-input-data-nascimento {
+  grid-row: 5;
+  grid-column: span 1 / span 2;
+  grid-column-start: 1;
+  padding: var(--espacamentoPequeno);
+  font-size: var(--fontePequena);
+  border-radius: var(--bordaRaio);
+  transition: border-color 0.3s ease;
+}
+.dialogo-cadastro-input-senha {
+  grid-row: 6;
+  grid-column: span 1 / span 2;
+  grid-column-start: 1;
+  padding: var(--espacamentoPequeno);
+  font-size: var(--fontePequena);
+  border-radius: var(--bordaRaio);
+  transition: border-color 0.3s ease;
+}
+
+.dialogo-cadastro-input-confirme-senha {
+  grid-row: 7;
+  grid-column: span 1 / span 2;
+  grid-column-start: 1;
+  padding: var(--espacamentoPequeno);
+  font-size: var(--fontePequena);
+  border-radius: var(--bordaRaio);
+  transition: border-color 0.3s ease;
+}
+
+.dialogo-cadastro-input-nome,
+.dialogo-cadastro-input-email, 
+.dialogo-cadastro-input-cpf, 
+.dialogo-cadastro-input-data-nascimento,
+.dialogo-cadastro-input-senha,
+.dialogo-cadastro-input-confirme-senha {
+  width: 90%;
+}
+
+
+.dialogo-cadastro-link-login {
+  grid-row: 8;
+  grid-column: 1;
+  color: var(--amarelo);
+  cursor: pointer;
+  font-size: var(--fontePequena);
+  font-weight: var(--fonteSemiBold);
+  text-decoration: none;
+}
+
+ .dialogo-cadastro-button {
+  all: unset;
+  grid-row-start: 8;
+  align-self: start;
+  font-size: var(--fontePequena);
+  font-weight: var(--fonteSemiBold);
+  justify-self: end;
+  padding: var(--espacamentoPequeno) var(--espacamentoMenor);
+  border-radius: var(--bordaRaio);
+  background-color: var(--amarelo);
+  color: var(--verde);
+  cursor: pointer;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  z-index: 999;
+}
