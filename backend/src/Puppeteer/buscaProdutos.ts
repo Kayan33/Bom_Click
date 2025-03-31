@@ -10,17 +10,83 @@ class Puppeteer {
         const pagina = await navegador.newPage();
 
         async function buscaDados() {
-            console.log("Acessou");
             const informacoesProduto = await pagina.waitForSelector('div.auto-suggest-item__info');
             const produtoSite = await informacoesProduto!.evaluate(el => el.textContent);
             return String(produtoSite);
         }
 
-        let produto = 'Empanada Seara Levíssimo Recheado Frango/Mussarela 120g';
+        async function produtoEncontrado() {
+
+            const resultado = await pagina.waitForSelector('div.auto-suggest-item-container > a');
+            const resultadoLink = await resultado!.evaluate(el => el.href);
+
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            await pagina.goto(resultadoLink);
+
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            const imagemContainer = await pagina.locator('div.Img__Wrapper img').waitHandle();
+            const imagemProduto = await imagemContainer.evaluate(img => img.src);
+
+            const produtoContainer = await pagina.locator('div.product-info h2.heading-2').waitHandle();
+            const nomeProduto = await produtoContainer.evaluate((el) => el.textContent);
+
+            const valorContainer = await pagina.locator('div.product-info__price').waitHandle();
+            const valorProduto = await valorContainer.evaluate((el => el.textContent));
+
+            return ({
+
+                nomeProduto: nomeProduto,
+                valorProduto: valorProduto,
+                imagemProduto: imagemProduto
+
+            })
+        }
+
+        async function buscaSimilares() {
+
+            const resultadosSimilares = pagina.locator('div.auto-suggest-item-container')
+
+            const itemsData = await pagina.$$eval('div.auto-suggest-item', (itemDivs) => {
+                // Esta função roda no navegador. 'itemDivs' é um array das divs encontradas.
+
+                return itemDivs.map(div => {
+                    // Para cada 'div.auto-suggest-item', encontramos os elementos internos.
+                    // Usamos querySelector DENTRO da div atual.
+
+                    // 1. Imagem (pegando o atributo 'src' da tag 'img')
+                    const imgElement = div.querySelector('.auto-suggest-item__img img');
+                    // NOTA: O 'src' aqui é relativo ("/ccstore/..."). Pode precisar ser combinado com o domínio base.
+                    const imageUrl = imgElement ? imgElement.getAttribute('src') : null;
+
+                    // 2. Informação (pegando o texto do 'h4')
+                    const infoElement = div.querySelector('.auto-suggest-item__info h4');
+                    const title = infoElement ? infoElement.textContent!.trim() : null;
+
+                    // 3. Preço (pegando o texto do 'h2')
+                    const priceElement = div.querySelector('.auto-suggest-item__price h2.price-current');
+                    const price = priceElement ? priceElement.textContent!.trim() : null;
+
+                    // Retornamos um objeto com os dados extraídos para este item
+
+                    return {
+                        imageUrl: imageUrl,
+                        title: title,
+                        price: price,
+                    };
+
+                });
+            });
+        }
+
+        let produto = "Café 3 Corações Portinari Peneirando Café 1957 Pacote 250g";
         let produtoArray = produto.split(" ");
         await pagina.goto(`https://www.confianca.com.br/bauru/home`);
         await pagina.setViewport({ width: 1080, height: 1024 });
         let produtoConcatenado = "";
+
+        let dadosEncontrados = {}
+        let produtosSimilares
 
         for (let contador = 0; contador < produtoArray.length; contador++) {
             produtoConcatenado += `${produtoArray[contador]} `;
@@ -31,22 +97,42 @@ class Puppeteer {
             await new Promise(resolve => setTimeout(resolve, 2000));
 
             const produtoSite = await buscaDados();
-            console.log("ENCONTRADO_SITE:", produtoSite);
             const similaridade = stringSimilarity.compareTwoStrings(produtoConcatenado, produtoSite);
-            console.log("Similaridade:", similaridade);
-            console.log(similaridade >= 0.60);
 
-            if (similaridade >= 0.60) {
-                const resultado = await pagina.waitForSelector('div.auto-suggest-item-container > a');
-                await new Promise(resolve => setTimeout(resolve, 1000));
-                resultado!.click();
-                const imagemContainer = await pagina.locator('.Img__Wrapper img').waitHandle();
-                const imagemProduto = await imagemContainer.evaluate((img => img.src));
-                console.log(imagemProduto);
-                const valorContainer = await pagina.locator('.product-info__price false').waitHandle();
-                const valorProduto = await valorContainer.evaluate((el => el.textContent));
-                console.log(valorProduto);
+            if (similaridade >= 0.40 && similaridade <= 0.60) {
+
+                produtosSimilares = await buscaSimilares()
+
             }
+
+            if (similaridade >= 0.80) {
+
+                dadosEncontrados = await produtoEncontrado();
+                produtosSimilares
+                break
+
+            }
+        }
+
+        console.log(dadosEncontrados)
+        console.log(produtosSimilares)
+
+
+        if ((Object.keys(dadosEncontrados).length > 0)) {
+
+            console.log(dadosEncontrados)
+            console.log(produtosSimilares)
+
+            return {
+
+                dadosEncontrados: dadosEncontrados,
+                produtosSimilares: produtosSimilares
+            }
+
+        } else {
+
+            console.log("Produto não encontrado")
+            return `Produto não encontrado ${produtosSimilares}`
         }
     }
 
