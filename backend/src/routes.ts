@@ -9,6 +9,7 @@ router.get('/BuscarProdutos', new Puppeteer().buscaProdutosConfiança)
 
 
 router.post('/CadastroUsuarios', new ControllerPost().cadastro_Usuarios)
+router.post('/BuscaUsuariosUnico/:id', new ControllerPost().BuscaUsuarioUnico)
 router.get('/BuscaUsuarios', new ControllerGet().BuscaUsuarios)
 
 export default router;

@@ -34,6 +34,21 @@ class ControllerPost {
       console.error("Erro no cadastro de usuário:", error);
       return res.status(500).json({ error: "Erro ao cadastrar usuário." });
     }
+    
+  }
+
+  async BuscaUsuarioUnico(req: Request, res: Response) {
+
+    try {
+      
+      const { id } = req.params
+      const servicesPost = new ServicesPost();
+      const resposta = await servicesPost.consultarUsuarioUnico(id)
+      return res.json(resposta)
+    } catch (error) {
+      console.error("Erro ao buscar usuário unico:", error);
+      return res.status(500).json({ error: "Erro ao buscar usuário unico." });
+    }
   }
 }
 

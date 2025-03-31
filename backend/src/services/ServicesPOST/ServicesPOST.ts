@@ -48,6 +48,27 @@ class ServicesPost {
       
     }
   }
+
+  async consultarUsuarioUnico(id: string) {
+    try {
+      const resposta = await prismaClient.usuario.findUnique({
+        where: {
+          id: id,
+        },
+        include:{
+  
+        }
+        
+      });
+      if (!resposta) {
+        return {error: "Usuário não encontrado." };
+    }
+      return resposta;
+    } catch (error) {
+      console.log(error);
+      throw new Error("Erro interno ao buscar usuário unico.");
+    }
+  }
 }
 
 export default ServicesPost;

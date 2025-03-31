@@ -114,6 +114,67 @@
           }
         }
       }
+    },
+    "/BuscaUsuariosUnico/{id}": {
+      "post": {
+        "summary": "Busca um usuário pelo ID",
+        "description": "Retorna os dados de um usuário específico com base no ID fornecido.",
+        "operationId": "buscaUsuarioUnico",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID do usuário a ser buscado"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuário encontrado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string", "example": "123" },
+                    "nome": { "type": "string", "example": "Maria Oliveira" },
+                    "email": { "type": "string", "example": "maria@email.com" }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Usuário não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string", "example": "Usuário não encontrado." }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno ao buscar usuário",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string", "example": "Erro ao buscar usuário único." }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
