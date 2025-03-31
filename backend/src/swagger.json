@@ -254,6 +254,65 @@
           }
         }
       }
+    },
+    "/DeletaUsuario/{id}": {
+      "delete": {
+        "summary": "Deleta um usuário pelo ID",
+        "description": "Remove um usuário do sistema com base no ID fornecido.",
+        "operationId": "deletarUsuarioUnico",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID do usuário a ser deletado"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuário deletado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "mensagem": { "type": "string", "example": "Usuário deletado com sucesso." }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Usuário não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string", "example": "Usuário não encontrado." }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno ao deletar usuário",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string", "example": "Erro ao deletar usuário." }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
