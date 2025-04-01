@@ -10,6 +10,7 @@
       "post": {
         "summary": "Cadastra um novo usuário",
         "description": "Recebe os dados do usuário e os armazena no banco de dados.",
+        "tags": ["Usuario"],
         "requestBody": {
           "required": true,
           "content": {
@@ -77,6 +78,7 @@
         "summary": "Busca todos os usuários",
         "description": "Retorna a lista de usuários cadastrados no sistema.",
         "operationId": "buscaUsuarios",
+        "tags": ["Usuario"],
         "responses": {
           "200": {
             "description": "Lista de usuários retornada com sucesso",
@@ -120,6 +122,7 @@
         "summary": "Busca um usuário pelo ID",
         "description": "Retorna os dados de um usuário específico com base no ID fornecido.",
         "operationId": "buscaUsuarioUnico",
+        "tags": ["Usuario"],
         "parameters": [
           {
             "name": "id",
@@ -181,6 +184,7 @@
         "summary": "Altera os dados de um usuário pelo ID",
         "description": "Atualiza os dados de um usuário específico com base no ID fornecido.",
         "operationId": "alteraDadosUsuario",
+        "tags": ["Usuario"],
         "parameters": [
           {
             "name": "id",
@@ -260,6 +264,7 @@
         "summary": "Deleta um usuário pelo ID",
         "description": "Remove um usuário do sistema com base no ID fornecido.",
         "operationId": "deletarUsuarioUnico",
+        "tags": ["Usuario"],
         "parameters": [
           {
             "name": "id",
@@ -310,6 +315,91 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+
+    "/loginUsuario": {
+      "post": {
+        "summary": "Realiza o login do usuário",
+        "tags": ["Login"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "usuario@example.com"
+                  },
+                  "senha": {
+                    "type": "string",
+                    "example": "senha123"
+                  }
+                },
+                "required": ["email", "senha"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Usuário autenticado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string" },
+                    "nome": { "type": "string" },
+                    "email": { "type": "string" },
+                    "token": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Usuário ou senha inválidos"
+          }
+        }
+      }
+    },
+    "/verificaTokenUsuario/{id}": {
+      "get": {
+        "summary": "Verifica a autenticidade do token do usuário",
+        "tags": ["Verifica Token"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "123456"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuário autenticado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string" },
+                    "nome": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Verificação falhou"
           }
         }
       }

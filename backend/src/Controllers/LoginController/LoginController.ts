@@ -14,7 +14,7 @@ class loginController {
   
 
   async verificaTokenUsuario(req: Request, res: Response){
-    const id = req.params.id
+    const id = req.params.usuarioId
     const loginServices = new LoginServices();
     try {
         
