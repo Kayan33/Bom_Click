@@ -19,13 +19,13 @@ export function estaAutenticado(
     const [, Token] = autToken.split(' ');
 
     try {
-        const {sub} = verify(
+        const { sub } = verify(
             Token,
             process.env.JWT_SECRETO as string
-        ) as Payload; 
+        ) as Payload;
 
-        req.usuarioID = sub ; 
-        return next(); 
+        req.usuarioID = sub;
+        return next();
     } catch (error) {
         return res.json({ error: 'Token Inválido' });
     }

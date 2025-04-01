@@ -6,6 +6,7 @@
     "version": "1.0.0"
   },
   "paths": {
+    
     "/CadastroUsuarios": {
       "post": {
         "summary": "Cadastra um novo usuário",
@@ -368,19 +369,13 @@
         }
       }
     },
-    "/verificaTokenUsuario/{id}": {
+    "/verificaTokenUsuario": {
       "get": {
         "summary": "Verifica a autenticidade do token do usuário",
         "tags": ["Verifica Token"],
-        "parameters": [
+        "security": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "example": "123456"
+            "BearerAuth": []
           }
         ],
         "responses": {
@@ -404,5 +399,16 @@
         }
       }
     }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "Insira o token no formato Bearer <seu_token>"
+      }
+    }
   }
+  
 }

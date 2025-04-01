@@ -4,7 +4,8 @@ import ControllerPost from './Controllers/ControllersPost/ControllersPost';
 import ControllerGet from './Controllers/ControllersGet/ControllersGet';
 import ControllerPut from './Controllers/ControllersPut/ControllersPut';
 import ControllerDelete from './Controllers/ControllersDelete/ControllersDelete';
-import { loginController } from './Controllers/LoginController/LoginController';
+import LoginController from './Controllers/LoginController/LoginController';
+import { estaAutenticado } from './middleware/estaAutenticado';
 
 const router = Router();
 
@@ -17,6 +18,6 @@ router.post('/BuscaUsuariosUnico/:id', new ControllerPost().BuscaUsuarioUnico)
 router.put('/AlteraDadosUsuario/:id', new ControllerPut().AlteraDadosUsuario)
 router.delete('/DeletaUsuario/:id', new ControllerDelete().DeletarUsuarioUnico)
 
-router.post('/loginUsuario', new loginController().loginUsuario)
-router.get('/verificaTokenUsuario/:id', new loginController().verificaTokenUsuario)
+router.post('/loginUsuario', new LoginController().loginUsuario)
+router.get('/verificaTokenUsuario', estaAutenticado,new LoginController().verificaTokenUsuario)
 export default router;

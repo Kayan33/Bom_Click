@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import ServicesPost from "../../services/ServicesPOST/ServicesPOST";
 import ServicesPut from "../../services/ServicesPut/ServicesPut";
 
 class ControllerPut {
