@@ -6,6 +6,9 @@ class Puppeteer {
 
     async buscaProdutosConfiança(req: Request, res: Response) {
         console.time("Execução");
+
+        const { nomeProduto, url } = req.body;
+
         const navegador = await puppeteer.launch({ headless: false, devtools: true });
         const pagina = await navegador.newPage();
 
@@ -20,10 +23,7 @@ class Puppeteer {
             const resultado = await pagina.waitForSelector('div.auto-suggest-item-container > a');
             const resultadoLink = await resultado!.evaluate(el => el.href);
 
-            await new Promise(resolve => setTimeout(resolve, 1000));
             await pagina.goto(resultadoLink);
-
-            await new Promise(resolve => setTimeout(resolve, 2000));
 
             const imagemContainer = await pagina.locator('div.Img__Wrapper img').waitHandle();
             const imagemProduto = await imagemContainer.evaluate(img => img.src);
@@ -44,8 +44,6 @@ class Puppeteer {
         }
 
         async function buscaSimilares() {
-
-            const resultadosSimilares = pagina.locator('div.auto-suggest-item-container')
 
             const itemsData = await pagina.$$eval('div.auto-suggest-item', (itemDivs) => {
                 // Esta função roda no navegador. 'itemDivs' é um array das divs encontradas.
@@ -81,18 +79,19 @@ class Puppeteer {
             return itemsData
         }
 
-        let produto = "Café 3 Corações Portinari Peneirando Café 1957 Pacote 250g"; 
+        let produto = nomeProduto;
         let produtoArray = produto.split(" ");
-        await pagina.goto(`https://www.confianca.com.br/bauru/home`);
+        await pagina.goto(url);
         await pagina.setViewport({ width: 1080, height: 1024 });
         let produtoConcatenado = "";
 
         let dadosEncontrados = {}
-        let produtosSimilares ={}
+        let produtosSimilares = {}
 
         for (let contador = 0; contador < produtoArray.length; contador++) {
+
             produtoConcatenado += `${produtoArray[contador]} `;
-            console.log("TENTATIVA:", produtoConcatenado);
+
             await pagina.locator('div.search-header > form > input').fill(produtoConcatenado);
 
             //pausa de 2 segundos
@@ -105,34 +104,34 @@ class Puppeteer {
 
                 produtosSimilares = await buscaSimilares()
 
-            }else if (similaridade >= 0.80) {
+            } else if (similaridade >= 0.80) {
 
                 dadosEncontrados = await produtoEncontrado();
 
                 await navegador.close();
                 console.timeEnd("Execução");
 
-                return res.json( {
+                return res.json({
 
-                dadosEncontrados: dadosEncontrados,
-                produtosSimilares: produtosSimilares
-                
-            })
-            }          
+                    dadosEncontrados: dadosEncontrados,
+                    produtosSimilares: produtosSimilares
+
+                })
+            }
         }
 
-       if(Object.keys(produtosSimilares).length > 0){
+        if (Object.keys(produtosSimilares).length > 0) {
 
             await navegador.close();
             console.timeEnd("Execução");
 
-            return res.json({produtosSimilares: produtosSimilares}); 
+            return res.json({ produtosSimilares: produtosSimilares });
 
-        } else{
+        } else {
 
             await navegador.close();
             console.timeEnd("Execução");
-            return  res.json("Nenhum produto localizado");
+            return res.json("Nenhum produto localizado");
         }
 
     }
@@ -140,32 +139,120 @@ class Puppeteer {
     async buscaProdutosTauste(req: Request, res: Response) {
 
         console.time("Execução");
-        const { url, produto } = req.body;
-        const browser = await puppeteer.launch({ headless: false, devtools: true });
-        const page = await browser.newPage();
 
-        await page.goto(`https://www.confianca.com.br/bauru/home`)
+        const { nomeProduto } = req.body;
 
-        await page.setViewport({ width: 1080, height: 1024 });
+        const navegador = await puppeteer.launch({ headless: false, devtools: true });
+        const pagina = await navegador.newPage();
 
-        // Type into search box.
-        await page.locator('.search-header__input').fill('Frango a milanesa bife 470g');
+        async function buscaDados() {
+            const informacoesProduto = await pagina.waitForSelector('div.product-item-details');
+            const produtoSite = await informacoesProduto!.evaluate(el => el.textContent);
+            return String(produtoSite);
+        }
 
-        // // Wait and click on first result.
-        // await page.locator('.devsite-result-item-link').click();
+        async function produtoEncontrado() {
 
-        // // Locate the full title with a unique string.
-        // const textSelector = await page
-        //     .locator('text/Customize and automate')
-        //     .waitHandle();
-        // const fullTitle = await textSelector?.evaluate(el => el.textContent);
+            const productNameElement = pagina.locator('span.livesearch.product-name');
+            await productNameElement.click();
 
-        // // Print the full title.
-        // console.log('The title of this blog post is "%s".', fullTitle);
+            //pausa de 2 segundos
+            await new Promise(resolve => setTimeout(resolve, 2000));
 
-        await browser.close();
+            const imagemContainer = await pagina.locator('div.Img__Wrapper img').waitHandle();
+            const imagemProduto = await imagemContainer.evaluate(img => img.src);
 
-        console.timeEnd("Execução");
+            const produtoContainer = await pagina.locator('div.product-info h2.heading-2').waitHandle();
+            const nomeProduto = await produtoContainer.evaluate((el) => el.textContent);
+
+            const valorContainer = await pagina.locator('div.product-info__price').waitHandle();
+            const valorProduto = await valorContainer.evaluate((el => el.textContent));
+
+            return ({
+
+                nomeProduto: nomeProduto,
+                valorProduto: valorProduto,
+                imagemProduto: imagemProduto
+
+            })
+        }
+
+        async function buscaSimilares() {
+            const itemsData = await pagina.$$eval('div.livesearch.products-container > div.livesearch.product-result > div.product-container', (productContainers) => {
+                return productContainers.map(container => {
+                    const imgElement = container.querySelector('.product-info .product-image');
+                    const imageUrl = imgElement ? imgElement.getAttribute('src') : null;
+
+                    const titleElement = container.querySelector('.product-info .product-item-details .livesearch.product-name');
+                    const title = titleElement ? titleElement.textContent!.trim() : null;
+
+                    const priceElement = container.querySelector('.product-info .product-item-details .livesearch.product-price span');
+                    const price = priceElement ? priceElement.textContent!.trim() : null;
+
+                    return {
+                        imageUrl: imageUrl,
+                        title: title,
+                        price: price,
+                    };
+                });
+            });
+            return itemsData;
+        }
+
+        let produto = "Isotônico Gatorade Limão Frasco 500ml";
+        let produtoArray = produto.split(" ");
+        await pagina.goto(`https://tauste.com.br/bauru/`);
+        await pagina.setViewport({ width: 1080, height: 1024 });
+        let produtoConcatenado = "";
+
+        let dadosEncontrados = {}
+        let produtosSimilares = {}
+
+        for (let contador = 0; contador < produtoArray.length; contador++) {
+            produtoConcatenado += `${produtoArray[contador]} `;
+            console.log("TENTATIVA:", produtoConcatenado);
+            await pagina.locator('input#search').fill(produtoConcatenado);
+
+            //pausa de 2 segundos
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            const produtoSite = await buscaDados();
+            const similaridade = stringSimilarity.compareTwoStrings(produtoConcatenado, produtoSite);
+
+            if (similaridade >= 0.40 && similaridade <= 0.60) {
+
+                produtosSimilares = await buscaSimilares()
+
+            } else if (similaridade >= 0.80) {
+
+                dadosEncontrados = await produtoEncontrado();
+
+                await navegador.close();
+                console.timeEnd("Execução");
+
+                return res.json({
+
+                    dadosEncontrados: dadosEncontrados,
+                    produtosSimilares: produtosSimilares
+
+                })
+            }
+        }
+
+        if (Object.keys(produtosSimilares).length > 0) {
+
+            await navegador.close();
+            console.timeEnd("Execução");
+
+            return res.json({ produtosSimilares: produtosSimilares });
+
+        } else {
+
+            await navegador.close();
+            console.timeEnd("Execução");
+            return res.json("Nenhum produto localizado");
+        }
+
 
     }
 

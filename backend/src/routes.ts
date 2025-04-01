@@ -8,7 +8,10 @@ import { loginController } from './Controllers/LoginController/LoginController';
 
 const router = Router();
 
-router.get('/BuscarProdutos', new Puppeteer().buscaProdutosConfiança)
+router.get('/BuscarProdutosConfianca', new Puppeteer().buscaProdutosConfiança)
+
+router.get('/BuscarProdutosTauste', new Puppeteer().buscaProdutosTauste)
+
 
 
 router.post('/CadastroUsuarios', new ControllerPost().cadastro_Usuarios)
