@@ -77,16 +77,18 @@ class Puppeteer {
 
                 });
             });
+
+            return itemsData
         }
 
-        let produto = "Café 3 Corações Portinari Peneirando Café 1957 Pacote 250g";
+        let produto = "Café 3 Corações Portinari Peneirando Café 1957 Pacote 250g"; 
         let produtoArray = produto.split(" ");
         await pagina.goto(`https://www.confianca.com.br/bauru/home`);
         await pagina.setViewport({ width: 1080, height: 1024 });
         let produtoConcatenado = "";
 
         let dadosEncontrados = {}
-        let produtosSimilares
+        let produtosSimilares ={}
 
         for (let contador = 0; contador < produtoArray.length; contador++) {
             produtoConcatenado += `${produtoArray[contador]} `;
@@ -103,37 +105,36 @@ class Puppeteer {
 
                 produtosSimilares = await buscaSimilares()
 
-            }
-
-            if (similaridade >= 0.80) {
+            }else if (similaridade >= 0.80) {
 
                 dadosEncontrados = await produtoEncontrado();
-                produtosSimilares
-                break
 
-            }
-        }
+                await navegador.close();
+                console.timeEnd("Execução");
 
-        console.log(dadosEncontrados)
-        console.log(produtosSimilares)
-
-
-        if ((Object.keys(dadosEncontrados).length > 0)) {
-
-            console.log(dadosEncontrados)
-            console.log(produtosSimilares)
-
-            return {
+                return res.json( {
 
                 dadosEncontrados: dadosEncontrados,
                 produtosSimilares: produtosSimilares
-            }
-
-        } else {
-
-            console.log("Produto não encontrado")
-            return `Produto não encontrado ${produtosSimilares}`
+                
+            })
+            }          
         }
+
+       if(Object.keys(produtosSimilares).length > 0){
+
+            await navegador.close();
+            console.timeEnd("Execução");
+
+            return res.json({produtosSimilares: produtosSimilares}); 
+
+        } else{
+
+            await navegador.close();
+            console.timeEnd("Execução");
+            return  res.json("Nenhum produto localizado");
+        }
+
     }
 
     async buscaProdutosTauste(req: Request, res: Response) {
@@ -162,9 +163,9 @@ class Puppeteer {
         // // Print the full title.
         // console.log('The title of this blog post is "%s".', fullTitle);
 
-        // await browser.close();
+        await browser.close();
 
-        // console.timeEnd("Execução");
+        console.timeEnd("Execução");
 
     }
 
