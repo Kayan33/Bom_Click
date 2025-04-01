@@ -23,14 +23,14 @@ enum OpcaoPagamento {
 model Usuario {
   id   String @id @default(uuid())
   nome String
-  cpf String @unique @db.VarChar(14)
-  dataNascimento DateTime
-  senha String
-  cep String @db.VarChar(8)
-  logradouro String
-  bairro String
-  numero Int
   email String @unique
+  cpf String @unique @db.VarChar(14)
+  senha String
+  dataNascimento DateTime?
+  cep String? @db.VarChar(8)
+  logradouro String?
+  bairro String?
+  numero Int?
   // Relação entre Usuario e formasPagamento
   formasPagamento FormaPagamento[]
  

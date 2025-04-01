@@ -45,17 +45,29 @@ class LoginServices {
 
   
 
-  async verificaTokenUsuario(id:string){
-    const resposta = await prismaClient.usuario.findFirst({
-        where:{
-            id:id
+  async verificaTokenUsuario(id: string) {
+    try {
+      const resposta = await prismaClient.usuario.findFirst({
+        where: {
+          id: id
         },
-        select:{
-            id:true, nome:true
+        select: {
+          id: true,
+          nome: true,
         }
-    })
-    return resposta
+      });
+  
+      if (!resposta) {
+        throw new Error("Usuário não encontrado.");
+      }
+  
+      return resposta;
+    } catch (error) {
+      console.error("Erro ao verificar o token do usuário:", error);
+      throw new Error("Erro ao verificar o token do usuário.");
+    }
   }
+  
 
 
 }

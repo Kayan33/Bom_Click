@@ -6,27 +6,27 @@ class ControllerPost {
     try {
       const {
         nome,
+        email,
         cpf,
-        dataNascimento,
         senha,
+        dataNascimento,
         cep,
         logradouro,
         bairro,
-        numero,
-        email,
+        numero
       } = req.body;
 
       const servicesPost = new ServicesPost();
       const resposta = await servicesPost.CadastroUsuarios({
         nome,
+        email,
         cpf,
-        dataNascimento,
         senha,
+        dataNascimento,
         cep,
         logradouro,
         bairro,
-        numero,
-        email,
+        numero
       });
 
       return res.status(201).json(resposta);
@@ -34,13 +34,13 @@ class ControllerPost {
       console.error("Erro no cadastro de usuário:", error);
       return res.status(500).json({ error: "Erro ao cadastrar usuário." });
     }
-    
+
   }
 
   async BuscaUsuarioUnico(req: Request, res: Response) {
 
     try {
-      
+
       const { id } = req.params
       const servicesPost = new ServicesPost();
       const resposta = await servicesPost.consultarUsuarioUnico(id)
