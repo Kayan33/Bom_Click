@@ -7,14 +7,15 @@
   border-radius: var(--bordaRaio);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   width: 90vw; 
-  max-width: 25rem;
+  max-width: 15rem;
   height: auto;
-  max-height: 100vh;
+  max-height: 80vh;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1000;
+  justify-items: center;
 }
 
 /* Modal Similares */
@@ -23,22 +24,20 @@
 }
 
 /* modal cadastro */
-.modal--cadastro {
-  grid-template-columns: repeat(4, auto);
-  grid-template-rows: repeat(12, auto);
+/* .modal--cadastro {
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(7, auto);
   grid-column-gap: var(--espacamentoMenor);
   grid-row-gap: var(--espacamentoMenor);
   align-items: center;
   max-width: 15rem;
-  height: 30rem;
+  height: 15rem;
   justify-items: center;
-}
-
-
+} */
 
 .modal-cadastro-titulo {
   grid-row: 1;
-  grid-column: span 1 / span 2;
+  grid-column: span 1 / span 3;
   grid-column-start: 1;
   justify-self: center;
   font-size: var(--fonteSegundaria);
@@ -55,13 +54,21 @@ dialog {
 
 form {
   display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(7, auto);
+  grid-column-gap: var(--espacamentoMenor);
+  grid-row-gap: var(--espacamentoMenor);
+  align-items: center;
+  max-width: 15rem;
+  height: 15rem;
+  justify-items: center;
   row-gap: var(--espacamentoPequeno);
 }
 
 
 form .dialogo-cadastro-input-nome {
   grid-row: 2;
-  grid-column: span 1 / span 2;
+  grid-column: span 1 / span 3;
   grid-column-start: 1;
   padding: var(--espacamentoPequeno);
   font-size: var(--fontePequena);
@@ -71,7 +78,7 @@ form .dialogo-cadastro-input-nome {
 
 form .dialogo-cadastro-input-email {
   grid-row: 3;
-  grid-column: span 1 / span 2;
+  grid-column: span 1 / span 3;
   grid-column-start: 1;
   padding: var(--espacamentoPequeno);
   font-size: var(--fontePequena);
@@ -81,57 +88,7 @@ form .dialogo-cadastro-input-email {
 
 form .dialogo-cadastro-input-cpf {
   grid-row: 4;
-  grid-column: span 1 / span 2;
-  grid-column-start: 1;
-  padding: var(--espacamentoPequeno);
-  font-size: var(--fontePequena);
-  border-radius: var(--bordaRaio);
-  transition: border-color 0.3s ease;
-}
-
- form .dialogo-cadastro-input-data-nascimento {
-  grid-row: 5;
-  grid-column: span 1 / span 2;
-  grid-column-start: 1;
-  padding: var(--espacamentoPequeno);
-  font-size: var(--fontePequena);
-  border-radius: var(--bordaRaio);
-  transition: border-color 0.3s ease;
-}
-
- form .dialogo-cadastro-input-cep {
-  grid-row: 6;
-  grid-column: span 1 / span 2;
-  grid-column-start: 1;
-  padding: var(--espacamentoPequeno);
-  font-size: var(--fontePequena);
-  border-radius: var(--bordaRaio);
-  transition: border-color 0.3s ease;
-}
-
- form .dialogo-cadastro-input-bairro {
-  grid-row: 7;
-  grid-column: span 1 / span 2;
-  grid-column-start: 1;
-  padding: var(--espacamentoPequeno);
-  font-size: var(--fontePequena);
-  border-radius: var(--bordaRaio);
-  transition: border-color 0.3s ease;
-}
-
- form .dialogo-cadastro-input-logradouro {
-  grid-row: 8;
-  grid-column: span 1 / span 2;
-  grid-column-start: 1;
-  padding: var(--espacamentoPequeno);
-  font-size: var(--fontePequena);
-  border-radius: var(--bordaRaio);
-  transition: border-color 0.3s ease;
-}
-
- form .dialogo-cadastro-input-numero {
-  grid-row: 9;
-  grid-column: span 1 / span 2;
+  grid-column: span 1 / span 3;
   grid-column-start: 1;
   padding: var(--espacamentoPequeno);
   font-size: var(--fontePequena);
@@ -140,8 +97,8 @@ form .dialogo-cadastro-input-cpf {
 }
 
  form .dialogo-cadastro-input-senha {
-  grid-row: 10;
-  grid-column: span 1 / span 2;
+  grid-row: 5;
+  grid-column: span 1 / span 3;
   grid-column-start: 1;
   padding: var(--espacamentoPequeno);
   font-size: var(--fontePequena);
@@ -150,8 +107,8 @@ form .dialogo-cadastro-input-cpf {
 }
 
 form .dialogo-cadastro-input-confirme-senha {
-  grid-row: 11;
-  grid-column: span 1 / span 2;
+  grid-row: 6;
+  grid-column: span 1 / span 3;
   grid-column-start: 1;
   padding: var(--espacamentoPequeno);
   font-size: var(--fontePequena);
@@ -160,7 +117,7 @@ form .dialogo-cadastro-input-confirme-senha {
 }
 
 form .dialogo-cadastro-link-login {
-  grid-row: 12;
+  grid-row: 7;
   grid-column: 1;
   color: var(--amarelo);
   cursor: pointer;
@@ -171,8 +128,8 @@ form .dialogo-cadastro-link-login {
 
  form .dialogo-cadastro-button {
   all: unset;
-  grid-row-start: 12;
-  grid-column: 2;
+  grid-row-start: 7;
+  grid-column: 3;
   align-self: start;
   font-size: var(--fontePequena);
   font-weight: var(--fonteSemiBold);
@@ -187,13 +144,9 @@ form .dialogo-cadastro-link-login {
 .dialogo-cadastro-input-nome,
 .dialogo-cadastro-input-email, 
 .dialogo-cadastro-input-cpf, 
-.dialogo-cadastro-input-data-nascimento,
+
 .dialogo-cadastro-input-senha,
-.dialogo-cadastro-input-confirme-senha,
-.dialogo-cadastro-input-cep,
-.dialogo-cadastro-input-logradouro, 
-.dialogo-cadastro-input-bairro,
-.dialogo-cadastro-input-numero {
+.dialogo-cadastro-input-confirme-senha{
   width: 90%;
 }
 

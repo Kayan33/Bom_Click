@@ -4,48 +4,50 @@ import prismaClient from "../../prisma";
 class ServicesPost {
   async CadastroUsuarios({
     nome,
+    email,
     cpf,
-    dataNascimento,
     senha,
+    dataNascimento,
     cep,
     logradouro,
     bairro,
     numero,
-    email,
+
   }: {
     nome: string;
+    email: string;
     cpf: string;
-    dataNascimento: string;
     senha: string;
+    dataNascimento: string;
     cep: string;
     logradouro: string;
     bairro: string;
     numero: number;
-    email: string;
+
   }) {
     try {
-      
+
       const senhaCrypt = await hash(senha, 10);
-  
+
       await prismaClient.usuario.create({
         data: {
           nome,
+          email,
           cpf,
-          dataNascimento: dataNascimento,
           senha: senhaCrypt,
+          dataNascimento: dataNascimento,
           logradouro,
           numero,
           bairro,
-          cep,
-          email,
+          cep
         },
       });
-  
+
       return { mensagem: "Cadastro efetuado com sucesso!" };
     } catch (error) {
       console.log(error);
       throw new Error("Erro interno ao cadastrar usuário.");
-      
+
     }
   }
 
@@ -55,14 +57,14 @@ class ServicesPost {
         where: {
           id: id,
         },
-        include:{
-  
+        include: {
+
         }
-        
+
       });
       if (!resposta) {
-        return {error: "Usuário não encontrado." };
-    }
+        return { error: "Usuário não encontrado." };
+      }
       return resposta;
     } catch (error) {
       console.log(error);
