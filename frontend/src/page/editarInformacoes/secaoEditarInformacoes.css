@@ -24,8 +24,8 @@
     display: grid;
     grid-template-columns: max-content auto;
     grid-template-rows: 1fr 1fr;
-   
 }
+
 
 .secao_informacoesPessoais_formulario_container_campo_titulo{
 

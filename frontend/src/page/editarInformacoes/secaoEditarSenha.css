@@ -15,6 +15,7 @@
     grid-template-columns: max-content max-content auto;
     align-items: center;
     gap: 10px; /* Espaço entre os elementos */
+    justify-content: flex-start;
 }
 
 .secao_senha_formulario_container_titulo{
@@ -65,7 +66,7 @@
 
     .secao_senha_formulario_container_campo_valor {
 
-        width: 10rem;
+        width: 9rem;
     }
 }
   

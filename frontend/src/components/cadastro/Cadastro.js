@@ -43,7 +43,7 @@ export default function Cadastro() {
         <div className="modal-content">
             <div className="modal modal--cadastro">
 
-                <form onSubmit={CadastroUsuarios}>
+                <form onSubmit={CadastroUsuarios} className="modal_form_cadastro">
                     <h2 className="modal-cadastro-titulo">
                         Cadastro
                     </h2>

@@ -1,19 +1,9 @@
 main {
-    .secao_conferir_produtos {
 
-        h2 {
-            color: var(--amarelo);
-            font-weight: var(--fonteBold);
-            margin: var(--espacamentoMenor) var(--espacamentoMenor);
-        }
-
-        .scroll_conferir_produtos {
-            margin:0 var(--espacamentoMenor) ;
-        }
-
-        img {
-            margin:0 var(--espacamentoMenor);
-        }
+    .titulo_resumo_produtos {
+        font-size: var(--fonteBold);
+        font-weight: var(--fonteBold);
+        color: var(--amarelo);
     }
 
     .melhor_preco {

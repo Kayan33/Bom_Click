@@ -87,94 +87,23 @@ export default function ResumoCompra() {
         <h1 className='cabecalho_titulo'>Resumo da compra</h1>
       </header>
       <main>
-        <section className="secao_conferir_produtos">
-          <h2>Confira os produtos</h2>
-          <img src={confiancaLogo} alt="Logo do supermercado confiança"/>
-          <div className='scroll_conferir_produtos'>
-
+       <h2 className="titulo_resumo_produtos">Confira os Produtos</h2>
+      <section className='secao_resumo_produtos'>
+          <img src={confiancaLogo} alt="Confiança Logo" className='secao_resumo_produtos_logoMercado' />
           <ul className='secao_compras_produtos_lista barraRolagem'>
+              <li className='secao_compras_produtos_lista_item'>
+                <article className='secao_compras_lista_item_produto'>
+                  <img src={batata} alt='' className='secao_compras_lista_item_produto_imagem' />
+                  <h3 className='secao_compras_lista_item_produto_titulo'>Batata</h3>
+                  <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preco'>
+                    R$5,00
+                  </h4>
+                  <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--naoMelhorPreco'>Melhor preço</h4>
 
-<li className='secao_compras_produtos_lista_item'>
-
-    <article className='secao_compras_lista_item_produto'>
-
-        <img src={carne} alt="Fraldinha" className='secao_compras_lista_item_produto_imagem' />
-
-        <h3 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo'>Fraldinha Bovina Resfriada KG</h3>
-
-        <div className='secao_compras_lista_item_produto_valores melhor_preco'>
-
-            <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preço'>R$40,00</h4>
-
-            <h4>Melhor Preço!</h4>
-
-        </div>
-
-    </article>
-
-</li>
-
-<li className='secao_compras_produtos_lista_item'>
-
-    <article className='secao_compras_lista_item_produto'>
-
-        <img src={limao} alt="Fraldinha" className='secao_compras_lista_item_produto_imagem' />
-
-        <h3 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo'>Limao Taiti KG</h3>
-
-        <div className='secao_compras_lista_item_produto_valores nao_melhor_preco'>
-
-            <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preço'>R$10,00</h4>
-
-            <h4>Não é o melhor preço</h4>
-
-        </div>
-
-    </article>
-
-</li>
-<li className='secao_compras_produtos_lista_item'>
-
-    <article className='secao_compras_lista_item_produto'>
-
-        <img src={alho} alt="Fraldinha" className='secao_compras_lista_item_produto_imagem' />
-
-        <h3 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo'>Alho UN</h3>
-
-        <div className='secao_compras_lista_item_produto_valores'>
-
-            <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preço'>R$0,50</h4>
-
-            <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--desconto secao_compras_lista_item_produto_titulo--amarelo'>R$40,00</h4>
-
-        </div>
-
-    </article>
-
-</li>
-<li className='secao_compras_produtos_lista_item'>
-
-    <article className='secao_compras_lista_item_produto'>
-
-        <img src={batata} alt="Fraldinha" className='secao_compras_lista_item_produto_imagem' />
-
-        <h3 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo'>Batata UN</h3>
-
-        <div className='secao_compras_lista_item_produto_valores'>
-
-            <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preço'>R$5,00</h4>
-
-            <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--desconto secao_compras_lista_item_produto_titulo--amarelo'>R$1,00</h4>
-
-        </div>
-
-    </article>
-
-</li>
-
-</ul>
-          </div>
-        </section>
+                </article>
+              </li>
+          </ul>
+          </section>
 
         <section className="secao_resumo_entrega">
           <h3>Entrega:</h3>
