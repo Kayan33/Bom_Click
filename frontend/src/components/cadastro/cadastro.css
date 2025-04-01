@@ -9,7 +9,7 @@
   width: 90vw; 
   max-width: 25rem;
   height: auto;
-  max-height: 80vh;
+  max-height: 100vh;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -24,13 +24,13 @@
 
 /* modal cadastro */
 .modal--cadastro {
-  grid-template-columns: repeat(3, auto);
-  grid-template-rows: repeat(8, auto);
+  grid-template-columns: repeat(4, auto);
+  grid-template-rows: repeat(12, auto);
   grid-column-gap: var(--espacamentoMenor);
   grid-row-gap: var(--espacamentoMenor);
   align-items: center;
   max-width: 15rem;
-  height: 25rem;
+  height: 30rem;
   justify-items: center;
 }
 
@@ -53,8 +53,13 @@ dialog {
   background-color: transparent;
 }
 
+form {
+  display: grid;
+  row-gap: var(--espacamentoPequeno);
+}
 
-.dialogo-cadastro-input-nome {
+
+form .dialogo-cadastro-input-nome {
   grid-row: 2;
   grid-column: span 1 / span 2;
   grid-column-start: 1;
@@ -64,7 +69,7 @@ dialog {
   transition: border-color 0.3s ease;
 }
 
-.dialogo-cadastro-input-email {
+form .dialogo-cadastro-input-email {
   grid-row: 3;
   grid-column: span 1 / span 2;
   grid-column-start: 1;
@@ -74,7 +79,7 @@ dialog {
   transition: border-color 0.3s ease;
 }
 
-.dialogo-cadastro-input-cpf {
+form .dialogo-cadastro-input-cpf {
   grid-row: 4;
   grid-column: span 1 / span 2;
   grid-column-start: 1;
@@ -84,7 +89,7 @@ dialog {
   transition: border-color 0.3s ease;
 }
 
-.dialogo-cadastro-input-data-nascimento {
+ form .dialogo-cadastro-input-data-nascimento {
   grid-row: 5;
   grid-column: span 1 / span 2;
   grid-column-start: 1;
@@ -93,7 +98,8 @@ dialog {
   border-radius: var(--bordaRaio);
   transition: border-color 0.3s ease;
 }
-.dialogo-cadastro-input-senha {
+
+ form .dialogo-cadastro-input-cep {
   grid-row: 6;
   grid-column: span 1 / span 2;
   grid-column-start: 1;
@@ -103,7 +109,7 @@ dialog {
   transition: border-color 0.3s ease;
 }
 
-.dialogo-cadastro-input-confirme-senha {
+ form .dialogo-cadastro-input-bairro {
   grid-row: 7;
   grid-column: span 1 / span 2;
   grid-column-start: 1;
@@ -113,18 +119,48 @@ dialog {
   transition: border-color 0.3s ease;
 }
 
-.dialogo-cadastro-input-nome,
-.dialogo-cadastro-input-email, 
-.dialogo-cadastro-input-cpf, 
-.dialogo-cadastro-input-data-nascimento,
-.dialogo-cadastro-input-senha,
-.dialogo-cadastro-input-confirme-senha {
-  width: 90%;
+ form .dialogo-cadastro-input-logradouro {
+  grid-row: 8;
+  grid-column: span 1 / span 2;
+  grid-column-start: 1;
+  padding: var(--espacamentoPequeno);
+  font-size: var(--fontePequena);
+  border-radius: var(--bordaRaio);
+  transition: border-color 0.3s ease;
 }
 
+ form .dialogo-cadastro-input-numero {
+  grid-row: 9;
+  grid-column: span 1 / span 2;
+  grid-column-start: 1;
+  padding: var(--espacamentoPequeno);
+  font-size: var(--fontePequena);
+  border-radius: var(--bordaRaio);
+  transition: border-color 0.3s ease;
+}
 
-.dialogo-cadastro-link-login {
-  grid-row: 8;
+ form .dialogo-cadastro-input-senha {
+  grid-row: 10;
+  grid-column: span 1 / span 2;
+  grid-column-start: 1;
+  padding: var(--espacamentoPequeno);
+  font-size: var(--fontePequena);
+  border-radius: var(--bordaRaio);
+  transition: border-color 0.3s ease;
+}
+
+form .dialogo-cadastro-input-confirme-senha {
+  grid-row: 11;
+  grid-column: span 1 / span 2;
+  grid-column-start: 1;
+  padding: var(--espacamentoPequeno);
+  font-size: var(--fontePequena);
+  border-radius: var(--bordaRaio);
+  transition: border-color 0.3s ease;
+}
+
+form .dialogo-cadastro-link-login {
+  grid-row: 12;
   grid-column: 1;
   color: var(--amarelo);
   cursor: pointer;
@@ -133,9 +169,10 @@ dialog {
   text-decoration: none;
 }
 
- .dialogo-cadastro-button {
+ form .dialogo-cadastro-button {
   all: unset;
-  grid-row-start: 8;
+  grid-row-start: 12;
+  grid-column: 2;
   align-self: start;
   font-size: var(--fontePequena);
   font-weight: var(--fonteSemiBold);
@@ -146,6 +183,20 @@ dialog {
   color: var(--verde);
   cursor: pointer;
 }
+
+.dialogo-cadastro-input-nome,
+.dialogo-cadastro-input-email, 
+.dialogo-cadastro-input-cpf, 
+.dialogo-cadastro-input-data-nascimento,
+.dialogo-cadastro-input-senha,
+.dialogo-cadastro-input-confirme-senha,
+.dialogo-cadastro-input-cep,
+.dialogo-cadastro-input-logradouro, 
+.dialogo-cadastro-input-bairro,
+.dialogo-cadastro-input-numero {
+  width: 90%;
+}
+
 
 .modal-overlay {
   position: fixed;
