@@ -3,9 +3,8 @@ import stringSimilarity from "string-similarity";
 
 export class PuppeteerService {
     async buscaProdutosConfiança(nomeProduto: string, url: string) {
-        console.time("Execução");
 
-        const navegador = await puppeteer.launch({ headless: false, devtools: true });
+        const navegador = await puppeteer.launch();
         const pagina = await navegador.newPage();
 
         async function buscaDados() {
@@ -50,7 +49,6 @@ export class PuppeteerService {
         let dadosEncontrados = {};
 
         await pagina.goto(url);
-        await pagina.setViewport({ width: 1080, height: 1024 });
 
         for (let palavra of nomeProduto.split(" ")) {
             produtoConcatenado += `${palavra} `;
@@ -65,20 +63,18 @@ export class PuppeteerService {
             } else if (similaridade >= 0.80) {
                 dadosEncontrados = await produtoEncontrado();
                 await navegador.close();
-                console.timeEnd("Execução");
+
                 return { dadosEncontrados, produtosSimilares };
             }
         }
 
         await navegador.close();
-        console.timeEnd("Execução");
         return produtosSimilares;
     }
 
     async buscaProdutosTauste(nomeProduto: string, url: string) {
-        console.time("Execução");
 
-        const navegador = await puppeteer.launch({ headless: false, devtools: true });
+        const navegador = await puppeteer.launch();
         const pagina = await navegador.newPage();
 
         async function buscaDados() {
@@ -88,34 +84,36 @@ export class PuppeteerService {
         }
 
         async function produtoEncontrado() {
-            const productNameElement = await pagina.locator('span.livesearch.product-name');
-            await productNameElement.click();
 
-            // Pausa de 2 segundos
             await new Promise(resolve => setTimeout(resolve, 2000));
 
-            const imagemContainer = await pagina.locator('div.Img__Wrapper img').waitHandle();
-            const imagemProduto = await imagemContainer.evaluate(img => img.src);
+            return await pagina.$$eval('div.product-container', itemDivs => {
+                return itemDivs.map(div => {
+                    const imgElement = div.querySelector('img.product-image');
+                    const imageUrl = imgElement ? imgElement.getAttribute('src') : null;
 
-            const produtoContainer = await pagina.locator('div.product-info h2.heading-2').waitHandle();
-            const nomeProduto = await produtoContainer.evaluate(el => el.textContent);
+                    const titleElement = div.querySelector('span.livesearch.product-name');
+                    const title = titleElement ? titleElement.textContent!.trim() : null;
 
-            const valorContainer = await pagina.locator('div.product-info__price').waitHandle();
-            const valorProduto = await valorContainer.evaluate(el => el.textContent);
+                    const priceElement = div.querySelector('.livesearch.product-price span'); // Adicionamos o 'span' para selecionar o elemento correto
+                    const price = priceElement ? priceElement.textContent!.trim() : null;
 
-            return { nomeProduto, valorProduto, imagemProduto };
+                    return { imageUrl, title, price };
+                });
+            });
         }
 
         async function buscaSimilares() {
-            return await pagina.$$eval('div.livesearch.product-container', itemDivs => {
+
+            return await pagina.$$eval('div.product-container', itemDivs => {
                 return itemDivs.map(div => {
-                    const imgElement = div.querySelector('.product-image img');
+                    const imgElement = div.querySelector('img.product-image');
                     const imageUrl = imgElement ? imgElement.getAttribute('src') : null;
 
-                    const titleElement = div.querySelector('.livesearch.product-name');
+                    const titleElement = div.querySelector('span.livesearch.product-name');
                     const title = titleElement ? titleElement.textContent!.trim() : null;
 
-                    const priceElement = div.querySelector('.livesearch.product-price');
+                    const priceElement = div.querySelector('.livesearch.product-price span'); // Adicionamos o 'span' para selecionar o elemento correto
                     const price = priceElement ? priceElement.textContent!.trim() : null;
 
                     return { imageUrl, title, price };
@@ -128,7 +126,6 @@ export class PuppeteerService {
         let dadosEncontrados = {};
 
         await pagina.goto(url);
-        await pagina.setViewport({ width: 1080, height: 1024 });
 
         for (let palavra of nomeProduto.split(" ")) {
             produtoConcatenado += `${palavra} `;
@@ -143,13 +140,11 @@ export class PuppeteerService {
             } else if (similaridade >= 0.80) {
                 dadosEncontrados = await produtoEncontrado();
                 await navegador.close();
-                console.timeEnd("Execução");
                 return { dadosEncontrados, produtosSimilares };
             }
         }
 
         await navegador.close();
-        console.timeEnd("Execução");
         return produtosSimilares;
     }
 }
