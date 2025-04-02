@@ -11,6 +11,7 @@ import tausteLogo from "../../imagens/tausteLogo.png";
 import { produtos } from "../../data/produtos.js";
 import { useState, useEffect, useRef } from "react";
 import ModalSimilares from "../../components/modalSimilares/modalSimilares.js";
+import api from "../../services/api.js";
 
 function HomeScreen() {
   const [setorSelecionado, setSetorSelecionado] = useState("Frios");
@@ -46,15 +47,23 @@ function HomeScreen() {
     return produtos.filter((produto) => produto.nome === nomeProduto);
   }
 
-  const handleCompararPreco = (nomeProduto) => {
-    const resultado = compararPreco(nomeProduto);
-    setProdutosComparacao(resultado);
-    console.log(resultado);
+  const handleCompararPreco = async (nomeProduto) => {
+    try {
+      // Faz a chamada à API para comparar preços
+      const resposta = await api.post("/BuscarProdutos", { nomeProduto });
 
-    if (comparacaoRef.current) {
-      setTimeout(() => {
-        comparacaoRef.current.scrollIntoView({ behavior: "smooth" });
-      }, 100);
+      // Armazena o resultado no estado
+      setProdutosComparacao(resposta.data);
+      console.log(resposta.data);
+
+      // Verifica se o comparacaoRef está presente e rola para o componente desejado
+      if (comparacaoRef.current) {
+        setTimeout(() => {
+          comparacaoRef.current.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      }
+    } catch (erro) {
+      console.error("Erro ao buscar comparação de preços:", erro);
     }
   };
 
@@ -240,54 +249,61 @@ function HomeScreen() {
         <h2 className="comparativo">
           Comparativo:{" "}
           <span>
-            {produtosComparacao.length > 0
-              ? produtosComparacao[0].nome.split(" ").slice(0, 2).join(" ")
+            {produtosComparacao && produtosComparacao.length > 0
+              ? produtosComparacao[0].title.split(" ").slice(0, 2).join(" ")
               : ""}
           </span>
         </h2>
         <ul className="secao_compras_produtos_lista barraRolagem">
-          {produtosComparacao.map((produto) => (
-            <li key={produto.id} className="secao_compras_produtos_lista_item">
-              <h3>
-                <img
-                  src={produto.mercadoImagem}
-                  alt="Imagem do mercado"
-                  className="secao_compras_lista_item_produto_imagem--mercado"
-                />
-              </h3>
+          {Object.keys(produtosComparacao).map((mercado) => {
+            const mercadoProdutos = produtosComparacao[mercado];
 
-              <article className="secao_compras_lista_item_produto">
-                <img
-                  src={produto.imagem}
-                  alt={produto.nome}
-                  className="secao_compras_lista_item_produto_imagem"
-                />
-                <h3 className="secao_compras_lista_item_produto_titulo">
-                  {produto.nome}
-                </h3>
+            // Verifica se mercadoProdutos é um array antes de aplicar map
+            if (Array.isArray(mercadoProdutos)) {
+              return mercadoProdutos.map((produto, index) => (
+                <li key={index} className="secao_compras_produtos_lista_item">
+                  <article className="secao_compras_lista_item_produto">
+                    <img
+                      src={produto.imageUrl}
+                      alt={produto.title}
+                      className="secao_compras_lista_item_produto_imagem"
+                    />
+                    <h3 className="secao_compras_lista_item_produto_titulo">
+                      {produto.title}
+                    </h3>
+                    <h4 className="secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preco">
+                      {produto.price}{" "}
+                      {/* Exibindo o preço diretamente como string */}
+                    </h4>
 
-                <h4 className="secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preco ">
-                  R${produto.preco.toFixed(2)}
-                </h4>
+                    <button
+                      className="secao_compras_lista_item_produto_comparar secao_compras_lista_item_produto_comparar--naoEncontrado"
+                      onClick={() => setIsOpen(true)}
+                    >
+                      Produto incorreto?
+                    </button>
 
-                <button
-                  className="secao_compras_lista_item_produto_comparar secao_compras_lista_item_produto_comparar--naoEncontrado"
-                  onClick={() => setIsOpen(true)}
-                >
-                  Produto incorreto?
-                </button>
-
-                <button
-                  className="secao_compras_lista_item_produto_carrinho"
-                  onClick={() => handleAddToCart(produto)}
-                >
-                  ADICIONAR A COMPRA
-                </button>
-              </article>
-            </li>
-          ))}
+                    <button
+                      className="secao_compras_lista_item_produto_carrinho"
+                      onClick={() => handleAddToCart(produto)}
+                    >
+                      ADICIONAR A COMPRA
+                    </button>
+                  </article>
+                </li>
+              ));
+            } else {
+              return (
+                <li key={mercado} className="secao_compras_produtos_lista_item">
+                  <h3>{mercado}</h3>
+                  <p>Erro ao buscar produtos ou mercado vazio.</p>
+                </li>
+              );
+            }
+          })}
         </ul>
       </section>
+
       {isOpen && <ModalSimilares setIsOpen={setIsOpen} />}
     </div>
   );

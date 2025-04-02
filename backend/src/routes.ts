@@ -6,12 +6,15 @@ import ControllerPut from './Controllers/ControllersPut/ControllersPut';
 import ControllerDelete from './Controllers/ControllersDelete/ControllersDelete';
 import LoginController from './Controllers/LoginController/LoginController';
 import { estaAutenticado } from './middleware/estaAutenticado';
+import { PuppeteerController } from './Controllers/puppeteerController/puppeteerController';
 
 const router = Router();
 
 router.get('/BuscarProdutosConfianca', new Puppeteer().buscaProdutosConfiança)
 
 router.get('/BuscarProdutosTauste', new Puppeteer().buscaProdutosTauste)
+
+router.post('/BuscarProdutos', new PuppeteerController().buscaProdutos)
 
 
 

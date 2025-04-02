@@ -24,7 +24,7 @@ export function estaAutenticado(
             process.env.JWT_SECRETO as string
         ) as Payload;
 
-        req.usuarioID = sub;
+        req.params.id = sub;
         return next();
     } catch (error) {
         return res.json({ error: 'Token Inválido' });

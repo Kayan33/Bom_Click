@@ -398,6 +398,69 @@
           }
         }
       }
+    },
+    "/BuscarProdutos": {
+      "post": {
+        "summary": "Busca produtos no supermercado Confiança",
+        "description": "Retorna informações sobre um produto buscado no site do Confiança.",
+        "operationId": "buscaProdutosConfianca",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nomeProduto": {
+                    "type": "string",
+                    "example": "Isotônico Gatorade Limão Frasco 500ml"
+                  }
+                },
+                "required": ["nomeProduto"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Produtos encontrados com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "dadosEncontrados": {
+                      "type": "object",
+                      "properties": {
+                        "nomeProduto": { "type": "string" },
+                        "valorProduto": { "type": "string" },
+                        "imagemProduto": { "type": "string" }
+                      }
+                    },
+                    "produtosSimilares": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "imageUrl": { "type": "string" },
+                          "title": { "type": "string" },
+                          "price": { "type": "string" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro na requisição"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
     }
   },
   "components": {
