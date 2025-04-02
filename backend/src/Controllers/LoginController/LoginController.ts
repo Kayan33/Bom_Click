@@ -12,14 +12,10 @@ class LoginController {
   }
 
   async verificaTokenUsuario(req: Request, res: Response) {
-    const id = req.params.id;
+    const id = req.usuarioID;
     const VerificaToken = new LoginServices();
 
     try {
-      if (!id) {
-        return res.status(400).json({ error: "Usuário não autenticado" });
-      }
-
       const resposta = await VerificaToken.verificaTokenUsuario(id);
       return res.json(resposta);
     } catch (error) {
