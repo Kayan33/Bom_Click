@@ -6,7 +6,10 @@ import EditarInformacoes from "../page/editarInformacoes/editarInformacoes";
 import ResumoCompra from "../page/resumoCompra/resumo_compra";
 import CarrinhoCompras from "../page/carrinho/carrinho_compras";
 import Cadastro from "../components/cadastro/Cadastro";
+<<<<<<< Updated upstream
 import Loading from "../page/compraFinalizada/Loading";
+=======
+>>>>>>> Stashed changes
 import Login from "../components/login/Login";
 
 function Rotas() {

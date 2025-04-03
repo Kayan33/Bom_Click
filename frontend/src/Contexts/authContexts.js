@@ -19,7 +19,7 @@ export default function AuthProvider({ children }) {
         const tokenU = JSON.parse(iToken)
         setToken(tokenU)
         try {
-            const resposta = await api.get('/VerificaToken', {
+            const resposta = await api.get('/verificaTokenUsuario', {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -36,22 +36,21 @@ export default function AuthProvider({ children }) {
 
     async function loginEntrada(email, senha) {
         try {
-            const resposta = await api.post('/LoginUsuarios', {
+            const resposta = await api.post('/loginUsuario', {
                 email,
                 senha
             })
             localStorage.setItem('@id', JSON.stringify(resposta.data.id))
             localStorage.setItem('@token', JSON.stringify(resposta.data.token))
             localStorage.setItem('@nome', JSON.stringify(resposta.data.nome))
-            localStorage.setItem('@listaId', JSON.stringify(resposta.data.listaId));
-            setTokenT(true)
+           
         } catch (err) {
             console.error('Erro de Comunicação')
         }
     }
 
     return (
-        <AutenticadoContexto.Provider value={{ autenticado, loginEntrada, verificarToken, token }}>
+        <AutenticadoContexto.Provider value={({ autenticado, loginEntrada, verificarToken, token })}>
             {children}
         </AutenticadoContexto.Provider>
     )
