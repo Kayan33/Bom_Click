@@ -59,9 +59,28 @@ export class PuppeteerService {
       });
     }
 
+    async function BuscaTodosProdutos() {
+      return await pagina.$$eval("div.auto-suggest-item", (itemDivs) => {
+        return itemDivs.map((div) => {
+          const imgElement = div.querySelector(".auto-suggest-item__img img");
+          const baseUrl = "https://www.confianca.com.br";
+          const src = imgElement?.getAttribute("src") || "";
+          const imageUrl = src.startsWith("http") ? src : baseUrl + src;
+          const infoElement = div.querySelector(".auto-suggest-item__info h4");
+          const title = infoElement ? infoElement.textContent!.trim() : null;
+          const priceElement = div.querySelector(
+            ".auto-suggest-item__price h2.price-current"
+          );
+          const price = priceElement ? priceElement.textContent!.trim() : null;
+          return { imageUrl, title, price };
+        });
+      });
+    }
+
     let produtoConcatenado = "";
     let produtosSimilares = {};
     let dadosEncontrados = {};
+    let buscaTodosProdutos = {};
 
     await pagina.goto(url);
 
@@ -77,19 +96,21 @@ export class PuppeteerService {
         produtoConcatenado,
         produtoSite
       );
-
-      if (similaridade >= 0.4 && similaridade <= 0.6) {
+      if (similaridade < 0.4) {
+        buscaTodosProdutos = await BuscaTodosProdutos()
+      }
+      else if (similaridade >= 0.4 && similaridade <= 0.6) {
         produtosSimilares = await buscaSimilares();
       } else if (similaridade >= 0.8) {
         dadosEncontrados = await produtoEncontrado();
         await navegador.close();
 
-        return { dadosEncontrados, produtosSimilares };
+        return { dadosEncontrados, produtosSimilares,buscaTodosProdutos};
       }
     }
 
     await navegador.close();
-    return { dadosEncontrados: null, produtosSimilares: [] };
+    return { dadosEncontrados: null, produtosSimilares: [],buscaTodosProdutos};
   }
 
   async buscaProdutosTauste(title: string, url: string) {
@@ -150,9 +171,31 @@ export class PuppeteerService {
       });
     }
 
+    async function BuscaTodosProdutos() {
+      return await pagina.$$eval("div.product-container", (itemDivs) => {
+        return itemDivs.map((div) => {
+          const imgElement = div.querySelector("img.product-image");
+          const imageUrl = imgElement ? imgElement.getAttribute("src") : null;
+
+          const titleElement = div.querySelector(
+            "span.livesearch.product-name"
+          );
+          const title = titleElement ? titleElement.textContent!.trim() : null;
+
+          const priceElement = div.querySelector(
+            ".livesearch.product-price span"
+          ); // Adicionamos o 'span' para selecionar o elemento correto
+          const price = priceElement ? priceElement.textContent!.trim() : null;
+
+          return { imageUrl, title, price };
+        });
+      });
+    }
+
     let produtoConcatenado = "";
     let produtosSimilares = {};
     let dadosEncontrados = {};
+    let buscaTodosProdutos = {};
 
     await pagina.goto(url);
 
@@ -166,19 +209,48 @@ export class PuppeteerService {
         produtoConcatenado,
         produtoSite
       );
-
-      if (similaridade >= 0.4 && similaridade <= 0.6) {
+      if (similaridade < 0.4) {
+        buscaTodosProdutos = await BuscaTodosProdutos()
+      }
+      else if (similaridade >= 0.4 && similaridade <= 0.6) {
         produtosSimilares = await buscaSimilares();
       } else if (similaridade >= 0.8) {
         dadosEncontrados = await produtoEncontrado();
         await navegador.close();
-        return { dadosEncontrados, produtosSimilares };
+        return { dadosEncontrados, produtosSimilares, buscaTodosProdutos };
       }
     }
 
     await navegador.close();
-    return { dadosEncontrados: null, produtosSimilares: [] };
+    return { dadosEncontrados: null, produtosSimilares: [],buscaTodosProdutos };
   }
+
+  async buscaProdutosMercados(title: string, urlConfianca: string, urlTauste: string) {
+    const [produtosConfiança, produtosTauste] = await Promise.all([
+      this.buscaProdutosConfiança(title, urlConfianca),
+      this.buscaProdutosTauste(title, urlTauste)
+    ]);
+  
+    function extraiListaProdutos(produtos: any) {
+      return produtos.buscaTodosProdutos || []; // Pega só os produtos de 'BuscaTodosProdutos'
+    }
+  
+    const listaConfiança = extraiListaProdutos(produtosConfiança);
+    const listaTauste = extraiListaProdutos(produtosTauste);
+  
+    function intercalaProdutos(lista1: any[], lista2: any[]) {
+      const resultado = [];
+      const maxLength = Math.max(lista1.length, lista2.length);
+      for (let i = 0; i < maxLength; i++) {
+        if (lista1[i]) resultado.push(lista1[i]);
+        if (lista2[i]) resultado.push(lista2[i]);
+      }
+      return resultado;
+    }
+  
+    return { produtos: intercalaProdutos(listaConfiança, listaTauste) };
+  }
+  
 }
 
 export default new PuppeteerService();

@@ -15,6 +15,7 @@ router.get('/BuscarProdutosConfianca', new Puppeteer().buscaProdutosConfiança)
 router.get('/BuscarProdutosTauste', new Puppeteer().buscaProdutosTauste)
 
 router.post('/BuscarProdutos', new PuppeteerController().buscaProdutos)
+router.post('/BuscarTodosProdutos', new PuppeteerController().buscaTodosProdutos)
 
 
 
