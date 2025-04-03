@@ -1,5 +1,7 @@
 import React, { useState, useContext } from "react";
 import "./login.css";
+
+import "../../assets/style.css"
 import iconeVoltar from "../../imagens/icon-voltar.svg"
 import { AutenticadoContexto } from "../../Contexts/authContexts";
 
@@ -25,7 +27,7 @@ function Login() {
   }
 
     return (
-        <div className="modal-content">
+        <div className="modal-fundo">
         <div className="modal modal--login ">
           <a href="/" className="modal-login-voltar">
             <img src={iconeVoltar} alt="" />

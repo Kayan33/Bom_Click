@@ -1,21 +1,5 @@
 
 
-.modal {
-  display: grid;
-  background-color: var(--azul);
-  padding: var(--espacamentoMenor);
-  border-radius: var(--bordaRaio);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  width: 90vw; 
-  max-width: 25rem;
-  height: auto;
-  max-height: 80vh;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1000;
-}
 
 /* Modal Similares */
 .modal--similares {

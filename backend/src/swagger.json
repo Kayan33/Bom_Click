@@ -461,6 +461,58 @@
           }
         }
       }
+    },
+    "/BuscarTodosProdutos": {
+      "post": {
+        "summary": "Busca produtos no supermercado Confiança",
+        "description": "Retorna informações sobre todos os produto buscado de todos os sites.",
+        "operationId": "BuscaTodosProdutos",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nomeProduto": {
+                    "type": "string",
+                    "example": "Isotônico Gatorade Limão Frasco 500ml"
+                  }
+                },
+                "required": ["nomeProduto"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Produtos encontrados com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "produtos": {
+                      "type": "object",
+                      "properties": {
+                        "imageUrl": { "type": "string" },
+                        "title": { "type": "string" },
+                        "price": { "type": "string" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro na requisição"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
     }
   },
   "components": {

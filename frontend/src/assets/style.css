@@ -91,3 +91,35 @@
         font-size: 20px;
     }
 }
+
+.modal-fundo{
+    position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.3); /* Um pouco mais transparente */
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+    display: grid;
+    background-color: var(--azul);
+    padding: var(--espacamentoMenor);
+    border-radius: var(--bordaRaio);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 90vw;
+    max-width: 25rem;
+    height: auto;
+    max-height: 80vh;
+    position: fixed; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001;
+  }

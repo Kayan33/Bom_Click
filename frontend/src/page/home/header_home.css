@@ -183,6 +183,38 @@ margin-right: 0.8rem;
     flex-wrap: wrap;
 }
 
+.cabecalho_mercados-busca {
+    margin: 0rem 1rem;
+    padding: 1rem;
+    background-color: #f8f8f8;
+    border-radius: 0.5rem;
+}
+
+
+.mercados_input {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+
+.mercados_botao {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #ffcc00;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.mercados_botao:hover {
+    background-color: #e6b800;
+}
+
+
 .mercados_flex img {
     width: var(--tamanhoFotoGrande);
     transition: transform 0.3s ease;

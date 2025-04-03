@@ -66,8 +66,8 @@ export const produtos = [
     },
     {
         id: 6,
-        nome: "Carne Bovina - Filé Mignon",
-        descricao: "Filé Mignon bovino, peça de 1kg.",
+        nome: "Carne Bovina Bisteca do Contra Filé Bandeja 1kg",
+        descricao: "Carne Bovina Bisteca do Contra Filé Bandeja 1kg",
         preco: 129.90,
         pesoKg: 1,
         mercado: "Confiança",
@@ -122,7 +122,7 @@ export const produtos = [
     },
     {
         id: 11,
-        nome: "Carne Bovina - Filé Mignon",
+        nome: "Filé de Peito de Frango Sadia Bio Bandeja 1000g",
         descricao: "Filé Mignon bovino, peça de 1kg.",
         preco: 90.90,
         pesoKg: 1,
@@ -135,7 +135,7 @@ export const produtos = [
     {
         id: 12,
         nome: "Alho Fresco 200g",
-        descricao: "Alho Fresco 200g",
+        descricao: "Cerveja Heineken Lata 350ml",
         preco: 7.98,
         pesoKg: 200,
         mercado: "Tauste",

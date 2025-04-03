@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from 'react-router-dom'
 import api from "../../services/api";
 import "./cadastro.css"
+import "../../assets/style.css"
 
 export default function Cadastro() {
 
@@ -40,7 +41,7 @@ export default function Cadastro() {
     }
 
     return (
-        <div className="modal-content">
+        <div className="modal-fundo">
             <div className="modal modal--cadastro">
 
                 <form onSubmit={CadastroUsuarios} className="modal_form_cadastro">

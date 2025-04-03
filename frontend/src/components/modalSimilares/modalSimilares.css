@@ -15,6 +15,7 @@
   grid-template-columns: 1fr;
   gap: var(--espacamentoMaior);
   padding-right: var(--espacamentoPequeno);
+  max-height: calc(3 * 80px);
 }
 
 .modal-similares__item {
@@ -42,6 +43,7 @@
 .modal-similares__produto-nome {
   font-weight: bold;
   color: var(--branco);
+  font-size: var(--fonteSegundaria);
 }
 
 .modal-similares__produto-preco {
@@ -49,3 +51,8 @@
   font-weight: bold;
   font-size: var(--fonteSegundaria);
 }
+
+
+
+
+
