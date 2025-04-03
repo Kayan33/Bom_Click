@@ -7,6 +7,7 @@ export class MarketService {
         const mercados = [
             { nome: "Confianca", url: "https://www.confianca.com.br" },
             { nome: "Tauste", url: "https://tauste.com.br/bauru/" },
+            { nome: "PaoAcucar", url: "https://www.paodeacucar.com/" }
         ];
 
         // Realizando as buscas em paralelo
@@ -18,7 +19,10 @@ export class MarketService {
                         resultado = await puppeteerService.buscaProdutosConfiança(nomeProduto, mercado.url);
                     } else if (mercado.nome === "Tauste") {
                         resultado = await puppeteerService.buscaProdutosTauste(nomeProduto, mercado.url);
+                    } else if (mercado.nome === "PaoAcucar") {
+                        resultado = await puppeteerService.buscaProdutosPaoAcucar(nomeProduto, mercado.url);
                     }
+
                     return { [mercado.nome]: resultado };
                 } catch (error) {
                     console.error(`Erro ao buscar no mercado ${mercado.nome}:`, error);
