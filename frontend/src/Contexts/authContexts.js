@@ -43,6 +43,7 @@ export default function AuthProvider({ children }) {
             localStorage.setItem('@id', JSON.stringify(resposta.data.id))
             localStorage.setItem('@token', JSON.stringify(resposta.data.token))
             localStorage.setItem('@nome', JSON.stringify(resposta.data.nome))
+            setTokenT(true)
            
         } catch (err) {
             console.error('Erro de Comunicação')
@@ -50,7 +51,7 @@ export default function AuthProvider({ children }) {
     }
 
     return (
-        <AutenticadoContexto.Provider value={({ autenticado, loginEntrada, verificarToken, token })}>
+        <AutenticadoContexto.Provider value={{ autenticado, loginEntrada, verificarToken, token }}>
             {children}
         </AutenticadoContexto.Provider>
     )

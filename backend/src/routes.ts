@@ -17,8 +17,6 @@ router.get('/BuscarProdutosTauste', new Puppeteer().buscaProdutosTauste)
 router.post('/BuscarProdutos', new PuppeteerController().buscaProdutos)
 router.post('/BuscarTodosProdutos', new PuppeteerController().buscaTodosProdutos)
 
-
-
 router.post('/CadastroUsuarios', new ControllerPost().cadastro_Usuarios)
 router.get('/BuscaUsuarios', new ControllerGet().BuscaUsuarios)
 router.post('/BuscaUsuariosUnico/:id', new ControllerPost().BuscaUsuarioUnico)

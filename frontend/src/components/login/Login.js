@@ -1,6 +1,5 @@
 import React, {  useContext, useState } from "react";
 import "./login.css";
-
 import "../../assets/style.css"
 import iconeVoltar from "../../imagens/icon-voltar.svg"
 import { AutenticadoContexto } from "../../Contexts/authContexts";
@@ -23,15 +22,8 @@ export default function Login() {
     }
   }
 
-<<<<<<< Updated upstream
-    return (
-        <div className="modal-fundo">
-        <div className="modal modal--login ">
-          <a href="/" className="modal-login-voltar">
-            <img src={iconeVoltar} alt="" />
-=======
   return (
-    <div className="modal-content">
+    <div className="modal-fundo">
       <div className="modal modal--login ">
         <a href="/" className="modal-login-voltar">
           <img src={iconeVoltar} alt="" />
@@ -56,7 +48,6 @@ export default function Login() {
           />
           <a className="dialogo-button-esqueceu-senha" href="/">
             Esqueci a senha
->>>>>>> Stashed changes
           </a>
           <a className="dialogo-login-link-cadastro" href="/cadastro">
             Cadastre-se
