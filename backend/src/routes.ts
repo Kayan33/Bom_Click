@@ -10,12 +10,6 @@ import { PuppeteerController } from './Controllers/puppeteerController/puppeteer
 
 const router = Router();
 
-router.get('/BuscarProdutosConfianca', new Puppeteer().buscaProdutosConfiança)
-
-router.get('/BuscarProdutosTauste', new Puppeteer().buscaProdutosTauste)
-
-router.get('/BuscarProdutosPaoAcucar', new Puppeteer().buscaProdutosPaoAcucar)
-
 router.post('/BuscarProdutos', new PuppeteerController().buscaProdutos)
 
 router.post('/CadastroUsuarios', new ControllerPost().cadastro_Usuarios)

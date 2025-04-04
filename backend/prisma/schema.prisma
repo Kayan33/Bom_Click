@@ -148,6 +148,7 @@ model Mercado {
   id   String @id @default(uuid())
   nome String
   logo String
+  url String
  
   // Relação entre Mercado e Produto
   produto Produto[]
