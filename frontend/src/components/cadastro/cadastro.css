@@ -43,7 +43,7 @@ dialog {
 
 .modal_form_cadastro .dialogo-cadastro-input-email {
   grid-row: 3;
-  grid-column: span 1 / span 3;
+  grid-column: 1 / span 3;
   grid-column-start: 1;
   padding: var(--espacamentoPequeno);
   font-size: var(--fontePequena);
