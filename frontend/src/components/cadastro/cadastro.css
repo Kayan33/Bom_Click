@@ -54,8 +54,7 @@ dialog {
 .modal_form_cadastro .dialogo-cadastro-input-cpf {
   border-radius: var(--bordaRaio);
   font-size: var(--fontePequena);
-  grid-column: span 1 / span 3;
-  grid-column-start: 1;
+  grid-column: 1 / span 3;
   padding: var(--espacamentoPequeno);
   transition: border-color .3s ease;
 }
