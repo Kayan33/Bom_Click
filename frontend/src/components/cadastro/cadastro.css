@@ -32,18 +32,18 @@ dialog {
 
 
 .modal_form_cadastro .dialogo-cadastro-input-nome {
-  grid-row: 2;
-  grid-column: span 1 / span 3;
+  grid-column: 1 / span 3;
   grid-column-start: 1;
-  padding: var(--espacamentoPequeno);
-  font-size: var(--fontePequena);
+  grid-row: 2;
   border-radius: var(--bordaRaio);
-  transition: border-color 0.3s ease;
+  font-size: var(--fontePequena);
+  padding: var(--espacamentoPequeno);
+  transition: border-color .3s 
 }
 
 .modal_form_cadastro .dialogo-cadastro-input-email {
   grid-row: 3;
-  grid-column: span 1 / span 3;
+  grid-column: 1 / span 3;
   grid-column-start: 1;
   padding: var(--espacamentoPequeno);
   font-size: var(--fontePequena);
@@ -52,18 +52,16 @@ dialog {
 }
 
 .modal_form_cadastro .dialogo-cadastro-input-cpf {
-  grid-row: 4;
-  grid-column: span 1 / span 3;
-  grid-column-start: 1;
-  padding: var(--espacamentoPequeno);
-  font-size: var(--fontePequena);
   border-radius: var(--bordaRaio);
-  transition: border-color 0.3s ease;
+  font-size: var(--fontePequena);
+  grid-column: 1 / span 3;
+  padding: var(--espacamentoPequeno);
+  transition: border-color .3s ease;
 }
 
  .modal_form_cadastro .dialogo-cadastro-input-senha {
   grid-row: 5;
-  grid-column: span 1 / span 3;
+  grid-column: 1 / span 3;
   grid-column-start: 1;
   padding: var(--espacamentoPequeno);
   font-size: var(--fontePequena);
@@ -73,7 +71,7 @@ dialog {
 
 .modal_form_cadastro .dialogo-cadastro-input-confirme-senha {
   grid-row: 6;
-  grid-column: span 1 / span 3;
+  grid-column: 1 / span 3;
   grid-column-start: 1;
   padding: var(--espacamentoPequeno);
   font-size: var(--fontePequena);
