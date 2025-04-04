@@ -14,7 +14,15 @@ export class PuppeteerService {
       const produtoSite = await informacoesProduto!.evaluate(
         (el) => el.textContent
       );
-      return String(produtoSite);
+      
+        if(produtoSite){
+
+          return String(produtoSite);
+
+        }else{
+
+          return ""
+        }
     }
 
     async function produtoEncontrado() {

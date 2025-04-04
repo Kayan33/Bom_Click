@@ -13,7 +13,7 @@ export class MarketService {
         // Realizando as buscas em paralelo
         const resultados = await Promise.all(
             mercados.map(async mercado => {
-                try {
+        
                     let resultado;
                     if (mercado.nome === "Confianca") {
                         resultado = await puppeteerService.buscaProdutosConfiança(nomeProduto, mercado.url);
@@ -24,10 +24,7 @@ export class MarketService {
                     }
 
                     return { [mercado.nome]: resultado };
-                } catch (error) {
-                    console.error(`Erro ao buscar no mercado ${mercado.nome}:`, error);
-                    return { [mercado.nome]: "Erro ao buscar produtos" };
-                }
+            
             })
         );
 
