@@ -3,22 +3,45 @@ import logo from "../../imagens/bomClick.svg";
 import carrinho from "../../imagens/carrinho.svg";
 import perfil from "../../imagens/perfil.svg";
 import { Link } from "react-router-dom";
-
+import confiancaLogo from "../../imagens/confiancaLogo.png";
+import panelaoLogo from "../../imagens/panelaoLogo.png";
+import tausteLogo from "../../imagens/tausteLogo.png";
 import { produtos } from "../../data/produtos.js";
 import { useState, useEffect, useRef } from "react";
 import ModalSimilares from "../../components/modalSimilares/modalSimilares.js";
 import api from "../../services/api.js";
 import Loading from "../compraFinalizada/Loading.js";
-import ExibirProdutosMercados from "../../components/exibirProdutosMercados/exibirProdutosMercados.js";
 
 function HomeScreen() {
   const [cartCount, setCartCount] = useState(0);
   const [produtosComparacao, setProdutosComparacao] = useState([]);
-  const [todosProdutos, setTodosProdutos] = useState([]);
   const [produtosSimilares, setProdutosSimilares] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [nomeProduto, setNomeProduto] = useState("");
+ 
+
+  const [setorSelecionado, setSetorSelecionado] = useState("Frios");
+  const [mercadoSelecionado, setMercadoSelecionado] = useState("Confiança");
+  const handleMercadoClick = (mercado) => {
+    setMercadoSelecionado(mercado);
+  };
+
+  const handleSetorClick = (setor) => {
+    setSetorSelecionado(setor);
+  };
+
+  function filtrarProdutos() {
+    return produtos.filter((produto) => {
+      const mercadoMatch =
+        mercadoSelecionado === "Todos" ||
+        produto.mercado === mercadoSelecionado;
+      const setorMatch =
+        setorSelecionado === "Todos" || produto.setores === setorSelecionado;
+      return mercadoMatch && setorMatch;
+    });
+  }
+
+  const produtosFiltrados = filtrarProdutos();
 
   const comparacaoRef = useRef(null);
 
@@ -45,25 +68,17 @@ function HomeScreen() {
     }
   };
 
-  const handlebuscaProdutos = async (e) => {
-    e.preventDefault(); // Evita o reload da página
-
-    if (!nomeProduto.trim()) {
-      alert("Digite o nome do produto!");
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const resposta = await api.post("/BuscarTodosProdutos", { nomeProduto });
-      setTodosProdutos(resposta?.data.produtos || []);
-      console.log(resposta.data);
-    } catch (erro) {
-      console.error("Erro ao buscar comparação de preços:", erro);
-    } finally {
-      setLoading(false);
-    }
+  const atualizarProduto = (mercado, produtoSelecionado) => {
+    setProdutosComparacao((prev) => ({
+      ...prev,
+      [mercado]: {
+        ...prev[mercado],
+        dadosEncontrados: produtoSelecionado,
+      },
+    }));
   };
+
+ 
 
   const handleAddToCart = (produto) => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -112,98 +127,130 @@ function HomeScreen() {
         </div>
       </section>
 
-      
-<div>
-      <section className="cabecalho_promocoes">
-        <h1>Promoções do dia!</h1>
+      <div>
+        <section className="cabecalho_promocoes">
+          <h1>Promoções do dia!</h1>
 
-        <div className="promocoes-01 barraRolagem">
-          {produtos.map((produto) => (
-            <div className="promocoes" key={produto.id}>
-              <div className="promocoes_img">
-                <img src={produto.imagem} alt={produto.nome} />
-              </div>
-              <div className="promocoes_produtos">
-                <h3>{produto.nome}</h3>
-                <span>R${produto.preco.toFixed(2)}</span>
-                <div>
-                  <img
-                    src={produto.mercadoImagem}
-                    alt={produto.mercado}
-                    className="imagem-mercado"
-                  />
-                  <button onClick={() => handleAddToCart(produto)}>
-                    Adicionar <br /> a compra
-                  </button>
+          <div className="promocoes-01 barraRolagem">
+            {produtos.map((produto) => (
+              <div className="promocoes" key={produto.id}>
+                <div className="promocoes_img">
+                  <img src={produto.imagem} alt={produto.nome} />
+                </div>
+                <div className="promocoes_produtos">
+                  <h3>{produto.nome}</h3>
+                  <span>R${produto.preco.toFixed(2)}</span>
+                  <div>
+                    <img
+                      src={produto.mercadoImagem}
+                      alt={produto.mercado}
+                      className="imagem-mercado"
+                    />
+                    <button onClick={() => handleAddToCart(produto)}>
+                      Adicionar <br /> a compra
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-      </section>
-      <section className="cabecalho_mercados-busca">
-        <form className="mercados_flex" onSubmit={handlebuscaProdutos}>
-          <input
-            type="text"
-            placeholder="Nome do produto"
-            className="mercados_input"
-            value={nomeProduto}
-            onChange={(e) => setNomeProduto(e.target.value)}
-          />
-          <button className="mercados_botao" type="submit">
-            Buscar produtos
-          </button>
-        </form>
-      </section>
-
-      <section className="secao_compras">
-        <ul className="secao_compras_produtos_lista barraRolagem">
-          {todosProdutos.map((produto, index) => (
-            <li key={index} className="secao_compras_produtos_lista_item">
-              <article className="secao_compras_lista_item_produto">
-                <img
-                  src={
-                    produto.imageUrl.startsWith("//")
-                      ? `https:${produto.imageUrl}`
-                      : produto.imageUrl
-                  }
-                  alt={produto.title}
-                  className="secao_compras_lista_item_produto_imagem"
-                />
-                <h3 className="secao_compras_lista_item_produto_titulo">
-                  {produto.title}
-                </h3>
-
-                <h4 className="secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preco">
-                  {produto.price}
-                </h4>
-
-                <button
-                  className="secao_compras_lista_item_produto_comparar"
-                  onClick={() => handleCompararPreco(produto.title)}
-                >
-                  Comparar Preço
-                </button>
-
-                <button
-                  className="secao_compras_lista_item_produto_carrinho"
-                  onClick={() => handleAddToCart(produto)}
-                >
-                  ADICIONAR A COMPRA
-                </button>
-              </article>
-            </li>
-          ))}
-        </ul>
-      </section>
+            ))}
+          </div>
+        </section>
       </div>
 
-      <ExibirProdutosMercados />
+      <div>
+        <section className="cabecalho_mercados">
+          <div className="mercados_flex">
+            <button
+              className={`button ${
+                mercadoSelecionado === "Confiança" ? "selected" : ""
+              }`}
+              onClick={() => handleMercadoClick("Confiança")}
+            >
+              <img src={confiancaLogo} alt="Confiança Logo"></img>
+            </button>
+            <button
+              className={`button ${
+                mercadoSelecionado === "Panelão" ? "selected" : ""
+              }`}
+              onClick={() => handleMercadoClick("Panelão")}
+            >
+              <img src={panelaoLogo} alt="Panelão Logo"></img>
+            </button>
+            <button
+              className={`button ${
+                mercadoSelecionado === "Tauste" ? "selected" : ""
+              }`}
+              onClick={() => handleMercadoClick("Tauste")}
+            >
+              <img src={tausteLogo} alt="Tauste Logo"></img>
+            </button>
+          </div>
+        </section>
 
+        <section className="cabecalho_setores">
+          <div className="barraRolagem">
+            <div className="promocoes-01 setores-mercado">
+              {["Frios", "Açougue", "Hortifrut", "Higiene"].map((setor) => (
+                <button
+                  key={setor}
+                  className={`button ${
+                    setorSelecionado === setor ? "selected" : ""
+                  }`}
+                  onClick={() => handleSetorClick(setor)}
+                >
+                  {setor}
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
 
+        <section className="secao_compras">
+          <ul className="secao_compras_produtos_lista barraRolagem">
+            {produtosFiltrados.map((produto) => (
+              <li
+                key={produto.id}
+                className="secao_compras_produtos_lista_item"
+              >
+                <article className="secao_compras_lista_item_produto">
+                  <img
+                    src={produto.imagem}
+                    alt={produto.nome}
+                    className="secao_compras_lista_item_produto_imagem"
+                  />
+                  <h3 className="secao_compras_lista_item_produto_titulo">
+                    {produto.nome}
+                  </h3>
+
+                  <h4 className="secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preco">
+                    R${produto.preco.toFixed(2)}
+                  </h4>
+
+                  <button
+                    className="secao_compras_lista_item_produto_comparar"
+                    onClick={() => handleCompararPreco(produto.nome)}
+                  >
+                    Comparar Preço
+                  </button>
+
+                  <button
+                    className="secao_compras_lista_item_produto_carrinho"
+                    onClick={() => handleAddToCart(produto)}
+                  >
+                    ADICIONAR A COMPRA
+                  </button>
+                </article>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
 
       <section className="secao_compras" ref={comparacaoRef}>
-
+      <h2 className="comparativo">
+                    Comparativo:
+                    <span></span>
+                  </h2>
         <ul className="secao_compras_produtos_lista barraRolagem">
           {Object.keys(produtosComparacao).map((mercado) => {
             const dadosEncontrados = Array.isArray(
@@ -217,11 +264,8 @@ function HomeScreen() {
 
             if (dadosEncontrados) {
               return (
-                <li key={mercado} className="secao_compras_produtos_lista_item">
-        <h2 className="comparativo">
-          Comparativo:{" messi messi"}
-          <span></span>
-        </h2>
+                <li key={dadosEncontrados.id} className="secao_compras_produtos_lista_item">
+                 
                   <h3 className="mercado_nome">{mercado}</h3>
                   <article className="secao_compras_lista_item_produto">
                     <img
@@ -284,6 +328,7 @@ function HomeScreen() {
           produtosSimilares={produtosSimilares}
           setProdutosSimilares={setProdutosSimilares}
           comparacaoRef={comparacaoRef}
+          atualizarProduto={atualizarProduto}
         />
       )}
     </div>
