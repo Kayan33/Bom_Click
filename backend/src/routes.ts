@@ -11,6 +11,7 @@ import { PuppeteerController } from './Controllers/puppeteerController/puppeteer
 const router = Router();
 
 router.post('/BuscarProdutos', new PuppeteerController().buscaProdutos)
+router.get('/BuscaPromocoes', new PuppeteerController().buscaPromocoes)
 
 router.post('/CadastroUsuarios', new ControllerPost().cadastro_Usuarios)
 router.get('/BuscaUsuarios', new ControllerGet().BuscaUsuarios)

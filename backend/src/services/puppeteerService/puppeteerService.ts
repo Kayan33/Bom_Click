@@ -27,44 +27,44 @@ export class PuppeteerService {
 
     async function produtoEncontrado() {
       const resultado = await pagina.waitForSelector(
-          "div.auto-suggest-item-container > a"
+        "div.auto-suggest-item-container > a"
       );
       const resultadoLink = await resultado!.evaluate((el) => el.href);
       await pagina.goto(resultadoLink);
-  
+
       const imagemContainer = await pagina
-          .locator("div.Img__Wrapper img")
-          .waitHandle();
+        .locator("div.Img__Wrapper img")
+        .waitHandle();
       const imageUrl = await imagemContainer.evaluate((img) => img.src);
-  
+
       const produtoContainer = await pagina
-          .locator("div.product-info h2.heading-2")
-          .waitHandle();
+        .locator("div.product-info h2.heading-2")
+        .waitHandle();
       const title = await produtoContainer.evaluate((el) => el.textContent);
-  
+
       const valorContainer = await pagina
-          .locator("div.product-info__price")
-          .waitHandle();
-  
+        .locator("div.product-info__price")
+        .waitHandle();
+
       const priceString = await valorContainer.evaluate((el) => el.textContent);
       let finalPrice = null;
-  
+
       if (priceString) {
-          const prices = priceString.split('R$').map(p => p.trim()).filter(p => p !== '');
-          if (prices.length >= 2) {
-              finalPrice = 'R$ ' + prices[prices.length - 1]; // Pega o segundo preço
-          } else if (prices.length === 1) {
-              finalPrice = 'R$ ' + prices[0]; // Pega o primeiro preço
-          }
-          // Se prices.length for 0, finalPrice permanecerá null
+        const prices = priceString.split('R$').map(p => p.trim()).filter(p => p !== '');
+        if (prices.length >= 2) {
+          finalPrice = 'R$ ' + prices[prices.length - 1]; // Pega o segundo preço
+        } else if (prices.length === 1) {
+          finalPrice = 'R$ ' + prices[0]; // Pega o primeiro preço
+        }
+        // Se prices.length for 0, finalPrice permanecerá null
       }
-  
+
       return { imageUrl, title, price: finalPrice };
-  }
+    }
 
     async function buscaSimilares() {
       return await pagina.$$eval("div.auto-suggest-item", (itemDivs) => {
-        return itemDivs.map((div,index) => {
+        return itemDivs.map((div, index) => {
           const imgElement = div.querySelector(".auto-suggest-item__img img");
           const baseUrl = "https://www.confianca.com.br";
           const src = imgElement?.getAttribute("src") || "";
@@ -251,10 +251,10 @@ export class PuppeteerService {
     }
 
     async function buscaSimilares() {
-      await pagina.waitForSelector('div.CardSuggestion-sc-v5lr4f-1'); 
+      await pagina.waitForSelector('div.CardSuggestion-sc-v5lr4f-1');
 
       const itemsData = await pagina.$$eval('div.CardSuggestion-sc-v5lr4f-1 .ListStyled-sc-chotap-0 > div.Container-sc-chotap-2', (productContainers) => {
-        return productContainers.map((container, index) => { 
+        return productContainers.map((container, index) => {
           // Pegar a URL da imagem
           const imgElement = container.querySelector('a > div > div > img.Image-sc-chotap-4');
           const imageUrl = imgElement ? imgElement.getAttribute('src') : null;
@@ -268,7 +268,7 @@ export class PuppeteerService {
           const price = priceElement ? priceElement.textContent!.trim() : null;
 
           return {
-            id: index, 
+            id: index,
             imageUrl: imageUrl,
             title: title,
             price: price,
@@ -346,6 +346,76 @@ export class PuppeteerService {
     }
 
     return { produtos: intercalaProdutos(listaConfiança, listaTauste, listaPaoAcucar) };
+  }
+
+  async buscaProdutosPromocoes() {
+
+    async function buscaDadosConfianca() {
+
+      const navegador = await puppeteer.launch();
+      const pagina = await navegador.newPage();
+
+      await pagina.goto("https://www.confianca.com.br/bauru/home");
+
+      const produtos = await pagina.$$eval('div.slick-track > div.slick-slide', (slides) => {
+        return slides.map(slide => {
+          try {
+            const imgElement = slide.querySelector('div.slide a.product-shelf div.product-shelf__header div.product-shelf__img button img');
+            const imageUrl = imgElement ? imgElement.getAttribute('src') : null;
+
+            const titleElement = slide.querySelector('div.slide a.product-shelf article.product-shelf__info div h3.product-shelf__name');
+            const title = titleElement ? titleElement.textContent : null;
+
+            const currentPriceElement = slide.querySelector('div.slide a.product-shelf article.product-shelf__info div div.product-shelf__price.normal-price span.product-shelf__price-current');
+            const price = currentPriceElement ? currentPriceElement.textContent : null;
+
+            return {
+              imageUrl,
+              title,
+              price,
+            };
+          } catch (error) {
+            console.error("Erro ao extrair dados de um slide:", error);
+            return null;
+          }
+        }).filter(product => product !== null);
+      });
+      return {Confianca: produtos};
+    }
+
+    async function buscaDadosTauste() {
+      const navegador = await puppeteer.launch();
+      const pagina = await navegador.newPage();
+    
+      await pagina.goto("https://tauste.com.br/bauru/");
+    
+      const produtos = await pagina.$$eval('div.slick-track > div.slick-slide', (slides) => {
+        return slides.map(slide => {
+          try {
+            const imgElement = slide.querySelector('div.slide a.product-shelf div.product-shelf__header div.product-shelf__img button img');
+            const imageUrl = imgElement ? imgElement.getAttribute('src') : null;
+    
+            const titleElement = slide.querySelector('div.slide a.product-shelf article.product-shelf__info div h3.product-shelf__name');
+            const title = titleElement ? titleElement.textContent : null;
+    
+            const currentPriceElement = slide.querySelector('div.slide a.product-shelf article.product-shelf__info div div.product-shelf__price.normal-price span.product-shelf__price-current');
+            const price = currentPriceElement ? currentPriceElement.textContent : null;
+    
+            return {
+              imageUrl,
+              title,
+              price,
+            };
+          } catch (error) {
+            console.error("Erro ao extrair dados de um slide:", error);
+            return null;
+          }
+        }).filter(product => product !== null);
+      });
+      return { Confianca: produtos };
+    }
+
+    return buscaDadosConfianca()
   }
 
 }
