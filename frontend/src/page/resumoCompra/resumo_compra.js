@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useContext, useEffect } from "react"
 import SecaoCep from '../../components/SecaoCep/SecaoCep'
 import './resumocompra.css'
 import { Link } from 'react-router-dom'
@@ -13,9 +13,8 @@ import iconeCartao from '../../imagens/iconeCartao.svg'
 import iconeExcluir from '../../imagens/iconeExcluir.svg'
 import '../../assets/carrossel.css'
 
-
-
 export default function ResumoCompra() {
+  
 
   const [isChecked, setIsChecked] = useState(true)
 
