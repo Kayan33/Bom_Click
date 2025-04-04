@@ -98,29 +98,6 @@ export const produtos = [
         setores: "Hortifrut"
     },
     {
-        id: 9,
-        nome: "Limão Taiti",
-        descricao: "Limão Taiti fresco, pacote de 1kg.",
-        preco: 7.60,
-        pesoKg: 1,
-        mercado: "Tauste",
-        imagem: limao,
-        mercadoImagem:tausteLogo,
-        setores: "Hortifrut"
-    },
-
-    {
-        id: 10,
-        nome: "Batata Inglesa",
-        descricao: "Batata inglesa fresca, pacote de 2kg.",
-        preco: 10.5,
-        pesoKg: 2,
-        mercado: "Tauste",
-        imagem: batata,
-        mercadoImagem:tausteLogo,
-        setores: "Hortifrut"
-    },
-    {
         id: 11,
         nome: "Filé de Peito de Frango Sadia Bio Bandeja 1000g",
         descricao: "Filé Mignon bovino, peça de 1kg.",

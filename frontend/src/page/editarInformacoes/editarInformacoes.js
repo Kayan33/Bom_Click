@@ -1,3 +1,7 @@
+import React, {useState, useEffect, useContext } from 'react'
+import api from '../../services/api';
+import { useNavigate } from 'react-router-dom';
+import { AutenticadoContexto } from '../../Contexts/authContexts';
 import '../../assets/cabecalho.css';
 import './secaoEditarInformacoes.css';
 import './secaoEditarSenha.css';
@@ -7,13 +11,79 @@ import './secaoCartoes.css';
 
 import iconeVoltar from '../../imagens/icon-voltar.svg';
 import SecaoCep from '../../components/SecaoCep/SecaoCep';
+import ModalAlterarDados from '../../components/modalAlterarDados/ModalAlterarDados';
 
 function EditarInformacoes() {
+    const navigate = useNavigate();
+    const { autenticado, usuario, logout } = useContext(AutenticadoContexto);
+    const [dadosUsuarios, setDadosUsuarios] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [modalVisivel, setModalVisivel] = useState(false);
+   
+    
+    
+
+    useEffect(() => {
+        async function consultarDadosUsuarios() {
+            if (!usuario?.id) {
+                console.log("ID do usuário não encontrado no contexto.");
+                setLoading(false);
+                setError("Não foi possível identificar o usuário.");
+                return;
+            }
+
+            setLoading(true);
+            setError(null);
+
+            try {
+                const id = usuario.id;
+                const resposta = await api.post(`/BuscaUsuariosUnico/${id}`);
+                setDadosUsuarios(resposta.data);
+                console.log("Dados do usuário:", resposta.data);
+
+            } catch (err) {
+                console.error("Erro ao buscar dados do usuário:", err);
+                setError("Falha ao carregar informações do perfil.");
+                setDadosUsuarios(null);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        if (autenticado) {
+            consultarDadosUsuarios();
+        } else {
+            setLoading(false);
+        }
+
+    }, [autenticado, usuario]);
+
+    function isModalVisivel(e) {
+        e.preventDefault();
+        setModalVisivel(true)
+    }
+
+
+    if (loading) {
+        return <div>Carregando perfil...</div>;
+    }
+
+    if (error) {
+        return <div>Erro ao carregar perfil: {error}</div>;
+    }
+
+    function logOutUsuario () {
+        logout()
+        navigate('/')
+    }
+
+
 
     return (
-
         <>
 
+        {modalVisivel === true && <ModalAlterarDados/>}
             <header className="cabecalho">
 
                 <a href="/perfil">
@@ -38,7 +108,7 @@ function EditarInformacoes() {
 
                             <label for="user" className='secao_informacoesPessoais_formulario_container_campo_titulo'>Nome:</label>
 
-                            <input type="text" id="user" value="Felipe Da Silva Jr" className='secao_informacoesPessoais_formulario_container_campo_valor' disabled />
+                            <input type="text" id="user" value={dadosUsuarios.nome} className='secao_informacoesPessoais_formulario_container_campo_valor' disabled />
 
                             <label for="alterarNome" className='iconeEditar'></label>
 
@@ -51,7 +121,7 @@ function EditarInformacoes() {
 
                             <label for="cpf" className='secao_informacoesPessoais_formulario_container_campo_titulo'>CPF:</label>
 
-                            <input type="text" id="cpf" value="581.021.984.69" className='secao_informacoesPessoais_formulario_container_campo_valor' disabled />
+                            <input type="text" id="cpf" value={dadosUsuarios.cpf} className='secao_informacoesPessoais_formulario_container_campo_valor' disabled />
 
                             <label for="alterarCpf" className='iconeEditar'></label>
 
@@ -60,12 +130,12 @@ function EditarInformacoes() {
 
                         </div>
 
-                        <div className='secao_informacoesPessoais_formulario_container_campo'>
+                        <div className='secao_informacoesPessoais_formulario_container_campo' id='desabilitado'>
 
                             <label for="dataNascimento" className='secao_informacoesPessoais_formulario_container_campo_titulo'>Data de Nascimento:</label>
 
-                            <input type="text" id="dataNascimento" value="05/08/1999" className='secao_informacoesPessoais_formulario_container_campo_valor' disabled />
-
+                            <input type="text" id="dataNascimento" value={dadosUsuarios?.data_Nascimento || ''} className='secao_informacoesPessoais_formulario_container_campo_valor' disabled />
+                            
                             <label for="alterarDataNascimento" className='iconeEditar'></label>
 
                             <input type="checkbox" name="" id="alterarDataNascimento" value="Alterar data de nascimento"
@@ -89,13 +159,13 @@ function EditarInformacoes() {
 
                         <div className='secao_senha_formulario_container_campo' >
 
-                            <input type="password" id="senha" value="1231233123" className='secao_senha_formulario_container_campo_valor' />
+                            <input type="password" id="senha" value={dadosUsuarios.senha} className='secao_senha_formulario_container_campo_valor' />
 
                             <label for="mostrarSenha" className='iconeMostrarSenha'></label>
 
                             <input type="checkbox" name="" id="mostrarSenha" value="Ver senha" className='secao_senha_formulario_container_campo_checkbox' />
 
-                            <button className='secao_senha_formulario_container_campo_botao'>Redefinir senha</button>
+                            <button className='secao_senha_formulario_container_campo_botao' onClick={isModalVisivel}>Redefinir Dados</button>
 
 
                         </div>
@@ -112,7 +182,7 @@ function EditarInformacoes() {
 
             </section>
 
-            <section className='secaoCartoes'>
+            <section className='secaoCartoes' id='desabilitado'>
 
                 <form action="" className='secaoCartoes_formulario'>
 
@@ -166,7 +236,7 @@ function EditarInformacoes() {
 
                     <fieldset className='secaoGerenciamentoConta_formularioSairConta_container'>
 
-                        <button className='secaoGerenciamentoConta_formularioSairConta_container_botao'></button>
+                        <button className='secaoGerenciamentoConta_formularioSairConta_container_botao' onClick={logOutUsuario}></button>
 
                     </fieldset>
 
