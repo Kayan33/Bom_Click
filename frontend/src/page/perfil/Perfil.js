@@ -10,8 +10,8 @@ import batata from '../../imagens/batata.png';
 import alho from '../../imagens/alho.png';
 import '../../assets/cabecalho.css';
 import { Link } from 'react-router-dom';
-import { useState, useContext, useEffect } from 'react'; 
-import { AutenticadoContexto } from '../../Contexts/authContexts'; 
+import { useState, useContext, useEffect } from 'react';
+import { AutenticadoContexto } from '../../Contexts/authContexts';
 import Login from '../../components/login/Login';
 import api from '../../services/api';
 
@@ -56,12 +56,13 @@ export default function Perfil() {
 
     }, [autenticado, usuario]);
 
+    
     if (loading) {
-        return <div>Carregando perfil...</div>;
+        return <div>Carregando Dados...</div>;
     }
 
     if (error) {
-        return <div>Erro ao carregar perfil: {error}</div>;
+        return <div>Erro ao buscar dados: {error}</div>;
     }
 
 
@@ -94,7 +95,7 @@ export default function Perfil() {
                                         <p>R$ 40,50</p>
                                     </div>
                                 </li>
-                             </ul>
+                            </ul>
                         </section>
 
                         <section className='secao_info_mercados'>
@@ -108,7 +109,7 @@ export default function Perfil() {
                                         </Link>
                                     </div>
                                 </li>
-                                 <li>
+                                <li>
                                     <div className='info_compras'>
                                         <Link to='/dadosPorMercado'>
                                             <img src={confiancaLogo} alt="Logo Supermecado Confiança" />
@@ -116,7 +117,7 @@ export default function Perfil() {
                                         </Link>
                                     </div>
                                 </li>
-                                 <li>
+                                <li>
                                     <div className='info_compras'>
                                         <Link to='/dadosPorMercado'>
                                             <img src={panelaoLogo} alt="Logo Supermecado Panelão" />
@@ -141,36 +142,36 @@ export default function Perfil() {
                                             </div>
                                         </article>
                                     </li>
-                                     <li className='secao_compras_produtos_lista_item'>
-                                         <article className='secao_compras_lista_item_produto'>
-                                             <img src={limao} alt="Limao" className='secao_compras_lista_item_produto_imagem' />
-                                             <h3 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo'>Limao Taiti KG</h3>
-                                             <div className='secao_compras_lista_item_produto_valores'>
-                                                 <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preço'>R$10,00</h4>
-                                                 <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--desconto secao_compras_lista_item_produto_titulo--amarelo'>R$40,00</h4>
-                                             </div>
-                                         </article>
-                                     </li>
-                                     <li className='secao_compras_produtos_lista_item'>
-                                         <article className='secao_compras_lista_item_produto'>
-                                             <img src={alho} alt="Alho" className='secao_compras_lista_item_produto_imagem' />
-                                             <h3 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo'>Alho UN</h3>
-                                             <div className='secao_compras_lista_item_produto_valores'>
-                                                 <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preço'>R$0,50</h4>
-                                                 <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--desconto secao_compras_lista_item_produto_titulo--amarelo'>R$40,00</h4>
-                                             </div>
-                                         </article>
-                                     </li>
-                                     <li className='secao_compras_produtos_lista_item'>
-                                         <article className='secao_compras_lista_item_produto'>
-                                             <img src={batata} alt="Batata" className='secao_compras_lista_item_produto_imagem' />
-                                             <h3 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo'>Batata UN</h3>
-                                             <div className='secao_compras_lista_item_produto_valores'>
-                                                 <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preço'>R$5,00</h4>
-                                                 <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--desconto secao_compras_lista_item_produto_titulo--amarelo'>R$1,00</h4>
-                                             </div>
-                                         </article>
-                                     </li>
+                                    <li className='secao_compras_produtos_lista_item'>
+                                        <article className='secao_compras_lista_item_produto'>
+                                            <img src={limao} alt="Limao" className='secao_compras_lista_item_produto_imagem' />
+                                            <h3 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo'>Limao Taiti KG</h3>
+                                            <div className='secao_compras_lista_item_produto_valores'>
+                                                <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preço'>R$10,00</h4>
+                                                <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--desconto secao_compras_lista_item_produto_titulo--amarelo'>R$40,00</h4>
+                                            </div>
+                                        </article>
+                                    </li>
+                                    <li className='secao_compras_produtos_lista_item'>
+                                        <article className='secao_compras_lista_item_produto'>
+                                            <img src={alho} alt="Alho" className='secao_compras_lista_item_produto_imagem' />
+                                            <h3 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo'>Alho UN</h3>
+                                            <div className='secao_compras_lista_item_produto_valores'>
+                                                <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preço'>R$0,50</h4>
+                                                <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--desconto secao_compras_lista_item_produto_titulo--amarelo'>R$40,00</h4>
+                                            </div>
+                                        </article>
+                                    </li>
+                                    <li className='secao_compras_produtos_lista_item'>
+                                        <article className='secao_compras_lista_item_produto'>
+                                            <img src={batata} alt="Batata" className='secao_compras_lista_item_produto_imagem' />
+                                            <h3 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo'>Batata UN</h3>
+                                            <div className='secao_compras_lista_item_produto_valores'>
+                                                <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--preço'>R$5,00</h4>
+                                                <h4 className='secao_compras_lista_item_produto_titulo secao_compras_lista_item_produto_titulo--desconto secao_compras_lista_item_produto_titulo--amarelo'>R$1,00</h4>
+                                            </div>
+                                        </article>
+                                    </li>
                                 </ul>
                             </section>
                         </section>
