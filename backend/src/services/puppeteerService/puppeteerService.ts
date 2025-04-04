@@ -27,28 +27,40 @@ export class PuppeteerService {
 
     async function produtoEncontrado() {
       const resultado = await pagina.waitForSelector(
-        "div.auto-suggest-item-container > a"
+          "div.auto-suggest-item-container > a"
       );
       const resultadoLink = await resultado!.evaluate((el) => el.href);
       await pagina.goto(resultadoLink);
-
+  
       const imagemContainer = await pagina
-        .locator("div.Img__Wrapper img")
-        .waitHandle();
+          .locator("div.Img__Wrapper img")
+          .waitHandle();
       const imageUrl = await imagemContainer.evaluate((img) => img.src);
-
+  
       const produtoContainer = await pagina
-        .locator("div.product-info h2.heading-2")
-        .waitHandle();
+          .locator("div.product-info h2.heading-2")
+          .waitHandle();
       const title = await produtoContainer.evaluate((el) => el.textContent);
-
+  
       const valorContainer = await pagina
-        .locator("div.product-info__price")
-        .waitHandle();
-      const price = await valorContainer.evaluate((el) => el.textContent);
-
-      return { imageUrl, title, price };
-    }
+          .locator("div.product-info__price")
+          .waitHandle();
+  
+      const priceString = await valorContainer.evaluate((el) => el.textContent);
+      let finalPrice = null;
+  
+      if (priceString) {
+          const prices = priceString.split('R$').map(p => p.trim()).filter(p => p !== '');
+          if (prices.length >= 2) {
+              finalPrice = 'R$ ' + prices[prices.length - 1]; // Pega o segundo preço
+          } else if (prices.length === 1) {
+              finalPrice = 'R$ ' + prices[0]; // Pega o primeiro preço
+          }
+          // Se prices.length for 0, finalPrice permanecerá null
+      }
+  
+      return { imageUrl, title, price: finalPrice };
+  }
 
     async function buscaSimilares() {
       return await pagina.$$eval("div.auto-suggest-item", (itemDivs) => {
