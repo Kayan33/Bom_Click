@@ -11,18 +11,18 @@ export class PuppeteerService {
       const informacoesProduto = await pagina.waitForSelector(
         "div.auto-suggest-item__info"
       );
-      const produtoSite = await informacoesProduto!.evaluate(
-        (el) => el.textContent
-      );
-      
-        if(produtoSite){
 
-          return String(produtoSite);
+      if (informacoesProduto) {
 
-        }else{
+        const produtoSite = await informacoesProduto.evaluate(
+          (el) => el.textContent
+        );
+        return String(produtoSite);
 
-          return ""
-        }
+      } else {
+
+        return ""
+      }
     }
 
     async function produtoEncontrado() {
@@ -52,7 +52,7 @@ export class PuppeteerService {
 
     async function buscaSimilares() {
       return await pagina.$$eval("div.auto-suggest-item", (itemDivs) => {
-        return itemDivs.map((div) => {
+        return itemDivs.map((div,index) => {
           const imgElement = div.querySelector(".auto-suggest-item__img img");
           const baseUrl = "https://www.confianca.com.br";
           const src = imgElement?.getAttribute("src") || "";
@@ -63,7 +63,7 @@ export class PuppeteerService {
             ".auto-suggest-item__price h2.price-current"
           );
           const price = priceElement ? priceElement.textContent!.trim() : null;
-          return { imageUrl, title, price };
+          return { id: index, imageUrl, title, price };
         });
       });
     }
@@ -135,7 +135,7 @@ export class PuppeteerService {
 
     async function buscaSimilares() {
       return await pagina.$$eval("div.product-container", (itemDivs) => {
-        return itemDivs.map((div) => {
+        return itemDivs.map((div, index) => {
           const imgElement = div.querySelector("img.product-image");
           const imageUrl = imgElement ? imgElement.getAttribute("src") : null;
 
@@ -149,7 +149,7 @@ export class PuppeteerService {
           ); // Adicionamos o 'span' para selecionar o elemento correto
           const price = priceElement ? priceElement.textContent!.trim() : null;
 
-          return { imageUrl, title, price };
+          return { id: index, imageUrl, title, price };
         });
       });
     }
@@ -231,18 +231,18 @@ export class PuppeteerService {
 
       return ({
 
-        nomeProduto: nomeProduto,
-        valorProduto: valorProduto,
-        imagemProduto: imagemProduto
+        title: nomeProduto,
+        price: valorProduto,
+        imageUrl: imagemProduto
 
       })
     }
 
     async function buscaSimilares() {
-      await pagina.waitForSelector('div.CardSuggestion-sc-v5lr4f-1'); // Espera o container principal da sugestão aparecer
+      await pagina.waitForSelector('div.CardSuggestion-sc-v5lr4f-1'); 
 
       const itemsData = await pagina.$$eval('div.CardSuggestion-sc-v5lr4f-1 .ListStyled-sc-chotap-0 > div.Container-sc-chotap-2', (productContainers) => {
-        return productContainers.map(container => {
+        return productContainers.map((container, index) => { 
           // Pegar a URL da imagem
           const imgElement = container.querySelector('a > div > div > img.Image-sc-chotap-4');
           const imageUrl = imgElement ? imgElement.getAttribute('src') : null;
@@ -256,6 +256,7 @@ export class PuppeteerService {
           const price = priceElement ? priceElement.textContent!.trim() : null;
 
           return {
+            id: index, 
             imageUrl: imageUrl,
             title: title,
             price: price,
@@ -302,8 +303,8 @@ export class PuppeteerService {
         }
       }
     }
-       await navegador.close();
-       return { dadosEncontrados: null, produtosSimilares: [] };
+    await navegador.close();
+    return { dadosEncontrados: null, produtosSimilares: [] };
   }
 
   async buscaProdutosMercados(title: string, urlConfianca: string, urlTauste: string, urlPaoAcucar: string) {
