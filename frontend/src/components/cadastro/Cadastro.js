@@ -1,102 +1,113 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom'
-import api from "../../services/api";
-import "./cadastro.css"
-import "../../assets/style.css"
+import "./cadastro.css";
+import "../../assets/style.css";
 
-export default function Cadastro() {
+export default function Cadastro({ onSubmitCadastro, onSwitchToLogin }) {
+    const [nome, setNome] = useState('');
+    const [email, setEmail] = useState('');
+    const [cpf, setCpf] = useState('');
+    const [senha, setSenha] = useState('');
+    const [confimeSenha, setConfimeSenha] = useState('');
+    // eslint-disable-next-line no-unused-vars
+    const [error, setError] = useState('');
+    const [registrando, setRegistrando] = useState(false);
 
-    const [nome, setNome] = useState('')
-    const [email, setEmail] = useState('')
-    const [cpf, setCpf] = useState('')
-    const [senha, setSenha] = useState('')
-    const [confimeSenha, setConfimeSenha] = useState('')
-    
-    async function CadastroUsuarios(e) {
+    async function handleCadastroSubmit(e) {
+        e.preventDefault();
+        setError('');
+
+        if (!nome || !cpf || !email || !senha || !confimeSenha) {
+            setError("Preencha todos os campos");
+            return;
+        }
+
+        if (senha !== confimeSenha) {
+            setError("As senhas não coincidem.");
+            return;
+        }
+
+        setRegistrando(true);
         try {
-            e.preventDefault()
-
-            if (!nome || !cpf || !email || !senha ) {
-                alert("Campo em Branco")
-                return
-            }
-
-            if (senha !== confimeSenha) {
-                alert("No campo 'Confirme a sua senha' a senha tem que ser a mesma digitada acima.")
-                return
-            }
-        
-
-            await api.post('/CadastroUsuarios', {
+            const success = await onSubmitCadastro({
                 nome,
                 email,
                 cpf,
                 senha,
-            })
-            console.log('Cadastro Efetuado com Sucesso');
+            });
+
+            if (success) {
+                alert('Cadastro realizado com sucesso! Faça o login para continuar.');
+                onSwitchToLogin();
+            } else {
+                setError('Falha no cadastro. Verifique os dados ou tente outro email/CPF.');
+            }
 
         } catch (err) {
-            console.log(err)
+             console.error("Erro no handleCadastroSubmit:", err);
+            setError('Ocorreu um erro inesperado durante o cadastro.');
+        } finally {
+            setRegistrando(false);
         }
     }
 
     return (
-        <div className="modal-fundo">
-            <div className="modal modal--cadastro">
-
-                <form onSubmit={CadastroUsuarios} className="modal_form_cadastro">
-                    <h2 className="modal-cadastro-titulo">
-                        Cadastro
-                    </h2>
-                    <input
-                        type="text"
-                        placeholder="Nome"
-                        value={nome}
-                        className="dialogo-cadastro-input-nome"
-                        onChange={(e) => setNome(e.target.value)}
-                    />
-
-                    <input
-                        type="text"
-                        placeholder="E-mail"
-                        value={email}
-                        className="dialogo-cadastro-input-email"
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-
-                    <input
-                        type="text"
-                        placeholder="CPF"
-                        value={cpf}
-                        className="dialogo-cadastro-input-cpf"
-                        onChange={(e) => setCpf(e.target.value)}
-                    />
-
-
-                    <input
-                        type="text"
-                        placeholder="Senha"
-                        value={senha}
-                        className="dialogo-cadastro-input-senha"
-                        onChange={(e) => setSenha(e.target.value)}
-                    />
-
-                    <input
-                        type="text"
-                        placeholder="Confirme a Senha"
-                        value={confimeSenha}
-                        className="dialogo-cadastro-input-confirme-senha"
-                        onChange={(e) => setConfimeSenha(e.target.value)}
-                    />
-                    <Link to='/carrinho' className="dialogo-cadastro-link-login">
-                        Já tem uma Conta? faça login
-                    </Link>
-                    <button className="dialogo-cadastro-button" type="submit">
-                        Cadastrar
-                    </button>
-                </form>
-
-            </div>
-        </div>
-    )
+        <form onSubmit={handleCadastroSubmit} className="modal_form_cadastro">
+            <input
+                type="text"
+                placeholder="Nome"
+                value={nome}
+                className="dialogo-cadastro-input-nome"
+                onChange={(e) => setNome(e.target.value)}
+                disabled={registrando}
+                required
+            />
+            <input
+                type="email"
+                placeholder="E-mail"
+                value={email}
+                className="dialogo-cadastro-input-email"
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={registrando}
+                required
+            />
+            <input
+                type="text"
+                placeholder="CPF"
+                value={cpf}
+                className="dialogo-cadastro-input-cpf"
+                onChange={(e) => setCpf(e.target.value)}
+                disabled={registrando}
+                required
+            />
+            <input
+                type="password"
+                placeholder="Senha"
+                value={senha}
+                className="dialogo-cadastro-input-senha"
+                onChange={(e) => setSenha(e.target.value)}
+                disabled={registrando}
+                required
+            />
+            <input
+                type="password"
+                placeholder="Confirme a Senha"
+                value={confimeSenha}
+                className="dialogo-cadastro-input-confirme-senha"
+                onChange={(e) => setConfimeSenha(e.target.value)}
+                disabled={registrando}
+                required
+            />
+            <button
+                type="button"
+                onClick={onSwitchToLogin}
+                className="dialogo-cadastro-link-login"
+                disabled={registrando}
+            >
+                Já tem uma Conta? faça login
+            </button>
+            <button className="dialogo-cadastro-button" type="submit" disabled={registrando}>
+                {registrando ? 'Cadastrando...' : 'Cadastrar'}
+            </button>
+        </form>
+    );
 }

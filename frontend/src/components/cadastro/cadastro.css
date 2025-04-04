@@ -82,13 +82,15 @@ dialog {
 }
 
 .modal_form_cadastro .dialogo-cadastro-link-login {
+  all: unset;
   grid-row: 7;
-  grid-column: 1;
+  grid-column: span 2;
   color: var(--amarelo);
   cursor: pointer;
   font-size: var(--fontePequena);
   font-weight: var(--fonteSemiBold);
   text-decoration: none;
+
 }
 
  .modal_form_cadastro .dialogo-cadastro-button {
@@ -109,20 +111,9 @@ dialog {
 .dialogo-cadastro-input-nome,
 .dialogo-cadastro-input-email, 
 .dialogo-cadastro-input-cpf, 
-
 .dialogo-cadastro-input-senha,
 .dialogo-cadastro-input-confirme-senha{
+  all: revert;
+  border: none;
   width: 90%;
-}
-
-
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(2px);
-  z-index: 999;
 }

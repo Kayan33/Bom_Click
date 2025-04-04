@@ -12,12 +12,9 @@ import limao from '../../imagens/limao.png'
 import iconeCartao from '../../imagens/iconeCartao.svg'
 import iconeExcluir from '../../imagens/iconeExcluir.svg'
 import '../../assets/carrossel.css'
-import { AutenticadoContexto } from "../../Contexts/authContexts"
-import Login from "../../components/login/Login"
 
 export default function ResumoCompra() {
-
-  const { loginEntrada } = useContext(AutenticadoContexto)
+  
 
   const [isChecked, setIsChecked] = useState(true)
 
@@ -84,7 +81,6 @@ export default function ResumoCompra() {
 
   return(
     <div>
-    {!loginEntrada && <Login/>}
     <header className='cabecalho'>
         <Link to='/'><img src={iconeVoltar} alt="Voltar para Página Inicial" /></Link>
         <h1 className='cabecalho_titulo'>Resumo da compra</h1>
