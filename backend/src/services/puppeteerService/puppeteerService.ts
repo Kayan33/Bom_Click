@@ -361,7 +361,12 @@ export class PuppeteerService {
         return slides.map(slide => {
           try {
             const imgElement = slide.querySelector('div.slide a.product-shelf div.product-shelf__header div.product-shelf__img button img');
-            const imageUrl = imgElement ? imgElement.getAttribute('src') : null;
+            let imageUrl = imgElement ? imgElement.getAttribute('src') : null;
+
+            if (imageUrl && !imageUrl.startsWith('http')) {
+                 imageUrl = `https://www.confianca.com.br${imageUrl}`;
+                }
+
   
             const titleElement = slide.querySelector('div.slide a.product-shelf article.product-shelf__info div h3.product-shelf__name');
             const title = titleElement ? titleElement.textContent : null;

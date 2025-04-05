@@ -16,6 +16,7 @@ function HomeScreen() {
   const [cartCount, setCartCount] = useState(0);
   const [produtosComparacao, setProdutosComparacao] = useState([]);
   const [produtosSimilares, setProdutosSimilares] = useState([]);
+  const [produtosPromo, setProdutosPromo] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
  
@@ -53,7 +54,6 @@ function HomeScreen() {
 
       // Armazena o resultado no estado
       setProdutosComparacao(resposta.data);
-      console.log(resposta.data);
 
       // Verifica se o comparacaoRef está presente e rola para o componente desejado
       if (comparacaoRef.current) {
@@ -68,6 +68,24 @@ function HomeScreen() {
     }
   };
 
+  const BuscaPromoTodosMercados = async () => {
+   
+    try {
+     
+      const resposta = await api.get("/BuscaPromoMercados");
+
+      setProdutosPromo(resposta.data);
+      console.log(resposta.data);
+
+    } catch (erro) {
+      console.error("Erro ao buscar produtos em oferta:", erro);
+    } 
+  };
+
+  useEffect(()=>{
+    BuscaPromoTodosMercados()
+  },[])
+
   const atualizarProduto = (mercado, produtoSelecionado) => {
     setProdutosComparacao((prev) => ({
       ...prev,
@@ -80,13 +98,7 @@ function HomeScreen() {
 
  
 
-  const handleAddToCart = (produto) => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    cart.push(produto);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    localStorage.setItem("cartCount", cart.length);
-    setCartCount(cart.length);
-  };
+
 
   useEffect(() => {
     const count = localStorage.getItem("cartCount");
@@ -132,22 +144,22 @@ function HomeScreen() {
           <h1>Promoções do dia!</h1>
 
           <div className="promocoes-01 barraRolagem">
-            {produtos.map((produto) => (
+            {produtosPromo.map((produto) => (
               <div className="promocoes" key={produto.id}>
                 <div className="promocoes_img">
-                  <img src={produto.imagem} alt={produto.nome} />
+                  <img src={produto.imageUrl} alt={produto.title} />
                 </div>
                 <div className="promocoes_produtos">
-                  <h3>{produto.nome}</h3>
-                  <span>R${produto.preco.toFixed(2)}</span>
+                  <h3>{produto.title}</h3>
+                  <span>R${produto.price}</span>
                   <div>
                     <img
-                      src={produto.mercadoImagem}
+                      src={produto.mercado.logo}
                       alt={produto.mercado}
                       className="imagem-mercado"
                     />
-                    <button onClick={() => handleAddToCart(produto)}>
-                      Adicionar <br /> a compra
+                    <button  onClick={() => handleCompararPreco(produto.nome)}>
+                    Comparar Preço
                     </button>
                   </div>
                 </div>

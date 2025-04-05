@@ -23,6 +23,19 @@ class ControllerGet {
       return res.status(500).json({ error: "Erro ao buscar mercado." });
     }
   }
+
+  async cadastrarProdutosDosMercados(req: Request, res: Response) {
+    try {
+      const servicesGet = new ServicesGet();
+      const resposta = await servicesGet.BuscaProdutosIntercalados();
+      return res.json(resposta);
+    } catch (error) {
+        console.error("Erro ao buscar promoções de mercado:", error);
+      return res.status(500).json({ error: "Erro ao buscar promoções de mercado." });
+    }
+  }
+
+  
 }
 
 export default ControllerGet;

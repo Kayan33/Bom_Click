@@ -22,6 +22,10 @@ router.delete('/DeletaUsuario/:id', new ControllerDelete().DeletarUsuarioUnico)
 router.post('/CadastroMercado', new ControllerPost().cadastro_Mercado)
 router.get('/BuscaMercado', new ControllerGet().BuscaMercado)
 
+
+router.get('/CadastraProduto', new ControllerPost().Cadastrao_Produto_Promocoes)
+router.get('/BuscaPromoMercados', new ControllerGet().cadastrarProdutosDosMercados)
+
 router.post('/loginUsuario', new LoginController().loginUsuario)
 router.get('/verificaTokenUsuario', estaAutenticado,new LoginController().verificaTokenUsuario)
 export default router;

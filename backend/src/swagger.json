@@ -608,7 +608,86 @@
       }
     }
   }
-}
+    },
+    "/BuscaPromoMercados": {
+      "get": {
+        "summary": "Buscar promoções intercaladas entre mercados",
+        "tags": ["Produtos Promoções"],
+        "responses": {
+          "200": {
+            "description": "Lista de produtos intercalados por mercado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Produto"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno no servidor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Erro ao buscar promoções de mercado."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/CadastraProduto": {
+      "get": {
+        "summary": "Cadastrar produtos em promoção",
+        "description": "Busca os produtos promocionais dos mercados e cadastra no banco de dados. Esta rota também limpa os produtos antigos antes de cadastrar os novos.",
+        "tags": ["Produtos Promoções"],
+        "responses": {
+          "200": {
+            "description": "Produtos cadastrados com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Produtos cadastrados com sucesso!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro ao cadastrar os produtos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Erro ao buscar mercado."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
 
   }
   

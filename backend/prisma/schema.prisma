@@ -142,7 +142,7 @@ model Produto {
  
 model Mercado {
   id   Int @id @default(autoincrement())
-  nome String
+  nome String @unique
   logo String
  
   // Relação entre Mercado e Produto
