@@ -137,9 +137,11 @@ async  cadastrarProdutosDosMercados() {
       }
     }
 
-    console.log("Produtos cadastrados com sucesso!");
+    return{mensagem:"Produtos cadastrados com sucesso!"};
   } catch (err) {
-    console.error("Erro ao cadastrar produtos:", err);
+    console.log(err);
+    throw new Error("Erro ao cadastrar produtos:");
+    
   }
 }
   
