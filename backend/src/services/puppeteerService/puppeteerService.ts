@@ -349,74 +349,79 @@ export class PuppeteerService {
   }
 
   async buscaProdutosPromocoes() {
-
     async function buscaDadosConfianca() {
-
       const navegador = await puppeteer.launch();
       const pagina = await navegador.newPage();
-
+  
       await pagina.goto("https://www.confianca.com.br/bauru/home");
-
+  
       const produtos = await pagina.$$eval('div.slick-track > div.slick-slide', (slides) => {
         return slides.map(slide => {
           try {
             const imgElement = slide.querySelector('div.slide a.product-shelf div.product-shelf__header div.product-shelf__img button img');
             const imageUrl = imgElement ? imgElement.getAttribute('src') : null;
-
+  
             const titleElement = slide.querySelector('div.slide a.product-shelf article.product-shelf__info div h3.product-shelf__name');
             const title = titleElement ? titleElement.textContent : null;
-
+  
             const currentPriceElement = slide.querySelector('div.slide a.product-shelf article.product-shelf__info div div.product-shelf__price.normal-price span.product-shelf__price-current');
             const price = currentPriceElement ? currentPriceElement.textContent : null;
-
-            return {
-              imageUrl,
-              title,
-              price,
-            };
+  
+            return { imageUrl, title, price };
           } catch (error) {
             console.error("Erro ao extrair dados de um slide:", error);
             return null;
           }
         }).filter(product => product !== null);
       });
-      return {Confianca: produtos};
+  
+      await navegador.close();
+      return { Confianca: produtos };
     }
-
+  
     async function buscaDadosTauste() {
       const navegador = await puppeteer.launch();
       const pagina = await navegador.newPage();
-    
+  
       await pagina.goto("https://tauste.com.br/bauru/");
-    
-      const produtos = await pagina.$$eval('div.slick-track > div.slick-slide', (slides) => {
-        return slides.map(slide => {
+  
+      const produtos = await pagina.$$eval('li.product-item', (items) => {
+        return items.map(slide => {
           try {
-            const imgElement = slide.querySelector('div.slide a.product-shelf div.product-shelf__header div.product-shelf__img button img');
-            const imageUrl = imgElement ? imgElement.getAttribute('src') : null;
-    
-            const titleElement = slide.querySelector('div.slide a.product-shelf article.product-shelf__info div h3.product-shelf__name');
-            const title = titleElement ? titleElement.textContent : null;
-    
-            const currentPriceElement = slide.querySelector('div.slide a.product-shelf article.product-shelf__info div div.product-shelf__price.normal-price span.product-shelf__price-current');
-            const price = currentPriceElement ? currentPriceElement.textContent : null;
-    
-            return {
-              imageUrl,
-              title,
-              price,
-            };
+            const imgElement = slide.querySelector('img.product-image-photo');
+            const imageUrl = imgElement?.getAttribute('src') || null;
+      
+            const titleElement = slide.querySelector('strong.product-item-name a');
+            const title = titleElement?.textContent?.trim() || null;
+      
+            const priceElement = slide.querySelector('span.price');
+            const price = priceElement?.textContent?.trim() || null;
+      
+            return { imageUrl, title, price };
           } catch (error) {
-            console.error("Erro ao extrair dados de um slide:", error);
+            console.error("Erro ao extrair dados de um produto:", error);
             return null;
           }
         }).filter(product => product !== null);
       });
-      return { Confianca: produtos };
+      
+  
+      await navegador.close();
+      return { Tauste: produtos };
     }
-
-    return buscaDadosConfianca()
+  
+    // Execução simultânea
+    const [dadosConfianca, dadosTauste] = await Promise.all([
+      buscaDadosConfianca(),
+      buscaDadosTauste()
+    ]);
+  
+    return {
+      ...dadosConfianca,
+      ...dadosTauste
+    };
   }
+  
 
 }
 
