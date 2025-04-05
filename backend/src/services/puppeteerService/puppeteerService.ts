@@ -251,9 +251,9 @@ export class PuppeteerService {
     }
 
     async function buscaSimilares() {
-      await pagina.waitForSelector('div.CardSuggestion-sc-v5lr4f-1');
+      await pagina.waitForSelector('div.slidesuggestion-sc-v5lr4f-1');
 
-      const itemsData = await pagina.$$eval('div.CardSuggestion-sc-v5lr4f-1 .ListStyled-sc-chotap-0 > div.Container-sc-chotap-2', (productContainers) => {
+      const itemsData = await pagina.$$eval('div.slidesuggestion-sc-v5lr4f-1 .ListStyled-sc-chotap-0 > div.Container-sc-chotap-2', (productContainers) => {
         return productContainers.map((container, index) => {
           // Pegar a URL da imagem
           const imgElement = container.querySelector('a > div > div > img.Image-sc-chotap-4');
@@ -349,6 +349,8 @@ export class PuppeteerService {
   }
 
   async buscaProdutosPromocoes() {
+
+    
     async function buscaDadosConfianca() {
       const navegador = await puppeteer.launch();
       const pagina = await navegador.newPage();
@@ -385,8 +387,8 @@ export class PuppeteerService {
   
       await pagina.goto("https://tauste.com.br/bauru/");
   
-      const produtos = await pagina.$$eval('li.product-item', (items) => {
-        return items.map(slide => {
+      const produtos = await pagina.$$eval('li.product-item', (slides) => {
+        return slides.map(slide => {
           try {
             const imgElement = slide.querySelector('img.product-image-photo');
             const imageUrl = imgElement?.getAttribute('src') || null;
@@ -409,16 +411,49 @@ export class PuppeteerService {
       await navegador.close();
       return { Tauste: produtos };
     }
+
+    async function buscaPromoPaoDeAcucar() {
+      const navegador = await puppeteer.launch();
+      const pagina = await navegador.newPage();
+  
+      await pagina.goto("https://www.paodeacucar.com/especial/ofertasdodia-pao2023");
+  
+      const produtos = await pagina.$$eval("div.Card-sc-yvvqkp-0", (slides) => {
+        return slides.map((slide) => {
+          try {
+            const imgElement = slide.querySelector("img");
+            const imageUrl = imgElement?.getAttribute("src") || null;
+    
+            const titleElement = slide.querySelector("a[aria-label]");
+            const title = titleElement?.getAttribute("title")?.trim() || null;
+    
+            const priceElement = slide.querySelector("p.PriceValue-sc-20azeh-4");
+            const price = priceElement?.textContent?.trim() || null;
+    
+            return { imageUrl, title, price };
+          } catch (error) {
+            console.error("Erro ao extrair dados de um produto:", error);
+            return null;
+          }
+        }).filter((item) => item !== null);
+      });
+      
+  
+      await navegador.close();
+      return { PaoDeAcucar: produtos };
+    }
   
     // Execução simultânea
-    const [dadosConfianca, dadosTauste] = await Promise.all([
+    const [dadosConfianca, dadosTauste,dadosPaoDeAcucar] = await Promise.all([
       buscaDadosConfianca(),
-      buscaDadosTauste()
+      buscaDadosTauste(),
+      buscaPromoPaoDeAcucar()
     ]);
   
     return {
       ...dadosConfianca,
-      ...dadosTauste
+      ...dadosTauste,
+      ...dadosPaoDeAcucar
     };
   }
   
