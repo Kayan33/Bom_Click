@@ -111,11 +111,9 @@ model ItensCompra {
   compraId   String
   compra     Compras  @relation(fields: [compraId], references: [id], onDelete: Cascade)
  
-  // Relação entre ItensCompra e Produto
-  produtoId  String
-  produto    Produto @relation(fields: [produtoId], references: [id], onDelete: Cascade)
  
-  @@unique([compraId, produtoId])
+ 
+  @@unique([compraId])
 
   create_at DateTime? @default(now())
   update_at DateTime? @default(now())
@@ -124,18 +122,16 @@ model ItensCompra {
 }
  
 model Produto {
-  id   String @id @default(uuid())
-  imagem String
-  valor Float
-  quantidade Int
-  valorEconomizado Float
+  id  Int @id @default(autoincrement())
+  imageUrl String
+  title String
+  price String
  
   // Relação entre Produto e Mercado
-  mercadoId String
+  mercadoId Int
   mercado Mercado @relation(fields: [mercadoId], references: [id])
  
-  // Relação Intermediária de muitos para muitos de Produtos e Compras
-  itens ItensCompra[]
+ 
 
   create_at DateTime? @default(now())
   update_at DateTime? @default(now())
@@ -145,7 +141,7 @@ model Produto {
  
  
 model Mercado {
-  id   String @id @default(uuid())
+  id   Int @id @default(autoincrement())
   nome String
   logo String
  

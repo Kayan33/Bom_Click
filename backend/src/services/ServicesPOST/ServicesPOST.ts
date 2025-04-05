@@ -71,6 +71,21 @@ class ServicesPost {
       throw new Error("Erro interno ao buscar usuário unico.");
     }
   }
+
+  async CadastroMercado({nome,logo}:{nome:string,logo:string}){
+    try {
+      await prismaClient.mercado.create({
+        data:{
+          nome,
+          logo
+        }
+      })
+      return { mensagem: "Cadastro efetuado com sucesso!" };
+    } catch (error) {
+      console.log(error);
+      throw new Error("Erro interno ao cadastrar mercado.");
+    }
+  }
 }
 
 export default ServicesPost;

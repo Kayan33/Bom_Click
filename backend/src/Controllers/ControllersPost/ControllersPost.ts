@@ -50,6 +50,27 @@ class ControllerPost {
       return res.status(500).json({ error: "Erro ao buscar usuário unico." });
     }
   }
+
+  async cadastro_Mercado(req: Request, res: Response) {
+    try {
+      const {
+        nome,
+        logo
+      } = req.body;
+
+      const servicesPost = new ServicesPost();
+      const resposta = await servicesPost.CadastroMercado({
+        nome,
+        logo
+      });
+
+      return res.status(201).json(resposta);
+    } catch (error) {
+      console.error("Erro no cadastro de mercado:", error);
+      return res.status(500).json({ error: "Erro ao cadastrar mercado." });
+    }
+
+  }
 }
 
 export default ControllerPost;

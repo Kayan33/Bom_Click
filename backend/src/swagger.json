@@ -321,6 +321,113 @@
       }
     },
 
+    "/CadastroMercado": {
+      "post": {
+        "tags": ["Mercado"],
+        "summary": "Cadastrar um novo mercado",
+        "requestBody": {
+          "description": "Dados do mercado a ser cadastrado",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "string",
+                    "example": "Mercado Central"
+                  },
+                  "logo": {
+                    "type": "string",
+                    "example": "https://exemplo.com/logo.png"
+                  }
+                },
+                "required": ["nome", "logo"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Cadastro realizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "mensagem": {
+                      "type": "string",
+                      "example": "Cadastro efetuado com sucesso!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno ao cadastrar mercado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Erro ao cadastrar mercado."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/BuscaMercado": {
+      "get": {
+        "summary": "Busca  mercado",
+        "description": "Retorna a lista de mercados cadastrados no sistema.",
+        "operationId": "BuscaMercado",
+        "tags": ["Mercado"],
+        "responses": {
+          "200": {
+            "description": "Lista de mercado retornada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "integer", "example": 1 },
+                      "nome": { "type": "string", "example": "Confiança" },
+                      "logo": { "type": "string", "example": "https://www.confianca.com.br/logo.svg" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno ao buscar usuários",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Erro ao buscar usuário."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
     "/loginUsuario": {
       "post": {
         "summary": "Realiza o login do usuário",
@@ -503,16 +610,6 @@
   }
 }
 
-  },
-  "components": {
-    "securitySchemes": {
-      "BearerAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "Insira o token no formato Bearer <seu_token>"
-      }
-    }
   }
   
 }
