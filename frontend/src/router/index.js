@@ -13,6 +13,7 @@ export default function NAutenticado() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomeScreen />}></Route>
+        <Route path="/paginaInicial" element={<HomeScreen />}></Route>
         <Route path="/dadosPorMercado" element={<DadosPorMercado />}></Route>
         <Route path="/carrinho" element={<CarrinhoCompras />}></Route>
         <Route path="/finalizado" element={<Loading />}></Route>

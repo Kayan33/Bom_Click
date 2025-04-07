@@ -1,0 +1,48 @@
+.modal-deletar-voltar {
+    grid-row: 1;
+    grid-column: 1;
+}
+
+
+.modal-deletar-p {
+    color: var(--amarelo);
+    font-size: var( --fonteSegundaria);
+    font-weight: var(--fonteSemiBold);
+    grid-row: 1;
+    grid-column: 1 / span 3;
+}
+
+
+.dialogo-deletar-button {
+    all: unset;
+    grid-row: 3;
+    grid-column: 1 / span 4;
+    align-self: center;
+    font-size: var(--fontePequena);
+    font-weight: var(--fonteSemiBold);
+    padding: var(--espacamentoPequeno) var(--espacamentoMenor);
+    border-radius: var(--bordaRaio);
+    background-color: var(--amarelo);
+    color: var(--verde);
+    cursor: pointer;
+    display: inline-block;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.dialogo-Cancelar-button {
+    all: unset;
+    grid-row: 4;
+    grid-column: 1 / span 4;
+    align-self: center;
+    font-size: var(--fontePequena);
+    font-weight: var(--fonteSemiBold);
+    padding: var(--espacamentoPequeno) var(--espacamentoMenor);
+    border-radius: var(--bordaRaio);
+    background-color: var(--amarelo);
+    color: var(--verde);
+    cursor: pointer;
+    display: inline-block;
+    box-sizing: border-box;
+    text-align: center;
+}

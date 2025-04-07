@@ -38,6 +38,7 @@
     background-repeat: no-repeat;
     width: var(--tamanhoIcone);
     height: 60%;
+    cursor: pointer;
 }
 
 .secao_senha_formulario_container_campo_checkbox{

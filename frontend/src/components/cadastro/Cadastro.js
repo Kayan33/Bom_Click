@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./cadastro.css";
 import "../../assets/style.css";
+import { toast } from "react-toastify";
 
 export default function Cadastro({ onSubmitCadastro, onSwitchToLogin }) {
     const [nome, setNome] = useState('');
@@ -9,20 +10,18 @@ export default function Cadastro({ onSubmitCadastro, onSwitchToLogin }) {
     const [senha, setSenha] = useState('');
     const [confimeSenha, setConfimeSenha] = useState('');
     // eslint-disable-next-line no-unused-vars
-    const [error, setError] = useState('');
     const [registrando, setRegistrando] = useState(false);
 
     async function handleCadastroSubmit(e) {
         e.preventDefault();
-        setError('');
 
         if (!nome || !cpf || !email || !senha || !confimeSenha) {
-            setError("Preencha todos os campos");
+            toast.warn("Preencha todos os campos");
             return;
         }
 
         if (senha !== confimeSenha) {
-            setError("As senhas não coincidem.");
+            toast.warn("As senhas não coincidem.");
             return;
         }
 
@@ -36,15 +35,15 @@ export default function Cadastro({ onSubmitCadastro, onSwitchToLogin }) {
             });
 
             if (success) {
-                alert('Cadastro realizado com sucesso! Faça o login para continuar.');
+                toast.success('Cadastro realizado com sucesso! Faça o login para continuar.');
                 onSwitchToLogin();
             } else {
-                setError('Falha no cadastro. Verifique os dados ou tente outro email/CPF.');
+                toast.error('Falha no cadastro. Verifique os dados ou tente outro email/CPF.');
             }
 
         } catch (err) {
-             console.error("Erro no handleCadastroSubmit:", err);
-            setError('Ocorreu um erro inesperado durante o cadastro.');
+            console.error("Erro no handleCadastroSubmit:", err);
+            toast.error('Ocorreu um erro inesperado durante o cadastro.');
         } finally {
             setRegistrando(false);
         }
@@ -106,7 +105,7 @@ export default function Cadastro({ onSubmitCadastro, onSwitchToLogin }) {
                 Já tem uma Conta? faça login
             </button>
             <button className="dialogo-cadastro-button" type="submit" disabled={registrando}>
-                {registrando ? 'Cadastrando...' : 'Cadastrar'}
+                Cadastrar
             </button>
         </form>
     );

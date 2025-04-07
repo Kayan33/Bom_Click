@@ -1,10 +1,11 @@
 import React, {useState, useContext} from "react";
-import { Link } from "react-router-dom";
 import api from "../../services/api";
-import iconeVoltar from '../../imagens/icon-voltar.svg'
 import { AutenticadoContexto } from "../../Contexts/authContexts";
+import '../modalAlterarDados/modaleditarusuarios.css'
+import { toast } from "react-toastify";
 
-export default function ModalAlterarDados() {
+
+export default function ModalAlterarDados({ isOpen, onClose }) {
     const [nome, setNome] = useState('');
     const [senha, setSenha] = useState('');
     const { usuario } = useContext(AutenticadoContexto);
@@ -22,11 +23,12 @@ export default function ModalAlterarDados() {
             const id = usuario.id;
             console.log("Enviando dados para alteração:", { nome, senha });
             const resposta = await api.put(`/AlteraDadosUsuario/${id}`, {
-                nome,
-                senha
+                nome: nome,
+                senha: senha
             });
             console.log("Resposta da API", resposta);
-            console.log('Cadastro alterado com sucesso!');
+           toast.success('Cadastro alterado com sucesso!');
+            onClose()
         } catch (error) {
             console.log(error);
         }
@@ -35,10 +37,7 @@ export default function ModalAlterarDados() {
     return (
         <div className="modal-fundo">
             <div className="modal modal--login ">
-            <Link to="/Perfil" className="modal-login-voltar">
-                    <img src={iconeVoltar} alt="Voltar" />
-                </Link>
-            <h2 className="modal-login-titulo">Editar Usuarios</h2>
+            <h2 className="modal-editar-titulo">Editar Usuarios</h2>
                 <form onSubmit={alterarDadosUsuarios}>
                     <input
                         type="nome"
@@ -46,7 +45,7 @@ export default function ModalAlterarDados() {
                         placeholder="Nome:"
                         value={nome}
                         onChange={(e) => setNome(e.target.value)}
-                        className="dialogo-login-input-email"
+                        className="modal-editar-input-email"
                     />
                     <input
                         type="password"
@@ -54,9 +53,10 @@ export default function ModalAlterarDados() {
                         placeholder="Senha:"
                         value={senha}
                         onChange={(e) => setSenha(e.target.value)}
-                        className="dialogo-login-input-senha"
+                        className="modal-editar-input-senha"
                     />
-                    <button type="submit" className="dialogo-login-button">Enviar</button>
+                    <button type="submit" className="modal-editar-enviar-button">Enviar</button>
+                    <button type="button" className="modal-editar-cancelar-button" onClick={onClose}>Cancelar</button>
                 </form>
             </div>
         </div>
