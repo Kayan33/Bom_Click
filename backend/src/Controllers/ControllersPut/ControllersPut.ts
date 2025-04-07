@@ -6,27 +6,29 @@ class ControllerPut {
     try {
       const {
         nome,
+        email,
         cpf,
         dataNascimento,
         cep,
         logradouro,
         bairro,
         numero,
-        email,
+
       } = req.body;
-      const{id}=req.params
+      const { id } = req.params
 
       const servicesPut = new ServicesPut();
       const resposta = await servicesPut.alterarDadosAluno({
         id,
         nome,
+        email,
         cpf,
         dataNascimento,
         cep,
         logradouro,
         bairro,
         numero,
-        email,
+
       });
 
       return res.status(201).json(resposta);

@@ -36,7 +36,7 @@ export default function AuthProvider({ children }) {
             return;
         }
         const tokenU = JSON.parse(iToken);
-        setToken(tokenU); // Set token state early
+        setToken(tokenU);
 
         try {
             const resposta = await api.get('/verificaTokenUsuario');

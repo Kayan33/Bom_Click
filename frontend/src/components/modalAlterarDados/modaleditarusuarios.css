@@ -1,0 +1,74 @@
+.modal-editar-titulo {
+    grid-row: 1;
+    font-size: var(--fonteSegundaria);
+    color: var(--branco);
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.modal-editar-input-email {
+    all: revert;
+    grid-row: 2;
+    grid-column: 1 / span 4;
+    padding: var(--espacamentoPequeno);
+    font-size: var(--fontePequena);
+    border-radius: var(--bordaRaio);
+    transition: border-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid grey;
+}
+
+.modal-editar-input-senha {
+    all: revert;
+    grid-row: 3;
+    grid-column: 1 / span 4;
+    padding: var(--espacamentoPequeno);
+    font-size: var(--fontePequena);
+    border-radius: var(--bordaRaio);
+    transition: border-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid grey;
+}
+
+.modal-editar-button {
+    grid-row: 4;
+}
+
+.modal-editar-enviar-button {
+    all: unset;
+    grid-row: 5;
+    grid-column: 1 / span 4;
+    align-self: end;
+    justify-self: end;
+    font-size: var(--fontePequena);
+    font-weight: var(--fonteSemiBold);
+    padding: var(--espacamentoPequeno) var(--espacamentoMenor);
+    border-radius: var(--bordaRaio);
+    background-color: var(--amarelo);
+    color: var(--verde);
+    cursor: pointer;
+    display: inline-block;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.modal-editar-cancelar-button {
+    all: unset;
+    grid-row: 5;
+    grid-column: 1 / span 1;
+    align-self: center;
+    justify-self: start;
+    font-size: var(--fontePequena);
+    font-weight: var(--fonteSemiBold);
+    padding: var(--espacamentoPequeno) var(--espacamentoMenor);
+    border-radius: var(--bordaRaio);
+    background-color: var(--amarelo);
+    color: var(--verde);
+    cursor: pointer;
+    display: inline-block;
+    box-sizing: border-box;
+    text-align: center;
+}

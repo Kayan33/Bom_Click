@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import api from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 import { AutenticadoContexto } from '../../Contexts/authContexts';
@@ -12,6 +12,7 @@ import './secaoCartoes.css';
 import iconeVoltar from '../../imagens/icon-voltar.svg';
 import SecaoCep from '../../components/SecaoCep/SecaoCep';
 import ModalAlterarDados from '../../components/modalAlterarDados/ModalAlterarDados';
+import ModalDeletarUsuarios from '../../components/modalDeletarUsuarios/ModalDeletarUsuario';
 
 function EditarInformacoes() {
     const navigate = useNavigate();
@@ -19,10 +20,12 @@ function EditarInformacoes() {
     const [dadosUsuarios, setDadosUsuarios] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [modalVisivel, setModalVisivel] = useState(false);
-   
-    
-    
+    const [modalAlterarVisivel, setModalAlterarVisivel] = useState(false);
+    const [modalDeletarVisivel, setModalDeletarVisivel] = useState(false);
+    const [mostrarSenha, setMostrarSenha] = useState(false);
+
+
+
 
     useEffect(() => {
         async function consultarDadosUsuarios() {
@@ -59,10 +62,29 @@ function EditarInformacoes() {
 
     }, [autenticado, usuario]);
 
-    function isModalVisivel(e) {
+    const toggleMostrarSenha = () => {
+        setMostrarSenha(prevState => !prevState);
+    };
+   
+
+    function isModalAlterarVisivel(e) {
         e.preventDefault();
-        setModalVisivel(true)
+        setModalAlterarVisivel(true)
     }
+
+
+    const handleCloseAlterarModal = () => {
+        setModalAlterarVisivel(false);
+    }
+
+    function isModalDeletarVisivel(e) {
+        e.preventDefault();
+        setModalDeletarVisivel(true)
+    }
+
+    const handleCloseDeletarModal = () => {
+        setModalDeletarVisivel(false);
+    };
 
 
     if (loading) {
@@ -73,7 +95,7 @@ function EditarInformacoes() {
         return <div>Erro ao carregar perfil: {error}</div>;
     }
 
-    function logOutUsuario () {
+    function logOutUsuario() {
         logout()
         navigate('/')
     }
@@ -82,8 +104,20 @@ function EditarInformacoes() {
 
     return (
         <>
-
-        {modalVisivel === true && <ModalAlterarDados/>}
+          {modalAlterarVisivel && (
+                <ModalAlterarDados
+                    onClose={handleCloseAlterarModal}
+                   
+                    dadosParaAlterar={{ nome: dadosUsuarios.nome }} 
+                    usuarioId={usuario.id}
+                />
+            )}
+             {modalDeletarVisivel && (
+                 <ModalDeletarUsuarios
+                     isOpen={modalDeletarVisivel}
+                     onClose={handleCloseDeletarModal}
+                 />
+             )}
             <header className="cabecalho">
 
                 <a href="/perfil">
@@ -135,7 +169,7 @@ function EditarInformacoes() {
                             <label for="dataNascimento" className='secao_informacoesPessoais_formulario_container_campo_titulo'>Data de Nascimento:</label>
 
                             <input type="text" id="dataNascimento" value={dadosUsuarios?.data_Nascimento || ''} className='secao_informacoesPessoais_formulario_container_campo_valor' disabled />
-                            
+
                             <label for="alterarDataNascimento" className='iconeEditar'></label>
 
                             <input type="checkbox" name="" id="alterarDataNascimento" value="Alterar data de nascimento"
@@ -159,13 +193,25 @@ function EditarInformacoes() {
 
                         <div className='secao_senha_formulario_container_campo' >
 
-                            <input type="password" id="senha" value={dadosUsuarios.senha} className='secao_senha_formulario_container_campo_valor' />
+                        <input
+                               
+                                type={mostrarSenha ? "text" : "password"}
+                                id="senha"
+                                value={dadosUsuarios.senha}
+                                className='secao_senha_formulario_container_campo_valor'
+                            />
 
-                            <label for="mostrarSenha" className='iconeMostrarSenha'></label>
+                            <label for="mostrarSenha"  className={`iconeMostrarSenha ${mostrarSenha ? 'senha-visivel' : 'senha-oculta'}`}></label>
 
-                            <input type="checkbox" name="" id="mostrarSenha" value="Ver senha" className='secao_senha_formulario_container_campo_checkbox' />
+                            <input
+                                type="checkbox"
+                                id="mostrarSenha" 
+                                checked={mostrarSenha}
+                                onChange={toggleMostrarSenha}
+                                className='secao_senha_formulario_container_campo_checkbox'
+                            />
 
-                            <button className='secao_senha_formulario_container_campo_botao' onClick={isModalVisivel}>Redefinir Dados</button>
+                            <button className='secao_senha_formulario_container_campo_botao' onClick={isModalAlterarVisivel}>Redefinir Dados</button>
 
 
                         </div>
@@ -199,7 +245,7 @@ function EditarInformacoes() {
                             <input type="text" id="user" value="0800 0800 0800 0800" className='secaoCartoes_formulario_container_cartao_numero' />
 
                             <button aria-label="Excluir cartão" className='secaoCartoes_formulario_container_cartao_botao'></button>
-                            
+
                         </div>
 
                         <div className='secaoCartoes_formulario_container_cartao'>
@@ -211,7 +257,7 @@ function EditarInformacoes() {
                             <input type="text" id="user" value="0800 0800 0800 0800" className='secaoCartoes_formulario_container_cartao_numero' />
 
                             <button aria-label="Excluir cartão" className='secaoCartoes_formulario_container_cartao_botao'></button>
-                            
+
                         </div>
 
                         <button className='secaoCartoes_formulario_container_botao'>Adicionar Cartão</button>
@@ -227,7 +273,7 @@ function EditarInformacoes() {
                 <form action="" className='secaoGerenciamentoConta_formularioDeletarConta'>
 
                     <fieldset className='secaoGerenciamentoConta_formularioDeletarConta_container'>
-                        <button className='secaoGerenciamentoConta_formularioDeletarConta_container_botao'>Apagar conta</button>
+                        <button className='secaoGerenciamentoConta_formularioDeletarConta_container_botao' onClick={isModalDeletarVisivel}>Apagar conta</button>
                     </fieldset>
 
                 </form>

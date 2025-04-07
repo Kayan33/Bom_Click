@@ -5,6 +5,7 @@ import iconeVoltar from "../../imagens/icon-voltar.svg";
 import { AutenticadoContexto } from "../../Contexts/authContexts"; 
 import { Link } from "react-router-dom";
 import Cadastro from "../cadastro/Cadastro"; 
+import { toast } from "react-toastify";
 
 export default function Login() {
     const [view, setView] = useState('login');
@@ -26,7 +27,7 @@ export default function Login() {
         try {
             const success = await loginEntrada(emailLogin, senhaLogin);
             if (!success) {
-                setErrorLogin('Email ou senha inválidos.');
+               toast.error('Email ou senha inválidos.');
             }
         } catch (err) {
              console.error("Erro no handleLoginSubmit:", err);
@@ -85,7 +86,7 @@ export default function Login() {
                             Não tem conta? Cadastre-se
                         </button>
                         <button className="dialogo-login-button" type="submit" disabled={isLoggingIn}>
-                            {isLoggingIn ? 'Entrando...' : 'Login'}
+                           Login
                         </button>
                     </form>
                 ) : (
