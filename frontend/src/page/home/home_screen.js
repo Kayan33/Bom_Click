@@ -51,10 +51,12 @@ function HomeScreen() {
     try {
       // Faz a chamada à API para comparar preços
       const resposta = await api.post("/BuscarProdutos", { nomeProduto });
+console.log(nomeProduto);
 
       // Armazena o resultado no estado
       setProdutosComparacao(resposta.data);
-
+      console.log(resposta.data);
+      
       // Verifica se o comparacaoRef está presente e rola para o componente desejado
       if (comparacaoRef.current) {
         setTimeout(() => {
@@ -113,14 +115,14 @@ function HomeScreen() {
         <li>
           <img src={logo} alt="Logo" className="lista-logo" />
         </li>
-        <li>
+        {/* <li>
           <Link to="/carrinho">
             <div className="carrinho-container">
               <img src={carrinho} alt="Carrinho de compras" />
               {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
             </div>
           </Link>
-        </li>
+        </li> */}
       </header>
 
       <section className="cabecalho-estastisticas">
@@ -158,7 +160,7 @@ function HomeScreen() {
                       alt={produto.mercado}
                       className="imagem-mercado"
                     />
-                    <button  onClick={() => handleCompararPreco(produto.nome)}>
+                    <button  onClick={() => handleCompararPreco(produto.title)}>
                     Comparar Preço
                     </button>
                   </div>
