@@ -1,12 +1,15 @@
 import carne from '../imagens/carne.png'
 import limao from '../imagens/limao.png'
 import batata from '../imagens/batata.png'
+import file from "../imagens/file-de-frango.png"
 import confiancaLogo from '../imagens/confiancaLogo.png'
 import alho from '../imagens/alho.png'
 import acai from '../imagens/acai.png'
 import almondegas from '../imagens/almondegas.png'
 import panelaoLogo from '../imagens/panelaoLogo.png'
 import tausteLogo from '../imagens/tausteLogo.png'
+import isotonico from "../imagens/isotonico.jpg"
+
 export const produtos = [
     {
         id: 1,
@@ -104,7 +107,7 @@ export const produtos = [
         preco: 90.90,
         pesoKg: 1,
         mercado: "Tauste",
-        imagem: carne ,
+        imagem: file ,
         mercadoImagem: tausteLogo,
         setores: "Açougue"
     },
@@ -214,6 +217,62 @@ export const produtos = [
         mercadoImagem: panelaoLogo,
         setores: "Frios"
     },
+    {
+        id: 19,
+        nome: "Filé de Peito de Frango Sadia Bio Bandeja 1000g",
+        descricao: "Filé Mignon bovino, peça de 1kg.",
+        preco: 90.90,
+        pesoKg: 1,
+        mercado: "Confiança",
+        imagem: file ,
+        mercadoImagem: confiancaLogo,
+        setores: "Açougue"
+    },
+    {
+        id: 20,
+        nome: "Filé de Peito de Frango Sadia Bio Bandeja 1000g",
+        descricao: "Filé Mignon bovino, peça de 1kg.",
+        preco: 90.90,
+        pesoKg: 1,
+        mercado: "Panelão",
+        imagem: file ,
+        mercadoImagem: confiancaLogo,
+        setores: "Açougue"
+    },
+    {
+        id: 20,
+        nome: "Isotônico Gatorade Limão Frasco 500ml",
+        descricao: "Isotônico Gatorade Limão Frasco 500ml",
+        preco: 90.90,
+        pesoKg: 1,
+        mercado: "Panelão",
+        imagem: isotonico ,
+        mercadoImagem: confiancaLogo,
+        setores: "Frios"
+    },
+    {
+        id: 20,
+        nome: "Isotônico Gatorade Limão Frasco 500ml",
+        descricao: "Isotônico Gatorade Limão Frasco 500ml",
+        preco: 90.90,
+        pesoKg: 1,
+        mercado: "Confiança",
+        imagem: isotonico ,
+        mercadoImagem: panelaoLogo,
+        setores: "Frios"
+    },
+    {
+        id: 20,
+        nome: "Isotônico Gatorade Limão Frasco 500ml",
+        descricao: "Isotônico Gatorade Limão Frasco 500ml",
+        preco: 90.90,
+        pesoKg: 1,
+        mercado: "Tauste",
+        imagem: isotonico ,
+        mercadoImagem: tausteLogo,
+        setores: "Frios"
+    },
+    
     
     
 ];

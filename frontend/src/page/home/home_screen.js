@@ -5,6 +5,7 @@ import perfil from "../../imagens/perfil.svg";
 import { Link } from "react-router-dom";
 import confiancaLogo from "../../imagens/confiancaLogo.png";
 import panelaoLogo from "../../imagens/panelaoLogo.png";
+import paodeacucarLogo from "../../imagens/logo-pao-de-acucar.jpg";
 import tausteLogo from "../../imagens/tausteLogo.png";
 import { produtos } from "../../data/produtos.js";
 import { useState, useEffect, useRef } from "react";
@@ -50,13 +51,10 @@ function HomeScreen() {
     setLoading(true);
     try {
       // Faz a chamada à API para comparar preços
-      const resposta = await api.post("/BuscarProdutos", { nomeProduto: nomeProduto.trim() });
-
-console.log(nomeProduto);
+      const resposta = await api.post("/BuscarProdutos", { nomeProduto });
 
       // Armazena o resultado no estado
       setProdutosComparacao(resposta.data);
-      console.log(resposta.data);
       
       // Verifica se o comparacaoRef está presente e rola para o componente desejado
       if (comparacaoRef.current) {
