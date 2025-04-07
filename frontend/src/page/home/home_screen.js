@@ -50,7 +50,8 @@ function HomeScreen() {
     setLoading(true);
     try {
       // Faz a chamada à API para comparar preços
-      const resposta = await api.post("/BuscarProdutos", { nomeProduto });
+      const resposta = await api.post("/BuscarProdutos", { nomeProduto: nomeProduto.trim() });
+
 console.log(nomeProduto);
 
       // Armazena o resultado no estado

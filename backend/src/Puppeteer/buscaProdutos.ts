@@ -138,7 +138,7 @@ class Puppeteer {
 
     async buscaProdutosTauste(req: Request, res: Response) {
 
-        const { nomeProduto } = req.body;
+        const { nomeProduto, url } = req.body;
 
         const navegador = await puppeteer.launch();
         const pagina = await navegador.newPage();
@@ -193,9 +193,9 @@ class Puppeteer {
             });
           }
 
-        let produto = "Isotônico Gatorade Limão Frasco 500ml";
-        let produtoArray = produto.split(" ");
-        await pagina.goto(`https://tauste.com.br/bauru/`);
+       
+        let produtoArray = nomeProduto.split(" ");
+        await pagina.goto(url);
         await pagina.setViewport({ width: 1080, height: 1024 });
         let produtoConcatenado = "";
 
@@ -248,7 +248,7 @@ class Puppeteer {
 
         console.time("Execução");
 
-        const { nomeProduto } = req.body;
+        const { nomeProduto, url } = req.body;
 
         const navegador = await puppeteer.launch({ headless: false, devtools: true });
         const pagina = await navegador.newPage();
@@ -317,9 +317,9 @@ class Puppeteer {
             return itemsData;
         }
 
-        let produto = "Isotônico Gatorade Limão Frasco 500ml";
-        let produtoArray = produto.split(" ");
-        await pagina.goto(`https://www.paodeacucar.com/`);
+        
+        let produtoArray = nomeProduto.split(" ");
+        await pagina.goto(url);
         await pagina.setViewport({ width: 1080, height: 1024 });
         let produtoConcatenado = "";
 
