@@ -251,9 +251,9 @@ export class PuppeteerService {
     }
 
     async function buscaSimilares() {
-      await pagina.waitForSelector('div.slidesuggestion-sc-v5lr4f-1');
+      await pagina.waitForSelector('div.CardSuggestion-sc-v5lr4f-1');
 
-      const itemsData = await pagina.$$eval('div.slidesuggestion-sc-v5lr4f-1 .ListStyled-sc-chotap-0 > div.Container-sc-chotap-2', (productContainers) => {
+      const itemsData = await pagina.$$eval('div.CardSuggestion-sc-v5lr4f-1 .ListStyled-sc-chotap-0 > div.Container-sc-chotap-2', (productContainers) => {
         return productContainers.map((container, index) => {
           // Pegar a URL da imagem
           const imgElement = container.querySelector('a > div > div > img.Image-sc-chotap-4');
@@ -319,34 +319,7 @@ export class PuppeteerService {
     return { dadosEncontrados: null, produtosSimilares: [] };
   }
 
-  async buscaProdutosMercados(title: string, urlConfianca: string, urlTauste: string, urlPaoAcucar: string) {
-    const [produtosConfiança, produtosTauste, produtosPaoAcucar] = await Promise.all([
-      this.buscaProdutosConfiança(title, urlConfianca),
-      this.buscaProdutosTauste(title, urlTauste),
-      this.buscaProdutosPaoAcucar(title, urlPaoAcucar)
-    ]);
 
-    function extraiListaProdutos(produtos: any) {
-      return produtos.buscaTodosProdutos || []; // Pega só os produtos de 'BuscaTodosProdutos'
-    }
-
-    const listaConfiança = extraiListaProdutos(produtosConfiança);
-    const listaTauste = extraiListaProdutos(produtosTauste);
-    const listaPaoAcucar = extraiListaProdutos(produtosPaoAcucar);
-
-    function intercalaProdutos(lista1: any[], lista2: any[], lista3: any[]) {
-      const resultado = [];
-      const maxLength = Math.max(lista1.length, lista2.length);
-      for (let i = 0; i < maxLength; i++) {
-        if (lista1[i]) resultado.push(lista1[i]);
-        if (lista2[i]) resultado.push(lista2[i]);
-        if (lista3[i]) resultado.push(lista3[i]);
-      }
-      return resultado;
-    }
-
-    return { produtos: intercalaProdutos(listaConfiança, listaTauste, listaPaoAcucar) };
-  }
 
   async buscaProdutosPromocoes() {
 
