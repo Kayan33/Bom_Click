@@ -1,5 +1,7 @@
 import { StyleSheet, Text, View, Modal, Pressable, TextInput } from 'react-native';
 import React, { useState, useEffect } from 'react';
+import IconeVoltar from './icones/Voltar';
+import IconeOlho from './icones/IconeOlho';
 
 export default function LoginModal({ visible, onLoginSubmit, onClose, onNavigateToCadastro }) {
 
@@ -37,6 +39,8 @@ export default function LoginModal({ visible, onLoginSubmit, onClose, onNavigate
                         <Text style={{ color: 'white', fontSize: 18 }}>X</Text>
                     </Pressable>
 
+                    <IconeVoltar/>
+
                     <Text style={styles.modal_container_titulo}>Login</Text>
 
                     <TextInput
@@ -60,7 +64,7 @@ export default function LoginModal({ visible, onLoginSubmit, onClose, onNavigate
                             placeholderTextColor="#555"
                         />
                         <Pressable onPress={() => setSenhaVisibilidade(!senhaVisibilidade)}>
-                            {/* Icone pra colocar depois */}
+                            <IconeOlho/>
                             <Text style={{ color: '#333' }}>{senhaVisibilidade ? 'Ver' : 'Ocultar'}</Text>
                         </Pressable>
                     </View>

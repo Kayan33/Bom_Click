@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Image, ScrollView, Pressable, ActivityIndicator
 import { useNavigation } from '@react-navigation/native';
 import { AutenticadoContexto } from '../Context/authContext'
 import api from '../services/api'
+import IconeVoltar from '../components/icones/Voltar';
 
 export default function Perfil() {
     const navigation = useNavigation();
@@ -68,8 +69,8 @@ export default function Perfil() {
     return (
         <View style={styles.container}>
             <View style={styles.cabecalho}>
-                <Pressable onPress={() => navigation.goBack()} style={styles.cabecalhoLink}>
-                     {/* <IconeVoltar width={24} height={24} /> */}
+                <Pressable onPress={() => navigation.navigate('Inicial')} style={styles.cabecalhoLink}>
+                     <IconeVoltar/>
                     <Text style={{color: 'white', fontSize: 24}}>←</Text> 
                 </Pressable>
                 <Text style={styles.cabecalhoTitulo}>Perfil</Text>
