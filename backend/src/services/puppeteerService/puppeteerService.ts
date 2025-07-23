@@ -3,114 +3,90 @@ import stringSimilarity from "string-similarity";
 
 export class PuppeteerService {
 
-  async buscaProdutosConfiança(title: string, url: string) {
-    const navegador = await puppeteer.launch();
-    const pagina = await navegador.newPage();
 
-    async function buscaDados() {
-      const informacoesProduto = await pagina.waitForSelector(
-        "div.auto-suggest-item__info"
-      );
 
-      if (informacoesProduto) {
 
-        const produtoSite = await informacoesProduto.evaluate(
-          (el) => el.textContent
-        );
-        return String(produtoSite);
 
-      } else {
+async buscaProdutosConfiança(title: string, url: string) {
+  const navegador = await puppeteer.launch({ headless: false, defaultViewport: null });
+  const pagina = await navegador.newPage();
+  await pagina.goto(url);
 
-        return ""
-      }
-    }
-
-    async function produtoEncontrado() {
-      const resultado = await pagina.waitForSelector(
-        "div.auto-suggest-item-container > a"
-      );
-      const resultadoLink = await resultado!.evaluate((el) => el.href);
-      await pagina.goto(resultadoLink);
-
-      const imagemContainer = await pagina
-        .locator("div.Img__Wrapper img")
-        .waitHandle();
-      const imageUrl = await imagemContainer.evaluate((img) => img.src);
-
-      const produtoContainer = await pagina
-        .locator("div.product-info h2.heading-2")
-        .waitHandle();
-      const title = await produtoContainer.evaluate((el) => el.textContent);
-
-      const valorContainer = await pagina
-        .locator("div.product-info__price")
-        .waitHandle();
-
-      const priceString = await valorContainer.evaluate((el) => el.textContent);
-      let finalPrice = null;
-
-      if (priceString) {
-        const prices = priceString.split('R$').map(p => p.trim()).filter(p => p !== '');
-        if (prices.length >= 2) {
-          finalPrice = 'R$ ' + prices[prices.length - 1]; // Pega o segundo preço
-        } else if (prices.length === 1) {
-          finalPrice = 'R$ ' + prices[0]; // Pega o primeiro preço
-        }
-        // Se prices.length for 0, finalPrice permanecerá null
-      }
-
-      return { imageUrl, title, price: finalPrice };
-    }
-
-    async function buscaSimilares() {
-      return await pagina.$$eval("div.auto-suggest-item", (itemDivs) => {
-        return itemDivs.map((div, index) => {
-          const imgElement = div.querySelector(".auto-suggest-item__img img");
-          const baseUrl = "https://www.confianca.com.br";
-          const src = imgElement?.getAttribute("src") || "";
-          const imageUrl = src.startsWith("http") ? src : baseUrl + src;
-          const infoElement = div.querySelector(".auto-suggest-item__info h4");
-          const title = infoElement ? infoElement.textContent!.trim() : null;
-          const priceElement = div.querySelector(
-            ".auto-suggest-item__price h2.price-current"
-          );
-          const price = priceElement ? priceElement.textContent!.trim() : null;
-          return { id: index, imageUrl, title, price };
-        });
-      });
-    }
-
-    let produtoConcatenado = "";
-    let produtosSimilares = {};
-    let dadosEncontrados = {};
-
-    await pagina.goto(url);
-
-    for (let palavra of title.split(" ")) {
-      produtoConcatenado += `${palavra} `;
-      await pagina
-        .locator("div.search-header > form > input")
-        .fill(produtoConcatenado);
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-
-      const produtoSite = await buscaDados();
-      const similaridade = stringSimilarity.compareTwoStrings(
-        produtoConcatenado,
-        produtoSite
-      );
-      if (similaridade >= 0.4 && similaridade < 0.75) {
-        produtosSimilares = await buscaSimilares();
-      } else if (similaridade >= 0.75) {
-        dadosEncontrados = await produtoEncontrado();
-        await navegador.close();
-
-        return { dadosEncontrados, produtosSimilares };
-      }
-    }
-
-    await navegador.close();
-    return { dadosEncontrados: null, produtosSimilares: [] };
+  function limparTitulo(titulo: string): string {
+    const palavrasProibidas = [
+      "unidade", "aproximadamente",
+      "caixa", "embalagem", "unidades", "kg", "ml", "leve", "preço", "especial",
+      "tablete", "vidro", "refil", "pacote", "sache", "garrafa", "rótulo",
+    ];
+    const regex = new RegExp(`\\b(${palavrasProibidas.join("|")})\\b`, "gi");
+    return titulo.replace(regex, "").replace(/\s{2,}/g, " ").trim();
   }
+
+  const tituloLimpo = limparTitulo(title);
+  const palavras = tituloLimpo.split(" ");
+  let produtosSimilares: any[] = [];
+  let dadosEncontradosTemp: any = null;
+
+  const inputSelector = "input.search-header__input";
+
+  await pagina.waitForSelector(inputSelector, { timeout: 5000 });
+  await pagina.locator(inputSelector).fill(tituloLimpo);
+  await new Promise(resolve => setTimeout(resolve, 2000));
+
+  for (let i = palavras.length; i > 0; i--) {
+    const tentativa = palavras.slice(0, i).join(" ");
+    await pagina.locator(inputSelector).fill(tentativa);
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    const encontrados = await pagina.$$eval("div.auto-suggest-item", (itemDivs) => {
+      return itemDivs.map((div, index) => {
+        const imgElement = div.querySelector(".auto-suggest-item__img img");
+        const baseUrl = "https://www.confianca.com.br";
+        const src = imgElement?.getAttribute("src") || "";
+        let imageUrl = src.startsWith("http") ? src : baseUrl + src;
+        imageUrl = imageUrl
+          .replace(/height=\d+/i, "height=300")
+          .replace(/width=\d+/i, "width=300");
+
+        const infoElement = div.querySelector(".auto-suggest-item__info h4");
+        const title = infoElement ? infoElement.textContent!.trim() : null;
+
+        const priceElement = div.querySelector("h2.price-current");
+        const price = priceElement ? priceElement.textContent!.trim() : null;
+
+        return { id: index, imageUrl, title, price };
+      });
+    });
+
+   if (encontrados.length === 1 && !dadosEncontradosTemp) {
+  dadosEncontradosTemp = encontrados[0];
+} else if (encontrados.length > 1) {
+  if (!dadosEncontradosTemp) {
+    dadosEncontradosTemp = encontrados[0];
+    produtosSimilares = encontrados.slice(1);
+  } else {
+    const filtrados = encontrados.filter(p => p.title !== dadosEncontradosTemp.title);
+    produtosSimilares = filtrados;
+  }
+  break;
+}
+
+  }
+
+  await navegador.close();
+
+  return {
+    dadosEncontrados: dadosEncontradosTemp,
+    produtosSimilares
+  };
+}
+
+
+
+
+
+
+
 
   async buscaProdutosTauste(title: string, url: string) {
     const navegador = await puppeteer.launch();
