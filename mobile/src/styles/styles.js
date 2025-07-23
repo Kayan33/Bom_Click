@@ -2,7 +2,7 @@ import { Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
 
-const FONTE_BASE = 24;
+const FONTE_BASE = 16;
 
 export const CORES = {
     azul: '#054AAE',
