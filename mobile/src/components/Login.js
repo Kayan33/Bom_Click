@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Modal, Pressable, TextInput } from 'react-nativ
 import React, { useState, useEffect } from 'react';
 import IconeVoltar from './icones/Voltar';
 import IconeOlho from './icones/IconeOlho';
+import { CORES, TAMANHOS } from '../styles/styles';
 
 export default function LoginModal({ visible, onLoginSubmit, onClose, onNavigateToCadastro }) {
 
@@ -25,7 +26,6 @@ export default function LoginModal({ visible, onLoginSubmit, onClose, onNavigate
             console.log("Erro ao tentar fazer login:", err);
         }
     }
-
     return (
         <Modal
             animationType="slide"
@@ -35,14 +35,10 @@ export default function LoginModal({ visible, onLoginSubmit, onClose, onNavigate
         >
             <View style={styles.modal}>
                 <View style={styles.modal_container}>
-                    <Pressable onPress={onClose} style={{ position: 'absolute', top: 10, right: 10 }}>
-                        <Text style={{ color: 'white', fontSize: 18 }}>X</Text>
+                    <Pressable onPress={onClose} style={styles.iconVoltar_Container}>
+                        <IconeVoltar />
                     </Pressable>
-
-                    <IconeVoltar/>
-
                     <Text style={styles.modal_container_titulo}>Login</Text>
-
                     <TextInput
                         autoComplete='email'
                         inputMode='email'
@@ -53,7 +49,6 @@ export default function LoginModal({ visible, onLoginSubmit, onClose, onNavigate
                         style={styles.modal_container_input}
                         placeholderTextColor="#555"
                     />
-
                     <View style={styles.modal_container_passwordContainer}>
                         <TextInput
                             placeholder='Senha:'
@@ -64,8 +59,7 @@ export default function LoginModal({ visible, onLoginSubmit, onClose, onNavigate
                             placeholderTextColor="#555"
                         />
                         <Pressable onPress={() => setSenhaVisibilidade(!senhaVisibilidade)}>
-                            <IconeOlho/>
-                            <Text style={{ color: '#333' }}>{senhaVisibilidade ? 'Ver' : 'Ocultar'}</Text>
+                            <IconeOlho />
                         </Pressable>
                     </View>
 
@@ -77,30 +71,30 @@ export default function LoginModal({ visible, onLoginSubmit, onClose, onNavigate
                             <Text style={styles.opcoes_titulo_bold}>Cadastre-se</Text>
                         </Pressable>
                     </View>
-
-                    <Pressable
-                        onPress={dadosLogin}
-                        disabled={email === '' || senha === ''}
-                        style={[
-                            styles.botao,
-                            { backgroundColor: email === '' || senha === '' ? '#ffc200' : '#F2E205' }
-                        ]}
-                    >
-                        <Text style={styles.botao_texto}>Login</Text>
-                    </Pressable>
-
+                    <View style={styles.botaoContainer}>
+                        <Pressable
+                            onPress={dadosLogin}
+                            disabled={email === '' || senha === ''}
+                            style={[
+                                styles.botao,
+                                { backgroundColor: email === '' || senha === '' ?  '#b49738ff': '#ffc200' }
+                            ]}
+                        >
+                            <Text style={styles.botao_texto}>Login</Text>
+                        </Pressable>
+                    </View>
                 </View>
+
             </View>
         </Modal>
     )
 }
 
-
 const styles = StyleSheet.create({
     botao_texto: {
-        color: '#2f7339',
+        color: CORES.verde,
         fontWeight: 'bold',
-        fontSize: 16,
+        fontSize: TAMANHOS.fonteSegundaria,
     },
     modal: {
         alignItems: 'center',
@@ -110,55 +104,81 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
     modal_container: {
-        backgroundColor: '#054aae',
-        borderRadius: 8,
+        backgroundColor: CORES.azul,
+        borderRadius: 50,
         justifyContent: 'space-evenly',
-        height: 340,
-        paddingHorizontal: 20,
+        height: 300,
+        paddingHorizontal: TAMANHOS.espacamentoMaior,
         width: 340
     },
+    iconVoltar_Container: {
+        flexDirection: 'row',
+        alignItems: 'flex-end'
+    },
     modal_container_titulo: {
-        color: '#f1f1f1',
-        fontSize: 24,
+        color: CORES.branco,
+        fontSize: TAMANHOS.fonteTitulo,
         fontWeight: 'bold',
-        textAlign: 'center'
+        textAlign: 'center',
+        textAlignVertical: 'top',
     },
     modal_container_input: {
-        backgroundColor: '#f1f1f1',
-        borderRadius: 8,
-        color: '#022859',
-        paddingHorizontal: 16,
-        height: 40
+        width: 250,
+        height: 40,
+        backgroundColor: CORES.branco,
+        borderRadius: 50,
+        color: CORES.verde,
+        paddingHorizontal: TAMANHOS.espacamentoMenor,
+        alignSelf: 'center',
+        textAlign: 'justify',
     },
     modal_container_passwordContainer: {
-        alignItems: 'center',
-        backgroundColor: '#f1f1f1',
-        borderRadius: 8,
+        width: 250,
+        height: 40,
+        backgroundColor: CORES.branco,
+        borderRadius: 50,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingHorizontal: 16,
-        height: 40
+        paddingHorizontal: TAMANHOS.espacamentoMenor,
+        alignSelf: 'center',
+        alignItems: 'center',
     },
     modal_container_passwordContainer_valor: {
         flex: 1,
-        color: '#022859'
+        color: CORES.azul
     },
     opcoes: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        flexDirection: 'column',
+        rowGap: TAMANHOS.espacamentoMenor,
+        alignItems: 'center',
+        width: 150,
+        
     },
     opcoes_titulo: {
-        color: '#ffc200',
+        color: CORES.amarelo,
         fontWeight: 'normal'
     },
     opcoes_titulo_bold: {
-        color: '#ffc200',
-        fontWeight: 'bold'
+        color: CORES.amarelo,
+        fontWeight: 'bold',
+        alignSelf: 'flex-start',
+        paddingRight: TAMANHOS.espacamentoMaior
+    },
+    botaoContainer: {
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        flexDirection: 'row'
     },
     botao: {
-        borderRadius: 8,
-        paddingHorizontal: 24,
-        paddingVertical: 10,
-        alignItems: 'center'
+        width: 100,
+        alignItems: 'center',
+        borderRadius: 50,
+        padding: TAMANHOS.espacamentoPequeno,
+        backgroundColor: CORES.amarelo
+    },
+    botao_texto: {
+        justifyContent: 'flex-end',
+        color: CORES.verde,
+        fontWeight: 'bold'
     }
 });

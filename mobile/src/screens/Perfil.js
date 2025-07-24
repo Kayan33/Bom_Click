@@ -116,15 +116,15 @@ export default function Perfil() {
                     <Text style={styles.secaoTitulo}>Informações por mercados</Text>
                     <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.barraRolagemMercados}>
                         <Pressable style={styles.infoCompras} onPress={() => navigation.navigate('DadosMercado')}>
-                           <LogoTauste/>
+                            <LogoTauste />
                             <Text style={styles.TextoLinkDadosMercado}>Veja suas compras</Text>
                         </Pressable>
                         <Pressable style={styles.infoCompras} onPress={() => navigation.navigate('DadosMercado')}>
-                          <LogoConfianca/>
+                            <LogoConfianca />
                             <Text style={styles.TextoLinkDadosMercado}>Veja suas compras</Text>
                         </Pressable>
                         <Pressable style={styles.infoCompras} onPress={() => navigation.navigate('DadosMercado')}>
-                           <LogoPanelao/>
+                            <LogoPanelao />
                             <Text style={styles.TextoLinkDadosMercado}>Veja suas compras</Text>
                         </Pressable>
                     </ScrollView>
@@ -134,7 +134,7 @@ export default function Perfil() {
                     <Text style={styles.secaoTitulo}>Últimas Compras</Text>
                     <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.barraRolagem}>
                         <View style={styles.produtoCard}>
-                           <Image source={Carne} style={styles.produtoImagem}/>
+                            <Image source={Carne} style={styles.produtoImagem} />
                             <Text style={styles.produtoTitulo}>Fraldinha Bovina Resfriada KG</Text>
                             <View style={styles.produtoValores}>
                                 <Text style={styles.produtoPrecoRiscado}>R$40,00</Text>
@@ -142,7 +142,7 @@ export default function Perfil() {
                             </View>
                         </View>
                         <View style={styles.produtoCard}>
-                            <Image source={Limao}  style={styles.produtoImagem}/>
+                            <Image source={Limao} style={styles.produtoImagem} />
                             <Text style={styles.produtoTitulo}>Limao Taiti KG</Text>
                             <View style={styles.produtoValores}>
                                 <Text style={styles.produtoPrecoRiscado}>R$10,00</Text>
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
     secaoTitulo: {
         fontSize: 18,
         fontWeight: 'bold',
-        marginLeft: 10,
+        marginLeft: TAMANHOS.espacamentoMenor,
         marginBottom: 10,
         color: CORES.amarelo
     },
@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     barraRolagem: {
-        paddingHorizontal: 5,
+        paddingHorizontal: TAMANHOS.espacamentoPequeno,
     },
     barraRolagemMercados: {
         paddingHorizontal: 10,
@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
     },
     scrollItemTextoValor: {
         color: CORES.amarelo,
-        
+
     },
     secaoInfoMercados: {
         marginTop: 30,
@@ -280,7 +280,7 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 3,
         alignItems: 'center',
-       marginBottom: 5
+        marginBottom: 5
     },
     produtoImagem: {
         width: '50%',
