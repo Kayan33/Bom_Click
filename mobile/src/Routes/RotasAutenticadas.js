@@ -6,13 +6,25 @@ import InformacoesPessoais from '../screens/InformacoesPessoais';
 import Resumo from '../screens/Resumo';
 import Finalizado from '../screens/Finalizado';
 import DadosMercado from '../screens/DadosMercado';
+import Inicial from '../screens/Inicial'
+import Carrinho from "../screens/Carrinho";
 
 const Stack = createNativeStackNavigator();
 
 export default function RotasAutenticadas() {
     return (
-        <RotaProtegida> 
+        <RotaProtegida>
             <Stack.Navigator>
+                <Stack.Screen
+                    name="Inicial"
+                    component={Inicial}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Carrinho"
+                    component={Carrinho}
+                    options={{ headerShown: false }}
+                />
                 <Stack.Screen
                     name="Perfil"
                     component={Perfil}
