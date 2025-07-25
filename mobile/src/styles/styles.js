@@ -37,13 +37,12 @@ export const TAMANHOS = {
 };
 
 export const FONTES = {
-    fontePrincipal: 'Poppins-Regular', 
-    fonteMedium: 'Poppins-Medium',
-    fonteBold: 'Poppins-Bold',
-
-    // Você pode criar estilos de texto completos para reutilizar
-    h1: { fontFamily: 'Poppins-Bold', fontSize: TAMANHOS.fonteTitulo, color: CORES.verde },
-    body: { fontFamily: 'Poppins-Regular', fontSize: TAMANHOS.fonteSegundaria, color: CORES.azul },
+    fontePrincipal: 'Poppins_400Regular', 
+    fonteMedium: 'Poppins_500Medium', 
+    fonteBold: 'Poppins_700Bold',
+    
+    h1: { fontFamily: 'Poppins_700Bold', fontSize: TAMANHOS.fonteTitulo, color: CORES.verde },
+    body: { fontFamily: 'Poppins_400Regular', fontSize: TAMANHOS.fonteSegundaria, color: CORES.azul },
 };
 
 

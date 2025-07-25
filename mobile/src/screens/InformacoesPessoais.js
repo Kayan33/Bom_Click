@@ -87,7 +87,8 @@ export default function InformacoesPessoais() {
                 <View style={styles.section}>
                     <Text style={styles.sectionTitle}>Informações Pessoais</Text>
                     <InfoLinha label="Nome:" value={dadosUsuarios.nome || ''} />
-                    <InfoLinha label="CPF:" value={dadosUsuarios.CPF || ''} />
+                    <InfoLinha label="CPF:" value={dadosUsuarios.cpf || ''} />
+                    <InfoLinha label="E-mail:" value={dadosUsuarios.email || ''} />
                     <InfoLinha label="Data de Nascimento:" value={formatarData(dadosUsuarios.data_nascimento)} />
                     
                     <View style={styles.infoRow}>

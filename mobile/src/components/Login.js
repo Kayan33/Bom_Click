@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View, Modal, Pressable, TextInput } from 'react-native';
 import React, { useState } from 'react';
 import IconeVoltar from './icones/Voltar';
-import { Feather } from '@expo/vector-icons'; 
-import { CORES, TAMANHOS } from '../styles/styles';
+import { Feather } from '@expo/vector-icons';
+import { CORES, TAMANHOS, FONTES } from '../styles/styles';
 
 export default function LoginModal({ visible, onLoginSubmit, onClose, onNavigateToCadastro }) {
 
@@ -64,11 +64,11 @@ export default function LoginModal({ visible, onLoginSubmit, onClose, onNavigate
                                 placeholderTextColor={CORES.verde}
                             />
                             <Pressable onPress={() => setSenhaVisibilidade(!senhaVisibilidade)}>
-                                <Feather 
-                                name={senhaVisibilidade ? 'eye-off' : 'eye'} 
-                                size={18}
-                                color={CORES.verde}
-                            />
+                                <Feather
+                                    name={senhaVisibilidade ? 'eye-off' : 'eye'}
+                                    size={18}
+                                    color={CORES.verde}
+                                />
                             </Pressable>
                         </View>
                     </View>
@@ -127,19 +127,20 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     headerTitle: {
+        fontFamily: FONTES.fonteBold,
         color: CORES.branco,
         fontSize: TAMANHOS.fonteTitulo,
-        fontWeight: 'bold',
-        paddingTop: TAMANHOS.espacamentoPequeno
+        paddingTop: 10,
     },
     placeholder: {
         width: 24,
     },
     inputContainer: {
         width: '100%',
-        marginBottom: TAMANHOS.espacamentoMenor,
+        marginBottom: TAMANHOS.espacamentoPequeno,
     },
     input: {
+        fontFamily: FONTES.fonteMedium,
         width: '80%',
         height: 45,
         backgroundColor: CORES.branco,
@@ -149,22 +150,26 @@ const styles = StyleSheet.create({
         marginBottom: TAMANHOS.espacamentoMenor,
         alignItems: 'center',
         alignSelf: 'center',
-        color: CORES.verde
+        color: CORES.verde,
+        paddingLeft: TAMANHOS.espacamentoMenor,
     },
     passwordInputWrapper: {
+        fontFamily: FONTES.fonteMedium,
         width: '80%',
         height: 45,
         backgroundColor: CORES.branco,
         borderRadius: 50,
-        paddingHorizontal: TAMANHOS.espacamentoMenor,
+        paddingHorizontal: 12,
+        fontSize: TAMANHOS.fonteMedia,
         flexDirection: 'row',
         alignItems: 'center',
         alignSelf: 'center',
-        color: CORES.verde
+        color: CORES.verde,
+
     },
     passwordInput: {
         flex: 1,
-        fontSize: TAMANHOS.fonteMedia,
+        fontFamily: FONTES.fonteMedium,
     },
     footer: {
         flexDirection: 'row',
@@ -176,14 +181,15 @@ const styles = StyleSheet.create({
         marginLeft: TAMANHOS.espacamentoMaior
     },
     linkText: {
+        fontFamily: FONTES.fontePrincipal,
         color: CORES.amarelo,
         fontSize: TAMANHOS.fonteSegundaria,
         marginBottom: TAMANHOS.espacamentoMenor,
     },
     linkTextBold: {
+        fontFamily: FONTES.fonteBold,
         color: CORES.amarelo,
         fontSize: TAMANHOS.fonteSegundaria,
-        fontWeight: 'bold',
     },
     loginButton: {
         width: 100,
@@ -193,8 +199,8 @@ const styles = StyleSheet.create({
         borderRadius: 50,
     },
     loginButtonText: {
+        fontFamily: FONTES.fonteBold,
         color: CORES.azul,
-        fontWeight: 'bold',
         fontSize: TAMANHOS.fonteSegundaria,
     },
 });
