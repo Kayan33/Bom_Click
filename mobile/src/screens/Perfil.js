@@ -189,13 +189,13 @@ const styles = StyleSheet.create({
         flex: 1,
         textAlign: 'center',
         color: CORES.amarelo,
-        fontSize: 20,
+        fontSize: TAMANHOS.fonteTitulo,
         fontWeight: 'bold',
         paddingTop: 50
     },
     secaoPerfil: {
         alignItems: 'center',
-        padding: 20,
+        padding: TAMANHOS.espacamentoMenor,
     },
     editarInfoButton: {
         alignItems: 'center',
@@ -204,39 +204,40 @@ const styles = StyleSheet.create({
         width: 80,
         height: 80,
         borderRadius: 40,
-        marginBottom: 10,
+        marginBottom:  TAMANHOS.espacamentoMenor,
     },
     editarInfoText: {
-        color: '#007BFF',
-        fontSize: FONTES.f1,
+        color: CORES.azul,
+        fontSize: TAMANHOS.fonteSegundaria,
         fontWeight: 'bold'
     },
     saudacao: {
         fontSize: TAMANHOS.fonteTitulo,
         fontWeight: 'bold',
-        marginTop: 15,
+        marginTop: TAMANHOS.espacamentoPequeno,
         color: CORES.verde
     },
     secaoTitulo: {
-        fontSize: 18,
+        fontSize: TAMANHOS.fonteSegundaria,
         fontWeight: 'bold',
         marginLeft: TAMANHOS.espacamentoMenor,
-        marginBottom: 10,
+        marginBottom: TAMANHOS.espacamentoPequeno,
         color: CORES.amarelo
     },
     secaoEstatisticas: {
-        marginTop: 20,
+        paddingTop: TAMANHOS.espacamentoMenor,
     },
     barraRolagem: {
         paddingHorizontal: TAMANHOS.espacamentoPequeno,
+        marginLeft: TAMANHOS.espacamentoPequeno
     },
     barraRolagemMercados: {
-        paddingHorizontal: 10,
+        paddingHorizontal: TAMANHOS.espacamentoMenor,
     },
     scrollItem: {
-        padding: TAMANHOS.espacamentoMenor,
-        borderRadius: 8,
-        marginRight: 10,
+        padding: TAMANHOS.espacamentoPequeno,
+        borderRadius: TAMANHOS.bordaRaio,
+        marginRight: TAMANHOS.espacamentoMenor,
         alignItems: 'center',
         backgroundColor: CORES.azul,
     },
@@ -246,10 +247,9 @@ const styles = StyleSheet.create({
     },
     scrollItemTextoValor: {
         color: CORES.amarelo,
-
     },
     secaoInfoMercados: {
-        marginTop: 30,
+        marginTop: TAMANHOS.espacamentoMaior,
     },
     TextoLinkDadosMercado: {
         fontSize: 13,
@@ -258,7 +258,7 @@ const styles = StyleSheet.create({
     },
     infoCompras: {
         alignItems: 'center',
-        marginRight: 15,
+        marginRight: TAMANHOS.espacamentoMenor,
     },
     logoMercado: {
         width: 100,
@@ -266,13 +266,13 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     secaoCompras: {
-        marginTop: 30,
+        marginTop: TAMANHOS.espacamentoMaior,
     },
     produtoCard: {
-        backgroundColor: '#fff',
-        borderRadius: 8,
-        padding: 10,
-        marginRight: 10,
+        backgroundColor: CORES.branco,
+        borderRadius: TAMANHOS.bordaRaio,
+        padding: TAMANHOS.espacamentoPequeno,
+        marginRight: TAMANHOS.espacamentoPequeno,
         width: 150,
         shadowColor: "#000",
         shadowOffset: { width: 0, height: 2 },
@@ -280,23 +280,23 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 3,
         alignItems: 'center',
-        marginBottom: 5
+        marginBottom: TAMANHOS.espacamentoPequeno
     },
     produtoImagem: {
         width: '50%',
         height: 50,
         resizeMode: 'cover',
-        borderRadius: 4,
+        borderRadius: TAMANHOS.bordaRaio,
     },
     produtoTitulo: {
-        marginTop: 5,
-        fontSize: 14,
+        marginTop: TAMANHOS.espacamentoPequeno,
+        fontSize: TAMANHOS.fonteSegundaria,
         height: 50
     },
     produtoValores: {
         flexDirection: 'row',
-        marginTop: 5,
-        gap: 25,
+        marginTop: TAMANHOS.espacamentoPequeno,
+        gap: TAMANHOS.espacamentoMaior,
         alignItems: 'flex-end',
     },
     produtoPrecoRiscado: {
@@ -304,7 +304,7 @@ const styles = StyleSheet.create({
         color: 'gray',
     },
     produtoPrecoDestaque: {
-        color: 'green',
+        color: CORES.verde,
         fontWeight: 'bold',
     },
 });

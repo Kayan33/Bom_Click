@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Modal, Pressable, TextInput, Alert } from 'react-native';
+import { Feather } from '@expo/vector-icons';
+import { CORES, TAMANHOS } from '../styles/styles';
 
 export default function CadastroModal({ visible, onCadastroSubmit, onClose, onNavigateToLogin }) {
     const [nome, setNome] = useState('');
@@ -7,8 +9,9 @@ export default function CadastroModal({ visible, onCadastroSubmit, onClose, onNa
     const [cpf, setCpf] = useState('');
     const [senha, setSenha] = useState('');
     const [confirmeSenha, setConfirmeSenha] = useState('');
-
+   
     const [senhaVisibilidade, setSenhaVisibilidade] = useState(true);
+    const [confirmeSenhaVisibilidade, setConfirmeSenhaVisibilidade] = useState(true);
 
     async function RealizarCadastro() {
         if (!nome || !email || !cpf || !senha || !confirmeSenha) {
@@ -20,11 +23,9 @@ export default function CadastroModal({ visible, onCadastroSubmit, onClose, onNa
             Alert.alert("Erro", "As senhas não coincidem.");
             return;
         }
-        
+
         try {
             const sucesso = await onCadastroSubmit({ nome, email, cpf, senha });
-
-           
             if (sucesso) {
                 Alert.alert("Sucesso!", "Cadastro realizado. Faça o login para continuar.");
                 onNavigateToLogin();
@@ -57,8 +58,8 @@ export default function CadastroModal({ visible, onCadastroSubmit, onClose, onNa
                         placeholder='Nome completo:'
                         value={nome}
                         onChangeText={setNome}
-                        style={styles.modal_container_input}
-                        placeholderTextColor="#555"
+                        style={styles.input}
+                        placeholderTextColor={CORES.verde}
                     />
                     <TextInput
                         placeholder='Email:'
@@ -66,35 +67,64 @@ export default function CadastroModal({ visible, onCadastroSubmit, onClose, onNa
                         onChangeText={setEmail}
                         keyboardType='email-address'
                         autoCapitalize='none'
-                        style={styles.modal_container_input}
-                        placeholderTextColor="#555"
+                        style={styles.input}
+                        placeholderTextColor={CORES.verde}
                     />
                     <TextInput
                         placeholder='CPF:'
                         value={cpf}
                         onChangeText={setCpf}
                         keyboardType='numeric'
-                        style={styles.modal_container_input}
-                        placeholderTextColor="#555"
+                        style={styles.input}
+                        placeholderTextColor={CORES.verde}
                     />
-                    <TextInput
-                        placeholder='Senha:'
-                        value={senha}
-                        onChangeText={setSenha}
-                        secureTextEntry={senhaVisibilidade}
-                        style={styles.modal_container_input}
-                        placeholderTextColor="#555"
-                    />
-                    <TextInput
-                        placeholder='Confirme sua senha:'
-                        value={confirmeSenha}
-                        onChangeText={setConfirmeSenha}
-                        secureTextEntry={senhaVisibilidade}
-                        style={styles.modal_container_input}
-                        placeholderTextColor="#555"
-                    />
+                    <View style={styles.passwordInputWrapper}>
+                        <TextInput
+                            placeholder='Senha:'
+                            value={senha}
+                            onChangeText={setSenha}
+                            secureTextEntry={senhaVisibilidade}
+                            style={styles.passwordInput}
+                            placeholderTextColor={CORES.verde}
+                        />
+                        <Pressable onPress={() => setSenhaVisibilidade(!senhaVisibilidade)}>
+                            <Feather
+                                name={senhaVisibilidade ? 'eye-off' : 'eye'}
+                                size={18}
+                                color={CORES.verde}
+                            />
+                        </Pressable>
+                    </View>
+                   
+                    <View style={styles.passwordInputWrapper}>
+                        <TextInput
+                            placeholder='Confirme sua senha:'
+                            value={confirmeSenha}
+                            onChangeText={setConfirmeSenha}
+                            secureTextEntry={confirmeSenhaVisibilidade}
+                            style={styles.passwordInput}
+                            placeholderTextColor={CORES.verde}
+                        />
+                        <Pressable onPress={() => setConfirmeSenhaVisibilidade(!confirmeSenhaVisibilidade)}>
+                            <Feather
+                                name={confirmeSenhaVisibilidade ? 'eye-off' : 'eye'}
+                                size={18}
+                                color={CORES.verde}
+                            />
+                        </Pressable>
+                    </View>
 
-                    <Pressable onPress={RealizarCadastro} style={styles.botao}>
+                    <Pressable
+                        onPress={RealizarCadastro}
+                        disabled={!nome || !email || !cpf || !senha || !confirmeSenha}
+                        style={({ pressed }) => [
+                            styles.botao,
+                            {
+                                backgroundColor: !nome || !email || !cpf || !senha || !confirmeSenha ? '#b49738ff' : '#ffc200',
+                                opacity: pressed ? 0.8 : 1
+                            }
+                        ]}
+                    >
                         <Text style={styles.botao_texto}>Cadastrar</Text>
                     </Pressable>
 
@@ -117,58 +147,76 @@ const styles = StyleSheet.create({
     },
     modal_container: {
         width: 340,
-        backgroundColor: '#054aae',
-        borderRadius: 8,
-        padding: 20,
+        backgroundColor: CORES.azul,
+        borderRadius: TAMANHOS.bordaRaio,
+        padding: TAMANHOS.espacamentoMenor,
+        alignItems: 'center',
         justifyContent: 'space-around',
     },
     closeButton: {
         position: 'absolute',
-        top: 10,
-        right: 10,
+        top: 7,
+        right: 17,
+        zIndex: 1,
     },
     closeButtonText: {
-        color: 'white',
-        fontSize: 20,
+        color: CORES.branco,
+        fontSize: TAMANHOS.fonteTitulo,
         fontWeight: 'bold',
     },
     modal_container_titulo: {
-        color: '#f1f1f1',
-        fontSize: 24,
+        color: CORES.branco,
+        fontSize: TAMANHOS.fonteTitulo,
         fontWeight: 'bold',
         textAlign: 'center',
-        marginBottom: 10,
+        marginBottom: TAMANHOS.espacamentoPequeno,
     },
-    modal_container_input: {
-        backgroundColor: '#f1f1f1',
-        borderRadius: 8,
-        color: '#2f7339',
-        paddingHorizontal: 16,
+    input: { 
+        backgroundColor: CORES.branco,
+        borderRadius: 50,
+        color: CORES.verde,
+        paddingHorizontal: TAMANHOS.espacamentoMenor,
         height: 45,
-        marginBottom: 10,
+        marginBottom: TAMANHOS.espacamentoPequeno,
+        width: 280,
+    },
+    passwordInputWrapper: { 
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: CORES.branco,
+        borderRadius: 50,
+        height: 45,
+        width: 280,
+        paddingHorizontal: TAMANHOS.espacamentoMenor,
+        marginBottom: TAMANHOS.espacamentoPequeno,
+    },
+    passwordInput: {
+        flex: 1,
+        color: CORES.verde,
     },
     botao: {
-        backgroundColor: '#F2E205',
-        borderRadius: 8,
-        paddingVertical: 12,
+        backgroundColor: CORES.amarelo,
+        borderRadius: 50,
+        paddingVertical: TAMANHOS.espacamentoPequeno,
         alignItems: 'center',
-        marginTop: 10,
+        marginTop: TAMANHOS.espacamentoMenor,
+        width: 150,
     },
     botao_texto: {
-        color: '#2f7339',
+        color: CORES.verde,
         fontWeight: 'bold',
-        fontSize: 16,
+        fontSize: TAMANHOS.fonteSegundaria,
     },
     linkContainer: {
         flexDirection: 'row',
         justifyContent: 'center',
-        marginTop: 15,
+        marginTop: TAMANHOS.espacamentoMenor,
     },
     opcoes_titulo: {
-        color: '#ffc200',
+        color: CORES.amarelo,
     },
     opcoes_titulo_bold: {
-        color: '#ffc200',
+        color: CORES.amarelo,
         fontWeight: 'bold',
     },
 });

@@ -1,14 +1,13 @@
 import { StyleSheet, Text, View, Modal, Pressable, TextInput } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import IconeVoltar from './icones/Voltar';
-import IconeOlho from './icones/IconeOlho';
+import { Feather } from '@expo/vector-icons'; 
 import { CORES, TAMANHOS } from '../styles/styles';
 
 export default function LoginModal({ visible, onLoginSubmit, onClose, onNavigateToCadastro }) {
 
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
-
     const [senhaVisibilidade, setSenhaVisibilidade] = useState(true);
 
     async function dadosLogin() {
@@ -26,6 +25,7 @@ export default function LoginModal({ visible, onLoginSubmit, onClose, onNavigate
             console.log("Erro ao tentar fazer login:", err);
         }
     }
+
     return (
         <Modal
             animationType="slide"
@@ -33,152 +33,168 @@ export default function LoginModal({ visible, onLoginSubmit, onClose, onNavigate
             visible={visible}
             onRequestClose={onClose}
         >
-            <View style={styles.modal}>
-                <View style={styles.modal_container}>
-                    <Pressable onPress={onClose} style={styles.iconVoltar_Container}>
-                        <IconeVoltar />
-                    </Pressable>
-                    <Text style={styles.modal_container_titulo}>Login</Text>
-                    <TextInput
-                        autoComplete='email'
-                        inputMode='email'
-                        keyboardType='email-address'
-                        placeholder='Email:'
-                        value={email}
-                        onChangeText={setEmail}
-                        style={styles.modal_container_input}
-                        placeholderTextColor="#555"
-                    />
-                    <View style={styles.modal_container_passwordContainer}>
-                        <TextInput
-                            placeholder='Senha:'
-                            secureTextEntry={senhaVisibilidade}
-                            style={styles.modal_container_passwordContainer_valor}
-                            value={senha}
-                            onChangeText={setSenha}
-                            placeholderTextColor="#555"
-                        />
-                        <Pressable onPress={() => setSenhaVisibilidade(!senhaVisibilidade)}>
-                            <IconeOlho />
+            <View style={styles.modalOverlay}>
+                <View style={styles.modalContainer}>
+                    <View style={styles.header}>
+                        <Pressable onPress={onClose} style={styles.backButton}>
+                            <IconeVoltar />
                         </Pressable>
+                        <Text style={styles.headerTitle}>Login</Text>
+                        <View style={styles.placeholder} />
                     </View>
 
-                    <View style={styles.opcoes}>
-                        <Pressable>
-                            <Text style={styles.opcoes_titulo}>Esqueceu senha?</Text>
-                        </Pressable>
-                        <Pressable onPress={onNavigateToCadastro}>
-                            <Text style={styles.opcoes_titulo_bold}>Cadastre-se</Text>
-                        </Pressable>
+                    <View style={styles.inputContainer}>
+                        <TextInput
+                            autoComplete='email'
+                            inputMode='email'
+                            keyboardType='email-address'
+                            placeholder='E-mail'
+                            value={email}
+                            onChangeText={setEmail}
+                            style={styles.input}
+                            placeholderTextColor={CORES.verde}
+                        />
+                        <View style={styles.passwordInputWrapper}>
+                            <TextInput
+                                placeholder='Senha:'
+                                secureTextEntry={senhaVisibilidade}
+                                style={styles.passwordInput}
+                                value={senha}
+                                onChangeText={setSenha}
+                                placeholderTextColor={CORES.verde}
+                            />
+                            <Pressable onPress={() => setSenhaVisibilidade(!senhaVisibilidade)}>
+                                <Feather 
+                                name={senhaVisibilidade ? 'eye-off' : 'eye'} 
+                                size={18}
+                                color={CORES.verde}
+                            />
+                            </Pressable>
+                        </View>
                     </View>
-                    <View style={styles.botaoContainer}>
+
+                    <View style={styles.footer}>
+                        <View style={styles.linksContainer}>
+                            <Pressable>
+                                <Text style={styles.linkText}>Esqueci a senha</Text>
+                            </Pressable>
+                            <Pressable onPress={onNavigateToCadastro}>
+                                <Text style={styles.linkTextBold}>Cadastrar-se</Text>
+                            </Pressable>
+                        </View>
                         <Pressable
                             onPress={dadosLogin}
                             disabled={email === '' || senha === ''}
-                            style={[
-                                styles.botao,
-                                { backgroundColor: email === '' || senha === '' ?  '#b49738ff': '#ffc200' }
+                            style={({ pressed }) => [
+                                styles.loginButton,
+                                {
+                                    backgroundColor: email === '' || senha === '' ? '#b49738ff' : '#ffc200',
+                                    opacity: pressed ? 0.8 : 1
+                                }
                             ]}
                         >
-                            <Text style={styles.botao_texto}>Login</Text>
+                            <Text style={styles.loginButtonText}>Login</Text>
                         </Pressable>
                     </View>
                 </View>
-
             </View>
         </Modal>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
-    botao_texto: {
-        color: CORES.verde,
-        fontWeight: 'bold',
-        fontSize: TAMANHOS.fonteSegundaria,
-    },
-    modal: {
-        alignItems: 'center',
+    modalOverlay: {
         flex: 1,
-        padding: 0,
         justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
-    modal_container: {
+    modalContainer: {
+        width: '90%',
+        maxWidth: 340,
         backgroundColor: CORES.azul,
-        borderRadius: 50,
-        justifyContent: 'space-evenly',
-        height: 300,
-        paddingHorizontal: TAMANHOS.espacamentoMaior,
-        width: 340
+        borderRadius: 25,
+        padding: TAMANHOS.espacamentoMenor,
     },
-    iconVoltar_Container: {
+    header: {
         flexDirection: 'row',
-        alignItems: 'flex-end'
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        marginBottom: TAMANHOS.espacamentoMaior,
+        gap: TAMANHOS.espacamentoPequeno
     },
-    modal_container_titulo: {
+    backButton: {
+        alignSelf: 'center'
+    },
+    headerTitle: {
         color: CORES.branco,
         fontSize: TAMANHOS.fonteTitulo,
         fontWeight: 'bold',
-        textAlign: 'center',
-        textAlignVertical: 'top',
+        paddingTop: TAMANHOS.espacamentoPequeno
     },
-    modal_container_input: {
-        width: 250,
-        height: 40,
+    placeholder: {
+        width: 24,
+    },
+    inputContainer: {
+        width: '100%',
+        marginBottom: TAMANHOS.espacamentoMenor,
+    },
+    input: {
+        width: '80%',
+        height: 45,
         backgroundColor: CORES.branco,
         borderRadius: 50,
-        color: CORES.verde,
         paddingHorizontal: TAMANHOS.espacamentoMenor,
+        fontSize: TAMANHOS.fonteMedia,
+        marginBottom: TAMANHOS.espacamentoMenor,
+        alignItems: 'center',
         alignSelf: 'center',
-        textAlign: 'justify',
+        color: CORES.verde
     },
-    modal_container_passwordContainer: {
-        width: 250,
-        height: 40,
+    passwordInputWrapper: {
+        width: '80%',
+        height: 45,
         backgroundColor: CORES.branco,
         borderRadius: 50,
+        paddingHorizontal: TAMANHOS.espacamentoMenor,
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingHorizontal: TAMANHOS.espacamentoMenor,
+        alignItems: 'center',
         alignSelf: 'center',
-        alignItems: 'center',
+        color: CORES.verde
     },
-    modal_container_passwordContainer_valor: {
+    passwordInput: {
         flex: 1,
-        color: CORES.azul
+        fontSize: TAMANHOS.fonteMedia,
     },
-    opcoes: {
-        flexDirection: 'column',
-        rowGap: TAMANHOS.espacamentoMenor,
+    footer: {
+        flexDirection: 'row',
         alignItems: 'center',
-        width: 150,
-        
+        justifyContent: 'space-between',
+        marginTop: TAMANHOS.espacamentoPequeno,
     },
-    opcoes_titulo: {
-        color: CORES.amarelo,
-        fontWeight: 'normal'
+    linksContainer: {
+        marginLeft: TAMANHOS.espacamentoMaior
     },
-    opcoes_titulo_bold: {
+    linkText: {
         color: CORES.amarelo,
+        fontSize: TAMANHOS.fonteSegundaria,
+        marginBottom: TAMANHOS.espacamentoMenor,
+    },
+    linkTextBold: {
+        color: CORES.amarelo,
+        fontSize: TAMANHOS.fonteSegundaria,
         fontWeight: 'bold',
-        alignSelf: 'flex-start',
-        paddingRight: TAMANHOS.espacamentoMaior
     },
-    botaoContainer: {
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        flexDirection: 'row'
-    },
-    botao: {
+    loginButton: {
         width: 100,
+        height: 40,
+        justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 50,
-        padding: TAMANHOS.espacamentoPequeno,
-        backgroundColor: CORES.amarelo
     },
-    botao_texto: {
-        justifyContent: 'flex-end',
-        color: CORES.verde,
-        fontWeight: 'bold'
-    }
+    loginButtonText: {
+        color: CORES.azul,
+        fontWeight: 'bold',
+        fontSize: TAMANHOS.fonteSegundaria,
+    },
 });
