@@ -13,7 +13,7 @@ import { AutenticadoContexto } from '../Context/authContext';
 import api from '../services/api';
 
 import { Feather, FontAwesome } from '@expo/vector-icons';
-import { CORES, TAMANHOS } from '../styles/styles';
+import { CORES, TAMANHOS, FONTES } from '../styles/styles';
 
 export default function InformacoesPessoais() {
     const navigation = useNavigation();
@@ -22,7 +22,6 @@ export default function InformacoesPessoais() {
     const [dadosUsuarios, setDadosUsuarios] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [mostrarSenha, setMostrarSenha] = useState(false);
 
     useEffect(() => {
         if (autenticado && usuario?.id) {
@@ -80,7 +79,7 @@ export default function InformacoesPessoais() {
                     <Feather name="arrow-left" size={24} color={CORES.amarelo} />
                 </TouchableOpacity>
                 <Text style={styles.headerTitle}>Editar Informações</Text>
-                <View style={{ width: 24 }} /> 
+                <View style={{ width: 24 }} />
             </View>
 
             <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -89,26 +88,38 @@ export default function InformacoesPessoais() {
                     <InfoLinha label="Nome:" value={dadosUsuarios.nome || ''} />
                     <InfoLinha label="CPF:" value={dadosUsuarios.cpf || ''} />
                     <InfoLinha label="E-mail:" value={dadosUsuarios.email || ''} />
-                    <InfoLinha label="Data de Nascimento:" value={formatarData(dadosUsuarios.data_nascimento)} />
-                    
-                    <View style={styles.infoRow}>
-                        
-                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <TouchableOpacity>
-                                <Text style={styles.link}>Redefinir senha</Text>
-                            </TouchableOpacity>
+                    <View style={styles.secaoDataNascimento}>
+                        <View>
+                            <InfoLinha
+                                label="Data de Nascimento:"
+                                value={
+                                    dadosUsuarios.data_nascimento
+                                        ? formatarData(dadosUsuarios.data_nascimento)
+                                        : 'Não informado'
+                                }
+                            />
                         </View>
+                        <TouchableOpacity style={styles.botaoEditar}>
+                            <Feather name="edit-2" size={TAMANHOS.espacamentoMenor} color={CORES.azul} />
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style={styles.secaoRedefinirSenha}>
+                        <TouchableOpacity>
+                            <Text style={styles.link}>Redefinir senha</Text>
+                        </TouchableOpacity>
+
                     </View>
                 </View>
-               
+
                 <View style={styles.section}>
                     <Text style={styles.sectionTitle}>Endereço</Text>
                     <InfoLinha label="CEP:" value={dadosUsuarios.cep || ''} showEditIcon />
                     <InfoLinha label="Logradouro:" value={dadosUsuarios.rua || ''} />
                     <InfoLinha label="BAIRRO:" value={dadosUsuarios.bairro || ''} />
-                    <InfoLinha label="Número:" value={dadosUsuarios.numero?.toString() || ''} showEditIcon />
+                    <InfoLinha label="Número:" value={dadosUsuarios.numero?.toString() || ''} />
                 </View>
-               
+
                 <View style={styles.section}>
                     <Text style={styles.sectionTitle}>Formas de pagamento</Text>
                     <CartaoLinha bandeira="Alimentação Alelo" numero="0800 **** **** 0800" />
@@ -118,7 +129,7 @@ export default function InformacoesPessoais() {
                     </TouchableOpacity>
                 </View>
             </ScrollView>
-          
+
             <View style={styles.footer}>
                 <TouchableOpacity style={styles.deleteButton}>
                     <Text style={styles.deleteButtonText}>Apagar conta</Text>
@@ -139,7 +150,7 @@ const InfoLinha = ({ label, value, showEditIcon = false }) => (
         </View>
         {showEditIcon && (
             <TouchableOpacity>
-                <Feather name="edit-2" size={TAMANHOS.espacamentoMenor} color={CORES.azul}/>
+                <Feather name="edit-2" size={TAMANHOS.espacamentoMenor} color={CORES.azul} />
             </TouchableOpacity>
         )}
     </View>
@@ -153,7 +164,7 @@ const CartaoLinha = ({ bandeira, numero }) => (
             <Text style={styles.cardNumb}>{numero}</Text>
         </View>
         <TouchableOpacity>
-            <Feather name="trash-2" size={20}color={CORES.vermelho} />
+            <Feather name="trash-2" size={20} color={CORES.vermelho} />
         </TouchableOpacity>
     </View>
 );
@@ -163,7 +174,7 @@ const styles = StyleSheet.create({
     safeArea: {
         flex: 1,
         backgroundColor: CORES.branco,
-        
+
     },
     center: {
         flex: 1,
@@ -181,11 +192,11 @@ const styles = StyleSheet.create({
         paddingHorizontal: TAMANHOS.espacamentoMenor,
         paddingVertical: TAMANHOS.espacamentoPequeno,
         backgroundColor: CORES.azul,
-        paddingTop:55
+        paddingTop: 55
     },
     headerTitle: {
+        fontFamily: FONTES.fonteBold,
         fontSize: TAMANHOS.fonteTitulo,
-        fontWeight: 'bold',
         color: CORES.amarelo,
     },
     scrollContainer: {
@@ -196,35 +207,56 @@ const styles = StyleSheet.create({
         marginBottom: TAMANHOS.espacamentoMaior,
     },
     sectionTitle: {
+        fontFamily: FONTES.fonteBold,
         fontSize: TAMANHOS.fonteSegundaria,
-        fontWeight: 'bold',
         color: CORES.amarelo,
         marginBottom: TAMANHOS.espacamentoMenor,
     },
+    secaoRedefinirSenha: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderBottomWidth: 1,
+        borderBottomColor: CORES.branco,
+        paddingBottom: TAMANHOS.espacamentoPequeno,
+        marginBottom: TAMANHOS.espacamentoPequeno,
+    },
+
     infoRow: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         borderBottomWidth: 1,
         borderBottomColor: CORES.branco,
-        paddingBottom: TAMANHOS.espacamentoMenor,
-        marginBottom: TAMANHOS.espacamentoMenor,
+        paddingBottom: TAMANHOS.espacamentoPequeno,
+        marginBottom: TAMANHOS.espacamentoPequeno,
     },
     label: {
+        fontFamily: FONTES.fonteMedium,
         fontSize: TAMANHOS.fonteSegundaria,
-        color: '#666',
         marginBottom: TAMANHOS.espacamentoPequeno,
         color: CORES.azul
     },
+    secaoDataNascimento: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'baseline',
+    },
+    botaoEditarTexto: {
+        fontFamily: FONTES.fonteBold
+    },
     value: {
+        fontFamily: FONTES.fonteBold,
         fontSize: TAMANHOS.fonteSegundaria,
-        fontWeight: 'bold',
         color: CORES.azul,
     },
     link: {
-        fontSize: TAMANHOS.fonteSegundaria,
-        color: CORES.azul,
-        fontWeight: 'bold',
+        borderWidth: 1,
+        borderColor: CORES.vermelho,
+        borderRadius: 50,
+        paddingVertical: TAMANHOS.espacamentoPequeno,
+        paddingHorizontal: TAMANHOS.espacamentoMenor,
+        color: CORES.vermelho
     },
     cardRow: {
         flexDirection: 'row',
@@ -240,8 +272,8 @@ const styles = StyleSheet.create({
         color: CORES.azul,
     },
     cardNumb: {
+         fontFamily: FONTES.fonteBold,
         fontSize: TAMANHOS.fonteSegundaria,
-        fontWeight: 'bold',
         color: CORES.azul,
         marginTop: TAMANHOS.espacamentoPequeno,
     },

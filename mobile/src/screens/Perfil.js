@@ -99,11 +99,19 @@ export default function Perfil() {
                     <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.barraRolagem}>
                         <View style={[styles.scrollItem, styles.scrollItemAmarelo]}>
                             <Text style={styles.scrollItemTexto}>Valores economizados</Text>
-                            <Text style={styles.scrollItemTexto}>R$ 40,50</Text>
+                            <Text style={styles.scrollItemTextoValor}>R$ 40,50</Text>
                         </View>
                         <View style={[styles.scrollItem, styles.scrollItemAmarelo]}>
                             <Text style={styles.scrollItemTexto}>Valores economizados</Text>
-                            <Text style={styles.scrollItemTexto}>R$ 40,50</Text>
+                            <Text style={styles.scrollItemTextoValor}>R$ 40,50</Text>
+                        </View>
+                        <View style={[styles.scrollItem, styles.scrollItemAmarelo]}>
+                            <Text style={styles.scrollItemTexto}>Valores economizados</Text>
+                            <Text style={styles.scrollItemTextoValor}>R$ 40,50</Text>
+                        </View>
+                        <View style={[styles.scrollItem, styles.scrollItemAmarelo]}>
+                            <Text style={styles.scrollItemTexto}>Valores economizados</Text>
+                            <Text style={styles.scrollItemTextoValor}>R$ 40,50</Text>
                         </View>
                         <View style={[styles.scrollItem, styles.scrollItemAmarelo]}>
                             <Text style={styles.scrollItemTexto}>Valores economizados</Text>
@@ -222,17 +230,17 @@ const styles = StyleSheet.create({
         fontSize: TAMANHOS.fonteSegundaria,
         marginLeft: TAMANHOS.espacamentoMenor,
         marginBottom: TAMANHOS.espacamentoPequeno,
-        color: CORES.amarelo
+        color: CORES.amarelo,
+        alignSelf: 'baseline'
     },
     secaoEstatisticas: {
         paddingTop: TAMANHOS.espacamentoMenor,
     },
     barraRolagem: {
-        paddingHorizontal: TAMANHOS.espacamentoPequeno,
         marginLeft: TAMANHOS.espacamentoPequeno
     },
     barraRolagemMercados: {
-        paddingHorizontal: TAMANHOS.espacamentoPequeno,
+        paddingHorizontal: TAMANHOS.espacamentoMenor,
     },
     scrollItem: {
         padding: TAMANHOS.espacamentoPequeno,
@@ -240,25 +248,31 @@ const styles = StyleSheet.create({
         marginHorizontal: TAMANHOS.espacamentoPequeno,
         alignItems: 'center',
         backgroundColor: CORES.azul,
+        justifyContent: 'center',
     },
     scrollItemTexto: {
         color: CORES.amarelo,
-        fontWeight: 'bold'
+        fontSize: TAMANHOS.fontePequena,
+        fontFamily: FONTES.fonteBold,
     },
     scrollItemTextoValor: {
+        fontSize: TAMANHOS.fonteSegundaria,
+        fontFamily: FONTES.fonteBold,
         color: CORES.amarelo,
     },
     secaoInfoMercados: {
         marginTop: TAMANHOS.espacamentoMaior,
+        alignItems: 'center'
     },
     TextoLinkDadosMercado: {
-        fontSize: 13,
-        fontWeight: 'bold',
-        color: CORES.azul
+        fontFamily: FONTES.fonteBold,
+        color: CORES.azul,
+        fontSize: TAMANHOS.fontePequena,
+        alignSelf: 'center'
     },
     infoCompras: {
         alignItems: 'center',
-        marginRight: TAMANHOS.espacamentoMenor,
+        marginHorizontal: TAMANHOS.espacamentoMenor,
     },
     logoMercado: {
         width: 100,
@@ -289,7 +303,7 @@ const styles = StyleSheet.create({
         borderRadius: TAMANHOS.bordaRaio,
     },
     produtoTitulo: {
-         fontFamily: FONTES.fonteMedium,
+        fontFamily: FONTES.fonteMedium,
         marginTop: TAMANHOS.espacamentoPequeno,
         fontSize: TAMANHOS.fonteSegundaria,
         height: 50,
