@@ -54,31 +54,37 @@ export default function CadastroModal({ visible, onCadastroSubmit, onClose, onNa
 
                     <Text style={styles.modal_container_titulo}>Crie sua Conta</Text>
 
-                    <TextInput
-                        placeholder='Nome completo:'
-                        value={nome}
-                        onChangeText={setNome}
-                        style={styles.input}
-                        placeholderTextColor={CORES.verde}
-                    />
-                    <TextInput
-                        placeholder='Email:'
-                        value={email}
-                        onChangeText={setEmail}
-                        keyboardType='email-address'
-                        autoCapitalize='none'
-                        style={styles.input}
-                        placeholderTextColor={CORES.verde}
-                    />
-                    <TextInput
-                        placeholder='CPF:'
-                        value={cpf}
-                        onChangeText={setCpf}
-                        keyboardType='numeric'
-                        style={styles.input}
-                        placeholderTextColor={CORES.verde}
-                    />
-                    <View style={styles.passwordInputWrapper}>
+                    <View style={styles.inputWrapper}>
+                        <TextInput
+                            placeholder='Nome completo:'
+                            value={nome}
+                            onChangeText={setNome}
+                            style={styles.input}
+                            placeholderTextColor={CORES.verde}
+                        />
+                    </View>
+                    <View style={styles.inputWrapper}>
+                        <TextInput
+                            placeholder='Email:'
+                            value={email}
+                            onChangeText={setEmail}
+                            keyboardType='email-address'
+                            autoCapitalize='none'
+                            style={styles.input}
+                            placeholderTextColor={CORES.verde}
+                        />
+                    </View>
+                    <View style={styles.inputWrapper}>
+                        <TextInput
+                            placeholder='CPF:'
+                            value={cpf}
+                            onChangeText={setCpf}
+                            keyboardType='numeric'
+                            style={styles.input}
+                            placeholderTextColor={CORES.verde}
+                        />
+                    </View>
+                    <View style={styles.inputWrapper}>
                         <TextInput
                             placeholder='Senha:'
                             value={senha}
@@ -96,7 +102,7 @@ export default function CadastroModal({ visible, onCadastroSubmit, onClose, onNa
                         </Pressable>
                     </View>
 
-                    <View style={styles.passwordInputWrapper}>
+                    <View style={styles.inputWrapper}>
                         <TextInput
                             placeholder='Confirme sua senha:'
                             value={confirmeSenha}
@@ -152,6 +158,7 @@ const styles = StyleSheet.create({
         padding: TAMANHOS.espacamentoMenor,
         alignItems: 'center',
         justifyContent: 'space-around',
+        borderRadius: 30
     },
     closeButton: {
         position: 'absolute',
@@ -171,17 +178,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginBottom: TAMANHOS.espacamentoPequeno,
     },
-    input: {
-         fontFamily: FONTES.fontePrincipal,
-        backgroundColor: CORES.branco,
-        borderRadius: 50,
-        color: CORES.verde,
-        paddingHorizontal: TAMANHOS.espacamentoMenor,
-        height: 45,
-        marginBottom: TAMANHOS.espacamentoPequeno,
-        width: 280,
-    },
-    passwordInputWrapper: {
+    inputWrapper: {
         fontFamily: FONTES.fontePrincipal,
         flexDirection: 'row',
         alignItems: 'center',
@@ -196,13 +193,21 @@ const styles = StyleSheet.create({
         flex: 1,
         color: CORES.verde,
     },
+    input: {
+        flex: 1,
+        color: CORES.verde,
+    },
     botao: {
+        flexDirection: 'row',
         backgroundColor: CORES.amarelo,
         borderRadius: 50,
         paddingVertical: TAMANHOS.espacamentoPequeno,
-        alignItems: 'center',
+
         marginTop: TAMANHOS.espacamentoMenor,
         width: 150,
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     botao_texto: {
         fontFamily: FONTES.fonteBold,
@@ -220,6 +225,6 @@ const styles = StyleSheet.create({
     },
     opcoes_titulo_bold: {
         color: CORES.amarelo,
-       fontFamily: FONTES.fonteBold,
+        fontFamily: FONTES.fonteBold,
     },
 });

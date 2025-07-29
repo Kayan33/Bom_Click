@@ -43,7 +43,7 @@ export default function LoginModal({ visible, onLoginSubmit, onClose, onNavigate
                         <View style={styles.placeholder} />
                     </View>
 
-                    <View style={styles.inputContainer}>
+                    <View style={styles.inputWrapper}>
                         <TextInput
                             autoComplete='email'
                             inputMode='email'
@@ -54,23 +54,23 @@ export default function LoginModal({ visible, onLoginSubmit, onClose, onNavigate
                             style={styles.input}
                             placeholderTextColor={CORES.verde}
                         />
-                        <View style={styles.passwordInputWrapper}>
-                            <TextInput
-                                placeholder='Senha:'
-                                secureTextEntry={senhaVisibilidade}
-                                style={styles.passwordInput}
-                                value={senha}
-                                onChangeText={setSenha}
-                                placeholderTextColor={CORES.verde}
+                    </View>
+                    <View style={styles.inputWrapper}>
+                        <TextInput
+                            placeholder='Senha:'
+                            secureTextEntry={senhaVisibilidade}
+                            style={styles.passwordInput}
+                            value={senha}
+                            onChangeText={setSenha}
+                            placeholderTextColor={CORES.verde}
+                        />
+                        <Pressable onPress={() => setSenhaVisibilidade(!senhaVisibilidade)}>
+                            <Feather
+                                name={senhaVisibilidade ? 'eye-off' : 'eye'}
+                                size={18}
+                                color={CORES.verde}
                             />
-                            <Pressable onPress={() => setSenhaVisibilidade(!senhaVisibilidade)}>
-                                <Feather
-                                    name={senhaVisibilidade ? 'eye-off' : 'eye'}
-                                    size={18}
-                                    color={CORES.verde}
-                                />
-                            </Pressable>
-                        </View>
+                        </Pressable>
                     </View>
 
                     <View style={styles.footer}>
@@ -135,41 +135,25 @@ const styles = StyleSheet.create({
     placeholder: {
         width: 24,
     },
-    inputContainer: {
-        width: '100%',
-        marginBottom: TAMANHOS.espacamentoPequeno,
-    },
-    input: {
-        fontFamily: FONTES.fonteMedium,
-        width: '80%',
-        height: 45,
-        backgroundColor: CORES.branco,
-        borderRadius: 50,
-        paddingHorizontal: TAMANHOS.espacamentoMenor,
-        fontSize: TAMANHOS.fonteMedia,
-        marginBottom: TAMANHOS.espacamentoMenor,
-        alignItems: 'center',
-        alignSelf: 'center',
-        color: CORES.verde,
-        paddingLeft: TAMANHOS.espacamentoMenor,
-    },
-    passwordInputWrapper: {
-        fontFamily: FONTES.fonteMedium,
-        width: '80%',
-        height: 45,
-        backgroundColor: CORES.branco,
-        borderRadius: 50,
-        paddingHorizontal: 12,
-        fontSize: TAMANHOS.fonteMedia,
+    inputWrapper: {
+        fontFamily: FONTES.fontePrincipal,
         flexDirection: 'row',
         alignItems: 'center',
+        backgroundColor: CORES.branco,
+        borderRadius: 50,
+        height: 45,
+        width: 280,
+        paddingHorizontal: TAMANHOS.espacamentoMenor,
+        marginBottom: TAMANHOS.espacamentoPequeno,
         alignSelf: 'center',
-        color: CORES.verde,
-
     },
+    input: {
+        flex: 1,
+        color: CORES.verde,
+    },
+    
     passwordInput: {
         flex: 1,
-        fontFamily: FONTES.fonteMedium,
     },
     footer: {
         flexDirection: 'row',
@@ -178,7 +162,7 @@ const styles = StyleSheet.create({
         marginTop: TAMANHOS.espacamentoPequeno,
     },
     linksContainer: {
-        marginLeft: TAMANHOS.espacamentoMaior
+        marginLeft: TAMANHOS.espacamentoMenor
     },
     linkText: {
         fontFamily: FONTES.fontePrincipal,

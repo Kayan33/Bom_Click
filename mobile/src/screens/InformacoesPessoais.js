@@ -100,7 +100,7 @@ export default function InformacoesPessoais() {
                             />
                         </View>
                         <TouchableOpacity style={styles.botaoEditar}>
-                            <Feather name="edit-2" size={TAMANHOS.espacamentoMenor} color={CORES.azul} />
+                            <Feather name="edit-2" size={TAMANHOS.espacamentoMenor} color={CORES.amarelo} />
                         </TouchableOpacity>
                     </View>
 
@@ -114,7 +114,9 @@ export default function InformacoesPessoais() {
 
                 <View style={styles.section}>
                     <Text style={styles.sectionTitle}>Endereço</Text>
-                    <InfoLinha label="CEP:" value={dadosUsuarios.cep || ''} showEditIcon />
+                    <View style={styles.sectionCep}>
+                        <InfoLinha label="CEP:" value={dadosUsuarios.cep || ''} showEditIcon layout="inline" />
+                    </View>
                     <InfoLinha label="Logradouro:" value={dadosUsuarios.rua || ''} />
                     <InfoLinha label="BAIRRO:" value={dadosUsuarios.bairro || ''} />
                     <InfoLinha label="Número:" value={dadosUsuarios.numero?.toString() || ''} />
@@ -142,15 +144,15 @@ export default function InformacoesPessoais() {
     );
 }
 
-const InfoLinha = ({ label, value, showEditIcon = false }) => (
-    <View style={styles.infoRow}>
+const InfoLinha = ({ label, value, showEditIcon = false, layout = 'stacked' }) => (
+    <View style={layout === 'inline' ? styles.infoRowInline : styles.infoRowStacked}>
         <View>
             <Text style={styles.label}>{label}</Text>
             <Text style={styles.value}>{value}</Text>
         </View>
         {showEditIcon && (
             <TouchableOpacity>
-                <Feather name="edit-2" size={TAMANHOS.espacamentoMenor} color={CORES.azul} />
+                <Feather name="edit-2" size={TAMANHOS.espacamentoMenor} color={CORES.amarelo} />
             </TouchableOpacity>
         )}
     </View>
@@ -211,6 +213,13 @@ const styles = StyleSheet.create({
         fontSize: TAMANHOS.fonteSegundaria,
         color: CORES.amarelo,
         marginBottom: TAMANHOS.espacamentoMenor,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    sectionCep: {
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        height:50,
     },
     secaoRedefinirSenha: {
         flexDirection: 'row',
@@ -221,8 +230,13 @@ const styles = StyleSheet.create({
         paddingBottom: TAMANHOS.espacamentoPequeno,
         marginBottom: TAMANHOS.espacamentoPequeno,
     },
-
-    infoRow: {
+     infoRowStacked: {
+        borderBottomWidth: 1,
+        borderBottomColor: CORES.branco,
+        paddingBottom: TAMANHOS.espacamentoPequeno,
+        marginBottom: TAMANHOS.espacamentoPequeno,
+    },
+    infoRowInline: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
