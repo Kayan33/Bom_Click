@@ -100,7 +100,7 @@ export default function InformacoesPessoais() {
                             />
                         </View>
                         <TouchableOpacity style={styles.botaoEditar}>
-                            <Feather name="edit-2" size={TAMANHOS.espacamentoMenor} color={CORES.amarelo} />
+                            <Feather name="edit" size={TAMANHOS.espacamentoMenor} color={CORES.amarelo} />
                         </TouchableOpacity>
                     </View>
 
@@ -152,7 +152,7 @@ const InfoLinha = ({ label, value, showEditIcon = false, layout = 'stacked' }) =
         </View>
         {showEditIcon && (
             <TouchableOpacity>
-                <Feather name="edit-2" size={TAMANHOS.espacamentoMenor} color={CORES.amarelo} />
+                <Feather name="edit" size={TAMANHOS.espacamentoMenor} color={CORES.amarelo} style={{paddingTop:5}}/>
             </TouchableOpacity>
         )}
     </View>
@@ -238,12 +238,11 @@ const styles = StyleSheet.create({
     },
     infoRowInline: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
         borderBottomWidth: 1,
         borderBottomColor: CORES.branco,
         paddingBottom: TAMANHOS.espacamentoPequeno,
         marginBottom: TAMANHOS.espacamentoPequeno,
+        gap: 10
     },
     label: {
         fontFamily: FONTES.fonteMedium,
@@ -253,8 +252,8 @@ const styles = StyleSheet.create({
     },
     secaoDataNascimento: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
         alignItems: 'baseline',
+        gap: 10
     },
     botaoEditarTexto: {
         fontFamily: FONTES.fonteBold
