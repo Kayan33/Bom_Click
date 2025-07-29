@@ -137,7 +137,7 @@ export default function Inicial() {
 
                     </View>
 
-                    <View style={[styles.mercados, styles.mercadosSetores]}>
+                    {/* <View style={[styles.mercados, styles.mercadosSetores]}>
 
                         <TouchableOpacity>
 
@@ -164,7 +164,7 @@ export default function Inicial() {
                         </TouchableOpacity>
 
 
-                    </View>
+                    </View> */}
 
                     <CarrosselSessoes data={CATEGORIAS} />
 

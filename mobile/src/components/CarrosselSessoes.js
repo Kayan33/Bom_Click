@@ -1,16 +1,18 @@
 import React, { useRef, useMemo } from 'react';
-import { View, Text, StyleSheet, Dimensions, FlatList, Animated } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, FlatList, Animated, Pressable } from 'react-native';
 
 const { width: windowWidth } = Dimensions.get('window');
+
+import { CORES, TAMANHOS } from '../styles/styles';
 
 const ITEM_WIDTH = 90;
 const ESPACO_ENTRE_ITENS = 10;
 const ITEM_FULL_WIDTH = ITEM_WIDTH + ESPACO_ENTRE_ITENS;
-const ESPACO_INICIAL_ESQUERDA = 30;
-const ESPACO_FINAL_DIREITA = windowWidth - ITEM_WIDTH - ESPACO_INICIAL_ESQUERDA;
+
+const SPACER_WIDTH = (windowWidth - ITEM_WIDTH) / 2;
 
 
-const ItemDoCarrossel = ({ item, scrollX, index }) => {
+const ItemDoCarrossel = ({ item, scrollX, index, onPress }) => { 
     if (item.type === 'spacer') {
         return <View style={{ width: item.width }} />;
     }
@@ -28,9 +30,12 @@ const ItemDoCarrossel = ({ item, scrollX, index }) => {
     });
 
     return (
-        <Animated.View style={[styles.itemContainer, { transform: [{ scale }] }]}>
-            <Text style={styles.itemLabel}>{item.label}</Text>
-        </Animated.View>
+        
+        <Pressable onPress={onPress}>
+            <Animated.View style={[styles.itemContainer, { transform: [{ scale }] }]}>
+                <Text style={styles.itemLabel}>{item.label}</Text>
+            </Animated.View>
+        </Pressable>
     );
 };
 
@@ -41,16 +46,16 @@ const CarrosselCategorias = ({ data }) => {
 
     const { loopedData, dataLength } = useMemo(() => {
         const dataLength = data.length;
-
         const firstItems = data.slice(0, dataLength);
         const lastItems = data.slice(-dataLength);
         return {
             loopedData: [
-                { id: 'spacer-left', type: 'spacer', width: ESPACO_INICIAL_ESQUERDA - ESPACO_ENTRE_ITENS },
+         
+                { id: 'spacer-left', type: 'spacer', width: SPACER_WIDTH - ESPACO_ENTRE_ITENS/2 },
                 ...lastItems,
                 ...data,
                 ...firstItems,
-                { id: 'spacer-right', type: 'spacer', width: ESPACO_FINAL_DIREITA },
+                { id: 'spacer-right', type: 'spacer', width: SPACER_WIDTH - ESPACO_ENTRE_ITENS/2 },
             ],
             dataLength,
         };
@@ -62,14 +67,10 @@ const CarrosselCategorias = ({ data }) => {
 
         if (currentIndex < dataLength) {
             const newIndex = currentIndex + dataLength;
-            const newOffset = newIndex * ITEM_FULL_WIDTH;
-            flatListRef.current?.scrollToOffset({ offset: newOffset, animated: false });
-        }
-
-        else if (currentIndex >= dataLength * 2) {
+            flatListRef.current?.scrollToIndex({ index: newIndex, animated: false });
+        } else if (currentIndex >= dataLength * 2) {
             const newIndex = currentIndex - dataLength;
-            const newOffset = newIndex * ITEM_FULL_WIDTH;
-            flatListRef.current?.scrollToOffset({ offset: newOffset, animated: false });
+            flatListRef.current?.scrollToIndex({ index: newIndex, animated: false });
         }
     };
 
@@ -98,7 +99,18 @@ const CarrosselCategorias = ({ data }) => {
                     index,
                 })}
                 renderItem={({ item, index }) => (
-                    <ItemDoCarrossel item={item} scrollX={scrollX} index={index} />
+                    
+                    <ItemDoCarrossel
+                        item={item}
+                        scrollX={scrollX}
+                        index={index}
+                        onPress={() => {
+                        
+                            if (item.type !== 'spacer') {
+                                flatListRef.current?.scrollToIndex({ index, animated: true });
+                            }
+                        }}
+                    />
                 )}
             />
         </View>
@@ -115,7 +127,7 @@ const styles = StyleSheet.create({
     itemLabel: {
         fontSize: 16,
         fontWeight: 'bold',
-        color: '#003366',
+        color: CORES.azul,
         textAlign: 'center',
     },
 });

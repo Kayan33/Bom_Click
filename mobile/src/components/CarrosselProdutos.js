@@ -29,7 +29,7 @@ const ProdutoCard = ({ item }) => (
 
             <TouchableOpacity style={[styles.produtosCardBotao, styles.comparar]}>
 
-                <Text style={[styles.produtosCardBotaoTexto, styles.compararTexto]}>Comparar</Text>
+                <Text style={[styles.produtosCardBotaoTexto, styles.compararTexto]}>Comparar Preços</Text>
 
             </TouchableOpacity>
 
