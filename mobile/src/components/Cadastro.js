@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Modal, Pressable, TextInput, Alert } from 'react-native';
 import { Feather } from '@expo/vector-icons';
-import { CORES, TAMANHOS } from '../styles/styles';
+import { CORES, TAMANHOS, FONTES } from '../styles/styles';
 
 export default function CadastroModal({ visible, onCadastroSubmit, onClose, onNavigateToLogin }) {
     const [nome, setNome] = useState('');
@@ -9,7 +9,7 @@ export default function CadastroModal({ visible, onCadastroSubmit, onClose, onNa
     const [cpf, setCpf] = useState('');
     const [senha, setSenha] = useState('');
     const [confirmeSenha, setConfirmeSenha] = useState('');
-   
+
     const [senhaVisibilidade, setSenhaVisibilidade] = useState(true);
     const [confirmeSenhaVisibilidade, setConfirmeSenhaVisibilidade] = useState(true);
 
@@ -54,31 +54,37 @@ export default function CadastroModal({ visible, onCadastroSubmit, onClose, onNa
 
                     <Text style={styles.modal_container_titulo}>Crie sua Conta</Text>
 
-                    <TextInput
-                        placeholder='Nome completo:'
-                        value={nome}
-                        onChangeText={setNome}
-                        style={styles.input}
-                        placeholderTextColor={CORES.verde}
-                    />
-                    <TextInput
-                        placeholder='Email:'
-                        value={email}
-                        onChangeText={setEmail}
-                        keyboardType='email-address'
-                        autoCapitalize='none'
-                        style={styles.input}
-                        placeholderTextColor={CORES.verde}
-                    />
-                    <TextInput
-                        placeholder='CPF:'
-                        value={cpf}
-                        onChangeText={setCpf}
-                        keyboardType='numeric'
-                        style={styles.input}
-                        placeholderTextColor={CORES.verde}
-                    />
-                    <View style={styles.passwordInputWrapper}>
+                    <View style={styles.inputWrapper}>
+                        <TextInput
+                            placeholder='Nome completo:'
+                            value={nome}
+                            onChangeText={setNome}
+                            style={styles.input}
+                            placeholderTextColor={CORES.verde}
+                        />
+                    </View>
+                    <View style={styles.inputWrapper}>
+                        <TextInput
+                            placeholder='Email:'
+                            value={email}
+                            onChangeText={setEmail}
+                            keyboardType='email-address'
+                            autoCapitalize='none'
+                            style={styles.input}
+                            placeholderTextColor={CORES.verde}
+                        />
+                    </View>
+                    <View style={styles.inputWrapper}>
+                        <TextInput
+                            placeholder='CPF:'
+                            value={cpf}
+                            onChangeText={setCpf}
+                            keyboardType='numeric'
+                            style={styles.input}
+                            placeholderTextColor={CORES.verde}
+                        />
+                    </View>
+                    <View style={styles.inputWrapper}>
                         <TextInput
                             placeholder='Senha:'
                             value={senha}
@@ -95,8 +101,8 @@ export default function CadastroModal({ visible, onCadastroSubmit, onClose, onNa
                             />
                         </Pressable>
                     </View>
-                   
-                    <View style={styles.passwordInputWrapper}>
+
+                    <View style={styles.inputWrapper}>
                         <TextInput
                             placeholder='Confirme sua senha:'
                             value={confirmeSenha}
@@ -152,6 +158,7 @@ const styles = StyleSheet.create({
         padding: TAMANHOS.espacamentoMenor,
         alignItems: 'center',
         justifyContent: 'space-around',
+        borderRadius: 30
     },
     closeButton: {
         position: 'absolute',
@@ -165,22 +172,14 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     modal_container_titulo: {
+        fontFamily: FONTES.fonteBold,
         color: CORES.branco,
         fontSize: TAMANHOS.fonteTitulo,
-        fontWeight: 'bold',
         textAlign: 'center',
         marginBottom: TAMANHOS.espacamentoPequeno,
     },
-    input: { 
-        backgroundColor: CORES.branco,
-        borderRadius: 50,
-        color: CORES.verde,
-        paddingHorizontal: TAMANHOS.espacamentoMenor,
-        height: 45,
-        marginBottom: TAMANHOS.espacamentoPequeno,
-        width: 280,
-    },
-    passwordInputWrapper: { 
+    inputWrapper: {
+        fontFamily: FONTES.fontePrincipal,
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: CORES.branco,
@@ -194,29 +193,38 @@ const styles = StyleSheet.create({
         flex: 1,
         color: CORES.verde,
     },
+    input: {
+        flex: 1,
+        color: CORES.verde,
+    },
     botao: {
+        flexDirection: 'row',
         backgroundColor: CORES.amarelo,
         borderRadius: 50,
         paddingVertical: TAMANHOS.espacamentoPequeno,
-        alignItems: 'center',
+
         marginTop: TAMANHOS.espacamentoMenor,
         width: 150,
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     botao_texto: {
+        fontFamily: FONTES.fonteBold,
         color: CORES.verde,
-        fontWeight: 'bold',
         fontSize: TAMANHOS.fonteSegundaria,
     },
     linkContainer: {
         flexDirection: 'row',
         justifyContent: 'center',
         marginTop: TAMANHOS.espacamentoMenor,
+        fontFamily: FONTES.fontePrincipal,
     },
     opcoes_titulo: {
         color: CORES.amarelo,
     },
     opcoes_titulo_bold: {
         color: CORES.amarelo,
-        fontWeight: 'bold',
+        fontFamily: FONTES.fonteBold,
     },
 });

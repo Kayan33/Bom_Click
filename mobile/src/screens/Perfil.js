@@ -99,11 +99,19 @@ export default function Perfil() {
                     <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.barraRolagem}>
                         <View style={[styles.scrollItem, styles.scrollItemAmarelo]}>
                             <Text style={styles.scrollItemTexto}>Valores economizados</Text>
-                            <Text style={styles.scrollItemTexto}>R$ 40,50</Text>
+                            <Text style={styles.scrollItemTextoValor}>R$ 40,50</Text>
                         </View>
                         <View style={[styles.scrollItem, styles.scrollItemAmarelo]}>
                             <Text style={styles.scrollItemTexto}>Valores economizados</Text>
-                            <Text style={styles.scrollItemTexto}>R$ 40,50</Text>
+                            <Text style={styles.scrollItemTextoValor}>R$ 40,50</Text>
+                        </View>
+                        <View style={[styles.scrollItem, styles.scrollItemAmarelo]}>
+                            <Text style={styles.scrollItemTexto}>Valores economizados</Text>
+                            <Text style={styles.scrollItemTextoValor}>R$ 40,50</Text>
+                        </View>
+                        <View style={[styles.scrollItem, styles.scrollItemAmarelo]}>
+                            <Text style={styles.scrollItemTexto}>Valores economizados</Text>
+                            <Text style={styles.scrollItemTextoValor}>R$ 40,50</Text>
                         </View>
                         <View style={[styles.scrollItem, styles.scrollItemAmarelo]}>
                             <Text style={styles.scrollItemTexto}>Valores economizados</Text>
@@ -186,11 +194,11 @@ const styles = StyleSheet.create({
         paddingBottom: TAMANHOS.espacamentoMenor
     },
     cabecalhoTitulo: {
+        fontFamily: FONTES.fonteMedium,
         flex: 1,
         textAlign: 'center',
         color: CORES.amarelo,
         fontSize: TAMANHOS.fonteTitulo,
-        fontWeight: 'bold',
         paddingTop: 50
     },
     secaoPerfil: {
@@ -204,31 +212,31 @@ const styles = StyleSheet.create({
         width: 80,
         height: 80,
         borderRadius: 40,
-        marginBottom:  TAMANHOS.espacamentoMenor,
+        marginBottom: TAMANHOS.espacamentoMenor,
     },
     editarInfoText: {
+        fontFamily: FONTES.fonteBold,
         color: CORES.azul,
         fontSize: TAMANHOS.fonteSegundaria,
-        fontWeight: 'bold'
     },
     saudacao: {
+        fontFamily: FONTES.fonteBold,
         fontSize: TAMANHOS.fonteTitulo,
-        fontWeight: 'bold',
         marginTop: TAMANHOS.espacamentoPequeno,
         color: CORES.verde
     },
     secaoTitulo: {
+        fontFamily: FONTES.fonteBold,
         fontSize: TAMANHOS.fonteSegundaria,
-        fontWeight: 'bold',
         marginLeft: TAMANHOS.espacamentoMenor,
         marginBottom: TAMANHOS.espacamentoPequeno,
-        color: CORES.amarelo
+        color: CORES.amarelo,
+        alignSelf: 'baseline'
     },
     secaoEstatisticas: {
         paddingTop: TAMANHOS.espacamentoMenor,
     },
     barraRolagem: {
-        paddingHorizontal: TAMANHOS.espacamentoPequeno,
         marginLeft: TAMANHOS.espacamentoPequeno
     },
     barraRolagemMercados: {
@@ -237,28 +245,34 @@ const styles = StyleSheet.create({
     scrollItem: {
         padding: TAMANHOS.espacamentoPequeno,
         borderRadius: TAMANHOS.bordaRaio,
-        marginRight: TAMANHOS.espacamentoMenor,
+        marginHorizontal: TAMANHOS.espacamentoPequeno,
         alignItems: 'center',
         backgroundColor: CORES.azul,
+        justifyContent: 'center',
     },
     scrollItemTexto: {
         color: CORES.amarelo,
-        fontWeight: 'bold'
+        fontSize: TAMANHOS.fontePequena,
+        fontFamily: FONTES.fonteBold,
     },
     scrollItemTextoValor: {
+        fontSize: TAMANHOS.fonteSegundaria,
+        fontFamily: FONTES.fonteBold,
         color: CORES.amarelo,
     },
     secaoInfoMercados: {
         marginTop: TAMANHOS.espacamentoMaior,
+        alignItems: 'center'
     },
     TextoLinkDadosMercado: {
-        fontSize: 13,
-        fontWeight: 'bold',
-        color: CORES.azul
+        fontFamily: FONTES.fonteBold,
+        color: CORES.azul,
+        fontSize: TAMANHOS.fontePequena,
+        alignSelf: 'center'
     },
     infoCompras: {
         alignItems: 'center',
-        marginRight: TAMANHOS.espacamentoMenor,
+        marginHorizontal: TAMANHOS.espacamentoMenor,
     },
     logoMercado: {
         width: 100,
@@ -289,9 +303,11 @@ const styles = StyleSheet.create({
         borderRadius: TAMANHOS.bordaRaio,
     },
     produtoTitulo: {
+        fontFamily: FONTES.fonteMedium,
         marginTop: TAMANHOS.espacamentoPequeno,
         fontSize: TAMANHOS.fonteSegundaria,
-        height: 50
+        height: 50,
+        color: CORES.verde
     },
     produtoValores: {
         flexDirection: 'row',
