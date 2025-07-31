@@ -3,9 +3,10 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
 import PagerView from 'react-native-pager-view';
 
-import { CORES, TAMANHOS } from '../styles/styles';
+import { CORES, TAMANHOS, LOGOS } from '../styles/styles';
 
-const CarrosselComPagerView = ({ data }) => {
+export default CarrosselPromocoes = ({ data }) => {
+
     const [activeIndex, setActiveIndex] = useState(0);
 
     const handlePageChange = (event) => {
@@ -42,7 +43,7 @@ const CarrosselComPagerView = ({ data }) => {
                                         <Text style={styles.promocoesCarosselItemInformacoesContainerPreco}>{item.preco}</Text>
 
                                         <Image
-                                            source={require('../../assets/ImagensTemp/images 3.png')}
+                                            source={item.logoMercado}
                                             style={styles.promocoesCarosselItemInformacoesContainerImagem}
                                         />
 
@@ -153,9 +154,9 @@ const styles = StyleSheet.create({
 
     paginationContainer: {
         flexDirection: 'row',
-        justifyContent: 'center',
         alignItems: 'center',
         paddingVertical: 10,
+
     },
     dot: {
         width: 8,
@@ -168,5 +169,3 @@ const styles = StyleSheet.create({
         backgroundColor: CORES.azul,
     },
 });
-
-export default CarrosselComPagerView;

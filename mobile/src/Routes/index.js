@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { AutenticadoContexto } from "../Context/authContext";
+import { AutenticadoContexto } from "../Context/AuthContext";
 import RotasAutenticadas from "./RotasAutenticadas";
 import RotasNaoAutenticadas from './RotaNaoAutenticadas'
 

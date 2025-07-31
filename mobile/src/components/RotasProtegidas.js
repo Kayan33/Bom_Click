@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { useIsFocused } from '@react-navigation/native';
-import { AutenticadoContexto } from '../Context/authContext'
+import { AutenticadoContexto } from '../Context/AuthContext'
 import { View, ActivityIndicator } from 'react-native';
 
 export default function RotaProtegida({ children }) {

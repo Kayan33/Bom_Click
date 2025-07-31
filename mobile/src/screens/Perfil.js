@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { StyleSheet, View, Text, Image, ScrollView, Pressable, ActivityIndicator } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
-import { AutenticadoContexto } from '../Context/authContext'
+import { AutenticadoContexto } from '../Context/AuthContext'
 import api from '../services/api'
 import IconeVoltar from '../components/icones/Voltar';
 import LogoPerfil from '../components/icones/Perfil';
