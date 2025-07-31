@@ -6,6 +6,7 @@ import { AutenticadoContexto } from '../Context/AuthContext'
 import api from '../services/api'
 import IconeVoltar from '../components/icones/Voltar';
 import LogoPerfil from '../components/icones/Perfil';
+import CarrosselSessoes from "../components/CarrosselSessoes";
 
 import { CORES, TAMANHOS, FONTES } from "../styles/styles";
 import LogoTauste from '../components/icones/LogoTauste';
@@ -14,14 +15,29 @@ import LogoPanelao from '../components/icones/LogoPanelao';
 import Carne from '../../assets/Carne.png';
 import Limao from '../../assets/Limao.png';
 
+
+const valoresEconomizados = () => {
+    return (
+        <View>
+            <View style={[styles.scrollItem, styles.scrollItemAmarelo]}>
+                <Text style={styles.scrollItemTexto}>Valores economizados</Text>
+                <Text style={styles.scrollItemTextoValor}>R$ 40,50</Text>
+            </View>
+        </View>
+    )
+}
+
 export default function Perfil() {
     const navigation = useNavigation();
     const { autenticado, usuario } = useContext(AutenticadoContexto);
     const [dadosUsuarios, setDadosUsuarios] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
     const insets = useSafeAreaInsets();
+
+    const ESTATISTICAS = [
+        <valoresEconomizados/> 
+    ];
 
     useEffect(() => {
         async function consultarDadosUsuarios() {
@@ -96,7 +112,7 @@ export default function Perfil() {
 
                 <View style={styles.secaoEstatisticas}>
                     <Text style={styles.secaoTitulo}>Suas estatísticas!</Text>
-                    <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.barraRolagem}>
+                    {/* <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.barraRolagem}>
                         <View style={[styles.scrollItem, styles.scrollItemAmarelo]}>
                             <Text style={styles.scrollItemTexto}>Valores economizados</Text>
                             <Text style={styles.scrollItemTextoValor}>R$ 40,50</Text>
@@ -117,7 +133,8 @@ export default function Perfil() {
                             <Text style={styles.scrollItemTexto}>Valores economizados</Text>
                             <Text style={styles.scrollItemTextoValor}>R$ 40,50</Text>
                         </View>
-                    </ScrollView>
+                    </ScrollView> */}
+                    <CarrosselSessoes data={ESTATISTICAS} />
                 </View>
 
                 <View style={styles.secaoInfoMercados}>
