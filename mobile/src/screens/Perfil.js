@@ -1,12 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { StyleSheet, View, Text, Image, ScrollView, Pressable, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, Text, Image, ScrollView, Pressable, ActivityIndicator, FlatList } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { AutenticadoContexto } from '../Context/authContext'
 import api from '../services/api'
 import IconeVoltar from '../components/icones/Voltar';
 import LogoPerfil from '../components/icones/Perfil';
-import CarrosselSessoes from "../components/CarrosselSessoes";
+import CarrosselEstatisticas from '../components/CarrosselEstatisticas';
+import CardMercado from '../components/CardMercado';
 
 import { CORES, TAMANHOS, FONTES } from "../styles/styles";
 import LogoTauste from '../components/icones/LogoTauste';
@@ -14,18 +15,6 @@ import LogoConfianca from '../components/icones/LogoConfianca';
 import LogoPanelao from '../components/icones/LogoPanelao';
 import Carne from '../../assets/Carne.png';
 import Limao from '../../assets/Limao.png';
-
-
-const valoresEconomizados = () => {
-    return (
-        <View>
-            <View style={[styles.scrollItem, styles.scrollItemAmarelo]}>
-                <Text style={styles.scrollItemTexto}>Valores economizados</Text>
-                <Text style={styles.scrollItemTextoValor}>R$ 40,50</Text>
-            </View>
-        </View>
-    )
-}
 
 export default function Perfil() {
     const navigation = useNavigation();
@@ -35,8 +24,28 @@ export default function Perfil() {
     const [error, setError] = useState(null);
     const insets = useSafeAreaInsets();
 
-    const ESTATISTICAS = [
-        <valoresEconomizados/> 
+
+    const DADOS_MERCADOS = [
+        {
+            id: '1',
+            LogoComponent: LogoTauste,
+        },
+        {
+            id: '2',
+            LogoComponent: LogoConfianca,
+        },
+        {
+            id: '3',
+            LogoComponent: LogoPanelao,
+        },
+    ];
+
+
+
+    const ESTATISTICAS_DATA = [
+        { id: '1', titulo: 'Valores economizados', valor: 'R$ 40,50' },
+        { id: '2', titulo: 'Valores economizados', valor: 'R$ 40,50' },
+        { id: '3', titulo: 'Valores economizados', valor: 'R$ 40,50' },
     ];
 
     useEffect(() => {
@@ -112,47 +121,22 @@ export default function Perfil() {
 
                 <View style={styles.secaoEstatisticas}>
                     <Text style={styles.secaoTitulo}>Suas estatísticas!</Text>
-                    {/* <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.barraRolagem}>
-                        <View style={[styles.scrollItem, styles.scrollItemAmarelo]}>
-                            <Text style={styles.scrollItemTexto}>Valores economizados</Text>
-                            <Text style={styles.scrollItemTextoValor}>R$ 40,50</Text>
-                        </View>
-                        <View style={[styles.scrollItem, styles.scrollItemAmarelo]}>
-                            <Text style={styles.scrollItemTexto}>Valores economizados</Text>
-                            <Text style={styles.scrollItemTextoValor}>R$ 40,50</Text>
-                        </View>
-                        <View style={[styles.scrollItem, styles.scrollItemAmarelo]}>
-                            <Text style={styles.scrollItemTexto}>Valores economizados</Text>
-                            <Text style={styles.scrollItemTextoValor}>R$ 40,50</Text>
-                        </View>
-                        <View style={[styles.scrollItem, styles.scrollItemAmarelo]}>
-                            <Text style={styles.scrollItemTexto}>Valores economizados</Text>
-                            <Text style={styles.scrollItemTextoValor}>R$ 40,50</Text>
-                        </View>
-                        <View style={[styles.scrollItem, styles.scrollItemAmarelo]}>
-                            <Text style={styles.scrollItemTexto}>Valores economizados</Text>
-                            <Text style={styles.scrollItemTextoValor}>R$ 40,50</Text>
-                        </View>
-                    </ScrollView> */}
-                    <CarrosselSessoes data={ESTATISTICAS} />
+                    <CarrosselEstatisticas data={ESTATISTICAS_DATA} />
                 </View>
+
+                // Dentro do return de Perfil.js
 
                 <View style={styles.secaoInfoMercados}>
                     <Text style={styles.secaoTitulo}>Informações por mercados</Text>
-                    <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.barraRolagemMercados}>
-                        <Pressable style={styles.infoCompras} onPress={() => navigation.navigate('DadosMercado')}>
-                            <LogoTauste />
-                            <Text style={styles.TextoLinkDadosMercado}>Veja suas compras</Text>
-                        </Pressable>
-                        <Pressable style={styles.infoCompras} onPress={() => navigation.navigate('DadosMercado')}>
-                            <LogoConfianca />
-                            <Text style={styles.TextoLinkDadosMercado}>Veja suas compras</Text>
-                        </Pressable>
-                        <Pressable style={styles.infoCompras} onPress={() => navigation.navigate('DadosMercado')}>
-                            <LogoPanelao />
-                            <Text style={styles.TextoLinkDadosMercado}>Veja suas compras</Text>
-                        </Pressable>
-                    </ScrollView>
+
+                    <FlatList
+                        data={DADOS_MERCADOS}
+                        renderItem={({ item }) => <CardMercado item={item} />}
+                        keyExtractor={item => item.id}
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                        contentContainerStyle={styles.barraRolagemMercados}
+                    />
                 </View>
 
                 <View style={styles.secaoCompras}>
@@ -185,7 +169,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-
     },
     centered: {
         flex: 1,
@@ -252,6 +235,7 @@ const styles = StyleSheet.create({
     },
     secaoEstatisticas: {
         paddingTop: TAMANHOS.espacamentoMenor,
+        height: 150
     },
     barraRolagem: {
         marginLeft: TAMANHOS.espacamentoPequeno
