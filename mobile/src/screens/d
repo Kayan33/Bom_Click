@@ -1,0 +1,136 @@
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
+import CarrosselCategorias from './CarrosselCategorias'; // Importe o seu componente de carrossel
+
+// --- SIMULAÇÃO DA API ---
+const DADOS_API = {
+    "Confianca": [
+        { "title": "Iogurte Batavo", "price": "R$ 4,28", "imageUrl": "..." },
+        { "title": "Cereal Sucrilhos", "price": "R$ 1,98", "imageUrl": "..." }
+    ],
+    "Tauste": [
+        { "title": "Kit Kat ao Leite", "price": "R$ 2,99", "imageUrl": "..." },
+        { "title": "Bombom Especialidades", "price": "R$ 13,61", "imageUrl": "..." }
+    ],
+    "PaoDeAcucar": [
+        { "title": "Cerveja Campinas IPA", "price": "R$ 10,50", "imageUrl": "..." },
+        { "title": "Cerveja Campinas Amber Ale", "price": "R$ 12,75", "imageUrl": "..." }
+    ]
+};
+
+const fetchDadosDosMercados = () => {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve(DADOS_API);
+        }, 1500);
+    });
+};
+
+// --- MAPA DE LOGOS ---
+const logos = {
+    Confianca: require('../../assets/Confianca.png'),
+    Tauste: require('../../assets/Tauste.png'),
+    PaoDeAcucar: require('../../assets/PaoDeAcucar.png'),
+};
+
+
+const VitrineMercados = () => { 
+    const [loading, setLoading] = useState(true);
+    const [dadosCompletos, setDadosCompletos] = useState({});
+    const [mercados, setMercados] = useState([]);
+    const [mercadoSelecionado, setMercadoSelecionado] = useState('');
+    const [produtosVisiveis, setProdutosVisiveis] = useState([]);
+
+    useEffect(() => {
+        const carregarDados = async () => {
+            try {
+                const resposta = await fetchDadosDosMercados();
+                const nomesDosMercados = Object.keys(resposta);
+                
+                setDadosCompletos(resposta);
+                setMercados(nomesDosMercados);
+                setMercadoSelecionado(nomesDosMercados[0]); 
+            } catch (error) {
+                console.error("Erro ao buscar dados:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        carregarDados();
+    }, []);
+
+    useEffect(() => {
+        if (!mercadoSelecionado || Object.keys(dadosCompletos).length === 0) return;
+
+        const produtosDoMercado = dadosCompletos[mercadoSelecionado];
+        
+        // ===== AQUI ESTÁ A CORREÇÃO =====
+        const produtosFormatados = produtosDoMercado.map((produto, index) => ({
+            // Criamos um ID único e confiável a partir dos dados existentes
+            id: `${mercadoSelecionado}-${produto.title}-${index}`,
+            label: produto.title,
+        }));
+        // ================================
+        
+        setProdutosVisiveis(produtosFormatados);
+
+    }, [mercadoSelecionado, dadosCompletos]);
+
+
+    if (loading) {
+        return <ActivityIndicator size="large" color="#0d6efd" style={{ marginTop: 50 }} />;
+    }
+
+    return (
+        <View>
+            <View style={styles.mercados}>
+                {mercados.map((nomeMercado) => (
+                    <TouchableOpacity
+                        key={nomeMercado}
+                        style={[
+                            styles.mercadosBotao,
+                            mercadoSelecionado === nomeMercado && styles.mercadoBotaoAtivo
+                        ]}
+                        onPress={() => setMercadoSelecionado(nomeMercado)}
+                    >
+                        <Image source={logos[nomeMercado]} style={styles.mercadosImagem} />
+                    </TouchableOpacity>
+                ))}
+            </View>
+
+            <View style={{ marginTop: 20 }}>
+                 <CarrosselCategorias
+                    key={mercadoSelecionado} 
+                    data={produtosVisiveis} 
+                 />
+            </View>
+        </View>
+    );
+};
+
+const styles = StyleSheet.create({
+    mercados: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        paddingHorizontal: 10,
+    },
+    mercadosBotao: {
+        padding: 10,
+        borderRadius: 10,
+        borderWidth: 2,
+        borderColor: 'transparent',
+    },
+    mercadoBotaoAtivo: {
+        borderColor: '#0d6efd',
+        backgroundColor: '#e7f1ff',
+    },
+    mercadosImagem: {
+        width: 80,
+        height: 80,
+        resizeMode: 'contain',
+    },
+});
+
+export default VitrineMercados;

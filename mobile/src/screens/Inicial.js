@@ -1,21 +1,24 @@
-import React, { useContext } from "react";
-import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Image, ScrollView } from "react-native";
+import React, { useContext, useEffect, useState} from "react";
+import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Image, ScrollView, ActivityIndicator  } from "react-native";
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from "@react-navigation/native";
-import { AutenticadoContexto } from '../Context/authContext'
+import { AutenticadoContexto } from '../Context/AuthContext'
 import LogoBomClick from "../components/icones/BomClick";
 import LogoCarinho from "../components/icones/Carinho";
 import LogoPerfil from "../components/icones/Perfil";
 
-import CarrosselComPagerView from '../components/CarrosselPromocoes'
+import { ApiContext } from "../Context/ApiContext";
 
-import { CORES, TAMANHOS } from "../styles/styles";
+import { CORES, TAMANHOS, LOGOS } from "../styles/styles";
 import CarrosselProdutos from "../components/CarrosselProdutos";
 import CarrosselSessoes from "../components/CarrosselSessoes";
+import CarrosselPromocoes from "../components/CarrosselPromocoes";
 
 export default function Inicial() {
 
     const { autenticado, abrirModalLogin } = useContext(AutenticadoContexto);
+
+    const { buscaPromocoes } = useContext(ApiContext);
 
     const insets = useSafeAreaInsets();
 
@@ -27,6 +30,41 @@ export default function Inicial() {
         } else {
             abrirModalLogin();
         }
+    }
+
+    const promocoesDados = () => new Promise(resolve => setTimeout(() => resolve(buscaPromocoes()), 1000));
+
+    const [loading, setLoading] = useState(true);
+    const [dadosFormatados, setDadosFormatados] = useState([]);
+
+    useEffect(() => {
+        const carregarEFormatarDados = async () => {
+            const respostaApi = await promocoesDados();
+            const listaDePromocoes = [];
+
+            for (const nomeMercado in respostaApi) {
+                const produtosDoMercado = respostaApi[nomeMercado];
+                produtosDoMercado.forEach((produto, index) => {
+                    
+                    listaDePromocoes.push({
+                        id: `${nomeMercado}-${index}`,
+                        titulo: produto.title,
+                        preco: produto.price,
+                        imagem: { uri: produto.imageUrl },
+                        logoMercado: LOGOS[nomeMercado],
+                    });
+                });
+            }
+
+            setDadosFormatados(listaDePromocoes);
+            setLoading(false);
+        };
+
+        carregarEFormatarDados();
+    }, []);
+
+    if (loading) {
+        return <ActivityIndicator size="large" color="#0000ff" style={{ height: 220 }} />;
     }
 
     const DADOS_EXEMPLO = [
@@ -94,9 +132,10 @@ export default function Inicial() {
 
                     <Text style={styles.promocoesTitulo}>Promoções do dia!</Text>
 
-                    <CarrosselComPagerView data={DADOS_EXEMPLO} />
+                    <CarrosselPromocoes data={dadosFormatados} />
 
                 </View>
+
 
                 <View>
 
@@ -105,7 +144,7 @@ export default function Inicial() {
                         <TouchableOpacity style={styles.mercadosBotao}>
 
                             <Image
-                                source={require('../../assets/TausteGrande.png')}
+                                source={require('../../assets/Tauste.png')}
                                 style={styles.mercadosImagem}
                             >
 
@@ -116,7 +155,7 @@ export default function Inicial() {
                         <TouchableOpacity>
 
                             <Image
-                                source={require('../../assets/TausteGrande.png')}
+                                source={require('../../assets/Tauste.png')}
                                 style={styles.mercadosImagem}
                             >
 
@@ -127,7 +166,7 @@ export default function Inicial() {
                         <TouchableOpacity>
 
                             <Image
-                                source={require('../../assets/TausteGrande.png')}
+                                source={require('../../assets/PaoAcucar.png')}
                                 style={styles.mercadosImagem}
                             >
 
@@ -237,8 +276,6 @@ export default function Inicial() {
 
                 </View>
 
-
-
             </ScrollView>
         </SafeAreaView >
     )
@@ -318,7 +355,6 @@ const styles = StyleSheet.create({
         borderRadius: TAMANHOS.bordaRaio,
         borderWidth: 2,
         padding: TAMANHOS.espacamentoPequeno,
-
 
     },
 

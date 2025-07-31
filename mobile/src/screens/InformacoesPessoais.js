@@ -11,7 +11,7 @@ import {
     Platform
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { AutenticadoContexto } from '../Context/authContext';
+import { AutenticadoContexto } from '../Context/AuthContext';
 import api from '../services/api';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
