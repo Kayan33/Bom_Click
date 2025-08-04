@@ -6,6 +6,7 @@ const FONTE_BASE = 16;
 
 export const CORES = {
     azul: '#054AAE',
+    azulEscuro: '#152e52',
     verde: '#2F7339',
     amarelo: '#FFC200',
     vermelho: '#D90D1E',
@@ -27,9 +28,12 @@ export const TAMANHOS = {
     bordaRaio: FONTE_BASE * 0.5,         // 8
 
     // Ícones e Imagens
+    tamanhoIconePequeno: FONTE_BASE - 8, //8
     tamanhoIcone: FONTE_BASE * 1.5,      // 24
     tamanhoIconeGrande: FONTE_BASE * 2.5,  // 40
     tamanhoFotoGrande: FONTE_BASE * 7.938, // ~127
+
+    tamanhoCard: FONTE_BASE * 11, //200
 
     // Dimensões da tela
     width,
@@ -43,6 +47,13 @@ export const FONTES = {
     
     h1: { fontFamily: 'Poppins_700Bold', fontSize: TAMANHOS.fonteTitulo, color: CORES.verde },
     body: { fontFamily: 'Poppins_400Regular', fontSize: TAMANHOS.fonteSegundaria, color: CORES.azul },
+};
+
+
+export const LOGOS = {
+    Confianca: require('../../assets/Confianca.png'),
+    Tauste: require('../../assets/Tauste.png'),
+    PaoDeAcucar: require('../../assets/PaoAcucar.png'),
 };
 
 

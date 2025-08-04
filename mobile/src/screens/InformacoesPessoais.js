@@ -7,10 +7,14 @@ import {
     TouchableOpacity,
     StyleSheet,
     ActivityIndicator,
+    Alert,
+    Platform
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { AutenticadoContexto } from '../Context/authContext';
+import { AutenticadoContexto } from '../Context/AuthContext';
 import api from '../services/api';
+
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 import { Feather, FontAwesome } from '@expo/vector-icons';
 import { CORES, TAMANHOS, FONTES } from '../styles/styles';
@@ -22,6 +26,9 @@ export default function InformacoesPessoais() {
     const [dadosUsuarios, setDadosUsuarios] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const [dataNascimento, setDataNascimento] = useState(new Date());
+    const [showDatePicker, setShowDatePicker] = useState(false);
 
     useEffect(() => {
         if (autenticado && usuario?.id) {
@@ -39,9 +46,46 @@ export default function InformacoesPessoais() {
             const id = usuario.id;
             const resposta = await api.post(`/BuscaUsuariosUnico/${id}`);
             setDadosUsuarios(resposta.data);
+
+            if (resposta.data.data_nascimento) {
+                setDataNascimento(new Date(resposta.data.data_nascimento));
+            }
         } catch (err) {
             setError("Falha ao carregar informações do perfil.");
             setDadosUsuarios(null);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    const onDateChange = (event, selectedDate) => {
+        setShowDatePicker(Platform.OS === 'ios');
+        if (selectedDate) {
+            setDataNascimento(selectedDate);
+            salvarDataNascimento(selectedDate);
+        }
+    };
+
+    const showDatepicker = () => {
+        setShowDatePicker(true);
+    };
+
+    async function salvarDataNascimento(novaData) {
+        setLoading(true);
+        try {
+            const id = usuario.id;
+            const dataFormatada = novaData.toISOString();
+
+            await api.put(`/AlteraDadosUsuario/${id}`, {
+                dataNascimento: dataFormatada,
+            });
+
+            Alert.alert("Sucesso", "Data de nascimento atualizada!");
+            consultarDadosUsuarios();
+
+        } catch (err) {
+            Alert.alert("Erro", "Não foi possível salvar a data de nascimento.");
+            console.error("Erro ao salvar data:", err);
         } finally {
             setLoading(false);
         }
@@ -66,9 +110,9 @@ export default function InformacoesPessoais() {
     const formatarData = (dataString) => {
         if (!dataString) return '';
         const data = new Date(dataString);
-        const dia = String(data.getDate()).padStart(2, '0');
-        const mes = String(data.getMonth() + 1).padStart(2, '0');
-        const ano = data.getFullYear();
+        const dia = String(data.getUTCDate()).padStart(2, '0');
+        const mes = String(data.getUTCMonth() + 1).padStart(2, '0');
+        const ano = data.getUTCFullYear();
         return `${dia}/${mes}/${ano}`;
     };
 
@@ -85,36 +129,33 @@ export default function InformacoesPessoais() {
             <ScrollView contentContainerStyle={styles.scrollContainer}>
                 <View style={styles.section}>
                     <Text style={styles.sectionTitle}>Informações Pessoais</Text>
-                    <InfoLinha label="Nome:" value={dadosUsuarios.nome || ''} />
+
+                    <InfoLinha label="Nome:" value={`${dadosUsuarios.nome || ''} ${dadosUsuarios.sobrenome || ''}`} />
                     <InfoLinha label="CPF:" value={dadosUsuarios.cpf || ''} />
                     <InfoLinha label="E-mail:" value={dadosUsuarios.email || ''} />
-                    <View style={styles.secaoDataNascimento}>
-                        <View>
-                            <InfoLinha
-                                label="Data de Nascimento:"
-                                value={
-                                    dadosUsuarios.data_nascimento
-                                        ? formatarData(dadosUsuarios.data_nascimento)
-                                        : 'Não informado'
-                                }
-                            />
-                        </View>
-                        <TouchableOpacity style={styles.botaoEditar}>
-                            <Feather name="edit-2" size={TAMANHOS.espacamentoMenor} color={CORES.azul} />
-                        </TouchableOpacity>
-                    </View>
+
+                    <InfoLinhaStackedEditavel
+                        label="Data de Nascimento:"
+                        value={formatarData(dadosUsuarios.dataNascimento) || 'Não informado'}
+                        onEditPress={showDatepicker}
+                    />
 
                     <View style={styles.secaoRedefinirSenha}>
                         <TouchableOpacity>
                             <Text style={styles.link}>Redefinir senha</Text>
                         </TouchableOpacity>
-
                     </View>
                 </View>
 
                 <View style={styles.section}>
                     <Text style={styles.sectionTitle}>Endereço</Text>
-                    <InfoLinha label="CEP:" value={dadosUsuarios.cep || ''} showEditIcon />
+
+                    <InfoLinhaEditavel
+                        label="CEP:"
+                        value={dadosUsuarios.cep || ''}
+                        onEditPress={() => Alert.alert("Editar CEP", "A lógica para editar o CEP seria chamada aqui.")}
+                    />
+
                     <InfoLinha label="Logradouro:" value={dadosUsuarios.rua || ''} />
                     <InfoLinha label="BAIRRO:" value={dadosUsuarios.bairro || ''} />
                     <InfoLinha label="Número:" value={dadosUsuarios.numero?.toString() || ''} />
@@ -129,7 +170,6 @@ export default function InformacoesPessoais() {
                     </TouchableOpacity>
                 </View>
             </ScrollView>
-
             <View style={styles.footer}>
                 <TouchableOpacity style={styles.deleteButton}>
                     <Text style={styles.deleteButtonText}>Apagar conta</Text>
@@ -138,23 +178,53 @@ export default function InformacoesPessoais() {
                     <Feather name="log-out" size={28} color={CORES.vermelho} />
                 </TouchableOpacity>
             </View>
+            {showDatePicker && (
+                <DateTimePicker
+                    testID="dateTimePicker"
+                    value={dataNascimento}
+                    mode={'date'}
+                    is24Hour={true}
+                    display="default"
+                    onChange={onDateChange}
+                />
+            )}
+
         </SafeAreaView>
     );
 }
 
-const InfoLinha = ({ label, value, showEditIcon = false }) => (
-    <View style={styles.infoRow}>
-        <View>
-            <Text style={styles.label}>{label}</Text>
-            <Text style={styles.value}>{value}</Text>
-        </View>
-        {showEditIcon && (
-            <TouchableOpacity>
-                <Feather name="edit-2" size={TAMANHOS.espacamentoMenor} color={CORES.azul} />
-            </TouchableOpacity>
-        )}
+const InfoLinha = ({ label, value }) => (
+    <View style={styles.infoRowStacked}>
+        <Text style={styles.label}>{label}</Text>
+        <Text style={styles.value}>{value}</Text>
     </View>
 );
+
+
+const InfoLinhaEditavel = ({ label, value, onEditPress }) => (
+    <View style={styles.infoRowInline}>
+        <Text style={styles.label}>{label}</Text>
+        <TouchableOpacity style={styles.valueContainer} onPress={onEditPress}>
+            <Text style={styles.value}>{value}</Text>
+            <View style={styles.iconWrapper}>
+                <Feather name="edit" size={16} color={CORES.amarelo} />
+            </View>
+        </TouchableOpacity>
+    </View>
+);
+
+const InfoLinhaStackedEditavel = ({ label, value, onEditPress }) => (
+    <View style={styles.infoRowStacked}>
+        <View style={styles.labelWithIconContainer}>
+            <Text style={styles.label}>{label}</Text>
+            <TouchableOpacity style={styles.iconWrapper} onPress={onEditPress}>
+                <Feather name="edit" size={16} color={CORES.amarelo} />
+            </TouchableOpacity>
+        </View>
+        <Text style={styles.value}>{value}</Text>
+    </View>
+);
+
 
 const CartaoLinha = ({ bandeira, numero }) => (
     <View style={styles.cardRow}>
@@ -174,7 +244,6 @@ const styles = StyleSheet.create({
     safeArea: {
         flex: 1,
         backgroundColor: CORES.branco,
-
     },
     center: {
         flex: 1,
@@ -212,51 +281,58 @@ const styles = StyleSheet.create({
         color: CORES.amarelo,
         marginBottom: TAMANHOS.espacamentoMenor,
     },
-    secaoRedefinirSenha: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
+    infoRowStacked: {
         borderBottomWidth: 1,
-        borderBottomColor: CORES.branco,
-        paddingBottom: TAMANHOS.espacamentoPequeno,
-        marginBottom: TAMANHOS.espacamentoPequeno,
+        borderBottomColor: '#f0f0f0',
+        paddingBottom: 15,
+        marginBottom: 15,
     },
-
-    infoRow: {
+    infoRowInline: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
         alignItems: 'center',
         borderBottomWidth: 1,
-        borderBottomColor: CORES.branco,
-        paddingBottom: TAMANHOS.espacamentoPequeno,
+        borderBottomColor: '#f0f0f0',
+        paddingBottom: TAMANHOS.espacamentoMenor,
+        marginBottom: TAMANHOS.espacamentoMenor,
+        
+    },
+    labelWithIconContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
         marginBottom: TAMANHOS.espacamentoPequeno,
+        
+    },
+    valueContainer: {
+        flexDirection: 'row',
+        alignItems:   'center',
+        marginBottom: 5
+    },
+    iconWrapper: {
+        marginLeft: 8,
     },
     label: {
         fontFamily: FONTES.fonteMedium,
         fontSize: TAMANHOS.fonteSegundaria,
-        marginBottom: TAMANHOS.espacamentoPequeno,
-        color: CORES.azul
-    },
-    secaoDataNascimento: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'baseline',
-    },
-    botaoEditarTexto: {
-        fontFamily: FONTES.fonteBold
+        color: CORES.azul,
     },
     value: {
         fontFamily: FONTES.fonteBold,
-        fontSize: TAMANHOS.fonteSegundaria,
+        fontSize: 18,
         color: CORES.azul,
     },
-    link: {
+    secaoRedefinirSenha: {
+        fontFamily: FONTES.fonteMedium,
+        alignSelf: 'center',
         borderWidth: 1,
         borderColor: CORES.vermelho,
         borderRadius: 50,
         paddingVertical: TAMANHOS.espacamentoPequeno,
         paddingHorizontal: TAMANHOS.espacamentoMenor,
-        color: CORES.vermelho
+    },
+    link: {
+        fontFamily: FONTES.fonteMedium,
+        fontSize: 14,
+        color: CORES.vermelho,
     },
     cardRow: {
         flexDirection: 'row',
@@ -268,21 +344,22 @@ const styles = StyleSheet.create({
         marginLeft: TAMANHOS.espacamentoMenor,
     },
     cardBrand: {
+        fontFamily: FONTES.fonteRegular,
         fontSize: TAMANHOS.fonteSegundaria,
         color: CORES.azul,
     },
     cardNumb: {
-         fontFamily: FONTES.fonteBold,
+        fontFamily: FONTES.fonteBold,
         fontSize: TAMANHOS.fonteSegundaria,
         color: CORES.azul,
-        marginTop: TAMANHOS.espacamentoPequeno,
+        marginTop: 4,
     },
     addButton: {
         alignSelf: 'center',
         borderWidth: 1,
         borderColor: CORES.verde,
         borderRadius: 50,
-        paddingVertical: TAMANHOS.espacamentoMenor,
+        paddingVertical: TAMANHOS.espacamentoPequeno,
         paddingHorizontal: TAMANHOS.espacamentoMenor,
     },
     addButtonText: {
@@ -300,14 +377,14 @@ const styles = StyleSheet.create({
         padding: TAMANHOS.espacamentoMenor,
         backgroundColor: CORES.branco,
         borderTopWidth: 1,
-        borderTopColor: CORES.branco,
-        marginBottom: TAMANHOS.espacamentoMaior
+        borderTopColor: '#f0f0f0',
+        paddingBottom: 30,
     },
     deleteButton: {
         borderWidth: 1,
         borderColor: CORES.vermelho,
         borderRadius: 50,
-        paddingVertical: TAMANHOS.espacamentoMenor,
+        paddingVertical: TAMANHOS.espacamentoPequeno,
         paddingHorizontal: TAMANHOS.espacamentoMenor,
     },
     deleteButtonText: {

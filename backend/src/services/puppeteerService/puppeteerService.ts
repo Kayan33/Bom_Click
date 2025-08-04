@@ -237,7 +237,6 @@ async  buscaProdutosPaoAcucar(title: string, url: string) {
 
   async buscaProdutosPromocoes() {
 
-    
     async function buscaDadosConfianca() {
       const navegador = await puppeteer.launch();
       const pagina = await navegador.newPage();
