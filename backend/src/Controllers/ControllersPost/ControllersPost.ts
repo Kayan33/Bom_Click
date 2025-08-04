@@ -77,6 +77,7 @@ class ControllerPost {
       const servicesGet = new ServicesPost();
       const resposta = await servicesGet.cadastrarProdutosDosMercados();
       return res.json(resposta);
+      
     } catch (error) {
         console.error("Erro ao buscar mercado:", error);
       return res.status(500).json({ error: "Erro ao buscar mercado." });

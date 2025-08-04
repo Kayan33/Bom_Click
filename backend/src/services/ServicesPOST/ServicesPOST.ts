@@ -1,7 +1,7 @@
 import { hash } from "bcryptjs";
 import prismaClient from "../../prisma";
-const axios = require('axios');
-import cron, { ScheduledTask } from 'node-cron';
+const axios = require("axios");
+import cron, { ScheduledTask } from "node-cron";
 
 class ServicesPost {
   async CadastroUsuarios({
@@ -14,7 +14,6 @@ class ServicesPost {
     logradouro,
     bairro,
     numero,
-
   }: {
     nome: string;
     email: string;
@@ -25,10 +24,8 @@ class ServicesPost {
     logradouro: string;
     bairro: string;
     numero: number;
-
   }) {
     try {
-
       const senhaCrypt = await hash(senha, 10);
 
       await prismaClient.usuario.create({
@@ -41,7 +38,7 @@ class ServicesPost {
           logradouro,
           numero,
           bairro,
-          cep
+          cep,
         },
       });
 
@@ -49,7 +46,6 @@ class ServicesPost {
     } catch (error) {
       console.log(error);
       throw new Error("Erro interno ao cadastrar usuário.");
-
     }
   }
 
@@ -59,10 +55,7 @@ class ServicesPost {
         where: {
           id: id,
         },
-        include: {
-
-        }
-
+        include: {},
       });
       if (!resposta) {
         return { error: "Usuário não encontrado." };
@@ -74,14 +67,14 @@ class ServicesPost {
     }
   }
 
-  async CadastroMercado({nome,logo}:{nome:string,logo:string}){
+  async CadastroMercado({ nome, logo }: { nome: string; logo: string }) {
     try {
       await prismaClient.mercado.create({
-        data:{
+        data: {
           nome,
-          logo
-        }
-      })
+          logo,
+        },
+      });
       return { mensagem: "Cadastro efetuado com sucesso!" };
     } catch (error) {
       console.log(error);
@@ -89,72 +82,68 @@ class ServicesPost {
     }
   }
 
-  
+  async cadastrarProdutosDosMercados() {
+    try {
+      // Deleta tudo no banco de dados produto
+      await prismaClient.produto.deleteMany({});
 
- 
-async  cadastrarProdutosDosMercados() {
-  try {
-    // Deleta tudo no banco de dados produto
-    await prismaClient.produto.deleteMany({});
+      const response = await axios.get("http://localhost:3333/BuscaPromocoes");
+      const dadosMercados = response.data;
 
-    const response = await axios.get("http://localhost:3333/BuscaPromocoes");
-    const dadosMercados = response.data;
+      for (const nomeMercado in dadosMercados) {
+        const produtos = dadosMercados[nomeMercado];
 
-    for (const nomeMercado in dadosMercados) {
-      const produtos = dadosMercados[nomeMercado];
+        if (!Array.isArray(produtos)) {
+          console.log(
+            `O valor de ${nomeMercado} não é uma lista de produtos. Ignorando.`
+          );
+          continue;
+        }
 
-      if (!Array.isArray(produtos)) {
-        console.log(`O valor de ${nomeMercado} não é uma lista de produtos. Ignorando.`);
-        continue;
-      }
-
-      const mercado = await prismaClient.mercado.findUnique({
-        where: { nome: nomeMercado },
-      });
-
-      if (!mercado) {
-        console.log(`Mercado não encontrado: ${nomeMercado}`);
-        continue;
-      }
-
-      for (const produto of produtos) {
-        const { title, price, imageUrl } = produto;
-
-        if (!title || !price || !imageUrl) continue;
-
-        await prismaClient.produto.create({
-          data: {
-            title,
-            price,
-            imageUrl,
-            mercado: {
-              connect: {
-                id: mercado.id,
-              },
-            },
-          },
+        const mercado = await prismaClient.mercado.findUnique({
+          where: { nome: nomeMercado },
         });
+
+        if (!mercado) {
+          console.log(`Mercado não encontrado: ${nomeMercado}`);
+          continue;
+        }
+
+        const vistos = new Set();
+
+        for (const produto of produtos) {
+          const { title, price, imageUrl } = produto;
+
+          if (!title || !price || !imageUrl) continue;
+
+          const chave = `${mercado.id}-${title.toLowerCase()}`;
+
+          if (vistos.has(chave)) continue; // já vimos este produto
+          vistos.add(chave);
+
+          await prismaClient.produto.create({
+            data: {
+              title,
+              price,
+              imageUrl,
+              mercado: { connect: { id: mercado.id } },
+            },
+          });
+        }
       }
+
+      return { mensagem: "Produtos cadastrados com sucesso!" };
+    } catch (err) {
+      console.log(err);
+      throw new Error("Erro ao cadastrar produtos:");
     }
-
-    return{mensagem:"Produtos cadastrados com sucesso!"};
-  } catch (err) {
-    console.log(err);
-    throw new Error("Erro ao cadastrar produtos:");
-    
   }
-}
-  
-schedule(): void {
-  cron.schedule('0 0 * * *', async () => {
-    await this.cadastrarProdutosDosMercados();
-  });
-}
 
-  
-  
-  
-  
+  schedule(): void {
+    cron.schedule("0 0 * * *", async () => {
+      await this.cadastrarProdutosDosMercados();
+    });
+  }
 }
 
 export default ServicesPost;
