@@ -7,14 +7,13 @@ import api from '../services/api'
 import IconeVoltar from '../components/icones/Voltar';
 import LogoPerfil from '../components/icones/Perfil';
 import CarrosselEstatisticas from '../components/CarrosselEstatisticas';
-import CardMercado from '../components/CardMercado';
+import CarrosselUltimasCompras from '../components/CarrosselUltimasCompras';
 
 import { CORES, TAMANHOS, FONTES } from "../styles/styles";
 import LogoTauste from '../components/icones/LogoTauste';
 import LogoConfianca from '../components/icones/LogoConfianca';
 import LogoPanelao from '../components/icones/LogoPanelao';
-import Carne from '../../assets/Carne.png';
-import Limao from '../../assets/Limao.png';
+
 
 export default function Perfil() {
     const navigation = useNavigation();
@@ -24,23 +23,23 @@ export default function Perfil() {
     const [error, setError] = useState(null);
     const insets = useSafeAreaInsets();
 
-
-    const DADOS_MERCADOS = [
-        {
-            id: '1',
-            LogoComponent: LogoTauste,
-        },
-        {
-            id: '2',
-            LogoComponent: LogoConfianca,
-        },
-        {
-            id: '3',
-            LogoComponent: LogoPanelao,
-        },
-    ];
-
-
+    const DADOS_ULTIMAS_COMPRAS = [
+    {
+        id: '1',
+        nome: 'Fraldinha Bovina Resfriada KG',
+        imagem: require('../../assets/ImagensTemp/carneExemplo.png'),
+        precoOriginal: 'R$40,00',
+        precoComDesconto: 'R$5,00'
+    },
+    {
+        id: '2',
+        nome: 'Limão Taiti KG',
+        imagem: require('../../assets/Limao.png') ,
+        precoOriginal: 'R$40,00',
+        precoComDesconto: 'R$0,00'
+    },
+    
+];
 
     const ESTATISTICAS_DATA = [
         { id: '1', titulo: 'Valores economizados', valor: 'R$ 40,50' },
@@ -124,41 +123,30 @@ export default function Perfil() {
                     <CarrosselEstatisticas data={ESTATISTICAS_DATA} />
                 </View>
 
-                // Dentro do return de Perfil.js
-
                 <View style={styles.secaoInfoMercados}>
                     <Text style={styles.secaoTitulo}>Informações por mercados</Text>
-
-                    <FlatList
-                        data={DADOS_MERCADOS}
-                        renderItem={({ item }) => <CardMercado item={item} />}
-                        keyExtractor={item => item.id}
-                        horizontal
-                        showsHorizontalScrollIndicator={false}
-                        contentContainerStyle={styles.barraRolagemMercados}
-                    />
+                    <View style={styles.containerMercadosLink}>
+                        <Pressable style={styles.infoCompras} onPress={() => navigation.navigate('DadosMercado')}>
+                            <LogoTauste />
+                            <Text style={styles.TextoLinkDadosMercado}>Veja suas compras</Text>
+                        </Pressable>
+                        <Pressable style={styles.infoCompras} onPress={() => navigation.navigate('DadosMercado')}>
+                            <LogoConfianca />
+                            <Text style={styles.TextoLinkDadosMercado}>Veja suas compras</Text>
+                        </Pressable>
+                        <Pressable style={styles.infoCompras} onPress={() => navigation.navigate('DadosMercado')}>
+                            <LogoPanelao />
+                            <Text style={styles.TextoLinkDadosMercado}>Veja suas compras</Text>
+                        </Pressable>
+                    </View>
                 </View>
 
                 <View style={styles.secaoCompras}>
-                    <Text style={styles.secaoTitulo}>Últimas Compras</Text>
-                    <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.barraRolagem}>
-                        <View style={styles.produtoCard}>
-                            <Image source={Carne} style={styles.produtoImagem} />
-                            <Text style={styles.produtoTitulo}>Fraldinha Bovina Resfriada KG</Text>
-                            <View style={styles.produtoValores}>
-                                <Text style={styles.produtoPrecoRiscado}>R$40,00</Text>
-                                <Text style={styles.produtoPrecoDestaque}>R$40,00</Text>
-                            </View>
-                        </View>
-                        <View style={styles.produtoCard}>
-                            <Image source={Limao} style={styles.produtoImagem} />
-                            <Text style={styles.produtoTitulo}>Limao Taiti KG</Text>
-                            <View style={styles.produtoValores}>
-                                <Text style={styles.produtoPrecoRiscado}>R$10,00</Text>
-                                <Text style={styles.produtoPrecoDestaque}>R$40,00</Text>
-                            </View>
-                        </View>
-                    </ScrollView>
+                    <Text style={styles.secaoTitulo}>Última compra</Text>
+                    <View style={styles.logoCompraContainer}>
+                        <LogoConfianca />
+                    </View>
+                    <CarrosselUltimasCompras data={DADOS_ULTIMAS_COMPRAS} />
                 </View>
             </ScrollView>
         </View>
@@ -182,7 +170,7 @@ const styles = StyleSheet.create({
         height: 90,
         justifyContent: 'space-between',
         paddingHorizontal: TAMANHOS.espacamentoPequeno,
-        paddingBottom: TAMANHOS.espacamentoMenor
+        paddingBottom: TAMANHOS.espacamentoPequeno
     },
     iconVoltar: {
         color: CORES.amarelo
@@ -191,7 +179,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: 15,
         zIndex: 1,
-        paddingBottom: TAMANHOS.espacamentoMenor
+        paddingBottom: TAMANHOS.espacamentoPequeno
     },
     cabecalhoTitulo: {
         fontFamily: FONTES.fonteMedium,
@@ -203,7 +191,7 @@ const styles = StyleSheet.create({
     },
     secaoPerfil: {
         alignItems: 'center',
-        padding: TAMANHOS.espacamentoMenor,
+        padding: TAMANHOS.espacamentoPequeno,
     },
     editarInfoButton: {
         alignItems: 'center',
@@ -212,7 +200,7 @@ const styles = StyleSheet.create({
         width: 80,
         height: 80,
         borderRadius: 40,
-        marginBottom: TAMANHOS.espacamentoMenor,
+        marginBottom: TAMANHOS.espacamentoPequeno,
     },
     editarInfoText: {
         fontFamily: FONTES.fonteBold,
@@ -229,19 +217,15 @@ const styles = StyleSheet.create({
         fontFamily: FONTES.fonteBold,
         fontSize: TAMANHOS.fonteSegundaria,
         marginLeft: TAMANHOS.espacamentoMenor,
-        marginBottom: TAMANHOS.espacamentoPequeno,
         color: CORES.amarelo,
         alignSelf: 'baseline'
     },
     secaoEstatisticas: {
-        paddingTop: TAMANHOS.espacamentoMenor,
-        height: 150
+        paddingTop: TAMANHOS.espacamentoPequeno,
+        height: 120
     },
     barraRolagem: {
         marginLeft: TAMANHOS.espacamentoPequeno
-    },
-    barraRolagemMercados: {
-        paddingHorizontal: TAMANHOS.espacamentoMenor,
     },
     scrollItem: {
         padding: TAMANHOS.espacamentoPequeno,
@@ -271,6 +255,10 @@ const styles = StyleSheet.create({
         fontSize: TAMANHOS.fontePequena,
         alignSelf: 'center'
     },
+    containerMercadosLink: {
+        flexDirection: 'row',
+        padding: TAMANHOS.espacamentoPequeno
+    },
     infoCompras: {
         alignItems: 'center',
         marginHorizontal: TAMANHOS.espacamentoMenor,
@@ -281,47 +269,12 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     secaoCompras: {
-        marginTop: TAMANHOS.espacamentoMaior,
+        marginTop: TAMANHOS.espacamentoMenor,
+        marginBottom: TAMANHOS.espacamentoMenor,
     },
-    produtoCard: {
-        backgroundColor: CORES.branco,
-        borderRadius: TAMANHOS.bordaRaio,
-        padding: TAMANHOS.espacamentoPequeno,
-        marginRight: TAMANHOS.espacamentoPequeno,
-        width: 150,
-        shadowColor: "#000",
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 4,
-        elevation: 3,
-        alignItems: 'center',
-        marginBottom: TAMANHOS.espacamentoPequeno
-    },
-    produtoImagem: {
-        width: '50%',
-        height: 50,
-        resizeMode: 'cover',
-        borderRadius: TAMANHOS.bordaRaio,
-    },
-    produtoTitulo: {
-        fontFamily: FONTES.fonteMedium,
-        marginTop: TAMANHOS.espacamentoPequeno,
-        fontSize: TAMANHOS.fonteSegundaria,
-        height: 50,
-        color: CORES.verde
-    },
-    produtoValores: {
-        flexDirection: 'row',
-        marginTop: TAMANHOS.espacamentoPequeno,
-        gap: TAMANHOS.espacamentoMaior,
-        alignItems: 'flex-end',
-    },
-    produtoPrecoRiscado: {
-        textDecorationLine: 'line-through',
-        color: 'gray',
-    },
-    produtoPrecoDestaque: {
-        color: CORES.verde,
-        fontWeight: 'bold',
+    logoCompraContainer: {
+        alignSelf: 'flex-start',
+        marginLeft: TAMANHOS.espacamentoMenor,
+        marginBottom: TAMANHOS.espacamentoPequeno,
     },
 });

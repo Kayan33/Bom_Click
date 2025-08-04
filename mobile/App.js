@@ -9,7 +9,7 @@ import { useCallback } from 'react';
 
 import RotasIndex from './src/Routes';
 
-import AuthProvider from './src/Context/AuthContext'
+import AuthProvider from './src/Context/AuthContext';
 import ApiProvider from './src/Context/ApiContext';
 
 SplashScreen.preventAutoHideAsync();
