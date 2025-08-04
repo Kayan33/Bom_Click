@@ -6,7 +6,7 @@ export const ApiContext = createContext();
 export default function ApiProvider({ children }) {
 
     const apiBack = axios.create({
-        baseURL: 'http://192.168.1.195:3333'
+        baseURL: 'http://192.168.56.1:3333'
         // baseURL: 'http://192.168.56.1:3333'
     });
 
@@ -17,19 +17,36 @@ export default function ApiProvider({ children }) {
             const response = await apiBack.get('/BuscaPromocoes');
 
 
-            return response.data
+            return response.data;
             
 
         } catch (error) {
             
-            console.error(error)
+            console.error(error);
 
-        }
+        };
+
+    };
+
+    const buscaProdutos = async (nomeProduto) => {
+
+        try {
+            
+            const response = await apiBack.get('/BuscarProdutos', { nomeProduto });
+
+            return response.data;
+            
+
+        } catch (error) {
+            
+            console.error(error);
+
+        };
 
     }
 
     return (
-        <ApiContext.Provider value={{apiBack, buscaPromocoes}}>
+        <ApiContext.Provider value={{apiBack, buscaPromocoes, buscaProdutos}}>
             {children}
         </ApiContext.Provider>
     )
