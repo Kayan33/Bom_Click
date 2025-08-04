@@ -1,10 +1,8 @@
-// no seu arquivo components/CarrosselUltimasCompras.js
 
 import React from 'react';
 import { View, Text, Image, FlatList, StyleSheet } from 'react-native';
 import { CORES, TAMANHOS, FONTES } from "../styles/styles";
 
-// Componente para renderizar um único card de produto
 const CardProduto = ({ item }) => (
     <View style={styles.produtoCard}>
         <Image source={item.imagem} style={styles.produtoImagem} />
@@ -16,7 +14,7 @@ const CardProduto = ({ item }) => (
     </View>
 );
 
-// Componente principal do carrossel
+
 const CarrosselUltimasCompras = ({ data }) => {
     return (
         <FlatList
@@ -40,7 +38,7 @@ const styles = StyleSheet.create({
         borderRadius: TAMANHOS.bordaRaio,
         padding: TAMANHOS.espacamentoPequeno,
         marginRight: TAMANHOS.espacamentoPequeno,
-        width: 150, // Largura fixa para cada card
+        width: 150, 
         shadowColor: "#000",
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
@@ -49,29 +47,30 @@ const styles = StyleSheet.create({
     },
     produtoImagem: {
         width: '100%',
-        height: 100, // Altura da imagem
-        resizeMode: 'contain', // 'contain' para ver a imagem toda
+        height: 100,
+        resizeMode: 'contain', 
         borderRadius: TAMANHOS.bordaRaio,
     },
     produtoTitulo: {
         fontFamily: FONTES.fonteMedium,
-        fontSize: 14,
-        height: 40, // Altura fixa para o título ter 2 linhas
+        height: 40,
         color: CORES.verde,
     },
     produtoValores: {
-        marginTop: 'auto', // Empurra os preços para o final do card
-        paddingTop: 5,
+        height: 40,
+        flexDirection: 'row',
+        paddingTop: TAMANHOS.espacamentoPequeno,
+        alignItems: 'center',
+        gap: TAMANHOS.espacamentoPequeno
+
     },
     produtoPrecoOriginal: {
-        fontFamily: FONTES.fonteRegular,
-        fontSize: 14,
-        color: 'gray',
+        fontFamily: FONTES.fonteBold,
+        color: CORES.azul,
     },
     produtoPrecoDesconto: {
         fontFamily: FONTES.fonteBold,
-        fontSize: 16,
-        color: '#e67e22', // Um tom de laranja/dourado para o desconto
+        color: CORES.amarelo,
     },
 });
 
