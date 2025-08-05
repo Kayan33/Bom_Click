@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState} from "react";
-import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Image, ScrollView, ActivityIndicator  } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
+import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Image, ScrollView, ActivityIndicator, TextInput } from "react-native";
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from "@react-navigation/native";
 import { AutenticadoContexto } from '../Context/AuthContext'
@@ -10,15 +10,38 @@ import LogoPerfil from "../components/icones/Perfil";
 import { ApiContext } from "../Context/ApiContext";
 
 import { CORES, TAMANHOS, LOGOS } from "../styles/styles";
-import CarrosselProdutos from "../components/CarrosselProdutos";
+import ResultadosDaBusca from "../components/CarrosselProdutos";
 import CarrosselSessoes from "../components/CarrosselSessoes";
 import CarrosselPromocoes from "../components/CarrosselPromocoes";
+import BarraPesquisa from "../components/BarraPesquisa";
 
 export default function Inicial() {
 
+
+    const DADOS_EXEMPLO_API = {
+        "Confianca": { "dadosEncontrados": null, "produtosSimilares": [{ "id": 1, "imageUrl": "https://...", "title": "Iogurte Batavo", "price": "R$ 4,28" }, /*...*/] },
+        "Tauste": { "dadosEncontrados": { "id": 10, "imageUrl": "https://...", "title": "Batata Extra KG", "price": "R$ 8,00" }, "produtosSimilares": [{ "id": 11, "imageUrl": "https://...", "title": "Kit Kat ao Leite", "price": "R$ 2,99" }, /*...*/] },
+        "PaoDeAcucar": { "dadosEncontrados": null, "produtosSimilares": [] }
+    };
+
+    const [termoBusca, setTermoBusca] = useState('');
+    const [resultadoApi, setResultadoApi] = useState(null);
+
+    // Função que a TELA INICIAL executa
+    const executarBusca = async (nomeProduto) => {
+        if (!nomeProduto) return;
+        setLoading(true);
+        setResultadoApi(null);
+        
+        const resposta = await buscaProdutos(nomeProduto); 
+        
+        setResultadoApi(resposta);
+        setLoading(false);
+    };
+
     const { autenticado, abrirModalLogin } = useContext(AutenticadoContexto);
 
-    const { buscaPromocoes } = useContext(ApiContext);
+    const { buscaPromocoes, buscaProdutos } = useContext(ApiContext);
 
     const insets = useSafeAreaInsets();
 
@@ -39,29 +62,29 @@ export default function Inicial() {
 
     useEffect(() => {
         const carregarEFormatarDados = async () => {
-        //   const respostaApi = await promocoesDados();
-        //     const listaDePromocoes = [];
+          const respostaApi = await promocoesDados();
+            const listaDePromocoes = [];
 
-        //     for (const nomeMercado in respostaApi) {
-        //         const produtosDoMercado = respostaApi[nomeMercado];
-        //         produtosDoMercado.forEach((produto, index) => {
+            for (const nomeMercado in respostaApi) {
+                const produtosDoMercado = respostaApi[nomeMercado];
+                produtosDoMercado.forEach((produto, index) => {
                     
-        //             listaDePromocoes.push({
-        //                 id: `${nomeMercado}-${index}`,
-        //                 titulo: produto.title,
-        //                 preco: produto.price,
-        //                 imagem: { uri: produto.imageUrl },
-        //                 logoMercado: LOGOS[nomeMercado],
-        //             });
-        //         });
-        //     }
+                    listaDePromocoes.push({
+                        id: `${nomeMercado}-${index}`,
+                        titulo: produto.title,
+                        preco: produto.price,
+                        imagem: { uri: produto.imageUrl },
+                        logoMercado: LOGOS[nomeMercado],
+                    });
+                });
+            }
 
-        //     setDadosFormatados(listaDePromocoes);
+            setDadosFormatados(listaDePromocoes);
             setLoading(false);  
         };
-
+       
         carregarEFormatarDados();
-    }, []);
+      }, []);
 
     if (loading) {
         return <ActivityIndicator size="large" color="#0000ff" style={{ height: 220 }} />;
@@ -136,10 +159,16 @@ export default function Inicial() {
 
                 </View>
 
-
                 <View>
 
-                    <View style={styles.mercados}>
+                    <BarraPesquisa
+                        valor={termoBusca}
+                        onValorChange={setTermoBusca}
+                        onBuscaSubmit={executarBusca}
+                    />
+
+
+                    {/* <View style={styles.mercados}>
 
                         <TouchableOpacity style={styles.mercadosBotao}>
 
@@ -174,7 +203,7 @@ export default function Inicial() {
 
                         </TouchableOpacity>
 
-                    </View>
+                    </View> */}
 
                     {/* <View style={[styles.mercados, styles.mercadosSetores]}>
 
@@ -272,7 +301,7 @@ export default function Inicial() {
 
                     </View> */}
 
-                    <CarrosselProdutos data={DADOS_PRODUTOS} />
+                    {/* <ResultadosDaBusca dadosDaBusca={resultadoApi} loading={loading} /> */}
 
                 </View>
 
@@ -341,6 +370,18 @@ const styles = StyleSheet.create({
 
     },
 
+    barraPesquisa: {
+
+        alignItems: 'center',
+        backgroundColor: CORES.azul,
+        borderRadius: 100,
+        flexDirection: 'row',
+        justifyContent: "center",
+        height: 30,
+        width:30
+        
+    },
+
     mercados: {
 
         alignItems: "center",
@@ -361,6 +402,7 @@ const styles = StyleSheet.create({
     mercadosImagem: {
 
         height: TAMANHOS.tamanhoIconeGrande
+
     },
 
     mercadosSetores: {
