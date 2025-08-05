@@ -73,8 +73,6 @@ export default function Inicial() {
             }));
        
             setDadosFormatados(listaDePromocoes);
-
-            console.log(listaDePromocoes);
             
           } catch (error) {
             console.error("Erro ao carregar promoções:", error);
