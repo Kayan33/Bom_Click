@@ -73,27 +73,6 @@ export default function Inicial() {
     // Effect para promoções (sem alteração)
     useEffect(() => {
         const carregarEFormatarDados = async () => {
-<<<<<<< HEAD
-          const respostaApi = await promocoesDados();
-            const listaDePromocoes = [];
-
-            for (const nomeMercado in respostaApi) {
-                const produtosDoMercado = respostaApi[nomeMercado];
-                produtosDoMercado.forEach((produto, index) => {
-                    
-                    listaDePromocoes.push({
-                        id: `${nomeMercado}-${index}`,
-                        titulo: produto.title,
-                        preco: produto.price,
-                        imagem: { uri: produto.imageUrl },
-                        logoMercado: LOGOS[nomeMercado],
-                    });
-                });
-            }
-
-            setDadosFormatados(listaDePromocoes);
-            setLoading(false);  
-=======
             try {
                 const respostaApi = await buscaPromocoes();
                 const listaDePromocoes = respostaApi.map((produto) => ({
@@ -110,7 +89,6 @@ export default function Inicial() {
             } finally {
                 setLoadingPromocoes(false);
             }
->>>>>>> 4259d63ab8d3a2dfec4f8ce7bf0e491f19c976c0
         };
         carregarEFormatarDados();
     }, []);
