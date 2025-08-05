@@ -135,6 +135,7 @@ model Produto {
 
   create_at DateTime? @default(now())
   update_at DateTime? @default(now())
+   @@unique([title, mercadoId])
 
   @@map("cadastro_produto")
 }

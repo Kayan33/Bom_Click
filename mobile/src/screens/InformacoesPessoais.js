@@ -283,16 +283,16 @@ const styles = StyleSheet.create({
     },
     infoRowStacked: {
         borderBottomWidth: 1,
-        borderBottomColor: '#f0f0f0',
-        paddingBottom: 15,
-        marginBottom: 15,
+        borderBottomColor: CORES.branco,
+        paddingBottom: TAMANHOS.espacamentoMenor,
+        marginBottom: 5,
     },
     infoRowInline: {
         flexDirection: 'row',
         alignItems: 'center',
         borderBottomWidth: 1,
-        borderBottomColor: '#f0f0f0',
-        paddingBottom: TAMANHOS.espacamentoMenor,
+        borderBottomColor: CORES.branco,
+        paddingBottom: TAMANHOS.espacamentoMenor, 
         marginBottom: TAMANHOS.espacamentoMenor,
         
     },
@@ -305,10 +305,10 @@ const styles = StyleSheet.create({
     valueContainer: {
         flexDirection: 'row',
         alignItems:   'center',
-        marginBottom: 5
+        marginBottom: TAMANHOS.espacamentoPequeno
     },
     iconWrapper: {
-        marginLeft: 8,
+        marginLeft: TAMANHOS.espacamentoPequeno,
     },
     label: {
         fontFamily: FONTES.fonteMedium,
@@ -317,7 +317,6 @@ const styles = StyleSheet.create({
     },
     value: {
         fontFamily: FONTES.fonteBold,
-        fontSize: 18,
         color: CORES.azul,
     },
     secaoRedefinirSenha: {
@@ -331,7 +330,6 @@ const styles = StyleSheet.create({
     },
     link: {
         fontFamily: FONTES.fonteMedium,
-        fontSize: 14,
         color: CORES.vermelho,
     },
     cardRow: {
@@ -352,7 +350,7 @@ const styles = StyleSheet.create({
         fontFamily: FONTES.fonteBold,
         fontSize: TAMANHOS.fonteSegundaria,
         color: CORES.azul,
-        marginTop: 4,
+        marginTop: TAMANHOS.espacamentoPequeno,
     },
     addButton: {
         alignSelf: 'center',
@@ -377,8 +375,8 @@ const styles = StyleSheet.create({
         padding: TAMANHOS.espacamentoMenor,
         backgroundColor: CORES.branco,
         borderTopWidth: 1,
-        borderTopColor: '#f0f0f0',
-        paddingBottom: 30,
+        borderTopColor: CORES.branco,
+        paddingBottom: TAMANHOS.espacamentoMaior + TAMANHOS.espacamentoPequeno,
     },
     deleteButton: {
         borderWidth: 1,

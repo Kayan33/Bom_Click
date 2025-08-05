@@ -10,10 +10,9 @@ import CarrosselEstatisticas from '../components/CarrosselEstatisticas';
 import CarrosselUltimasCompras from '../components/CarrosselUltimasCompras';
 
 import { CORES, TAMANHOS, FONTES } from "../styles/styles";
-import LogoTauste from '../components/icones/LogoTauste';
-import LogoConfianca from '../components/icones/LogoConfianca';
-import LogoPanelao from '../components/icones/LogoPanelao';
-
+import LogoTauste from '../../assets/Tauste.png'
+import LogoConfianca from '../../assets/Confianca.png'
+import LogoPaoAcucar from '../../assets/PaoAcucar.png'
 
 export default function Perfil() {
     const navigation = useNavigation();
@@ -24,22 +23,22 @@ export default function Perfil() {
     const insets = useSafeAreaInsets();
 
     const DADOS_ULTIMAS_COMPRAS = [
-    {
-        id: '1',
-        nome: 'Fraldinha Bovina Resfriada KG',
-        imagem: require('../../assets/ImagensTemp/carneExemplo.png'),
-        precoOriginal: 'R$40,00',
-        precoComDesconto: 'R$5,00'
-    },
-    {
-        id: '2',
-        nome: 'Limão Taiti KG',
-        imagem: require('../../assets/Limao.png') ,
-        precoOriginal: 'R$40,00',
-        precoComDesconto: 'R$0,00'
-    },
-    
-];
+        {
+            id: '1',
+            nome: 'Fraldinha Bovina Resfriada KG',
+            imagem: require('../../assets/ImagensTemp/carneExemplo.png'),
+            precoOriginal: 'R$40,00',
+            precoComDesconto: 'R$5,00'
+        },
+        {
+            id: '2',
+            nome: 'Limão Taiti KG',
+            imagem: require('../../assets/Limao.png'),
+            precoOriginal: 'R$40,00',
+            precoComDesconto: 'R$0,00'
+        },
+
+    ];
 
     const ESTATISTICAS_DATA = [
         { id: '1', titulo: 'Valores economizados', valor: 'R$ 40,50' },
@@ -127,15 +126,15 @@ export default function Perfil() {
                     <Text style={styles.secaoTitulo}>Informações por mercados</Text>
                     <View style={styles.containerMercadosLink}>
                         <Pressable style={styles.infoCompras} onPress={() => navigation.navigate('DadosMercado')}>
-                            <LogoTauste />
+                            <Image source={LogoTauste} style={styles.logoMercado}/>
                             <Text style={styles.TextoLinkDadosMercado}>Veja suas compras</Text>
                         </Pressable>
                         <Pressable style={styles.infoCompras} onPress={() => navigation.navigate('DadosMercado')}>
-                            <LogoConfianca />
+                            <Image source={LogoConfianca}  style={styles.logoMercado}/>
                             <Text style={styles.TextoLinkDadosMercado}>Veja suas compras</Text>
                         </Pressable>
                         <Pressable style={styles.infoCompras} onPress={() => navigation.navigate('DadosMercado')}>
-                            <LogoPanelao />
+                            <Image source={LogoPaoAcucar} style={styles.logoMercado}/>
                             <Text style={styles.TextoLinkDadosMercado}>Veja suas compras</Text>
                         </Pressable>
                     </View>
@@ -144,7 +143,7 @@ export default function Perfil() {
                 <View style={styles.secaoCompras}>
                     <Text style={styles.secaoTitulo}>Última compra</Text>
                     <View style={styles.logoCompraContainer}>
-                        <LogoConfianca />
+                        <Image source={LogoConfianca} style={styles.logoMercado}/>
                     </View>
                     <CarrosselUltimasCompras data={DADOS_ULTIMAS_COMPRAS} />
                 </View>
@@ -269,8 +268,7 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     secaoCompras: {
-        marginTop: TAMANHOS.espacamentoMenor,
-        marginBottom: TAMANHOS.espacamentoMenor,
+       marginVertical: TAMANHOS.espacamentoMaior
     },
     logoCompraContainer: {
         alignSelf: 'flex-start',
