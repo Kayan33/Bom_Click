@@ -17,8 +17,7 @@ import LogoPaoAcucar from '../../assets/PaoAcucar.png'
 export default function Perfil() {
     const navigation = useNavigation();
     const { autenticado, usuario } = useContext(AutenticadoContexto);
-    const [dadosUsuarios, setDadosUsuarios] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const insets = useSafeAreaInsets();
 
@@ -45,40 +44,7 @@ export default function Perfil() {
         { id: '2', titulo: 'Valores economizados', valor: 'R$ 40,50' },
         { id: '3', titulo: 'Valores economizados', valor: 'R$ 40,50' },
     ];
-
-    useEffect(() => {
-        async function consultarDadosUsuarios() {
-            if (!usuario?.id) {
-                console.log("ID do usuário não encontrado no contexto.");
-                setLoading(false);
-                setError("Não foi possível identificar o usuário.");
-                return;
-            }
-
-            setLoading(true);
-            setError(null);
-
-            try {
-                const id = usuario.id;
-                const resposta = await api.post(`/BuscaUsuariosUnico/${id}`);
-                setDadosUsuarios(resposta.data);
-                console.log("Dados do usuário:", resposta.data);
-            } catch (err) {
-                console.error("Erro ao buscar dados do usuário:", err);
-                setError("Falha ao carregar informações do perfil.");
-                setDadosUsuarios(null);
-            } finally {
-                setLoading(false);
-            }
-        }
-
-        if (autenticado) {
-            consultarDadosUsuarios();
-        } else {
-            setLoading(false);
-        }
-    }, [autenticado, usuario]);
-
+  
     if (loading) {
         return (
             <View style={styles.centered}>
@@ -114,7 +80,7 @@ export default function Perfil() {
                         <LogoPerfil width={60} height={60} />
                         <Text style={styles.editarInfoText}>Editar Informações</Text>
                     </Pressable>
-                    <Text style={styles.saudacao}>Olá {dadosUsuarios?.nome || 'Usuario'}</Text>
+                    <Text style={styles.saudacao}>Olá {usuario.nome || 'Usuario'}</Text>
                 </View>
 
                 <View style={styles.secaoEstatisticas}>

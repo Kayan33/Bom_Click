@@ -22,7 +22,7 @@ import { CORES, TAMANHOS, FONTES } from '../styles/styles';
 
 export default function InformacoesPessoais() {
     const navigation = useNavigation();
-    const { autenticado, usuario, logout } = useContext(AutenticadoContexto);
+    const { autenticado, usuario, logout, deletarUsuario } = useContext(AutenticadoContexto);
 
     const [dadosUsuarios, setDadosUsuarios] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -119,6 +119,11 @@ export default function InformacoesPessoais() {
         return `${dia}/${mes}/${ano}`;
     };
 
+async function apagarConta(id) {
+    await deletarUsuario(id)
+    logout()
+}
+
     return (
         <SafeAreaView style={styles.safeArea}>
             <View style={styles.header}>
@@ -174,7 +179,9 @@ export default function InformacoesPessoais() {
                 </View>
             </ScrollView>
             <View style={styles.footer}>
-                <TouchableOpacity style={styles.deleteButton}>
+                <TouchableOpacity 
+                    onPress={() => apagarConta(usuario.id)}
+                style={styles.deleteButton}>
                     <Text style={styles.deleteButtonText}>Apagar conta</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={logOutUsuario}>

@@ -40,6 +40,8 @@ class LoginServices {
       nome: usuario.nome,
       email: usuario.email,
       token: token,
+      dataNascimento: usuario.dataNascimento,
+      cpf: usuario.cpf
     };
   }
 

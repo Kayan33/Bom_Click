@@ -39,25 +39,25 @@ export default function Inicial() {
 
     useEffect(() => {
         const carregarEFormatarDados = async () => {
-            const respostaApi = await promocoesDados();
-            const listaDePromocoes = [];
+        //   const respostaApi = await promocoesDados();
+        //     const listaDePromocoes = [];
 
-            for (const nomeMercado in respostaApi) {
-                const produtosDoMercado = respostaApi[nomeMercado];
-                produtosDoMercado.forEach((produto, index) => {
+        //     for (const nomeMercado in respostaApi) {
+        //         const produtosDoMercado = respostaApi[nomeMercado];
+        //         produtosDoMercado.forEach((produto, index) => {
                     
-                    listaDePromocoes.push({
-                        id: `${nomeMercado}-${index}`,
-                        titulo: produto.title,
-                        preco: produto.price,
-                        imagem: { uri: produto.imageUrl },
-                        logoMercado: LOGOS[nomeMercado],
-                    });
-                });
-            }
+        //             listaDePromocoes.push({
+        //                 id: `${nomeMercado}-${index}`,
+        //                 titulo: produto.title,
+        //                 preco: produto.price,
+        //                 imagem: { uri: produto.imageUrl },
+        //                 logoMercado: LOGOS[nomeMercado],
+        //             });
+        //         });
+        //     }
 
-            setDadosFormatados(listaDePromocoes);
-            setLoading(false);
+        //     setDadosFormatados(listaDePromocoes);
+            setLoading(false);  
         };
 
         carregarEFormatarDados();

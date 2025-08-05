@@ -6,188 +6,104 @@ import CadastroModal from '../components/Cadastro';
 
 export const AutenticadoContexto = createContext({});
 
-export default function AuthProvider({ children }) {
-    const [token, setToken] = useState(null);
-    const [usuario, setUsuario] = useState(null);
-    const [loadingAuth, setLoadingAuth] = useState(true);
+// Definimos uma chave única para a sessão, tornando o armazenamento mais seguro e atômico.
+const ASYNC_STORAGE_KEY = '@Auth:session';
 
+export default function AuthProvider({ children }) {
+    const [usuario, setUsuario] = useState(null);
+    const [token, setToken] = useState(null);
+    const [loadingAuth, setLoadingAuth] = useState(true); // Começa como true para exibir um loader inicial
     const [modalAtivo, setModalAtivo] = useState(null);
 
     const autenticado = !!token && !!usuario;
 
-    function abrirModalLogin() {
-        setModalAtivo('login');
-    }
-
-    function abrirModalCadastro() {
-        setModalAtivo('cadastro');
-    }
-
-    function fecharTodosModais() {
-        setModalAtivo(null);
-    }
-
+    // Simplificamos o fluxo de inicialização em um único useEffect.
+    // Ele roda apenas uma vez quando o aplicativo é aberto.
     useEffect(() => {
-        async function loadStoredTokenAndUser() {
+        async function loadSession() {
             try {
-                const storedToken = await AsyncStorage.getItem('@token');
-                const storedUser = await AsyncStorage.getItem('@usuario');
+                const storedSession = await AsyncStorage.getItem(ASYNC_STORAGE_KEY);
 
-                let parsedToken = null;
-                if (storedToken) {
-                    try {
-                        parsedToken = JSON.parse(storedToken);
-                    } catch (e) {
-                        console.error("Erro ao fazer parse do token do AsyncStorage, limpando-o:", storedToken, e);
-                        await AsyncStorage.removeItem('@token');
+                if (storedSession) {
+                    const session = JSON.parse(storedSession);
+                    // Definimos o cabeçalho da API antes de verificar o token
+                    api.defaults.headers.common['Authorization'] = `Bearer ${session.token}`;
+
+                    // Verificamos se o token ainda é válido na API
+                    const resposta = await api.get('/verificaTokenUsuario');
+
+                    if (resposta.data && resposta.data.id) {
+                        // Se o token for válido, atualizamos o estado com os dados da sessão
+                        setToken(session.token);
+                        setUsuario(resposta.data); // Usamos os dados mais recentes da API
+                    } else {
+                        // Se o token for inválido, limpamos tudo
+                        console.warn("Sessão encontrada, mas token inválido. Limpando...");
+                        await handleLogoutCleanup();
                     }
                 }
-                setToken(parsedToken);
-
-                let parsedUser = null;
-                if (storedUser) {
-                    try {
-                        parsedUser = JSON.parse(storedUser);
-                    } catch (e) {
-                        console.error("Erro ao fazer parse do usuário do AsyncStorage, limpando-o:", storedUser, e);
-                        await AsyncStorage.removeItem('@usuario');
-                    }
-                }
-                setUsuario(parsedUser);
-
             } catch (error) {
-                console.error("Erro ao carregar dados do AsyncStorage:", error);
-                setToken(null);
-                setUsuario(null);
+                console.error("Erro ao carregar ou verificar a sessão:", error);
+                // Se houver qualquer erro (parsing, API), limpamos a sessão por segurança
+                await handleLogoutCleanup();
             } finally {
-                if (!token) {
-                    setLoadingAuth(false);
-                }
+                // Ao final de todo o processo, paramos o carregamento
+                setLoadingAuth(false);
             }
         }
 
-        loadStoredTokenAndUser();
-    }, []);
-
-    useEffect(() => {
-
-        if (token) {
-            api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
-            verificarToken();
-        } else {
-            delete api.defaults.headers.common['Authorization'];
-            setUsuario(null);
-            setLoadingAuth(false);
-        }
-    }, [token]);
-
-
-    async function verificarToken() {
-        setLoadingAuth(true);
-        let currentToken = token;
-        if (!currentToken) {
-            try {
-                const storedToken = await AsyncStorage.getItem('@token');
-                if (storedToken) {
-                    try {
-                        currentToken = JSON.parse(storedToken);
-                        setToken(currentToken);
-                    } catch (e) {
-                        console.error("Erro ao analisar token no verificarToken, limpando:", storedToken, e);
-                        await AsyncStorage.removeItem('@token');
-                        currentToken = null;
-                    }
-                }
-            } catch (e) {
-                console.error("Erro ao buscar token no AsyncStorage em verificarToken:", e);
-                currentToken = null;
-            }
-        }
-
-
-        if (!currentToken) {
-            setUsuario(null);
-            setToken(null);
-            setLoadingAuth(false);
-            return;
-        }
-
-        try {
-            const resposta = await api.get('/verificaTokenUsuario');
-            if (resposta.data && resposta.data.id) {
-                setUsuario(resposta.data);
-                await AsyncStorage.setItem('@id', JSON.stringify(resposta.data.id));
-                await AsyncStorage.setItem('@nome', JSON.stringify(resposta.data.nome));
-                await AsyncStorage.setItem('@usuario', JSON.stringify(resposta.data));
-            } else {
-                console.warn("Token inválido ou resposta da API incompleta ao verificar token:", resposta.data);
-                setUsuario(null);
-                setToken(null);
-                await AsyncStorage.removeItem('@token');
-                await AsyncStorage.removeItem('@id');
-                await AsyncStorage.removeItem('@nome');
-                await AsyncStorage.removeItem('@usuario');
-            }
-        } catch (err) {
-            console.error("Erro ao verificar token na API:", err);
-
-            setUsuario(null);
-            setToken(null);
-            await AsyncStorage.removeItem('@token');
-            await AsyncStorage.removeItem('@id');
-            await AsyncStorage.removeItem('@nome');
-            await AsyncStorage.removeItem('@usuario');
-        } finally {
-            setLoadingAuth(false);
-        }
-    }
+        loadSession();
+    }, []); // O array vazio [] garante que isso só rode uma vez.
 
     async function loginEntrada(email, senha) {
         setLoadingAuth(true);
         try {
             const resposta = await api.post('/loginUsuario', { email, senha });
-            if (resposta.data && resposta.data.id && resposta.data.token && resposta.data.nome) {
-                await AsyncStorage.setItem('@id', JSON.stringify(resposta.data.id));
-                await AsyncStorage.setItem('@token', JSON.stringify(resposta.data.token));
-                await AsyncStorage.setItem('@nome', JSON.stringify(resposta.data.nome));
-                await AsyncStorage.setItem('@usuario', JSON.stringify(resposta.data));
 
-                setUsuario(resposta.data);
-                setToken(resposta.data.token);
-                setLoadingAuth(false);
-                fecharTodosModais()
+            if (resposta.data && resposta.data.token && resposta.data.id) {
+                const sessionData = {
+                    token: resposta.data.token,
+                    usuario: resposta.data
+                };
+
+                // Salvamos o token e os dados do usuário em um único objeto
+                await AsyncStorage.setItem(ASYNC_STORAGE_KEY, JSON.stringify(sessionData));
+                
+                // Atualizamos o cabeçalho da API com o novo token
+                api.defaults.headers.common['Authorization'] = `Bearer ${sessionData.token}`;
+
+                setToken(sessionData.token);
+                setUsuario(sessionData.usuario);
+                
+                fecharTodosModais();
                 return true;
             } else {
                 console.error('Resposta inválida do login:', resposta.data);
-                setUsuario(null);
-                setToken(null);
-                setLoadingAuth(false);
+                await handleLogoutCleanup(); // Limpa qualquer estado parcial
                 return false;
             }
         } catch (err) {
             console.error('Erro de Comunicação no Login:', err);
-            setUsuario(null);
-            setToken(null);
-            await AsyncStorage.removeItem('@token');
-            await AsyncStorage.removeItem('@id');
-            await AsyncStorage.removeItem('@nome');
-            await AsyncStorage.removeItem('@usuario');
-            setLoadingAuth(false);
+            await handleLogoutCleanup(); // Limpa qualquer estado parcial
             return false;
+        } finally {
+            setLoadingAuth(false);
         }
     }
-
-    async function logout() {
-        setUsuario(null);
+    
+    // Função centralizada para limpar estado e AsyncStorage.
+    // Usada no logout, e em casos de erro de login ou verificação de token.
+    async function handleLogoutCleanup() {
+        delete api.defaults.headers.common['Authorization'];
         setToken(null);
-        await AsyncStorage.removeItem('@token');
-        await AsyncStorage.removeItem('@id');
-        await AsyncStorage.removeItem('@nome');
-        await AsyncStorage.removeItem('@usuario');
+        setUsuario(null);
+        await AsyncStorage.removeItem(ASYNC_STORAGE_KEY);
+    }
+    
+    async function logout() {
+        await handleLogoutCleanup();
         console.log("Usuário deslogado");
     }
-
 
     async function cadastrarUsuario({ nome, email, cpf, senha }) {
         try {
@@ -209,12 +125,35 @@ export default function AuthProvider({ children }) {
         }
     }
 
+    async function deletarUsuario(id) {
+        try {
+           const resposta = await api.delete(`/DeletaUsuario/${id}`)
+
+            return resposta
+        } catch (error) {
+            console.log(error);
+            
+        }
+          }
+
+    // Funções de controle dos modais (sem alteração)
+    function abrirModalLogin() { setModalAtivo('login'); }
+    function abrirModalCadastro() { setModalAtivo('cadastro'); }
+    function fecharTodosModais() { setModalAtivo(null); }
+
     return (
         <AutenticadoContexto.Provider value={{
-            autenticado, usuario, token, loadingAuth, loginEntrada, logout, cadastrarUsuario,
+            autenticado,
+            usuario, // Apenas 'usuario', sem o 'dadosUsuario'
+            token,
+            loadingAuth,
+            loginEntrada,
+            logout,
+            cadastrarUsuario,
+            deletarUsuario,
             abrirModalLogin,
             abrirModalCadastro,
-            fecharTodosModais
+            fecharTodosModais,
         }}>
             {children}
             <LoginModal
