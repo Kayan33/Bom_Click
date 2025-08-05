@@ -1,4 +1,5 @@
 import prismaClient from "../../prisma";
+import { hash, compare } from 'bcryptjs';
 
 class ServicesPut {
   async alterarDadosAluno({
@@ -55,6 +56,34 @@ class ServicesPut {
       throw new Error("Erro interno ao alterar dados usuário.");
     }
   }
+   async redefinirSenha({ id_usuario, senhaAtual, novaSenha }: { id_usuario: string, senhaAtual: string, novaSenha: string }) {
+        if (!senhaAtual || !novaSenha) {
+            throw new Error("Campos obrigatórios não preenchidos.");
+        }
+
+        const usuario = await prismaClient.usuario.findUnique({
+            where: { id: id_usuario }
+        });
+
+        if (!usuario) {
+            throw new Error("Usuário não encontrado.");
+        }
+
+        const senhaCorreta = await compare(senhaAtual, usuario.senha);
+
+        if (!senhaCorreta) {
+            throw new Error("A senha atual está incorreta.");
+        }
+
+        const novaSenhaHash = await hash(novaSenha, 8);
+
+        await prismaClient.usuario.update({
+            where: { id: id_usuario },
+            data: { senha: novaSenhaHash }
+        });
+
+        return { message: "Senha atualizada com sucesso!" };
+    }
 }
 
 export default ServicesPut;

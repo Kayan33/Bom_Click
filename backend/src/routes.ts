@@ -19,6 +19,8 @@ router.post('/BuscaUsuariosUnico/:id', new ControllerPost().BuscaUsuarioUnico)
 router.put('/AlteraDadosUsuario/:id', new ControllerPut().AlteraDadosUsuario)
 router.delete('/DeletaUsuario/:id', new ControllerDelete().DeletarUsuarioUnico)
 
+router.put('/usuario/redefinir-senha/:id', new ControllerPut().redefinirSenha);
+
 router.post('/CadastroMercado', new ControllerPost().cadastro_Mercado)
 router.get('/BuscaMercado', new ControllerGet().BuscaMercado)
 

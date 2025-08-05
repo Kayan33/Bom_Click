@@ -11,7 +11,8 @@ import {
     Platform
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { AutenticadoContexto } from '../Context/AuthContext';
+import { AutenticadoContexto } from '../Context/AuthContext'
+import ModalRedefinirSenha from '../components/ModalRedefinirSenha';
 import api from '../services/api';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -29,6 +30,8 @@ export default function InformacoesPessoais() {
 
     const [dataNascimento, setDataNascimento] = useState(new Date());
     const [showDatePicker, setShowDatePicker] = useState(false);
+
+    const [modalSenhaVisivel, setModalSenhaVisivel] = useState(false);
 
     useEffect(() => {
         if (autenticado && usuario?.id) {
@@ -140,11 +143,11 @@ export default function InformacoesPessoais() {
                         onEditPress={showDatepicker}
                     />
 
-                    <View style={styles.secaoRedefinirSenha}>
-                        <TouchableOpacity>
-                            <Text style={styles.link}>Redefinir senha</Text>
-                        </TouchableOpacity>
-                    </View>
+                     <View style={styles.secaoRedefinirSenha}>
+                <TouchableOpacity onPress={() => setModalSenhaVisivel(true)}>
+                    <Text style={styles.linkRedefinir}>Redefinir senha</Text>
+                </TouchableOpacity>
+            </View>
                 </View>
 
                 <View style={styles.section}>
@@ -188,6 +191,11 @@ export default function InformacoesPessoais() {
                     onChange={onDateChange}
                 />
             )}
+
+             <ModalRedefinirSenha 
+                visible={modalSenhaVisivel}
+                onClose={() => setModalSenhaVisivel(false)}
+            />
 
         </SafeAreaView>
     );
@@ -328,7 +336,7 @@ const styles = StyleSheet.create({
         paddingVertical: TAMANHOS.espacamentoPequeno,
         paddingHorizontal: TAMANHOS.espacamentoMenor,
     },
-    link: {
+    linkRedefinir: {
         fontFamily: FONTES.fonteMedium,
         color: CORES.vermelho,
     },
