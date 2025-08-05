@@ -9,7 +9,7 @@ interface Login {
 
 class LoginServices {
   async loginUsuario({ email, senha }: Login) {
-    const usuario = await prismaClient.usuario.findFirst({
+    const usuario = await prismaClient.usuario.findUnique({
       where: { email },
     });
 

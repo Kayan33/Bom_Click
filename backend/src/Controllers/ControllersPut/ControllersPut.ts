@@ -37,6 +37,24 @@ class ControllerPut {
       return res.status(500).json({ error: "Erro ao alterar usuario." });
     }
   }
+    async redefinirSenha(req: Request, res: Response) {
+        const { id } = req.params; 
+        const { senhaAtual, novaSenha } = req.body;
+
+        const servicesPut = new ServicesPut();
+
+        try {
+            const resposta = await servicesPut.redefinirSenha({
+                id_usuario: id,
+                senhaAtual,
+                novaSenha
+            });
+            return res.json(resposta);
+        } catch (error) {
+            return res.status(400).json({ error: error });
+        }
+    }
+  
 }
 
 export default ControllerPut;
