@@ -53,7 +53,7 @@ export const FONTES = {
 export const LOGOS = {
     Confianca: require('../../assets/Confianca.png'),
     Tauste: require('../../assets/Tauste.png'),
-    PaoDeAcucar: require('../../assets/PaoAcucar.png'),
+    PaoAcucar: require('../../assets/PaoAcucar.png'),
 };
 
 
