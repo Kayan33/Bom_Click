@@ -1,90 +1,165 @@
-// components/ResultadosDaBusca.js
+import React, { useState } from 'react';
+import { View, Text, Image, TouchableOpacity, StyleSheet, FlatList, Dimensions } from 'react-native';
 
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
-import CarrosselProdutos from './CarrosselProdutos'; // O seu carrossel "burro"
-import { CORES, TAMANHOS,LOGOS } from '../styles/styles';
+import { CORES, TAMANHOS } from '../styles/styles';
 
-// Mapa de logos que este componente precisa
+const { width } = Dimensions.get('window');
+const NUM_COLUNAS = 2;
+const ESPACO_HORIZONTAL = TAMANHOS.espacamentoMenor;
+const ESPACO_ENTRE_ITENS = TAMANHOS.espacamentoPequeno;
+const ITEM_LARGURA = (width - ESPACO_HORIZONTAL * 2 - ESPACO_ENTRE_ITENS * (NUM_COLUNAS - 1)) / NUM_COLUNAS;
 
-// Este componente agora recebe os dados da busca e o estado de loading como props
-const ResultadosDaBusca = ({ dadosDaBusca, loading }) => {
-    const [mercadoSelecionado, setMercadoSelecionado] = React.useState('');
-    const [produtosParaCarrossel, setProdutosParaCarrossel] = React.useState([]);
 
-    // Efeito que processa os dados sempre que uma nova busca é recebida
-    React.useEffect(() => {
-        if (!dadosDaBusca) {
-            setProdutosParaCarrossel([]);
-            return;
-        }
+const ProdutoCard = ({ item }) => (
+    <View style={[styles.produtosCard, { width: ITEM_LARGURA }]}>
+        <Image
+            source={item.imagem} // Funciona com require() e com {uri: '...'}
+            style={styles.produtosCardImagem}
+        />
+        <Text style={styles.produtosCardTexto} numberOfLines={2}>{item.nome}</Text>
+        <View style={styles.produtosCardInfo}>
+            <Text style={styles.produtosCardPreco}>{item.preco}</Text>
+            <TouchableOpacity style={[styles.produtosCardBotao, styles.comparar]}>
+                <Text style={[styles.produtosCardBotaoTexto, styles.compararTexto]}>Comparar</Text>
+            </TouchableOpacity>
+        </View>
+        <TouchableOpacity style={[styles.produtosCardBotao, styles.comprar]}>
+            <Text style={styles.produtosCardBotaoTexto}>Adicionar</Text>
+        </TouchableOpacity>
+    </View>
+);
 
-        const nomesMercados = Object.keys(dadosDaBusca);
-        const primeiroMercado = nomesMercados[0] || '';
-        setMercadoSelecionado(primeiroMercado);
+const CarrosselProdutos = ({ data }) => {
+    const [activeIndex, setActiveIndex] = useState(0);
 
-    }, [dadosDaBusca]);
-
-    // Efeito que filtra os produtos quando o mercado selecionado muda
-    React.useEffect(() => {
-        if (!dadosDaBusca || !mercadoSelecionado) {
-            setProdutosParaCarrossel([]);
-            return;
-        }
-
-        const dadosDoMercado = dadosDaBusca[mercadoSelecionado];
-        const produtosSimilares = dadosDoMercado?.produtosSimilares || [];
-
-        const produtosFormatados = produtosSimilares.map(produto => ({
-            id: produto.id.toString(),
-            nome: produto.title,
-            preco: produto.price,
-            imagem: { uri: produto.imageUrl },
-        }));
-
-        setProdutosParaCarrossel(produtosFormatados);
-    }, [mercadoSelecionado, dadosDaBusca]);
-
-    // Se o pai está carregando, mostramos o indicador
-    if (loading) {
-        return <ActivityIndicator size="large" style={{ marginVertical: 50 }} />;
+    const groupedData = [];
+    for (let i = 0; i < data.length; i += NUM_COLUNAS) {
+        groupedData.push(data.slice(i, i + NUM_COLUNAS));
     }
 
-    // Se não há dados para mostrar (ex: antes da primeira busca), não renderiza nada
-    if (!dadosDaBusca) {
-        return null;
-    }
-    
+    const handleScroll = (event) => {
+        const scrollPosition = event.nativeEvent.contentOffset.x;
+        // Calcula o índice da página atual. Usamos a largura da tela como o tamanho de uma página.
+        const index = Math.round(scrollPosition / width);
+        setActiveIndex(index);
+    };
+
+    const renderPage = ({ item: pageItems, index: pageIndex }) => (
+        <View style={styles.page}>
+            {pageItems.map((product, productIndex) => (
+                // A chave aqui é importante para o React identificar cada item
+                <ProdutoCard item={product} key={`${pageIndex}-${product.id}-${productIndex}`} />
+            ))}
+        </View>
+    );
+
     return (
         <View>
-            <View style={styles.mercados}>
-                {Object.keys(dadosDaBusca).map(nome => (
-                    <TouchableOpacity
-                        key={nome}
-                        onPress={() => setMercadoSelecionado(nome)}
-                        style={[
-                            styles.mercadosBotao,
-                            mercadoSelecionado === nome && styles.mercadosBotaoAtivo,
-                        ]}
-                    >
-                        <Image source={LOGOS[nome]} style={styles.mercadosImagem} />
-                    </TouchableOpacity>
-                ))}
-            </View>
-
-            <CarrosselProdutos
-                key={mercadoSelecionado}
-                data={produtosParaCarrossel}
+            <FlatList
+                data={groupedData}
+                keyExtractor={(_, index) => `page-${index}`}
+                renderItem={renderPage}
+                horizontal
+                pagingEnabled
+                showsHorizontalScrollIndicator={false}
+                onScroll={handleScroll}
+                scrollEventThrottle={16}
             />
+            {/* Renderiza a paginação apenas se houver mais de uma página */}
+            {groupedData.length > 1 && (
+                <View style={styles.paginationContainer}>
+                    {groupedData.map((_, index) => (
+                        <View
+                            key={index}
+                            style={[
+                                styles.dot,
+                                activeIndex === index ? styles.dotAtivo : {}
+                            ]}
+                        />
+                    ))}
+                </View>
+            )}
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    mercados: { flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 15, borderBottomWidth: 1, borderBottomColor: '#eee' },
-    mercadosBotao: { padding: 8, borderRadius: 12, borderWidth: 2, borderColor: 'transparent' },
-    mercadosBotaoAtivo: { borderColor: CORES.azul },
-    mercadosImagem: { width: 80, height: 40, resizeMode: 'contain' },
+    page: {
+        width: width,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        gap: TAMANHOS.espacamentoMenor,
+        paddingHorizontal: ESPACO_HORIZONTAL,
+        paddingBottom: TAMANHOS.espacamentoPequeno
+    },
+    produtosCard: {
+        backgroundColor: CORES.branco,
+        borderRadius: TAMANHOS.bordaRaio,
+        padding: TAMANHOS.espacamentoPequeno,
+        gap: TAMANHOS.espacamentoMenor,
+        elevation: 3,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.2,
+        shadowRadius: 1.41,
+    },
+    produtosCardImagem: {
+        height: TAMANHOS.tamanhoFotoGrande,
+        width: '100%',
+        resizeMode: 'contain',
+    },
+    produtosCardTexto: {
+        color: CORES.verde,
+        fontWeight: "700",
+        minHeight: 35, // Garante altura mínima para alinhar os cards
+    },
+    produtosCardInfo: {
+        alignItems: 'center',
+        flexDirection: "row",
+        justifyContent: 'space-between'
+    },
+    produtosCardPreco: {
+        color: CORES.azul,
+        fontWeight: "700",
+        fontSize: TAMANHOS.fonteSegundaria,
+    },
+    produtosCardBotao: {
+        borderRadius: TAMANHOS.bordaRaio,
+        paddingVertical: 8,
+        paddingHorizontal: 8,
+    },
+    produtosCardBotaoTexto: {
+        color: CORES.branco,
+        fontWeight: "700",
+        fontSize: TAMANHOS.fontePequena,
+        textAlign: 'center',
+    },
+    comparar: {
+        backgroundColor: CORES.azul
+    },
+    compararTexto: {
+        color: CORES.branco
+    },
+    comprar: {
+        backgroundColor: CORES.verde
+    },
+    paginationContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginTop: TAMANHOS.espacamentoMenor,
+        marginBottom: TAMANHOS.espacamentoMaior,
+    },
+    dot: {
+        width: TAMANHOS.tamanhoIconePequeno,
+        height: TAMANHOS.tamanhoIconePequeno,
+        borderRadius: TAMANHOS.bordaRaio / 2, // Para ser um círculo perfeito
+        backgroundColor: CORES.azulEscuro,
+        marginHorizontal: 4,
+    },
+    dotAtivo: {
+        backgroundColor: CORES.azul,
+        width: TAMANHOS.tamanhoIconePequeno + 4,
+    },
 });
 
-export default ResultadosDaBusca;
+export default CarrosselProdutos;

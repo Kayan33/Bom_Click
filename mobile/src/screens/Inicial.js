@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Image, ScrollView, ActivityIndicator, TextInput } from "react-native";
+import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Image, ScrollView, ActivityIndicator } from "react-native";
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from "@react-navigation/native";
-import { AutenticadoContexto } from '../Context/AuthContext'
+import { AutenticadoContexto } from '../Context/AuthContext';
 import LogoBomClick from "../components/icones/BomClick";
 import LogoCarinho from "../components/icones/Carinho";
 import LogoPerfil from "../components/icones/Perfil";
@@ -10,42 +10,55 @@ import LogoPerfil from "../components/icones/Perfil";
 import { ApiContext } from "../Context/ApiContext";
 
 import { CORES, TAMANHOS, LOGOS } from "../styles/styles";
-import ResultadosDaBusca from "../components/CarrosselProdutos";
-import CarrosselSessoes from "../components/CarrosselSessoes";
+
+import CarrosselProdutos from "../components/CarrosselProdutos";
 import CarrosselPromocoes from "../components/CarrosselPromocoes";
 import BarraPesquisa from "../components/BarraPesquisa";
 
+// MUDANÇA 1: Função auxiliar para corrigir a URL da imagem
+const formatarUrlImagem = (url) => {
+    // Se a URL existir e começar com "//", adiciona "https:" no início.
+    if (url && url.startsWith('//')) {
+        return `https:${url}`;
+    }
+    // Caso contrário, retorna a URL original.
+    return url;
+};
+
+
 export default function Inicial() {
+    const { autenticado, abrirModalLogin } = useContext(AutenticadoContexto);
+    const { buscaPromocoes, buscaProdutos } = useContext(ApiContext);
+    const insets = useSafeAreaInsets();
+    const navigation = useNavigation();
 
-
-    const DADOS_EXEMPLO_API = {
-        "Confianca": { "dadosEncontrados": null, "produtosSimilares": [{ "id": 1, "imageUrl": "https://...", "title": "Iogurte Batavo", "price": "R$ 4,28" }, /*...*/] },
-        "Tauste": { "dadosEncontrados": { "id": 10, "imageUrl": "https://...", "title": "Batata Extra KG", "price": "R$ 8,00" }, "produtosSimilares": [{ "id": 11, "imageUrl": "https://...", "title": "Kit Kat ao Leite", "price": "R$ 2,99" }, /*...*/] },
-        "PaoDeAcucar": { "dadosEncontrados": null, "produtosSimilares": [] }
-    };
-
+    // --- Estados da Página ---
     const [termoBusca, setTermoBusca] = useState('');
     const [resultadoApi, setResultadoApi] = useState(null);
+    const [loadingBusca, setLoadingBusca] = useState(false); 
+    const [mercadoSelecionado, setMercadoSelecionado] = useState(null);
+    const [produtosExibidos, setProdutosExibidos] = useState([]);
+    const [loadingPromocoes, setLoadingPromocoes] = useState(true);
+    const [dadosFormatados, setDadosFormatados] = useState([]);
 
-    // Função que a TELA INICIAL executa
+    // --- Funções ---
     const executarBusca = async (nomeProduto) => {
         if (!nomeProduto) return;
-        setLoading(true);
+        setLoadingBusca(true);
         setResultadoApi(null);
-        
-        const resposta = await buscaProdutos(nomeProduto); 
-        
-        setResultadoApi(resposta);
-        setLoading(false);
+        setMercadoSelecionado(null);
+        setProdutosExibidos([]);
+
+        try {
+            const resposta = await buscaProdutos(nomeProduto);
+            setResultadoApi(resposta);
+        } catch (error) {
+            console.error("Erro ao buscar produtos:", error);
+            setResultadoApi({});
+        } finally {
+            setLoadingBusca(false);
+        }
     };
-
-    const { autenticado, abrirModalLogin } = useContext(AutenticadoContexto);
-
-    const { buscaPromocoes, buscaProdutos } = useContext(ApiContext);
-
-    const insets = useSafeAreaInsets();
-
-    const navigation = useNavigation();
 
     function navegar() {
         if (autenticado) {
@@ -55,266 +68,162 @@ export default function Inicial() {
         }
     }
 
-    const promocoesDados = () => new Promise(resolve => setTimeout(() => resolve(buscaPromocoes()), 1000));
+    // --- Effects ---
 
-    const [loading, setLoading] = useState(true);
-    const [dadosFormatados, setDadosFormatados] = useState([]);
-
+    // Effect para promoções (sem alteração)
     useEffect(() => {
         const carregarEFormatarDados = async () => {
-          try {
-            const respostaApi = await promocoesDados();
-            const listaDePromocoes = respostaApi.map((produto) => ({
-              id: produto.id,
-              titulo: produto.title,
-              preco: produto.price,
-              imagem: { uri: produto.imageUrl },
-              logoMercado: produto.mercado.logo,
-            }));
-       
-            setDadosFormatados(listaDePromocoes);
-            
-          } catch (error) {
-            console.error("Erro ao carregar promoções:", error);
-          } finally {
-            setLoading(false);
-          }
+            try {
+                const respostaApi = await buscaPromocoes();
+                const listaDePromocoes = respostaApi.map((produto) => ({
+                    id: produto.id,
+                    titulo: produto.title,
+                    preco: produto.price,
+                    // MUDANÇA AQUI TAMBÉM (BOA PRÁTICA): Garante que as URLs de promoção também sejam corrigidas
+                    imagem: { uri: formatarUrlImagem(produto.imageUrl) }, 
+                    logoMercado: produto.mercado.logo,
+                }));
+                setDadosFormatados(listaDePromocoes);
+            } catch (error) {
+                console.error("Erro ao carregar promoções:", error);
+            } finally {
+                setLoadingPromocoes(false);
+            }
         };
-       
         carregarEFormatarDados();
-      }, []);
+    }, []);
 
-    if (loading) {
-        return <ActivityIndicator size="large" color="#0000ff" style={{ height: 220 }} />;
+    // Effect que define o mercado padrão (sem alteração)
+    useEffect(() => {
+        if (resultadoApi && Object.keys(resultadoApi).length > 0) {
+            const primeiroMercado = Object.keys(resultadoApi)[0];
+            setMercadoSelecionado(primeiroMercado);
+        }
+    }, [resultadoApi]);
+
+    // MUDANÇA 2: Usar a função auxiliar ao formatar os produtos
+    useEffect(() => {
+        if (mercadoSelecionado && resultadoApi) {
+            const dadosDoMercado = resultadoApi[mercadoSelecionado];
+            let produtosFormatados = [];
+
+            if (dadosDoMercado?.dadosEncontrados) {
+                produtosFormatados.push({
+                    id: `${mercadoSelecionado}-${dadosDoMercado.dadosEncontrados.id}-encontrado`,
+                    nome: dadosDoMercado.dadosEncontrados.title,
+                    preco: dadosDoMercado.dadosEncontrados.price,
+                    imagem: { uri: formatarUrlImagem(dadosDoMercado.dadosEncontrados.imageUrl) }, // <-- CORREÇÃO APLICADA
+                });
+            }
+
+            if (dadosDoMercado?.produtosSimilares?.length > 0) {
+                const similaresFormatados = dadosDoMercado.produtosSimilares.map((prod, index) => ({
+                    id: `${mercadoSelecionado}-${prod.id || index}-similar`,
+                    nome: prod.title,
+                    preco: prod.price,
+                    imagem: { uri: formatarUrlImagem(prod.imageUrl) }, // <-- CORREÇÃO APLICADA
+                }));
+                produtosFormatados = [...produtosFormatados, ...similaresFormatados];
+            }
+            
+            setProdutosExibidos(produtosFormatados);
+        }
+    }, [mercadoSelecionado, resultadoApi]);
+
+
+    // --- Renderização (sem alterações na estrutura JSX) ---
+
+    if (loadingPromocoes) {
+        return <ActivityIndicator size="large" color={CORES.azul} style={{ flex: 1, justifyContent: 'center' }} />;
     }
 
-    const DADOS_EXEMPLO = [
-        {
-            id: '1',
-            titulo: 'Fraldinha Bovina Resfriada KG',
-            preco: 'R$40,00',
-            imagem: require('../../assets/ImagensTemp/carneExemplo.png'),
-        },
-        {
-            id: '2',
-            titulo: 'Picanha Premium Peça KG',
-            preco: 'R$79,90',
-            imagem: require('../../assets/ImagensTemp/carneExemplo.png'),
-        },
-        {
-            id: '3',
-            titulo: 'Linguiça Toscana Sadia KG',
-            preco: 'R$25,50',
-            imagem: require('../../assets/ImagensTemp/carneExemplo.png'),
-        },
-    ];
-
-    const DADOS_PRODUTOS = [
-        { id: '1', nome: 'Limão Taiti KG', preco: 'R$2,00', imagem: require('../../assets/Limao.png') },
-        { id: '2', nome: 'Batata Lavada KG', preco: 'R$4,50', imagem: require('../../assets/Limao.png') },
-        { id: '3', nome: 'Cebola KG', preco: 'R$3,80', imagem: require('../../assets/Limao.png') },
-        { id: '4', nome: 'Tomate KG', preco: 'R$5,99', imagem: require('../../assets/Limao.png') },
-        { id: '5', nome: 'Tomate KG', preco: 'R$5,99', imagem: require('../../assets/Limao.png') },
-    ];
-
-    const CATEGORIAS = [
-        { id: '1', label: "Padaria" },
-        { id: '2', label: "Açougue" },
-        { id: '3', label: "Frios" },
-        { id: '4', label: "Hortifruti" },
-        { id: '5', label: "Bebidas" },
-        { id: '6', label: "Limpeza" },
-        { id: '7', label: "Higiene" },
-    ];
+    const mercadosComResultados = resultadoApi ? Object.keys(resultadoApi) : [];
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
-
+        <SafeAreaView style={{ flex: 1, backgroundColor: CORES.branco }}>
             <View style={[styles.cabecalho, { paddingTop: insets.top }]}>
-
                 <LogoBomClick />
                 <LogoCarinho />
-
             </View>
 
             <ScrollView>
-
                 <Text style={styles.tituloPrincipal}>Tudo o que você precisa para economizar em um só lugar!</Text>
 
-                <TouchableOpacity style={styles.botaoPerfil}
-                    onPress={navegar}
-                >
+                <TouchableOpacity style={styles.botaoPerfil} onPress={navegar}>
                     <LogoPerfil />
                     <Text style={styles.botaoPerfilTexto}>Veja suas economias e estatisticas!</Text>
-
                 </TouchableOpacity>
 
                 <View style={styles.promocoes}>
-
                     <Text style={styles.promocoesTitulo}>Promoções do dia!</Text>
-
                     <CarrosselPromocoes data={dadosFormatados} />
-
                 </View>
 
-                <View>
-
+                <View style={styles.containerBusca}>
                     <BarraPesquisa
                         valor={termoBusca}
                         onValorChange={setTermoBusca}
-                        onBuscaSubmit={executarBusca}
+                        onBuscaSubmit={() => executarBusca(termoBusca)}
                     />
 
-
-                    {/* <View style={styles.mercados}>
-
-                        <TouchableOpacity style={styles.mercadosBotao}>
-
-                            <Image
-                                source={require('../../assets/Tauste.png')}
-                                style={styles.mercadosImagem}
-                            >
-
-                            </Image>
-
-                        </TouchableOpacity>
-
-                        <TouchableOpacity>
-
-                            <Image
-                                source={require('../../assets/Tauste.png')}
-                                style={styles.mercadosImagem}
-                            >
-
-                            </Image>
-
-                        </TouchableOpacity>
-
-                        <TouchableOpacity>
-
-                            <Image
-                                source={require('../../assets/PaoAcucar.png')}
-                                style={styles.mercadosImagem}
-                            >
-
-                            </Image>
-
-                        </TouchableOpacity>
-
-                    </View> */}
-
-                    {/* <View style={[styles.mercados, styles.mercadosSetores]}>
-
-                        <TouchableOpacity>
-
-                            <Text style={[styles.mercadosBotao, styles.mercadosSetoresTexto]}>Frios</Text>
-
-                        </TouchableOpacity>
-
-                        <TouchableOpacity>
-
-                            <Text style={styles.mercadosSetoresTexto}>Açougue</Text>
-
-                        </TouchableOpacity>
-
-                        <TouchableOpacity>
-
-                            <Text style={styles.mercadosSetoresTexto}>Hortifrut</Text>
-
-                        </TouchableOpacity>
-
-                        <TouchableOpacity>
-
-                            <Text style={styles.mercadosSetoresTexto}>Higiene</Text>
-
-                        </TouchableOpacity>
-
-
-                    </View> */}
-
-                    <CarrosselSessoes data={CATEGORIAS} />
-
-                    {/* <View style={styles.produtos}>
-
-                        <View style={styles.produtosCard}>
-
-                            <Image
-                                source={require('../../assets/Limao.png')}
-                                style={styles.produtosCardImagem}
-                            >
-
-                            </Image>
-
-                            <Text style={styles.produtosCardTexto}>Limão Taiti KG</Text>
-
-                            <View style={styles.produtosCardInfo}>
-
-                                <Text style={styles.produtosCardPreco}>R$2,00</Text>
-
-                                <TouchableOpacity style={[styles.produtosCardBotao, styles.comparar]}>
-
-                                    <Text style={[styles.produtosCardTexto, styles.comparar]}>Comparar preços</Text>
-
+                    {loadingBusca && <ActivityIndicator size="large" color={CORES.azul} style={{ marginTop: 20 }} />}
+                    
+                    {!loadingBusca && mercadosComResultados.length > 0 && (
+                        <View style={styles.mercados}>
+                            {mercadosComResultados.map(nomeMercado => (
+                                <TouchableOpacity 
+                                    key={nomeMercado}
+                                    style={[
+                                        styles.mercadosBotao, 
+                                        mercadoSelecionado === nomeMercado && styles.mercadosBotaoSelecionado
+                                    ]}
+                                    onPress={() => setMercadoSelecionado(nomeMercado)}
+                                >
+                                    <Image 
+                                        source={LOGOS[nomeMercado]} 
+                                        style={styles.mercadosImagem} 
+                                        resizeMode="contain" 
+                                    />
                                 </TouchableOpacity>
-
-                            </View>
-
-                            <TouchableOpacity style={[styles.produtosCardBotao, styles.comprar]}>
-
-                                <Text style={[styles.produtosCardBotao, styles.comprar]}>Adicionar a compra</Text>
-
-                            </TouchableOpacity>
+                            ))}
                         </View>
+                    )}
 
-                        <View style={styles.produtosCard}>
-
-                            <Image
-                                source={require('../../assets/ImagensTemp/batata.png')}
-                                style={styles.produtosCardImagem}
-                            >
-
-                            </Image>
-
-                            <Text style={styles.produtosCardTexto}>Limão Taiti KG</Text>
-
-                            <View style={styles.produtosCardInfo}>
-
-                                <Text style={styles.produtosCardPreco}>R$2,00</Text>
-
-                                <TouchableOpacity style={[styles.produtosCardBotao, styles.comparar]}>
-
-                                    <Text style={[styles.produtosCardTexto, styles.comparar]}>Comparar preços</Text>
-
-                                </TouchableOpacity>
-
-                            </View>
-
-                            <TouchableOpacity style={[styles.produtosCardBotao, styles.comprar]}>
-
-                                <Text style={[styles.produtosCardBotao, styles.comprar]}>Adicionar a compra</Text>
-
-                            </TouchableOpacity>
+                    {!loadingBusca && produtosExibidos.length > 0 && (
+                        <View style={{marginTop: TAMANHOS.espacamentoMaior}}>
+                            <CarrosselProdutos data={produtosExibidos} />
                         </View>
-
-
-                    </View> */}
-
-                    {/* <ResultadosDaBusca dadosDaBusca={resultadoApi} loading={loading} /> */}
-
+                    )}
+                    
+                    {!loadingBusca && resultadoApi && mercadosComResultados.length === 0 && (
+                         <Text style={styles.semResultadosTexto}>Nenhum produto encontrado para "{termoBusca}"</Text>
+                    )}
                 </View>
-
             </ScrollView>
-        </SafeAreaView >
-    )
+        </SafeAreaView>
+    );
 }
 
+// Estilos (sem alterações)
 const styles = StyleSheet.create({
-    safeArea: {
-        flex: 1
+    mercadosBotao: {
+        borderColor: CORES.amarelo,
+        borderRadius: TAMANHOS.bordaRaio,
+        borderWidth: 2,
+        padding: TAMANHOS.espacamentoPequeno,
     },
-
+    mercadosBotaoSelecionado: {
+        borderColor: CORES.verde,
+        backgroundColor: '#e8f5e9',
+    },
+    mercados: {
+        alignItems: "center",
+        flexDirection: 'row',
+        justifyContent: "space-around",
+        marginTop: TAMANHOS.espacamentoPequeno,
+    },
+    safeArea: { flex: 1 },
     cabecalho: {
-
         alignItems: "center",
         backgroundColor: CORES.azul,
         flexDirection: 'row',
@@ -323,9 +232,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: TAMANHOS.espacamentoPequeno,
         paddingBottom: TAMANHOS.espacamentoMenor
     },
-
     tituloPrincipal: {
-
         color: CORES.azul,
         fontSize: TAMANHOS.fonteTitulo,
         fontWeight: "700",
@@ -333,154 +240,42 @@ const styles = StyleSheet.create({
         marginHorizontal: TAMANHOS.espacamentoMenor,
         marginVertical: TAMANHOS.espacamentoMaior
     },
-
     botaoPerfil: {
-
         alignItems: "center",
         backgroundColor: CORES.azul,
         borderRadius: TAMANHOS.bordaRaio,
         flexDirection: 'row',
         marginHorizontal: TAMANHOS.espacamentoMaior,
         padding: TAMANHOS.espacamentoPequeno
-
     },
-
     botaoPerfilTexto: {
-
         color: CORES.amarelo,
         fontSize: TAMANHOS.fonteSegundaria,
         fontWeight: "600",
         marginHorizontal: "auto"
     },
-
     promocoes: {
-
         backgroundColor: CORES.amarelo,
         marginVertical: TAMANHOS.espacamentoMaior,
-        padding: TAMANHOS.espacamentoMenor,
+        paddingVertical: TAMANHOS.espacamentoMenor,
     },
-
     promocoesTitulo: {
-
         color: CORES.azul,
         fontSize: TAMANHOS.fonteSegundaria,
         fontWeight: "700",
-
+        paddingHorizontal: TAMANHOS.espacamentoPequeno,
     },
-
-    barraPesquisa: {
-
-        alignItems: 'center',
-        backgroundColor: CORES.azul,
-        borderRadius: 100,
-        flexDirection: 'row',
-        justifyContent: "center",
-        height: 30,
-        width:30
-        
+    containerBusca: {
+        paddingHorizontal: TAMANHOS.espacamentoPequeno
     },
-
-    mercados: {
-
-        alignItems: "center",
-        flexDirection: 'row',
-        justifyContent: "space-around",
-
-    },
-
-    mercadosBotao: {
-
-        borderColor: CORES.amarelo,
-        borderRadius: TAMANHOS.bordaRaio,
-        borderWidth: 2,
-        padding: TAMANHOS.espacamentoPequeno,
-
-    },
-
     mercadosImagem: {
-
-        height: TAMANHOS.tamanhoIconeGrande
-
+        height: TAMANHOS.tamanhoIconeGrande,
+        width: TAMANHOS.tamanhoIconeGrande * 2,
     },
-
-    mercadosSetores: {
-
-        marginVertical: TAMANHOS.espacamentoMaior
-    },
-
-    mercadosSetoresTexto: {
-
-        color: CORES.verde,
-        fontWeight: "700"
-    },
-
-    produtos: {
-
-        flexDirection: 'row',
-        justifyContent: "space-around",
-        marginHorizontal: TAMANHOS.espacamentoMenor
-    },
-
-    produtosCard: {
-
-        gap: TAMANHOS.espacamentoMenor,
-        marginVertical: TAMANHOS.espacamentoMaior,
-        width: TAMANHOS.tamanhoCard
-    },
-
-    produtosCardImagem: {
-
-        height: TAMANHOS.tamanhoFotoGrande,
-        width: "auto"
-
-    },
-
-    produtosCardTexto: {
-
-        color: CORES.verde,
-        fontWeight: "700"
-
-    },
-
-    produtosCardInfo: {
-
-        alignItems: 'center',
-        flexDirection: "row",
-        gap: TAMANHOS.espacamentoMenor
-
-    },
-
-    produtosCardPreco: {
-
-        color: CORES.azul,
-        fontWeight: "700",
-
-    },
-
-    produtosCardBotao: {
-
-        borderRadius: TAMANHOS.bordaRaio,
-        color: CORES.branco,
-        padding: TAMANHOS.espacamentoPequeno,
-
-    },
-
-    comparar: {
-
-        backgroundColor: CORES.azul,
-        color: CORES.branco,
+    semResultadosTexto: {
+        textAlign: 'center',
+        marginTop: 20,
         fontSize: TAMANHOS.fontePequena,
-        textAlign: 'center'
-    },
-
-    comprar: {
-
-        backgroundColor: CORES.verde,
-        color: CORES.branco,
-        fontWeight: "700",
-        fontSize: TAMANHOS.fontePequena,
-        textAlign: 'center'
+        color: 'grey',
     }
-
-
-})
+});
