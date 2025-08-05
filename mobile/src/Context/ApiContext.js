@@ -14,7 +14,7 @@ export default function ApiProvider({ children }) {
 
         try {
             
-            const response = await apiBack.get('/BuscaPromocoes');
+            const response = await apiBack.get('/BuscaPromoMercados');
 
 
             return response.data;
@@ -32,7 +32,7 @@ export default function ApiProvider({ children }) {
 
         try {
             
-            const response = await apiBack.get('/BuscarProdutos', { nomeProduto });
+            const response = await apiBack.post('/BuscarProdutos', { nomeProduto });
 
             return response.data;
             

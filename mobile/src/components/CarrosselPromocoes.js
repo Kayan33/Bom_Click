@@ -5,81 +5,96 @@ import PagerView from 'react-native-pager-view';
 
 import { CORES, TAMANHOS, LOGOS } from '../styles/styles';
 
-export default CarrosselPromocoes = ({ data }) => {
-
-    const [activeIndex, setActiveIndex] = useState(0);
-
-    const handlePageChange = (event) => {
-
-        setActiveIndex(event.nativeEvent.position);
-    };
-
-    return (
-        <View>
-            <PagerView
-                style={styles.pagerView}
-                initialPage={0}
-                onPageSelected={handlePageChange}
-            >
-
-                {data.map(item => (
-                    <View style={styles.page} key={item.id}>
-
-                        <View style={styles.promocoesCarossel}>
-
-                            <Image
-                                source={item.imagem}
-                                style={styles.promocoesCarosselImagem}
-                            />
-
-                            <View style={styles.promocoesCarosselItem}>
-
-                                <Text style={styles.promocoesCarosselItemTitulo}>{item.titulo}</Text>
-
-                                <View style={styles.promocoesCarosselItemInformacoes}>
-
-                                    <View style={styles.promocoesCarosselItemInformacoesContainer}>
-
-                                        <Text style={styles.promocoesCarosselItemInformacoesContainerPreco}>{item.preco}</Text>
-
-                                        <Image
-                                            source={item.logoMercado}
-                                            style={styles.promocoesCarosselItemInformacoesContainerImagem}
-                                        />
-
-                                    </View>
-
-                                    <TouchableOpacity style={styles.promocoesCarosselItemInformacoesBotao}>
-
-                                        <Text style={styles.promocoesCarosselItemInformacoesBotaoTexto}>Adicionar a compra</Text>
-
-                                    </TouchableOpacity>
-
-                                </View>
-
-                            </View>
-
-                        </View>
-
-                    </View>
-                ))}
-            </PagerView>
-
-            <View style={styles.paginationContainer}>
-                {data.map((_, index) => (
-                    <View
-                        key={index}
-                        style={[
-                            styles.dot,
-                            activeIndex === index ? styles.dotAtivo : {},
-                        ]}
-                    />
-                ))}
-            </View>
-        </View>
-    );
-};
-
+const getLogoMercadoLocal = (item) => {
+    const url = item.logoMercado.toLowerCase();
+  
+    if (url.includes('confianca')) {
+      return LOGOS.Confianca;
+    }
+    if (url.includes('tauste')) {
+      return LOGOS.Tauste;
+    }
+    if (url.includes('paodeacucar') || url.includes('gpa.digital')) {
+      return LOGOS.PaoDeAcucar;
+    }
+    return null;
+  };
+  
+  
+  export default CarrosselPromocoes = ({ data }) => {
+  
+      if (!data || data.length === 0) {
+          return (
+              <View style={{ height: 180, justifyContent: 'center', alignItems: 'center' }}>
+                  <Text>Carregando promoções...</Text>
+              </View>
+          );
+      }
+  
+      const [activeIndex, setActiveIndex] = useState(0);
+  
+      const handlePageChange = (event) => {
+          setActiveIndex(event.nativeEvent.position);
+      };
+  
+      return (
+          <View>
+              <PagerView
+                  style={styles.pagerView}
+                  initialPage={0}
+                  onPageSelected={handlePageChange}
+              >
+                  {data.map(item => {
+                      // 3. CHAME A FUNÇÃO PARA OBTER O LOGO CORRETO
+                      const logoLocal = getLogoMercadoLocal(item);
+  
+                      return (
+                          <View style={styles.page} key={item.id}>
+                              <View style={styles.promocoesCarossel}>
+                                  <Image
+                                      source={item.imagem} // Imagem do produto continua vindo da API
+                                      style={styles.promocoesCarosselImagem}
+                                  />
+                                  <View style={styles.promocoesCarosselItem}>
+                                      <Text style={styles.promocoesCarosselItemTitulo}>{item.titulo}</Text>
+                                      <View style={styles.promocoesCarosselItemInformacoes}>
+                                          <View style={styles.promocoesCarosselItemInformacoesContainer}>
+                                              <Text style={styles.promocoesCarosselItemInformacoesContainerPreco}>{item.preco}</Text>
+                                              
+                                              {/* 4. USE O LOGO LOCAL E VERIFIQUE SE ELE EXISTE */}
+                                              {logoLocal && (
+                                                  <Image
+                                                      source={logoLocal}
+                                                      style={styles.promocoesCarosselItemInformacoesContainerImagem}
+                                                  />
+                                              )}
+                                          </View>
+                                          <TouchableOpacity style={styles.promocoesCarosselItemInformacoesBotao}>
+                                              <Text style={styles.promocoesCarosselItemInformacoesBotaoTexto}>Adicionar a compra</Text>
+                                          </TouchableOpacity>
+                                      </View>
+                                  </View>
+                              </View>
+                          </View>
+                      );
+                  })}
+              </PagerView>
+  
+              <View style={styles.paginationContainer}>
+                  {data.map((_, index) => (
+                      <View
+                          key={index}
+                          style={[
+                              styles.dot,
+                              activeIndex === index ? styles.dotAtivo : {},
+                          ]}
+                      />
+                  ))}
+              </View>
+          </View>
+      );
+  };
+  
 
 const styles = StyleSheet.create({
 
@@ -137,8 +152,8 @@ const styles = StyleSheet.create({
         fontWeight: "700",
     },
     promocoesCarosselItemInformacoesContainerImagem: {
-        height: TAMANHOS.tamanhoIconePequeno,
-        width: 53,
+        height: 16,
+        width: 65,
     },
     promocoesCarosselItemInformacoesBotao: {
         justifyContent: "center",

@@ -28,21 +28,20 @@ export default function Inicial() {
     const [resultadoApi, setResultadoApi] = useState(null);
 
     // Função que a TELA INICIAL executa
-    const executarBusca = async (termo) => {
-        if (!termo) return;
+    const executarBusca = async (nomeProduto) => {
+        if (!nomeProduto) return;
         setLoading(true);
         setResultadoApi(null);
         
-        const resposta = await buscaApi(termo); // Sua chamada de API real
+        const resposta = await buscaProdutos(nomeProduto); 
         
         setResultadoApi(resposta);
         setLoading(false);
     };
 
-
     const { autenticado, abrirModalLogin } = useContext(AutenticadoContexto);
 
-    const { buscaPromocoes } = useContext(ApiContext);
+    const { buscaPromocoes, buscaProdutos } = useContext(ApiContext);
 
     const insets = useSafeAreaInsets();
 
@@ -63,28 +62,29 @@ export default function Inicial() {
 
     useEffect(() => {
         const carregarEFormatarDados = async () => {
+          try {
             const respostaApi = await promocoesDados();
-            const listaDePromocoes = [];
-
-            for (const nomeMercado in respostaApi) {
-                const produtosDoMercado = respostaApi[nomeMercado];
-                produtosDoMercado.forEach((produto, index) => {
-                    listaDePromocoes.push({
-                        id: `${nomeMercado}-${index}`,
-                        titulo: produto.title,
-                        preco: produto.price,
-                        imagem: { uri: produto.imageUrl },
-                        logoMercado: LOGOS[nomeMercado],
-                    });
-                });
-            }
-
+            const listaDePromocoes = respostaApi.map((produto) => ({
+              id: produto.id,
+              titulo: produto.title,
+              preco: produto.price,
+              imagem: { uri: produto.imageUrl },
+              logoMercado: produto.mercado.logo,
+            }));
+       
             setDadosFormatados(listaDePromocoes);
-            setLoading(false);
-        };
 
+            console.log(listaDePromocoes);
+            
+          } catch (error) {
+            console.error("Erro ao carregar promoções:", error);
+          } finally {
+            setLoading(false);
+          }
+        };
+       
         carregarEFormatarDados();
-    }, []);
+      }, []);
 
     if (loading) {
         return <ActivityIndicator size="large" color="#0000ff" style={{ height: 220 }} />;
@@ -301,7 +301,7 @@ export default function Inicial() {
 
                     </View> */}
 
-                    <ResultadosDaBusca dadosDaBusca={resultadoApi} loading={loading} />
+                    {/* <ResultadosDaBusca dadosDaBusca={resultadoApi} loading={loading} /> */}
 
                 </View>
 
