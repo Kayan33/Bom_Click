@@ -158,8 +158,8 @@ async  buscaProdutosTauste(title: string, url: string) {
 
 
 async  buscaProdutosPaoAcucar(title: string, url: string) {
-   const navegador = await puppeteer.launch({ headless: false, defaultViewport: null });
-  // const navegador = await puppeteer.launch();
+   // const navegador = await puppeteer.launch({ headless: false, defaultViewport: null });
+  const navegador = await puppeteer.launch();
   const pagina = await navegador.newPage();
   await pagina.goto(url);
 
