@@ -7,7 +7,7 @@ export default function ApiProvider({ children }) {
 
     const apiBack = axios.create({
         // baseURL: 'http://192.168.56.1:3333'
-        baseURL: 'http://192.168.1.195:3333'
+        baseURL: 'https://kayanpereira.com.br:21025'
     });
 
     const buscaPromocoes = async () =>{
@@ -15,7 +15,6 @@ export default function ApiProvider({ children }) {
         try {
             
             const response = await apiBack.get('/BuscaPromoMercados');
-
 
             return response.data;
             
@@ -33,6 +32,7 @@ export default function ApiProvider({ children }) {
         try {
             
             const response = await apiBack.post('/BuscarProdutos', { nomeProduto });
+            console.log("Resposta", response)
 
             return response.data;
             

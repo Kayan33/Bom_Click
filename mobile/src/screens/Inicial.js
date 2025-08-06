@@ -15,13 +15,27 @@ import CarrosselProdutos from "../components/CarrosselProdutos";
 import CarrosselPromocoes from "../components/CarrosselPromocoes";
 import BarraPesquisa from "../components/BarraPesquisa";
 
-// MUDANÇA 1: Função auxiliar para corrigir a URL da imagem
+// --- MUDANÇA 1: Função auxiliar para converter preço em texto para número ---
+/**
+ * Converte uma string de preço (ex: "R$ 1.234,56") para um número (ex: 1234.56).
+ * Itens sem preço são considerados "infinitos" para ficarem no final da ordenação.
+ */
+const parsePrice = (priceString) => {
+    if (typeof priceString !== 'string' || !priceString) {
+        return Infinity;
+    }
+    // Remove "R$", espaços, troca o ponto de milhar por nada e a vírgula de decimal por ponto.
+    const numero = parseFloat(
+        priceString.replace('R$', '').trim().replace(/\./g, '').replace(',', '.')
+    );
+    return isNaN(numero) ? Infinity : numero;
+};
+
+
 const formatarUrlImagem = (url) => {
-    // Se a URL existir e começar com "//", adiciona "https:" no início.
     if (url && url.startsWith('//')) {
         return `https:${url}`;
     }
-    // Caso contrário, retorna a URL original.
     return url;
 };
 
@@ -32,7 +46,7 @@ export default function Inicial() {
     const insets = useSafeAreaInsets();
     const navigation = useNavigation();
 
-    // --- Estados da Página ---
+    // --- Estados da Página (sem alteração) ---
     const [termoBusca, setTermoBusca] = useState('');
     const [resultadoApi, setResultadoApi] = useState(null);
     const [loadingBusca, setLoadingBusca] = useState(false); 
@@ -41,7 +55,7 @@ export default function Inicial() {
     const [loadingPromocoes, setLoadingPromocoes] = useState(true);
     const [dadosFormatados, setDadosFormatados] = useState([]);
 
-    // --- Funções ---
+    // --- Funções (sem alteração) ---
     const executarBusca = async (nomeProduto) => {
         if (!nomeProduto) return;
         setLoadingBusca(true);
@@ -79,7 +93,6 @@ export default function Inicial() {
                     id: produto.id,
                     titulo: produto.title,
                     preco: produto.price,
-                    // MUDANÇA AQUI TAMBÉM (BOA PRÁTICA): Garante que as URLs de promoção também sejam corrigidas
                     imagem: { uri: formatarUrlImagem(produto.imageUrl) }, 
                     logoMercado: produto.mercado.logo,
                 }));
@@ -96,12 +109,17 @@ export default function Inicial() {
     // Effect que define o mercado padrão (sem alteração)
     useEffect(() => {
         if (resultadoApi && Object.keys(resultadoApi).length > 0) {
-            const primeiroMercado = Object.keys(resultadoApi)[0];
-            setMercadoSelecionado(primeiroMercado);
+            // Ordena os mercados pelo preço do produto principal antes de definir o padrão
+            const mercadosOrdenados = Object.keys(resultadoApi).sort((a, b) => {
+                const precoA = parsePrice(resultadoApi[a]?.dadosEncontrados?.price);
+                const precoB = parsePrice(resultadoApi[b]?.dadosEncontrados?.price);
+                return precoA - precoB;
+            });
+            setMercadoSelecionado(mercadosOrdenados[0]);
         }
     }, [resultadoApi]);
 
-    // MUDANÇA 2: Usar a função auxiliar ao formatar os produtos
+    // --- MUDANÇA 2: Ordenar os produtos por preço ---
     useEffect(() => {
         if (mercadoSelecionado && resultadoApi) {
             const dadosDoMercado = resultadoApi[mercadoSelecionado];
@@ -112,7 +130,7 @@ export default function Inicial() {
                     id: `${mercadoSelecionado}-${dadosDoMercado.dadosEncontrados.id}-encontrado`,
                     nome: dadosDoMercado.dadosEncontrados.title,
                     preco: dadosDoMercado.dadosEncontrados.price,
-                    imagem: { uri: formatarUrlImagem(dadosDoMercado.dadosEncontrados.imageUrl) }, // <-- CORREÇÃO APLICADA
+                    imagem: { uri: formatarUrlImagem(dadosDoMercado.dadosEncontrados.imageUrl) },
                 });
             }
 
@@ -121,23 +139,31 @@ export default function Inicial() {
                     id: `${mercadoSelecionado}-${prod.id || index}-similar`,
                     nome: prod.title,
                     preco: prod.price,
-                    imagem: { uri: formatarUrlImagem(prod.imageUrl) }, // <-- CORREÇÃO APLICADA
+                    imagem: { uri: formatarUrlImagem(prod.imageUrl) },
                 }));
                 produtosFormatados = [...produtosFormatados, ...similaresFormatados];
             }
             
+            // Ordena a lista final de produtos pelo preço (do menor para o maior)
+            produtosFormatados.sort((a, b) => parsePrice(a.preco) - parsePrice(b.preco));
+
             setProdutosExibidos(produtosFormatados);
         }
     }, [mercadoSelecionado, resultadoApi]);
 
 
-    // --- Renderização (sem alterações na estrutura JSX) ---
+    // --- Renderização ---
 
     if (loadingPromocoes) {
         return <ActivityIndicator size="large" color={CORES.azul} style={{ flex: 1, justifyContent: 'center' }} />;
     }
 
-    const mercadosComResultados = resultadoApi ? Object.keys(resultadoApi) : [];
+    // --- MUDANÇA 3: Ordenar a lista de mercados para renderizar os botões ---
+    const mercadosComResultados = resultadoApi ? Object.keys(resultadoApi).sort((a, b) => {
+        const precoA = parsePrice(resultadoApi[a]?.dadosEncontrados?.price);
+        const precoB = parsePrice(resultadoApi[b]?.dadosEncontrados?.price);
+        return precoA - precoB;
+    }) : [];
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: CORES.branco }}>
@@ -168,6 +194,7 @@ export default function Inicial() {
 
                     {loadingBusca && <ActivityIndicator size="large" color={CORES.azul} style={{ marginTop: 20 }} />}
                     
+                    {/* Agora os botões já serão renderizados na ordem correta */}
                     {!loadingBusca && mercadosComResultados.length > 0 && (
                         <View style={styles.mercados}>
                             {mercadosComResultados.map(nomeMercado => (
@@ -189,6 +216,7 @@ export default function Inicial() {
                         </View>
                     )}
 
+                    {/* O carrossel já receberá os produtos ordenados */}
                     {!loadingBusca && produtosExibidos.length > 0 && (
                         <View style={{marginTop: TAMANHOS.espacamentoMaior}}>
                             <CarrosselProdutos data={produtosExibidos} />
