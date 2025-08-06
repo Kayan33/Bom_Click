@@ -13,6 +13,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { AutenticadoContexto } from '../Context/AuthContext'
 import ModalRedefinirSenha from '../components/ModalRedefinirSenha';
+import ModalEditarCEP from '../components/ModalEditarCEP';
 import api from '../services/api';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -32,6 +33,7 @@ export default function InformacoesPessoais() {
     const [showDatePicker, setShowDatePicker] = useState(false);
 
     const [modalSenhaVisivel, setModalSenhaVisivel] = useState(false);
+     const [modalCepVisivel, setModalCepVisivel] = useState(false);
 
     useEffect(() => {
         if (autenticado && usuario?.id) {
@@ -161,8 +163,7 @@ async function apagarConta(id) {
                     <InfoLinhaEditavel
                         label="CEP:"
                         value={dadosUsuarios.cep || ''}
-                        onEditPress={() => Alert.alert("Editar CEP", "A lógica para editar o CEP seria chamada aqui.")}
-                    />
+                        onEditPress={() => setModalCepVisivel(true)}/>
 
                     <InfoLinha label="Logradouro:" value={dadosUsuarios.rua || ''} />
                     <InfoLinha label="BAIRRO:" value={dadosUsuarios.bairro || ''} />
@@ -202,6 +203,13 @@ async function apagarConta(id) {
              <ModalRedefinirSenha 
                 visible={modalSenhaVisivel}
                 onClose={() => setModalSenhaVisivel(false)}
+            />
+
+             <ModalEditarCEP
+                visible={modalCepVisivel}
+                onClose={() => setModalCepVisivel(false)}
+                cepAtual={dadosUsuarios.cep}
+                onSaveSuccess={consultarDadosUsuarios}
             />
 
         </SafeAreaView>
@@ -303,8 +311,8 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     infoRowInline: {
-        flexDirection: 'row',
-        alignItems: 'center',
+        // flexDirection: 'row',
+        // alignItems: 'center',
         borderBottomWidth: 1,
         borderBottomColor: CORES.branco,
         paddingBottom: TAMANHOS.espacamentoMenor, 

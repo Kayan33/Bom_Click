@@ -6,19 +6,16 @@ import CadastroModal from '../components/Cadastro';
 
 export const AutenticadoContexto = createContext({});
 
-// Definimos uma chave única para a sessão, tornando o armazenamento mais seguro e atômico.
 const ASYNC_STORAGE_KEY = '@Auth:session';
 
 export default function AuthProvider({ children }) {
     const [usuario, setUsuario] = useState(null);
     const [token, setToken] = useState(null);
-    const [loadingAuth, setLoadingAuth] = useState(true); // Começa como true para exibir um loader inicial
+    const [loadingAuth, setLoadingAuth] = useState(true);
     const [modalAtivo, setModalAtivo] = useState(null);
 
     const autenticado = !!token && !!usuario;
 
-    // Simplificamos o fluxo de inicialização em um único useEffect.
-    // Ele roda apenas uma vez quando o aplicativo é aberto.
     useEffect(() => {
         async function loadSession() {
             try {
@@ -26,34 +23,29 @@ export default function AuthProvider({ children }) {
 
                 if (storedSession) {
                     const session = JSON.parse(storedSession);
-                    // Definimos o cabeçalho da API antes de verificar o token
                     api.defaults.headers.common['Authorization'] = `Bearer ${session.token}`;
-
-                    // Verificamos se o token ainda é válido na API
+                  
                     const resposta = await api.get('/verificaTokenUsuario');
 
                     if (resposta.data && resposta.data.id) {
-                        // Se o token for válido, atualizamos o estado com os dados da sessão
+                     
                         setToken(session.token);
-                        setUsuario(resposta.data); // Usamos os dados mais recentes da API
+                        setUsuario(resposta.data);
                     } else {
-                        // Se o token for inválido, limpamos tudo
                         console.warn("Sessão encontrada, mas token inválido. Limpando...");
                         await handleLogoutCleanup();
                     }
                 }
             } catch (error) {
                 console.error("Erro ao carregar ou verificar a sessão:", error);
-                // Se houver qualquer erro (parsing, API), limpamos a sessão por segurança
                 await handleLogoutCleanup();
             } finally {
-                // Ao final de todo o processo, paramos o carregamento
                 setLoadingAuth(false);
             }
         }
 
         loadSession();
-    }, []); // O array vazio [] garante que isso só rode uma vez.
+    }, []);
 
     async function loginEntrada(email, senha) {
         setLoadingAuth(true);
@@ -65,11 +57,9 @@ export default function AuthProvider({ children }) {
                     token: resposta.data.token,
                     usuario: resposta.data
                 };
-
-                // Salvamos o token e os dados do usuário em um único objeto
+               
                 await AsyncStorage.setItem(ASYNC_STORAGE_KEY, JSON.stringify(sessionData));
                 
-                // Atualizamos o cabeçalho da API com o novo token
                 api.defaults.headers.common['Authorization'] = `Bearer ${sessionData.token}`;
 
                 setToken(sessionData.token);
@@ -79,20 +69,19 @@ export default function AuthProvider({ children }) {
                 return true;
             } else {
                 console.error('Resposta inválida do login:', resposta.data);
-                await handleLogoutCleanup(); // Limpa qualquer estado parcial
+                await handleLogoutCleanup();
                 return false;
             }
         } catch (err) {
             console.error('Erro de Comunicação no Login:', err);
-            await handleLogoutCleanup(); // Limpa qualquer estado parcial
+            await handleLogoutCleanup(); 
             return false;
         } finally {
             setLoadingAuth(false);
         }
     }
     
-    // Função centralizada para limpar estado e AsyncStorage.
-    // Usada no logout, e em casos de erro de login ou verificação de token.
+  
     async function handleLogoutCleanup() {
         delete api.defaults.headers.common['Authorization'];
         setToken(null);
@@ -136,7 +125,7 @@ export default function AuthProvider({ children }) {
         }
           }
 
-    // Funções de controle dos modais (sem alteração)
+    
     function abrirModalLogin() { setModalAtivo('login'); }
     function abrirModalCadastro() { setModalAtivo('cadastro'); }
     function fecharTodosModais() { setModalAtivo(null); }
@@ -144,7 +133,7 @@ export default function AuthProvider({ children }) {
     return (
         <AutenticadoContexto.Provider value={{
             autenticado,
-            usuario, // Apenas 'usuario', sem o 'dadosUsuario'
+            usuario,
             token,
             loadingAuth,
             loginEntrada,

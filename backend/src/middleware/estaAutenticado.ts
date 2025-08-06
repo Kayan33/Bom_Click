@@ -10,13 +10,14 @@ export function estaAutenticado(
     res: Response,
     next: NextFunction
 ) {
-    const autToken = req.headers.authorization;
+    const authToken = req.headers.authorization;
 
-    if (!autToken) {
-        return res.json({ error: 'Token Inválido' });
+    if (!authToken) {
+       
+        return res.status(401).json({ error: 'Token não fornecido' });
     }
-
-    const [, Token] = autToken.split(' ');
+    
+    const [, Token] = authToken.split(' ');
 
     try {
         const { sub } = verify(
@@ -24,9 +25,13 @@ export function estaAutenticado(
             process.env.JWT_SECRETO as string
         ) as Payload;
 
-        req.params.id = sub;
-        return next();
+      
+        req.id_usuario = sub;
+
+        return next(); 
+
     } catch (error) {
-        return res.json({ error: 'Token Inválido' });
+       
+        return res.status(401).json({ error: 'Token inválido ou expirado' });
     }
 }
