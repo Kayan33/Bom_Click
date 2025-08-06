@@ -38,20 +38,24 @@ class ControllerPut {
     }
   }
     async redefinirSenha(req: Request, res: Response) {
-        const { id } = req.params; 
+        const id_usuario = req.id_usuario;
         const { senhaAtual, novaSenha } = req.body;
 
         const servicesPut = new ServicesPut();
 
         try {
             const resposta = await servicesPut.redefinirSenha({
-                id_usuario: id,
+                id_usuario,
                 senhaAtual,
                 novaSenha
             });
             return res.json(resposta);
         } catch (error) {
-            return res.status(400).json({ error: error });
+    
+    if (error instanceof Error) {
+        return res.status(400).json({ error: error.message });
+    }
+    return res.status(500).json({ error: "Ocorreu um erro inesperado." });
         }
     }
   

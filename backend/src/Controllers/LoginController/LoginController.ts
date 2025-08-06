@@ -12,7 +12,7 @@ class LoginController {
   }
 
   async verificaTokenUsuario(req: Request, res: Response) {
-    const id = req.usuarioID;
+    const id = req.id_usuario;
     const VerificaToken = new LoginServices();
 
     try {

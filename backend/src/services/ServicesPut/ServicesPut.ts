@@ -75,6 +75,11 @@ class ServicesPut {
             throw new Error("A senha atual está incorreta.");
         }
 
+
+         if (await compare(novaSenha, usuario.senha)) {
+            throw new Error("A nova senha não pode ser igual à senha antiga.");
+        }
+
         const novaSenhaHash = await hash(novaSenha, 8);
 
         await prismaClient.usuario.update({
