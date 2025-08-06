@@ -10,16 +10,19 @@ const ESPACO_ENTRE_ITENS = TAMANHOS.espacamentoPequeno;
 const ITEM_LARGURA = (width - ESPACO_HORIZONTAL * 2 - ESPACO_ENTRE_ITENS * (NUM_COLUNAS - 1)) / NUM_COLUNAS;
 
 
-const ProdutoCard = ({ item }) => (
+const ProdutoCard = ({ item, onCompararPress }) => (
     <View style={[styles.produtosCard, { width: ITEM_LARGURA }]}>
         <Image
-            source={item.imagem} // Funciona com require() e com {uri: '...'}
+            source={item.imagem}
             style={styles.produtosCardImagem}
         />
         <Text style={styles.produtosCardTexto} numberOfLines={2}>{item.nome}</Text>
         <View style={styles.produtosCardInfo}>
             <Text style={styles.produtosCardPreco}>{item.preco}</Text>
-            <TouchableOpacity style={[styles.produtosCardBotao, styles.comparar]}>
+            <TouchableOpacity 
+                style={[styles.produtosCardBotao, styles.comparar]}
+                onPress={() => onCompararPress(item.nome)}
+            >
                 <Text style={[styles.produtosCardBotaoTexto, styles.compararTexto]}>Comparar</Text>
             </TouchableOpacity>
         </View>
@@ -29,7 +32,7 @@ const ProdutoCard = ({ item }) => (
     </View>
 );
 
-const CarrosselProdutos = ({ data }) => {
+const CarrosselProdutos = ({ data, onCompararPress }) => {
     const [activeIndex, setActiveIndex] = useState(0);
 
     const groupedData = [];
@@ -39,7 +42,6 @@ const CarrosselProdutos = ({ data }) => {
 
     const handleScroll = (event) => {
         const scrollPosition = event.nativeEvent.contentOffset.x;
-        // Calcula o índice da página atual. Usamos a largura da tela como o tamanho de uma página.
         const index = Math.round(scrollPosition / width);
         setActiveIndex(index);
     };
@@ -47,8 +49,11 @@ const CarrosselProdutos = ({ data }) => {
     const renderPage = ({ item: pageItems, index: pageIndex }) => (
         <View style={styles.page}>
             {pageItems.map((product, productIndex) => (
-                // A chave aqui é importante para o React identificar cada item
-                <ProdutoCard item={product} key={`${pageIndex}-${product.id}-${productIndex}`} />
+                <ProdutoCard 
+                    item={product} 
+                    key={`${pageIndex}-${product.id}-${productIndex}`} 
+                    onCompararPress={onCompararPress} 
+                />
             ))}
         </View>
     );
@@ -65,7 +70,6 @@ const CarrosselProdutos = ({ data }) => {
                 onScroll={handleScroll}
                 scrollEventThrottle={16}
             />
-            {/* Renderiza a paginação apenas se houver mais de uma página */}
             {groupedData.length > 1 && (
                 <View style={styles.paginationContainer}>
                     {groupedData.map((_, index) => (
@@ -111,7 +115,7 @@ const styles = StyleSheet.create({
     produtosCardTexto: {
         color: CORES.verde,
         fontWeight: "700",
-        minHeight: 35, // Garante altura mínima para alinhar os cards
+        minHeight: 35,
     },
     produtosCardInfo: {
         alignItems: 'center',
@@ -152,7 +156,7 @@ const styles = StyleSheet.create({
     dot: {
         width: TAMANHOS.tamanhoIconePequeno,
         height: TAMANHOS.tamanhoIconePequeno,
-        borderRadius: TAMANHOS.bordaRaio / 2, // Para ser um círculo perfeito
+        borderRadius: TAMANHOS.bordaRaio / 2,
         backgroundColor: CORES.azulEscuro,
         marginHorizontal: 4,
     },
