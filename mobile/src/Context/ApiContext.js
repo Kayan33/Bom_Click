@@ -6,7 +6,6 @@ export const ApiContext = createContext();
 export default function ApiProvider({ children }) {
 
     const apiBack = axios.create({
-        // baseURL: 'http://192.168.56.1:3333'
         baseURL: 'http://192.168.56.1:3333'
     });
 
