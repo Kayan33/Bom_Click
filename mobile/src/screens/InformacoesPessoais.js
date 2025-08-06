@@ -13,7 +13,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { AutenticadoContexto } from '../Context/AuthContext'
 import ModalRedefinirSenha from '../components/ModalRedefinirSenha';
-import ModalEditarCEP from '../components/ModalEditarCEP';
+import ModalEditarEndereco from '../components/ModalEditarEndereco';
 import api from '../services/api';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -33,7 +33,7 @@ export default function InformacoesPessoais() {
     const [showDatePicker, setShowDatePicker] = useState(false);
 
     const [modalSenhaVisivel, setModalSenhaVisivel] = useState(false);
-     const [modalCepVisivel, setModalCepVisivel] = useState(false);
+    const [modalEnderecoVisivel, setModalEnderecoVisivel] = useState(false);
 
     useEffect(() => {
         if (autenticado && usuario?.id) {
@@ -121,10 +121,10 @@ export default function InformacoesPessoais() {
         return `${dia}/${mes}/${ano}`;
     };
 
-async function apagarConta(id) {
-    await deletarUsuario(id)
-    logout()
-}
+    async function apagarConta(id) {
+        await deletarUsuario(id)
+        logout()
+    }
 
     return (
         <SafeAreaView style={styles.safeArea}>
@@ -150,11 +150,11 @@ async function apagarConta(id) {
                         onEditPress={showDatepicker}
                     />
 
-                     <View style={styles.secaoRedefinirSenha}>
-                <TouchableOpacity onPress={() => setModalSenhaVisivel(true)}>
-                    <Text style={styles.linkRedefinir}>Redefinir senha</Text>
-                </TouchableOpacity>
-            </View>
+                    <View style={styles.secaoRedefinirSenha}>
+                        <TouchableOpacity onPress={() => setModalSenhaVisivel(true)}>
+                            <Text style={styles.linkRedefinir}>Redefinir senha</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
 
                 <View style={styles.section}>
@@ -162,12 +162,16 @@ async function apagarConta(id) {
 
                     <InfoLinhaEditavel
                         label="CEP:"
-                        value={dadosUsuarios.cep || ''}
-                        onEditPress={() => setModalCepVisivel(true)}/>
+                        value={dadosUsuarios.cep || 'Não Informado'}
+                        onEditPress={() => setModalEnderecoVisivel(true)} />
 
-                    <InfoLinha label="Logradouro:" value={dadosUsuarios.rua || ''} />
+                    <InfoLinha label="Logradouro:" value={dadosUsuarios.logradouro || ''} />
                     <InfoLinha label="BAIRRO:" value={dadosUsuarios.bairro || ''} />
-                    <InfoLinha label="Número:" value={dadosUsuarios.numero?.toString() || ''} />
+                    <InfoLinhaEditavel
+                        label="Número:"
+                        value={dadosUsuarios.numero?.toString() || ''}
+                        onEditPress={() => setModalEnderecoVisivel(true)}
+                    />
                 </View>
 
                 <View style={styles.section}>
@@ -180,9 +184,9 @@ async function apagarConta(id) {
                 </View>
             </ScrollView>
             <View style={styles.footer}>
-                <TouchableOpacity 
+                <TouchableOpacity
                     onPress={() => apagarConta(usuario.id)}
-                style={styles.deleteButton}>
+                    style={styles.deleteButton}>
                     <Text style={styles.deleteButtonText}>Apagar conta</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={logOutUsuario}>
@@ -200,15 +204,20 @@ async function apagarConta(id) {
                 />
             )}
 
-             <ModalRedefinirSenha 
+            <ModalRedefinirSenha
                 visible={modalSenhaVisivel}
                 onClose={() => setModalSenhaVisivel(false)}
             />
 
-             <ModalEditarCEP
-                visible={modalCepVisivel}
-                onClose={() => setModalCepVisivel(false)}
-                cepAtual={dadosUsuarios.cep}
+            <ModalEditarEndereco
+                visible={modalEnderecoVisivel}
+                onClose={() => setModalEnderecoVisivel(false)}
+                enderecoAtual={{
+                    cep: dadosUsuarios.cep,
+                    rua: dadosUsuarios.rua,
+                    bairro: dadosUsuarios.bairro,
+                    numero: dadosUsuarios.numero
+                }}
                 onSaveSuccess={consultarDadosUsuarios}
             />
 
@@ -311,23 +320,18 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     infoRowInline: {
-        // flexDirection: 'row',
-        // alignItems: 'center',
         borderBottomWidth: 1,
         borderBottomColor: CORES.branco,
-        paddingBottom: TAMANHOS.espacamentoMenor, 
+        paddingBottom: TAMANHOS.espacamentoMenor,
         marginBottom: TAMANHOS.espacamentoMenor,
-        
     },
     labelWithIconContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: TAMANHOS.espacamentoPequeno,
-        
     },
     valueContainer: {
         flexDirection: 'row',
-        alignItems:   'center',
         marginBottom: TAMANHOS.espacamentoPequeno
     },
     iconWrapper: {

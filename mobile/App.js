@@ -14,7 +14,6 @@ import ApiProvider from './src/Context/ApiContext';
 
 SplashScreen.preventAutoHideAsync();
 
-
 export default function App() {
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
