@@ -53,7 +53,7 @@ const Comparativo = ({ dados, termoBusca, logos, onClose, onTrocarProduto }) => 
             </View>
 
             <View style={styles.titleContainer}>
-                <Text style={styles.title}>Comparativo </Text>
+                <Text style={styles.title}>Comparativo:</Text>
                 <Text style={styles.titleHighlight}>{termoBusca}</Text>
             </View>
 
@@ -76,9 +76,6 @@ const Comparativo = ({ dados, termoBusca, logos, onClose, onTrocarProduto }) => 
                                 <Text style={styles.incorrectButtonText}>Produto incorreto?</Text>
                             </TouchableOpacity>
 
-                            <TouchableOpacity style={styles.addButton}>
-                                <Text style={styles.addButtonText}>Adicionar a compra</Text>
-                            </TouchableOpacity>
                         </View>
                     );
                 })}
@@ -100,36 +97,33 @@ const styles = StyleSheet.create({
         backgroundColor: '#f4f6f8',
     },
     header: {
-        paddingHorizontal: 15,
-        paddingVertical: 10,
-    },
-    backButton: {
-        padding: 5,
+        marginHorizontal: TAMANHOS.espacamentoMenor,
+        marginVertical: TAMANHOS.espacamentoMenor
     },
     backButtonText: {
-        fontSize: 16,
+        fontSize: TAMANHOS.fonteSegundaria,
         color: CORES.azul,
         fontWeight: 'bold',
     },
     titleContainer: {
         alignItems: 'center',
         flexDirection: 'row',
-        justifyContent: 'center',
-        marginVertical: 10,
+        gap: TAMANHOS.espacamentoPequeno,
+        margin: TAMANHOS.espacamentoMenor,
     },
     title: {
-        fontSize: 22,
+        fontSize: TAMANHOS.fonteTitulo,
         fontWeight: 'bold',
         color: CORES.azul,
     },
     titleHighlight: {
-        fontSize: 16,
+        fontSize: TAMANHOS.fonteSegundaria - 2,
         fontWeight: 'bold',
         color: CORES.verde,
     },
     scrollContainer: {
-        paddingHorizontal: 20,
-        paddingTop: 10,
+        paddingHorizontal: TAMANHOS.espacamentoMenor,
+        paddingTop: TAMANHOS.espacamentoPequeno,
         alignItems: 'flex-start',
     },
     card: {

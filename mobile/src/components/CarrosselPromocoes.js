@@ -25,7 +25,8 @@ const CarrosselPromocoes = ({ data, onCompararPress }) => {
     const [activeIndex, setActiveIndex] = useState(0);
 
     const handlePageChange = (event) => {
-        setActiveIndex(event.nativeEvent.position);
+        const newIndex = event.nativeEvent.position;
+        setActiveIndex(newIndex);
     };
 
     return (
@@ -34,7 +35,7 @@ const CarrosselPromocoes = ({ data, onCompararPress }) => {
                 style={styles.pagerView}
                 initialPage={0}
                 onPageSelected={handlePageChange}
-                key={data.length} 
+                key={data.length}
             >
                 {data.map(item => {
                     const logoLocal = getLogoMercadoLocal(item);
@@ -78,7 +79,7 @@ const CarrosselPromocoes = ({ data, onCompararPress }) => {
                         key={`dot-${index}`}
                         style={[
                             styles.dot,
-                            activeIndex === index ? styles.dotAtivo : {},
+                            activeIndex === index && styles.dotAtivo // A lógica aqui está correta
                         ]}
                     />
                 ))}
@@ -160,9 +161,9 @@ const styles = StyleSheet.create({
     },
     paginationContainer: {
         flexDirection: 'row',
-        justifyContent: 'center',
         alignItems: 'center',
         paddingVertical: 10,
+        paddingLeft: TAMANHOS.espacamentoPequeno
     },
     dot: {
         width: 8,
@@ -171,8 +172,10 @@ const styles = StyleSheet.create({
         backgroundColor: CORES.azulEscuro,
         marginHorizontal: 4,
     },
+    
     dotAtivo: {
         backgroundColor: CORES.azul,
+        width: 8, // Deixa o ponto ativo mais largo
     },
 });
 

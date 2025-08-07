@@ -233,17 +233,86 @@ export default function Inicial() {
 }
 
 const styles = StyleSheet.create({
-    mercadosBotao: { borderColor: CORES.amarelo, borderRadius: TAMANHOS.bordaRaio, borderWidth: 2, padding: TAMANHOS.espacamentoPequeno },
-    mercadosBotaoSelecionado: { borderColor: CORES.verde, backgroundColor: '#e8f5e9' },
-    mercados: { alignItems: "center", flexDirection: 'row', justifyContent: "space-around", marginTop: TAMANHOS.espacamentoPequeno },
-    safeArea: { flex: 1 },
-    cabecalho: { alignItems: "center", backgroundColor: CORES.azul, flexDirection: 'row', height: 90, justifyContent: 'space-between', paddingHorizontal: TAMANHOS.espacamentoPequeno, paddingBottom: TAMANHOS.espacamentoMenor },
-    tituloPrincipal: { color: CORES.azul, fontSize: TAMANHOS.fonteTitulo, fontWeight: "700", textAlign: "center", marginHorizontal: TAMANHOS.espacamentoMenor, marginVertical: TAMANHOS.espacamentoMaior },
-    botaoPerfil: { alignItems: "center", backgroundColor: CORES.azul, borderRadius: TAMANHOS.bordaRaio, flexDirection: 'row', marginHorizontal: TAMANHOS.espacamentoMaior, padding: TAMANHOS.espacamentoPequeno },
-    botaoPerfilTexto: { color: CORES.amarelo, fontSize: TAMANHOS.fonteSegundaria, fontWeight: "600", marginHorizontal: "auto" },
-    promocoes: { backgroundColor: CORES.amarelo, marginVertical: TAMANHOS.espacamentoMaior, paddingVertical: TAMANHOS.espacamentoMenor },
-    promocoesTitulo: { color: CORES.azul, fontSize: TAMANHOS.fonteSegundaria, fontWeight: "700", paddingHorizontal: TAMANHOS.espacamentoPequeno },
-    containerBusca: { paddingHorizontal: TAMANHOS.espacamentoPequeno },
-    mercadosImagem: { height: TAMANHOS.tamanhoIconeGrande, width: TAMANHOS.tamanhoIconeGrande * 2 },
-    semResultadosTexto: { textAlign: 'center', marginTop: 20, fontSize: TAMANHOS.fontePequena, color: 'grey' }
+    mercadosBotao: {
+        borderColor: CORES.amarelo,
+        borderRadius: TAMANHOS.bordaRaio,
+        borderWidth: 2,
+        padding: TAMANHOS.espacamentoPequeno
+    },
+    mercadosBotaoSelecionado: {
+        borderColor: CORES.verde,
+        backgroundColor: '#e8f5e9'
+    },
+    mercados: {
+        alignItems: "center", 
+        flexDirection: 'row', 
+        justifyContent: "space-around", 
+        marginTop: TAMANHOS.espacamentoMaior
+    },
+
+    safeArea: {
+        flex: 1
+    },
+
+    cabecalho: {
+        alignItems: "center",
+        backgroundColor: CORES.azul,
+        flexDirection: 'row',
+        height: 90,
+        justifyContent: 'space-between',
+        paddingHorizontal: TAMANHOS.espacamentoPequeno,
+        paddingBottom: TAMANHOS.espacamentoMenor
+    },
+
+    tituloPrincipal: {
+        color: CORES.azul,
+        fontSize: TAMANHOS.fonteTitulo,
+        fontWeight: "700",
+        textAlign: "center",
+        marginHorizontal: TAMANHOS.espacamentoMenor,
+        marginVertical: TAMANHOS.espacamentoMaior
+    },
+
+    botaoPerfil: {
+        alignItems: "center",
+        backgroundColor: CORES.azul,
+        borderRadius: TAMANHOS.bordaRaio,
+        flexDirection: 'row',
+        marginHorizontal: TAMANHOS.espacamentoMaior,
+        padding: TAMANHOS.espacamentoPequeno
+    },
+
+    botaoPerfilTexto: {
+        color: CORES.amarelo,
+        fontSize: TAMANHOS.fonteSegundaria,
+        fontWeight: "600",
+        marginHorizontal: "auto"
+    },
+
+    promocoes: {
+        backgroundColor: CORES.amarelo,
+        marginVertical: TAMANHOS.espacamentoMaior,
+        paddingVertical: TAMANHOS.espacamentoMenor
+    },
+
+    promocoesTitulo: {
+        color: CORES.azul,
+        fontSize: TAMANHOS.fonteSegundaria,
+        fontWeight: "700",
+        paddingHorizontal: TAMANHOS.espacamentoMenor,
+        marginBottom: TAMANHOS.espacamentoPequeno,
+    },
+
+    mercadosImagem: {
+        height: TAMANHOS.tamanhoIconeGrande,
+        width: TAMANHOS.tamanhoIconeGrande * 2
+    },
+
+    semResultadosTexto: {
+        textAlign: 'center',
+        marginTop: 20,
+        fontSize: TAMANHOS.fontePequena,
+        color: 'grey'
+    }
+
 });
