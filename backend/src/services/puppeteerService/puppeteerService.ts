@@ -9,7 +9,10 @@ export class PuppeteerService {
 
 async buscaProdutosConfiança(title: string, url: string) {
   // const navegador = await puppeteer.launch({ headless: false, defaultViewport: null });
-  const navegador = await puppeteer.launch();
+  const navegador =  await puppeteer.launch({
+  headless: true,
+  args: ['--no-sandbox', '--disable-setuid-sandbox']
+});
   const pagina = await navegador.newPage();
   await pagina.goto(url);
 
@@ -90,7 +93,10 @@ async buscaProdutosConfiança(title: string, url: string) {
 
 async  buscaProdutosTauste(title: string, url: string) {
   // const navegador = await puppeteer.launch({ headless: false, defaultViewport: null });
-  const navegador = await puppeteer.launch();
+  const navegador =  await puppeteer.launch({
+  headless: true,
+  args: ['--no-sandbox', '--disable-setuid-sandbox']
+});
   const pagina = await navegador.newPage();
   await pagina.goto(url);
 
@@ -159,7 +165,11 @@ async  buscaProdutosTauste(title: string, url: string) {
 
 async  buscaProdutosPaoAcucar(title: string, url: string) {
    // const navegador = await puppeteer.launch({ headless: false, defaultViewport: null });
-  const navegador = await puppeteer.launch();
+  // const navegador = await puppeteer.launch();
+  const navegador =  await puppeteer.launch({
+  headless: true,
+  args: ['--no-sandbox', '--disable-setuid-sandbox']
+});
   const pagina = await navegador.newPage();
   await pagina.goto(url);
 
@@ -238,7 +248,10 @@ async  buscaProdutosPaoAcucar(title: string, url: string) {
   async buscaProdutosPromocoes() {
 
     async function buscaDadosConfianca() {
-      const navegador = await puppeteer.launch();
+      const navegador =  await puppeteer.launch({
+  headless: true,
+  args: ['--no-sandbox', '--disable-setuid-sandbox']
+});
       const pagina = await navegador.newPage();
   
       await pagina.goto("https://www.confianca.com.br/bauru/home");
@@ -273,7 +286,10 @@ async  buscaProdutosPaoAcucar(title: string, url: string) {
     }
   
     async function buscaDadosTauste() {
-      const navegador = await puppeteer.launch();
+      const navegador =  await puppeteer.launch({
+  headless: true,
+  args: ['--no-sandbox', '--disable-setuid-sandbox']
+});
       const pagina = await navegador.newPage();
   
       await pagina.goto("https://tauste.com.br/bauru/");
@@ -330,7 +346,10 @@ async  buscaProdutosPaoAcucar(title: string, url: string) {
 }
 
 
-   const navegador = await puppeteer.launch();
+   const navegador =  await puppeteer.launch({
+  headless: true,
+  args: ['--no-sandbox', '--disable-setuid-sandbox']
+});
 
   const pagina = await navegador.newPage();
 

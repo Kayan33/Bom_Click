@@ -22,7 +22,7 @@ export class PuppeteerController {
 
         try {
             const resultado = await puppeteerService.buscaProdutosPromocoes();
-            console.log(resultado)
+            
             return res.json(resultado); 
         } catch (error) {
             console.error("Erro ao buscar produtos:", error);

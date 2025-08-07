@@ -28,7 +28,7 @@ class ControllerGet {
     try {
       const servicesGet = new ServicesGet();
       const resposta = await servicesGet.BuscaProdutosIntercalados();
-      console.log(resposta);
+     
       
       return res.json(resposta);
     } catch (error) {
