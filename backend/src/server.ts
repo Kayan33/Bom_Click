@@ -34,6 +34,9 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     })
 })
  
-app.listen(3333, () => console.log('Servidor On Line'))
+app.listen(3333, '0.0.0.0', () => {
+  console.log('Servidor rodando na porta 3333');
+});
+
 
 //https.createServer(options, app).listen(21025, () => console.log('Servidor OnLine'))

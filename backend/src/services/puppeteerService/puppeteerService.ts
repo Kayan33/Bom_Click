@@ -14,7 +14,11 @@ async buscaProdutosConfiança(title: string, url: string) {
   args: ['--no-sandbox', '--disable-setuid-sandbox']
 });
   const pagina = await navegador.newPage();
-  await pagina.goto(url);
+ await pagina.goto(url, { 
+  waitUntil: 'networkidle2', // espera até a rede ficar ociosa
+  timeout: 0                 // sem limite de tempo
+});
+
 
   function limparTitulo(titulo: string): string {
     const palavrasProibidas = [
@@ -98,7 +102,10 @@ async  buscaProdutosTauste(title: string, url: string) {
   args: ['--no-sandbox', '--disable-setuid-sandbox']
 });
   const pagina = await navegador.newPage();
-  await pagina.goto(url);
+   await pagina.goto(url, { 
+  waitUntil: 'networkidle2', // espera até a rede ficar ociosa
+  timeout: 0                 // sem limite de tempo
+});
 
   function limparTitulo(titulo: string): string {
     const palavrasProibidas = [
@@ -171,7 +178,10 @@ async  buscaProdutosPaoAcucar(title: string, url: string) {
   args: ['--no-sandbox', '--disable-setuid-sandbox']
 });
   const pagina = await navegador.newPage();
-  await pagina.goto(url);
+   await pagina.goto(url, { 
+  waitUntil: 'networkidle2', // espera até a rede ficar ociosa
+  timeout: 0                 // sem limite de tempo
+});
 
   function limparTitulo(titulo: string): string {
     const palavrasProibidas = [
