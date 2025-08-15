@@ -9,10 +9,12 @@ export class PuppeteerService {
 
 async buscaProdutosConfiança(title: string, url: string) {
   // const navegador = await puppeteer.launch({ headless: false, defaultViewport: null });
-  const navegador =  await puppeteer.launch({
+  const navegador = await puppeteer.launch({
   headless: true,
+  executablePath: puppeteer.executablePath(),
   args: ['--no-sandbox', '--disable-setuid-sandbox']
 });
+
   const pagina = await navegador.newPage();
  await pagina.goto(url, { 
   waitUntil: 'networkidle2', // espera até a rede ficar ociosa
@@ -97,10 +99,13 @@ async buscaProdutosConfiança(title: string, url: string) {
 
 async  buscaProdutosTauste(title: string, url: string) {
   // const navegador = await puppeteer.launch({ headless: false, defaultViewport: null });
-  const navegador =  await puppeteer.launch({
+  const navegador = await puppeteer.launch({
   headless: true,
+  executablePath: puppeteer.executablePath(),
   args: ['--no-sandbox', '--disable-setuid-sandbox']
 });
+
+
   const pagina = await navegador.newPage();
    await pagina.goto(url, { 
   waitUntil: 'networkidle2', // espera até a rede ficar ociosa
@@ -173,10 +178,12 @@ async  buscaProdutosTauste(title: string, url: string) {
 async  buscaProdutosPaoAcucar(title: string, url: string) {
    // const navegador = await puppeteer.launch({ headless: false, defaultViewport: null });
   // const navegador = await puppeteer.launch();
-  const navegador =  await puppeteer.launch({
+  const navegador = await puppeteer.launch({
   headless: true,
+  executablePath: puppeteer.executablePath(),
   args: ['--no-sandbox', '--disable-setuid-sandbox']
 });
+
   const pagina = await navegador.newPage();
    await pagina.goto(url, { 
   waitUntil: 'networkidle2', // espera até a rede ficar ociosa
