@@ -11,7 +11,7 @@ async buscaProdutosConfiança(title: string, url: string) {
   // const navegador = await puppeteer.launch({ headless: false, defaultViewport: null });
   const navegador = await puppeteer.launch({
   headless: true,
-  executablePath: '/usr/bin/chromium-browser', // caminho do chromium do sistema
+  executablePath: '/usr/bin/chromium',
   args: ['--no-sandbox', '--disable-setuid-sandbox']
 });
 
@@ -102,7 +102,7 @@ async  buscaProdutosTauste(title: string, url: string) {
   // const navegador = await puppeteer.launch({ headless: false, defaultViewport: null });
   const navegador = await puppeteer.launch({
   headless: true,
-  executablePath: '/usr/bin/chromium-browser', // caminho do chromium do sistema
+  executablePath: '/usr/bin/chromium',
   args: ['--no-sandbox', '--disable-setuid-sandbox']
 });
 
@@ -181,7 +181,7 @@ async  buscaProdutosPaoAcucar(title: string, url: string) {
   // const navegador = await puppeteer.launch();
   const navegador = await puppeteer.launch({
   headless: true,
-  executablePath: '/usr/bin/chromium-browser', // caminho do chromium do sistema
+  executablePath: '/usr/bin/chromium',
   args: ['--no-sandbox', '--disable-setuid-sandbox']
 });
 
