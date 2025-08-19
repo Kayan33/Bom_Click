@@ -12,11 +12,10 @@ async buscaProdutosConfiança(title: string, url: string) {
 
   const navegador = await puppeteer.launch({
   headless: true,
-  executablePath: process.env.NODE_ENV === 'production'
-    ? '/tmp/chrome/linux-134.0.6998.165/chrome-linux64/chrome'
-    : undefined,
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  executablePath: '/usr/bin/chromium', // caminho do chromium do sistema
+  args: ['--no-sandbox', '--disable-setuid-sandbox']
 });
+
 
 
 
@@ -107,10 +106,8 @@ async  buscaProdutosTauste(title: string, url: string) {
   // const navegador = await puppeteer.launch({ headless: false, defaultViewport: null });
   const navegador = await puppeteer.launch({
   headless: true,
-  executablePath: process.env.NODE_ENV === 'production'
-    ? '/tmp/chrome/linux-134.0.6998.165/chrome-linux64/chrome'
-    : undefined,
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  executablePath: '/usr/bin/chromium', // caminho do chromium do sistema
+  args: ['--no-sandbox', '--disable-setuid-sandbox']
 });
 
 
@@ -189,10 +186,8 @@ async  buscaProdutosPaoAcucar(title: string, url: string) {
   // const navegador = await puppeteer.launch();
   const navegador = await puppeteer.launch({
   headless: true,
-  executablePath: process.env.NODE_ENV === 'production'
-    ? '/tmp/chrome/linux-134.0.6998.165/chrome-linux64/chrome'
-    : undefined,
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  executablePath: '/usr/bin/chromium', // caminho do chromium do sistema
+  args: ['--no-sandbox', '--disable-setuid-sandbox']
 });
 
 
