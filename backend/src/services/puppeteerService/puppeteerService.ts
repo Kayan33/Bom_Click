@@ -14,7 +14,8 @@ async buscaProdutosConfiança(title: string, url: string) {
   headless: true,
   executablePath: process.env.NODE_ENV === 'production'
     ? '/tmp/chrome/linux-134.0.6998.165/chrome-linux64/chrome'
-    : undefined
+    : undefined,
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
 });
 
 
@@ -108,7 +109,8 @@ async  buscaProdutosTauste(title: string, url: string) {
   headless: true,
   executablePath: process.env.NODE_ENV === 'production'
     ? '/tmp/chrome/linux-134.0.6998.165/chrome-linux64/chrome'
-    : undefined
+    : undefined,
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
 });
 
 
@@ -189,7 +191,8 @@ async  buscaProdutosPaoAcucar(title: string, url: string) {
   headless: true,
   executablePath: process.env.NODE_ENV === 'production'
     ? '/tmp/chrome/linux-134.0.6998.165/chrome-linux64/chrome'
-    : undefined
+    : undefined,
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
 });
 
 
