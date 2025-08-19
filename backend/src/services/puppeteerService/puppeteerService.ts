@@ -10,10 +10,13 @@ export class PuppeteerService {
 async buscaProdutosConfiança(title: string, url: string) {
   // const navegador = await puppeteer.launch({ headless: false, defaultViewport: null });
 
-const navegador = await puppeteer.launch({
+  const navegador = await puppeteer.launch({
   headless: true,
-  executablePath: '/opt/render/.cache/puppeteer/chrome/linux-134.0.6998.165/chrome-linux64/chrome'
+  executablePath: process.env.NODE_ENV === 'production'
+    ? '/tmp/chrome/linux-134.0.6998.165/chrome-linux64/chrome'
+    : undefined
 });
+
 
 
 
@@ -103,8 +106,11 @@ async  buscaProdutosTauste(title: string, url: string) {
   // const navegador = await puppeteer.launch({ headless: false, defaultViewport: null });
   const navegador = await puppeteer.launch({
   headless: true,
-  executablePath: '/opt/render/.cache/puppeteer/chrome/linux-134.0.6998.165/chrome-linux64/chrome'
+  executablePath: process.env.NODE_ENV === 'production'
+    ? '/tmp/chrome/linux-134.0.6998.165/chrome-linux64/chrome'
+    : undefined
 });
+
 
 
   const pagina = await navegador.newPage();
@@ -181,8 +187,11 @@ async  buscaProdutosPaoAcucar(title: string, url: string) {
   // const navegador = await puppeteer.launch();
   const navegador = await puppeteer.launch({
   headless: true,
-  executablePath: '/opt/render/.cache/puppeteer/chrome/linux-134.0.6998.165/chrome-linux64/chrome'
+  executablePath: process.env.NODE_ENV === 'production'
+    ? '/tmp/chrome/linux-134.0.6998.165/chrome-linux64/chrome'
+    : undefined
 });
+
 
   const pagina = await navegador.newPage();
    await pagina.goto(url, { 
